@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PeopleEdge HR Consulting | Transform Your Workforce</title>
+  <meta name="description" content="PeopleEdge HR Consulting — expert recruitment, talent strategy, and workforce transformation for enterprises and growing businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   '#0369A1',
+            secondary: '#0EA5E9',
+            cta:       '#22C55E',
+            bg:        '#F0F9FF',
+            ink:       '#0C4A6E',
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body:    ['Open Sans', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; background: #F0F9FF; color: #0C4A6E; }
+    h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(3,105,161,0.12);
+      border-radius: 16px;
+      transition: box-shadow 0.2s ease;
+    }
+    .navbar.scrolled { box-shadow: 0 8px 32px rgba(3,105,161,0.12); }
+
+    /* Hero gradient */
+    .hero-bg {
+      background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 50%, #38BDF8 100%);
+    }
+    .hero-pattern {
+      background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    /* Stat pulse */
+    @keyframes pulse-num {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .stat-pulse { animation: pulse-num 3s ease-in-out infinite; }
+
+    /* Service cards */
+    .service-card {
+      background: white;
+      border: 1px solid rgba(3,105,161,0.1);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(3,105,161,0.12);
+      border-color: rgba(3,105,161,0.3);
+    }
+
+    /* Testimonial card */
+    .testimonial-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid rgba(3,105,161,0.08);
+      box-shadow: 0 4px 16px rgba(3,105,161,0.06);
+    }
+
+    /* CTA button */
+    .btn-cta {
+      background: #22C55E;
+      color: white;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-cta:hover {
+      background: #16A34A;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(34,197,94,0.35);
+    }
+    .btn-cta:focus-visible { outline: 3px solid #22C55E; outline-offset: 3px; }
+
+    .btn-outline {
+      border: 2px solid white; color: white; border-radius: 10px;
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      transition: background 0.2s ease, color 0.2s ease;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { background: white; color: #0369A1; }
+    .btn-outline:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+
+    /* Process step line */
+    .step-line::after {
+      content: '';
+      position: absolute; top: 20px; left: 50%; width: 100%; height: 2px;
+      background: linear-gradient(to right, #0369A1, #0EA5E9);
+    }
+    @media (max-width: 768px) { .step-line::after { display: none; } }
+
+    /* Client logo strip */
+    .logo-strip {
+      display: flex; gap: 48px; align-items: center;
+      animation: scroll-logos 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scroll-logos {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .logo-strip:hover { animation-play-state: paused; }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* Accordion */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.2s ease; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="flex items-center justify-between px-6 py-4">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg" aria-label="PeopleEdge HR Consulting home">
+      <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-white" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <span class="font-heading font-700 text-xl text-ink" style="font-weight:700">PeopleEdge</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-8 list-none" role="list">
+      <li><a href="#services" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Services</a></li>
+      <li><a href="#audiences" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Who We Serve</a></li>
+      <li><a href="#process" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">How It Works</a></li>
+      <li><a href="#results" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Results</a></li>
+      <li><a href="#team" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Team</a></li>
+      <li><a href="#faq" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">FAQ</a></li>
+    </ul>
+
+    <!-- Desktop CTA -->
+    <a href="#contact" class="hidden md:inline-flex btn-cta px-5 py-2.5 text-sm focus-visible:outline-none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Book Consultation
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button id="hamburger" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-primary hover:bg-blue-50 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="border-t border-slate-100 px-6 pb-4" role="menu">
+    <ul class="flex flex-col gap-1 pt-3 list-none" role="list">
+      <li><a href="#services" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">Services</a></li>
+      <li><a href="#audiences" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">Who We Serve</a></li>
+      <li><a href="#process" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">How It Works</a></li>
+      <li><a href="#results" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">Results</a></li>
+      <li><a href="#team" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">Team</a></li>
+      <li><a href="#faq" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-primary transition-colors duration-200 cursor-pointer" role="menuitem">FAQ</a></li>
+      <li class="pt-2"><a href="#contact" class="btn-cta block text-center py-2.5 px-4 text-sm">Book Consultation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero-bg hero-pattern pt-40 pb-24 px-4 md:px-8" role="banner">
+  <div class="max-w-6xl mx-auto">
+    <!-- Trust badge -->
+    <div class="inline-flex items-center gap-2 bg-white/15 border border-white/25 rounded-full px-4 py-2 mb-8" role="note" aria-label="Award badge">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-yellow-300" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span class="text-white/90 text-sm font-medium">Top HR Consulting Firm 2024 — HR Awards</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-800 text-white leading-tight mb-6" style="font-weight:800; line-height:1.15">
+          Build Teams That<br/>
+          <span class="text-yellow-300">Drive Results</span>
+        </h1>
+        <p class="text-blue-100 text-lg leading-relaxed mb-8 max-w-lg" style="line-height:1.7">
+          Strategic HR consulting that transforms how organizations attract, develop, and retain exceptional talent. Trusted by 400+ companies across 18 industries.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="btn-cta px-7 py-4 text-base focus-visible:outline-none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+            Book Free Consultation
+          </a>
+          <a href="#results" class="btn-outline px-7 py-4 text-base focus-visible:outline-none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            See Case Studies
+          </a>
+        </div>
+        <!-- Micro trust -->
+        <div class="flex items-center gap-4 mt-8">
+          <div class="flex -space-x-2" aria-label="Client avatars">
+            <div class="w-9 h-9 rounded-full bg-blue-300 border-2 border-white flex items-center justify-center text-xs font-bold text-blue-800" aria-hidden="true">A</div>
+            <div class="w-9 h-9 rounded-full bg-green-300 border-2 border-white flex items-center justify-center text-xs font-bold text-green-800" aria-hidden="true">M</div>
+            <div class="w-9 h-9 rounded-full bg-yellow-300 border-2 border-white flex items-center justify-center text-xs font-bold text-yellow-800" aria-hidden="true">J</div>
+            <div class="w-9 h-9 rounded-full bg-pink-300 border-2 border-white flex items-center justify-center text-xs font-bold text-pink-800" aria-hidden="true">S</div>
+          </div>
+          <p class="text-white/80 text-sm"><strong class="text-white">400+ companies</strong> trust PeopleEdge</p>
+        </div>
+      </div>
+
+      <!-- Hero stats -->
+      <div class="grid grid-cols-2 gap-4" role="list" aria-label="Key statistics">
+        <div class="bg-white/15 border border-white/20 rounded-2xl p-6 backdrop-blur-sm" role="listitem">
+          <div class="text-4xl font-heading font-bold text-white stat-pulse mb-1" aria-label="98% client retention rate">98%</div>
+          <div class="text-blue-100 text-sm font-medium">Client Retention Rate</div>
+          <div class="text-blue-200 text-xs mt-1">Year over year</div>
+        </div>
+        <div class="bg-white/15 border border-white/20 rounded-2xl p-6 backdrop-blur-sm" role="listitem">
+          <div class="text-4xl font-heading font-bold text-yellow-300 stat-pulse mb-1" style="animation-delay:0.5s" aria-label="40% faster hiring">40%</div>
+          <div class="text-blue-100 text-sm font-medium">Faster Hiring</div>
+          <div class="text-blue-200 text-xs mt-1">vs. industry average</div>
+        </div>
+        <div class="bg-white/15 border border-white/20 rounded-2xl p-6 backdrop-blur-sm" role="listitem">
+          <div class="text-4xl font-heading font-bold text-white stat-pulse mb-1" style="animation-delay:1s" aria-label="15 years experience">15+</div>
+          <div class="text-blue-100 text-sm font-medium">Years Experience</div>
+          <div class="text-blue-200 text-xs mt-1">Since 2009</div>
+        </div>
+        <div class="bg-white/15 border border-white/20 rounded-2xl p-6 backdrop-blur-sm" role="listitem">
+          <div class="text-4xl font-heading font-bold text-cta stat-pulse mb-1" style="animation-delay:1.5s" aria-label="2.3 million placements">2.3M</div>
+          <div class="text-blue-100 text-sm font-medium">Talent Placements</div>
+          <div class="text-blue-200 text-xs mt-1">Across all sectors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CLIENT LOGOS ===== -->
+<section class="py-12 bg-white border-y border-slate-100" aria-label="Trusted clients">
+  <div class="max-w-6xl mx-auto px-4 mb-8">
+    <p class="text-center text-slate-500 text-sm font-medium uppercase tracking-wider">Trusted by leading organizations</p>
+  </div>
+  <div class="overflow-hidden">
+    <div class="logo-strip" aria-hidden="true">
+      <!-- Duplicated for seamless loop -->
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Accenture</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Deloitte</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">McKinsey</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Salesforce</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Microsoft</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Goldman Sachs</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">EY</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">IBM</span>
+      <!-- duplicate -->
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Accenture</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Deloitte</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">McKinsey</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Salesforce</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Microsoft</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">Goldman Sachs</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">EY</span>
+      <span class="text-2xl font-heading font-bold text-slate-300 select-none">IBM</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="py-24 px-4 md:px-8 bg-bg" aria-labelledby="services-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Our Services
+      </div>
+      <h2 id="services-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-4">End-to-End HR Solutions</h2>
+      <p class="text-slate-600 text-lg max-w-2xl mx-auto" style="line-height:1.7">From talent acquisition to organizational design, we provide the full spectrum of HR expertise your business needs to scale.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Service 1 -->
+      <article class="service-card" aria-labelledby="service-1-title">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2" class="w-6 h-6"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h3 id="service-1-title" class="font-heading text-xl font-semibold text-ink mb-3">Talent Acquisition</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Strategic recruitment for executive, mid-level, and specialist roles. We find candidates who fit your culture and drive performance.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-blue-50 text-primary px-3 py-1 rounded-full font-medium">Executive Search</span>
+          <span class="text-xs bg-blue-50 text-primary px-3 py-1 rounded-full font-medium">RPO</span>
+          <span class="text-xs bg-blue-50 text-primary px-3 py-1 rounded-full font-medium">Screening</span>
+        </div>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="service-card" aria-labelledby="service-2-title">
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" class="w-6 h-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 id="service-2-title" class="font-heading text-xl font-semibold text-ink mb-3">HR Strategy & Design</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Build HR functions aligned with your business goals. From org design to compensation benchmarking and HR technology roadmaps.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-green-50 text-green-700 px-3 py-1 rounded-full font-medium">Org Design</span>
+          <span class="text-xs bg-green-50 text-green-700 px-3 py-1 rounded-full font-medium">Compensation</span>
+          <span class="text-xs bg-green-50 text-green-700 px-3 py-1 rounded-full font-medium">HR Tech</span>
+        </div>
+      </article>
+
+      <!-- Service 3 -->
+      <article class="service-card" aria-labelledby="service-3-title">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" class="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 id="service-3-title" class="font-heading text-xl font-semibold text-ink mb-3">Leadership Development</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Executive coaching, succession planning, and high-potential programs that build your next generation of leaders from within.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full font-medium">Coaching</span>
+          <span class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full font-medium">Succession</span>
+          <span class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full font-medium">L&D</span>
+        </div>
+      </article>
+
+      <!-- Service 4 -->
+      <article class="service-card" aria-labelledby="service-4-title">
+        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2" class="w-6 h-6"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        </div>
+        <h3 id="service-4-title" class="font-heading text-xl font-semibold text-ink mb-3">Compliance & Policy</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Stay audit-ready with HR compliance audits, employee handbook development, and proactive employment law guidance.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-orange-50 text-orange-700 px-3 py-1 rounded-full font-medium">Audits</span>
+          <span class="text-xs bg-orange-50 text-orange-700 px-3 py-1 rounded-full font-medium">Policy</span>
+          <span class="text-xs bg-orange-50 text-orange-700 px-3 py-1 rounded-full font-medium">Labor Law</span>
+        </div>
+      </article>
+
+      <!-- Service 5 -->
+      <article class="service-card" aria-labelledby="service-5-title">
+        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 id="service-5-title" class="font-heading text-xl font-semibold text-ink mb-3">Culture & Engagement</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Diagnose culture gaps and build programs that boost engagement, reduce turnover, and make your workplace a destination.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-teal-50 text-teal-700 px-3 py-1 rounded-full font-medium">Surveys</span>
+          <span class="text-xs bg-teal-50 text-teal-700 px-3 py-1 rounded-full font-medium">DEI</span>
+          <span class="text-xs bg-teal-50 text-teal-700 px-3 py-1 rounded-full font-medium">Retention</span>
+        </div>
+      </article>
+
+      <!-- Service 6 -->
+      <article class="service-card" aria-labelledby="service-6-title">
+        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2" class="w-6 h-6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 id="service-6-title" class="font-heading text-xl font-semibold text-ink mb-3">HR Analytics</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4" style="line-height:1.75">Data-driven workforce insights — headcount planning, attrition modeling, and people analytics dashboards that inform decisions.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-sky-50 text-sky-700 px-3 py-1 rounded-full font-medium">Dashboards</span>
+          <span class="text-xs bg-sky-50 text-sky-700 px-3 py-1 rounded-full font-medium">Forecasting</span>
+          <span class="text-xs bg-sky-50 text-sky-700 px-3 py-1 rounded-full font-medium">Reporting</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO WE SERVE ===== -->
+<section id="audiences" class="py-24 px-4 md:px-8 bg-white" aria-labelledby="audiences-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Who We Serve
+      </div>
+      <h2 id="audiences-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-4">Built for the People We Partner With</h2>
+      <p class="text-slate-600 text-lg max-w-2xl mx-auto" style="line-height:1.7">From growing businesses to individual job seekers, we tailor our HR expertise to where you are and where you're headed.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Audience 1: SMBs -->
+      <article class="service-card" aria-labelledby="audience-1-title">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2" class="w-6 h-6"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+        </div>
+        <h3 id="audience-1-title" class="font-heading text-xl font-semibold text-ink mb-3">Small-to-Mid-Size Businesses</h3>
+        <p class="text-slate-600 text-sm leading-relaxed" style="line-height:1.75">Companies without in-house HR that need fractional support — the strategic guidance of a full HR department, scaled to your size and budget.</p>
+      </article>
+
+      <!-- Audience 2: Chemical / manufacturing -->
+      <article class="service-card" aria-labelledby="audience-2-title">
+        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2" class="w-6 h-6"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h.01M13 18h.01M9 18h.01"/></svg>
+        </div>
+        <h3 id="audience-2-title" class="font-heading text-xl font-semibold text-ink mb-3">Chemical &amp; Manufacturing</h3>
+        <p class="text-slate-600 text-sm leading-relaxed" style="line-height:1.75">Industrial employers leveraging our prior KAI industry experience — practical HR built for the realities of plant-floor and process-driven workforces.</p>
+      </article>
+
+      <!-- Audience 3: Government contractors -->
+      <article class="service-card relative" aria-labelledby="audience-3-title">
+        <span class="absolute top-6 right-6 inline-flex items-center gap-1 bg-green-50 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-green-200" aria-label="SDVOSB set-aside eligible">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3 h-3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          SDVOSB
+        </span>
+        <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" class="w-6 h-6"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        </div>
+        <h3 id="audience-3-title" class="font-heading text-xl font-semibold text-ink mb-3">Government Contractors</h3>
+        <p class="text-slate-600 text-sm leading-relaxed" style="line-height:1.75">Contractors needing HR compliance to stay audit-ready. As an SDVOSB, we're set-aside eligible — a partner that fits your procurement requirements.</p>
+      </article>
+
+      <!-- Audience 4: Individuals -->
+      <article class="service-card" aria-labelledby="audience-4-title">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" class="w-6 h-6"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3 id="audience-4-title" class="font-heading text-xl font-semibold text-ink mb-3">Individuals</h3>
+        <p class="text-slate-600 text-sm leading-relaxed" style="line-height:1.75">Job seekers needing career coaching, resume help, or interview prep — personal, one-on-one guidance to land the role and grow your career.</p>
+      </article>
+
+      <!-- Audience 5: Intern programs -->
+      <article class="service-card" aria-labelledby="audience-5-title">
+        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-5" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" class="w-6 h-6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3 id="audience-5-title" class="font-heading text-xl font-semibold text-ink mb-3">Companies Building Intern Programs</h3>
+        <p class="text-slate-600 text-sm leading-relaxed" style="line-height:1.75">Organizations that need structured onboarding and early-career program design — building intern and entry-level pipelines that actually develop talent.</p>
+      </article>
+
+      <!-- CTA card -->
+      <article class="service-card flex flex-col justify-center items-start" style="background:linear-gradient(135deg,#0369A1 0%,#0EA5E9 100%);border:none">
+        <h3 class="font-heading text-xl font-semibold text-white mb-3">Not sure where you fit?</h3>
+        <p class="text-blue-100 text-sm leading-relaxed mb-5" style="line-height:1.75">Tell us about your situation and we'll point you to the right kind of support.</p>
+        <a href="#contact" class="btn-cta px-5 py-2.5 text-sm focus-visible:outline-none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Talk to us
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="process" class="py-24 px-4 md:px-8 bg-bg" aria-labelledby="process-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Our Process
+      </div>
+      <h2 id="process-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-4">How We Work With You</h2>
+      <p class="text-slate-600 text-lg max-w-2xl mx-auto" style="line-height:1.7">A proven 4-step engagement model that delivers measurable outcomes from day one.</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-8">
+      <div class="text-center relative">
+        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-5 text-white font-heading font-bold text-lg" aria-hidden="true">1</div>
+        <h3 class="font-heading font-semibold text-ink mb-2">Discovery</h3>
+        <p class="text-slate-600 text-sm" style="line-height:1.7">Deep-dive into your org structure, culture, and HR pain points via stakeholder interviews and audits.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-5 text-white font-heading font-bold text-lg" aria-hidden="true">2</div>
+        <h3 class="font-heading font-semibold text-ink mb-2">Strategy</h3>
+        <p class="text-slate-600 text-sm" style="line-height:1.7">Co-create a bespoke HR roadmap with prioritized initiatives, timelines, and success metrics.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-5 text-white font-heading font-bold text-lg" aria-hidden="true">3</div>
+        <h3 class="font-heading font-semibold text-ink mb-2">Execution</h3>
+        <p class="text-slate-600 text-sm" style="line-height:1.7">Our consultants embed with your team to implement solutions — hands-on, not advisory-only.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-12 h-12 bg-cta rounded-full flex items-center justify-center mx-auto mb-5 text-white font-heading font-bold text-lg" aria-hidden="true">4</div>
+        <h3 class="font-heading font-semibold text-ink mb-2">Measure</h3>
+        <p class="text-slate-600 text-sm" style="line-height:1.7">Track impact through real metrics — time-to-hire, retention, engagement scores — and iterate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS / CASE STUDIES ===== -->
+<section id="results" class="py-24 px-4 md:px-8" style="background: linear-gradient(135deg, #0369A1 0%, #075985 100%)" aria-labelledby="results-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-white/15 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Proven Results
+      </div>
+      <h2 id="results-heading" class="font-heading text-3xl md:text-4xl font-bold text-white mb-4">Numbers That Matter</h2>
+      <p class="text-blue-200 text-lg max-w-2xl mx-auto" style="line-height:1.7">Real outcomes from real engagements across industries.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-16" role="list" aria-label="Case study results">
+      <div class="bg-white/10 border border-white/20 rounded-2xl p-8 backdrop-blur-sm" role="listitem">
+        <div class="text-5xl font-heading font-bold text-yellow-300 mb-2" aria-label="60 percent reduction">60%</div>
+        <div class="text-white font-semibold mb-2">Reduction in Time-to-Hire</div>
+        <p class="text-blue-200 text-sm" style="line-height:1.7">Fortune 500 tech company. Redesigned their talent acquisition process, cutting average hire time from 90 days to 36 days.</p>
+        <div class="mt-4 text-xs text-blue-300 font-medium uppercase tracking-wide">Technology / 2,000+ employees</div>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-2xl p-8 backdrop-blur-sm" role="listitem">
+        <div class="text-5xl font-heading font-bold text-cta mb-2" aria-label="35 percent increase">35%</div>
+        <div class="text-white font-semibold mb-2">Increase in Employee Retention</div>
+        <p class="text-blue-200 text-sm" style="line-height:1.7">Mid-market healthcare group. Culture transformation program reduced annual attrition from 28% to 18% within 12 months.</p>
+        <div class="mt-4 text-xs text-blue-300 font-medium uppercase tracking-wide">Healthcare / 800 employees</div>
+      </div>
+      <div class="bg-white/10 border border-white/20 rounded-2xl p-8 backdrop-blur-sm" role="listitem">
+        <div class="text-5xl font-heading font-bold text-white mb-2" aria-label="4.2 million dollars saved">$4.2M</div>
+        <div class="text-white font-semibold mb-2">Annual Savings on HR Ops</div>
+        <p class="text-blue-200 text-sm" style="line-height:1.7">Global financial services firm. HR technology consolidation and process automation delivered significant operational savings.</p>
+        <div class="mt-4 text-xs text-blue-300 font-medium uppercase tracking-wide">Financial Services / 5,000+ employees</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <blockquote class="testimonial-card p-8">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-slate-700 italic mb-6" style="line-height:1.75">"PeopleEdge completely transformed how we think about talent. Their strategic approach to recruitment saved us months of costly mis-hires and built a team that's genuinely high-performing."</p>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold font-heading" aria-hidden="true">SC</div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Sarah Chen</div>
+            <div class="text-slate-500 text-xs">Chief People Officer, TechScale Inc.</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="testimonial-card p-8">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#FBBF24" class="w-5 h-5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-slate-700 italic mb-6" style="line-height:1.75">"The engagement scores went from 54% to 81% in under a year. Their DEI and culture work is genuinely evidence-based, not just feel-good initiatives. I'd recommend them to any CHRO."</p>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-cta flex items-center justify-center text-white font-bold font-heading" aria-hidden="true">MJ</div>
+          <div>
+            <div class="font-semibold text-ink text-sm">Marcus Johnson</div>
+            <div class="text-slate-500 text-xs">VP Human Resources, MedCore Health</div>
+          </div>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section id="team" class="py-24 px-4 md:px-8 bg-bg" aria-labelledby="team-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Leadership Team
+      </div>
+      <h2 id="team-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-4">Meet Our Consultants</h2>
+      <p class="text-slate-600 text-lg max-w-2xl mx-auto" style="line-height:1.7">Senior HR professionals with deep industry expertise across technology, finance, healthcare, and more.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-shadow duration-200" aria-labelledby="team-1-name">
+        <div class="h-48 bg-gradient-to-br from-primary to-secondary flex items-center justify-center" aria-hidden="true">
+          <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-heading font-bold text-white">RL</div>
+        </div>
+        <div class="p-5">
+          <h3 id="team-1-name" class="font-heading font-semibold text-ink mb-1">Rachel Liu</h3>
+          <div class="text-primary text-sm font-medium mb-3">Managing Partner</div>
+          <p class="text-slate-600 text-xs leading-relaxed" style="line-height:1.7">20+ years in HR leadership. Former CHRO at two Fortune 500s. Expert in talent transformation and M&A HR integration.</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-shadow duration-200" aria-labelledby="team-2-name">
+        <div class="h-48 bg-gradient-to-br from-teal-500 to-green-500 flex items-center justify-center" aria-hidden="true">
+          <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-heading font-bold text-white">DK</div>
+        </div>
+        <div class="p-5">
+          <h3 id="team-2-name" class="font-heading font-semibold text-ink mb-1">David Kim</h3>
+          <div class="text-teal-600 text-sm font-medium mb-3">Head of Talent Strategy</div>
+          <p class="text-slate-600 text-xs leading-relaxed" style="line-height:1.7">Ex-McKinsey. Specializes in workforce planning, skills gap analysis, and large-scale talent operating model redesign.</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-shadow duration-200" aria-labelledby="team-3-name">
+        <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center" aria-hidden="true">
+          <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-heading font-bold text-white">AN</div>
+        </div>
+        <div class="p-5">
+          <h3 id="team-3-name" class="font-heading font-semibold text-ink mb-1">Amara Nwosu</h3>
+          <div class="text-purple-600 text-sm font-medium mb-3">DEI & Culture Lead</div>
+          <p class="text-slate-600 text-xs leading-relaxed" style="line-height:1.7">Organizational psychologist and certified DEI practitioner. Drives culture transformation with data-backed engagement strategies.</p>
+        </div>
+      </article>
+
+      <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg transition-shadow duration-200" aria-labelledby="team-4-name">
+        <div class="h-48 bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center" aria-hidden="true">
+          <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-3xl font-heading font-bold text-white">TR</div>
+        </div>
+        <div class="p-5">
+          <h3 id="team-4-name" class="font-heading font-semibold text-ink mb-1">Tom Richards</h3>
+          <div class="text-orange-600 text-sm font-medium mb-3">HR Tech & Analytics</div>
+          <p class="text-slate-600 text-xs leading-relaxed" style="line-height:1.7">15 years in HR systems and people analytics. HRIS implementations, ATS optimization, and workforce intelligence platforms.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CREDENTIALS ===== -->
+<section class="py-16 px-4 md:px-8 bg-white border-y border-slate-100" aria-labelledby="credentials-heading">
+  <div class="max-w-6xl mx-auto">
+    <h2 id="credentials-heading" class="text-center font-heading text-xl font-semibold text-ink mb-10">Certifications & Recognition</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" role="list" aria-label="Certifications">
+      <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-blue-50 border border-blue-100" role="listitem">
+        <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="text-center">
+          <div class="font-heading font-semibold text-ink text-sm">SHRM Certified</div>
+          <div class="text-slate-500 text-xs mt-1">All consultants</div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-50 border border-green-100" role="listitem">
+        <div class="w-12 h-12 bg-cta rounded-xl flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="w-6 h-6"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="text-center">
+          <div class="font-heading font-semibold text-ink text-sm">ISO 9001:2015</div>
+          <div class="text-slate-500 text-xs mt-1">Quality certified</div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-yellow-50 border border-yellow-100" role="listitem">
+        <div class="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="w-6 h-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="text-center">
+          <div class="font-heading font-semibold text-ink text-sm">Best HR Firm 2024</div>
+          <div class="text-slate-500 text-xs mt-1">HR Excellence Awards</div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-purple-50 border border-purple-100" role="listitem">
+        <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="w-6 h-6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="text-center">
+          <div class="font-heading font-semibold text-ink text-sm">15+ Years</div>
+          <div class="text-slate-500 text-xs mt-1">Industry experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="py-24 px-4 md:px-8 bg-bg" aria-labelledby="faq-heading">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4" aria-hidden="true">
+        FAQ
+      </div>
+      <h2 id="faq-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-4">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="space-y-3" role="list">
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset" aria-expanded="false">
+          <span class="font-heading font-semibold text-ink text-sm md:text-base">How long does a typical HR consulting engagement last?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2.5" class="faq-icon w-5 h-5 flex-shrink-0 ml-4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="px-6 pb-5 text-slate-600 text-sm" style="line-height:1.75">Engagements vary by scope. Talent acquisition projects typically run 8–16 weeks. HR strategy and organizational design projects average 3–6 months. Culture and DEI transformation programs are typically 12-month partnerships with ongoing support.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset" aria-expanded="false">
+          <span class="font-heading font-semibold text-ink text-sm md:text-base">Do you work with small businesses or only enterprise clients?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2.5" class="faq-icon w-5 h-5 flex-shrink-0 ml-4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="px-6 pb-5 text-slate-600 text-sm" style="line-height:1.75">We partner with organizations of all sizes, from 50-person scale-ups to 50,000+ employee enterprises. Our service packages are scoped to match company stage, budget, and HR maturity — so you get the right level of support without paying for what you don't need.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset" aria-expanded="false">
+          <span class="font-heading font-semibold text-ink text-sm md:text-base">What industries do you specialize in?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2.5" class="faq-icon w-5 h-5 flex-shrink-0 ml-4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="px-6 pb-5 text-slate-600 text-sm" style="line-height:1.75">We have deep expertise across technology, financial services, healthcare, professional services, manufacturing, and retail. Our consultants are matched to engagements based on industry background, ensuring relevant experience from day one.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white rounded-2xl border border-slate-100 overflow-hidden" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset" aria-expanded="false">
+          <span class="font-heading font-semibold text-ink text-sm md:text-base">How do you measure the success of an engagement?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2.5" class="faq-icon w-5 h-5 flex-shrink-0 ml-4" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="px-6 pb-5 text-slate-600 text-sm" style="line-height:1.75">We establish clear KPIs during the discovery phase — specific to your business — such as time-to-hire, offer acceptance rate, employee NPS, attrition rate, or cost-per-hire. Monthly reviews track progress against baselines and we adjust strategy in real time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / CTA ===== -->
+<section id="contact" class="py-24 px-4 md:px-8 bg-white" aria-labelledby="contact-heading">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <!-- Left copy -->
+    <div>
+      <div class="inline-flex items-center gap-2 bg-blue-100 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+        Get Started
+      </div>
+      <h2 id="contact-heading" class="font-heading text-3xl md:text-4xl font-bold text-ink mb-6">Book Your Free<br/>Strategy Call</h2>
+      <p class="text-slate-600 text-lg mb-8" style="line-height:1.7">30 minutes with a senior consultant to understand your HR challenges and explore how PeopleEdge can help — no obligation, no sales pitch.</p>
+      <ul class="space-y-4 list-none" role="list" aria-label="What you get">
+        <li class="flex items-center gap-3">
+          <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" class="w-3.5 h-3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="text-slate-700 text-sm">Confidential conversation — NDAs available</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" class="w-3.5 h-3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="text-slate-700 text-sm">Matched with a consultant from your industry</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" class="w-3.5 h-3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="text-slate-700 text-sm">Receive a custom HR assessment summary</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" class="w-3.5 h-3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="text-slate-700 text-sm">Responds within 1 business day</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact form -->
+    <div class="bg-bg border border-slate-200 rounded-2xl p-8">
+      <form action="#" method="POST" novalidate aria-label="Book consultation form">
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label for="first-name" class="block text-sm font-medium text-ink mb-1.5">First Name <span aria-hidden="true" class="text-red-500">*</span></label>
+            <input type="text" id="first-name" name="first_name" required autocomplete="given-name"
+              class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+              placeholder="Rachel" />
+          </div>
+          <div>
+            <label for="last-name" class="block text-sm font-medium text-ink mb-1.5">Last Name <span aria-hidden="true" class="text-red-500">*</span></label>
+            <input type="text" id="last-name" name="last_name" required autocomplete="family-name"
+              class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+              placeholder="Chen" />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-ink mb-1.5">Work Email <span aria-hidden="true" class="text-red-500">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+            placeholder="rachel@company.com" />
+        </div>
+        <div class="mb-4">
+          <label for="company" class="block text-sm font-medium text-ink mb-1.5">Company</label>
+          <input type="text" id="company" name="company" autocomplete="organization"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+            placeholder="Acme Corp" />
+        </div>
+        <div class="mb-4">
+          <label for="service" class="block text-sm font-medium text-ink mb-1.5">Primary Interest</label>
+          <select id="service" name="service"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 cursor-pointer">
+            <option value="">Select a service...</option>
+            <option value="talent">Talent Acquisition</option>
+            <option value="strategy">HR Strategy & Design</option>
+            <option value="leadership">Leadership Development</option>
+            <option value="compliance">Compliance & Policy</option>
+            <option value="culture">Culture & Engagement</option>
+            <option value="analytics">HR Analytics</option>
+            <option value="other">Other / Not sure</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label for="message" class="block text-sm font-medium text-ink mb-1.5">Tell us about your challenge</label>
+          <textarea id="message" name="message" rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none"
+            placeholder="Briefly describe your HR challenge or goal..."></textarea>
+        </div>
+        <button type="submit" class="btn-cta w-full py-4 text-base justify-center focus-visible:outline-none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+          Book My Free Call
+        </button>
+        <p class="text-center text-slate-400 text-xs mt-4">No spam. Your info is never shared.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-ink text-white py-16 px-4 md:px-8" role="contentinfo">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
+    <!-- Brand -->
+    <div class="md:col-span-2">
+      <a href="#" class="flex items-center gap-2 mb-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-lg" aria-label="PeopleEdge HR Consulting home">
+        <div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-white" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="font-heading font-bold text-xl">PeopleEdge</span>
+      </a>
+      <p class="text-blue-200 text-sm mb-6 max-w-xs" style="line-height:1.75">Strategic HR consulting that transforms how organizations attract, develop, and retain exceptional talent.</p>
+      <div class="flex gap-3">
+        <a href="#" aria-label="LinkedIn" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-secondary transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-secondary transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <!-- Services -->
+    <nav aria-label="Services footer navigation">
+      <h3 class="font-heading font-semibold text-white mb-4 text-sm uppercase tracking-wider">Services</h3>
+      <ul class="space-y-2.5 list-none" role="list">
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Talent Acquisition</a></li>
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">HR Strategy</a></li>
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Leadership Development</a></li>
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Compliance & Policy</a></li>
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Culture & DEI</a></li>
+        <li><a href="#services" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">HR Analytics</a></li>
+      </ul>
+    </nav>
+    <!-- Contact -->
+    <div>
+      <h3 class="font-heading font-semibold text-white mb-4 text-sm uppercase tracking-wider">Contact</h3>
+      <ul class="space-y-3 list-none" role="list">
+        <li class="flex items-center gap-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@peopleedge.com" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">hello@peopleedge.com</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.01z"/></svg>
+          <a href="tel:+18005550199" class="text-blue-200 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">+1 (800) 555-0199</a>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" class="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="text-blue-200 text-sm">350 Fifth Ave, Suite 4100<br/>New York, NY 10118</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-blue-300 text-sm">&copy; 2024 PeopleEdge HR Consulting. All rights reserved.</p>
+    <nav aria-label="Legal navigation">
+      <ul class="flex gap-6 list-none" role="list">
+        <li><a href="#" class="text-blue-300 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Privacy Policy</a></li>
+        <li><a href="#" class="text-blue-300 text-sm hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white rounded">Terms of Service</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const isOpen = item.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+</script>
+</body>
+</html>
