@@ -210,7 +210,7 @@ export default function LeadershipView() {
         title="Top organizational risks"
         subtitle="Highest-severity open findings driving audit exposure"
         action={
-          <Link to="/delivery" className="inline-flex items-center gap-1 text-xs font-medium text-brand-400 hover:text-brand-300 cursor-pointer">
+          <Link to="/app/delivery" className="inline-flex items-center gap-1 text-xs font-medium text-emerald-400 hover:text-emerald-300 cursor-pointer">
             View all open items <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
         }
