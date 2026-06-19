@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, monospace;
+
+  /* Observability dark palette */
+  --color-ink-950: #020617;
+  --color-ink-900: #0b1120;
+  --color-ink-850: #0f172a;
+  --color-ink-800: #131c30;
+  --color-ink-700: #1e293b;
+  --color-ink-600: #334155;
+  --color-ink-500: #475569;
+
+  --color-line: #1e2a44;
+
+  --color-brand-400: #34d399;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+
+  /* Status semantics */
+  --color-ok: #22c55e;
+  --color-warn: #f59e0b;
+  --color-risk: #f97316;
+  --color-crit: #ef4444;
+  --color-info: #38bdf8;
+  --color-violet: #a78bfa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ink-950);
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Slim custom scrollbars to match the observability aesthetic */
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #243049;
+  border-radius: 9999px;
+  border: 2px solid var(--color-ink-950);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(19, 28, 48, 0.9), rgba(11, 17, 32, 0.9));
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+}
+
+.grain {
+  background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.06) 1px, transparent 0);
+  background-size: 22px 22px;
+}
