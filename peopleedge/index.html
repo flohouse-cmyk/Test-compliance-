@@ -32,6 +32,7 @@
   <style>
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      [data-reveal], [data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: #FAF9F6; color: #0F172A; -webkit-font-smoothing: antialiased; }
@@ -130,6 +131,21 @@
     @keyframes pulse-num { 0%,100% { opacity: 1; } 50% { opacity: .82; } }
 
     a:focus-visible, button:focus-visible { outline: 2px solid #C0A062; outline-offset: 2px; border-radius: 6px; }
+
+    /* Scroll reveal (transform/opacity only; reduced-motion handled above) */
+    [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+    [data-reveal-stagger] > * { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    [data-reveal-stagger].is-visible > * { opacity: 1; transform: none; }
+
+    /* Subtle press feedback */
+    .btn-primary:active, .btn-dark:active, .btn-ghost:active, .btn-outline-ink:active { transform: translateY(0) scale(.98); }
+
+    /* Layered "expensive" card shadow on hover */
+    .card-hover:hover { box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 18px 50px -12px rgba(15,23,42,.18); }
+
+    /* Image frame */
+    .photo-frame { background: #1b2740; }
   </style>
 </head>
 <body>
@@ -221,36 +237,37 @@
         </div>
       </div>
 
-      <!-- Hero stat panel -->
+      <!-- Hero photo -->
       <div class="lg:col-span-5">
-        <div class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 sm:p-8">
-          <div class="flex items-center justify-between mb-6">
-            <span class="text-slate-400 text-xs uppercase tracking-widest">By the numbers</span>
-            <span class="inline-block w-2 h-2 rounded-full bg-gold" aria-hidden="true"></span>
-          </div>
-          <div class="grid grid-cols-2 gap-y-8 gap-x-6" role="list" aria-label="Key results">
-            <div role="listitem">
-              <div class="font-display text-4xl font-semibold text-white stat-pulse">98%</div>
-              <div class="text-slate-400 text-sm mt-1">Client retention</div>
+        <div class="relative">
+          <div class="absolute -inset-4 rounded-[2rem] bg-gold/10 blur-2xl" aria-hidden="true"></div>
+          <figure class="photo-frame relative rounded-[1.5rem] overflow-hidden border border-white/10 shadow-2xl" style="aspect-ratio:4/5">
+            <img
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80"
+              alt="An HR consultant meeting with a client"
+              width="900" height="1125" loading="eager" decoding="async" referrerpolicy="no-referrer"
+              class="h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" aria-hidden="true"></div>
+
+            <div class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-ink/70 backdrop-blur-md border border-white/15 px-3 py-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span>
+              <span class="text-white/90 text-xs font-medium">Serving clients since 2009</span>
             </div>
-            <div role="listitem">
-              <div class="font-display text-4xl font-semibold text-gold-soft stat-pulse" style="animation-delay:.6s">40%</div>
-              <div class="text-slate-400 text-sm mt-1">Faster hiring</div>
-            </div>
-            <div role="listitem">
-              <div class="font-display text-4xl font-semibold text-white stat-pulse" style="animation-delay:1.2s">5</div>
-              <div class="text-slate-400 text-sm mt-1">Audiences served</div>
-            </div>
-            <div role="listitem">
-              <div class="font-display text-4xl font-semibold text-gold-soft stat-pulse" style="animation-delay:1.8s">1 day</div>
-              <div class="text-slate-400 text-sm mt-1">Response time</div>
-            </div>
-          </div>
-          <div class="hairline h-px my-7" aria-hidden="true"></div>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            “PeopleEdge gave us a real HR function without the overhead of hiring one.”
-          </p>
-          <p class="text-slate-500 text-xs mt-2">— Operations Lead, 60-person manufacturer</p>
+
+            <figcaption class="absolute bottom-4 left-4 right-4 sm:right-auto rounded-2xl bg-ink/75 backdrop-blur-md border border-white/15 px-5 py-4 shadow-xl">
+              <div class="flex items-center gap-6">
+                <div>
+                  <div class="font-display text-3xl font-semibold text-gold-soft leading-none">98%</div>
+                  <div class="text-slate-300 text-xs mt-1.5">Client retention</div>
+                </div>
+                <div class="w-px self-stretch bg-white/15" aria-hidden="true"></div>
+                <div>
+                  <div class="font-display text-3xl font-semibold text-white leading-none">40%</div>
+                  <div class="text-slate-300 text-xs mt-1.5">Faster hiring</div>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -259,7 +276,7 @@
 
 <!-- ===== CREDENTIALS STRIP ===== -->
 <section class="bg-ink-deep border-t border-white/5 py-7 px-4 md:px-8" aria-label="Credentials and affiliations">
-  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-slate-400">
+  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-slate-400" data-reveal>
     <span class="text-xs uppercase tracking-[0.2em] text-slate-500">Credentials &amp; affiliations</span>
     <span class="font-display text-lg text-slate-300">SHRM Certified</span>
     <span class="font-display text-lg text-slate-300">SDVOSB</span>
@@ -271,7 +288,7 @@
 <!-- ===== SERVICES ===== -->
 <section id="services" class="py-24 px-4 md:px-8 bg-ivory" aria-labelledby="services-heading">
   <div class="max-w-6xl mx-auto">
-    <div class="max-w-2xl mb-14">
+    <div class="max-w-2xl mb-14" data-reveal>
       <div class="flex items-center gap-3 mb-4">
         <span class="eyebrow text-gold text-xs font-semibold uppercase">What we do</span>
         <span class="rule w-16" aria-hidden="true"></span>
@@ -280,7 +297,7 @@
       <p class="text-slate-600 text-lg leading-relaxed">From day-to-day compliance to long-term talent strategy — the full spectrum of HR expertise, available the moment you need it and never a headcount more than you do.</p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal-stagger>
       <!-- 1 -->
       <article class="group card card-hover p-7">
         <div class="icon-chip mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
@@ -325,7 +342,7 @@
 <section id="audiences" class="py-24 px-4 md:px-8 bg-paper" aria-labelledby="audiences-heading">
   <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12">
     <!-- Left sticky intro -->
-    <div class="lg:col-span-4">
+    <div class="lg:col-span-4" data-reveal>
       <div class="lg:sticky lg:top-28">
         <div class="flex items-center gap-3 mb-4">
           <span class="eyebrow text-gold text-xs font-semibold uppercase">Who we serve</span>
@@ -342,7 +359,7 @@
 
     <!-- Right list -->
     <div class="lg:col-span-8">
-      <ul class="list-none border-t border-ink/10" role="list">
+      <ul class="list-none border-t border-ink/10" role="list" data-reveal-stagger>
         <!-- 01 -->
         <li class="aud-row group" role="listitem">
           <div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
@@ -421,7 +438,7 @@
       <p class="text-slate-600 text-lg leading-relaxed">A clear, four-step engagement model — so you always know what's happening and what comes next.</p>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-10 md:gap-6">
+    <div class="grid md:grid-cols-4 gap-10 md:gap-6" data-reveal-stagger>
       <div class="text-center relative step-line">
         <div class="w-14 h-14 rounded-full border border-gold/50 bg-white text-ink font-display text-xl font-semibold flex items-center justify-center mx-auto mb-5">1</div>
         <h3 class="font-display text-lg font-semibold text-ink mb-2">Discovery</h3>
@@ -459,7 +476,7 @@
       <h2 id="results-heading" class="font-display text-3xl md:text-5xl font-semibold text-white leading-tight">Outcomes, not activity</h2>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-5 mb-14" role="list" aria-label="Results">
+    <div class="grid md:grid-cols-3 gap-5 mb-14" role="list" aria-label="Results" data-reveal-stagger>
       <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-8" role="listitem">
         <div class="font-display text-5xl font-semibold text-gold-soft mb-3">60%</div>
         <div class="text-white font-medium mb-2">Shorter time-to-hire</div>
@@ -477,7 +494,7 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-5">
+    <div class="grid md:grid-cols-2 gap-5" data-reveal-stagger>
       <blockquote class="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
         <svg viewBox="0 0 24 24" fill="#C0A062" class="w-7 h-7 mb-4 opacity-80" aria-hidden="true"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
         <p class="text-slate-200 leading-relaxed mb-6">PeopleEdge gave us a genuine HR function without the overhead of building one. Hiring is faster, our handbook finally makes sense, and compliance stopped being a worry.</p>
@@ -510,7 +527,7 @@
       <h2 id="faq-heading" class="font-display text-3xl md:text-5xl font-semibold text-ink leading-tight">Frequently asked</h2>
     </div>
 
-    <div class="space-y-3" role="list">
+    <div class="space-y-3" role="list" data-reveal-stagger>
       <div class="faq-item card overflow-hidden" role="listitem">
         <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
           <span class="font-display text-base md:text-lg font-semibold text-ink pr-4">Do you only work with companies, or individuals too?</span>
@@ -563,7 +580,7 @@
       </ul>
     </div>
 
-    <div class="card p-7 sm:p-8">
+    <div class="card p-7 sm:p-8" data-reveal>
       <form action="#" method="POST" novalidate aria-label="Book consultation form">
         <div class="grid sm:grid-cols-2 gap-4 mb-4">
           <div>
@@ -685,6 +702,28 @@
       trigger.setAttribute('aria-expanded', isOpen);
     });
   });
+
+  // Scroll reveal (respects reduced motion)
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.hasAttribute('data-reveal-stagger')) {
+          Array.from(el.children).forEach((child, i) => {
+            child.style.transitionDelay = Math.min(i * 55, 400) + 'ms';
+          });
+        }
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
 </script>
 </body>
 </html>
