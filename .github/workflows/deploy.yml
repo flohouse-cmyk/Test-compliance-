@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
+  # Deploys run from the default branch — the only branch the github-pages
+  # environment permits to publish. Develop on the feature branch, then
+  # promote to the default branch to publish.
   push:
     branches:
       - claude/nice-franklin-i7qjko
