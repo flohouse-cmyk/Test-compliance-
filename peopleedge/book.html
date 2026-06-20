@@ -16,8 +16,6 @@
     }}}
   </script>
   <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
@@ -69,38 +67,20 @@
 <!-- SCHEDULER + INTAKE -->
 <section class="pb-24 px-4 md:px-8 bg-ivory">
   <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-8 items-start">
-    <!-- Calendly embed placeholder -->
+    <!-- How booking works -->
     <div class="lg:col-span-7" data-reveal>
-      <h2 class="font-display text-2xl font-semibold text-ink mb-4">Choose a time</h2>
-      <!-- LIVE EMBED: add your link in the CALENDLY_URL variable in the script below.
-           Until then, the styled placeholder shows. Cal.com works the same way. -->
-      <div id="scheduler" class="card overflow-hidden">
-        <div id="calendly-fallback" class="aspect-[4/3] sm:aspect-[3/2] w-full bg-paper flex flex-col items-center justify-center text-center px-6">
-          <span class="w-14 h-14 rounded-2xl bg-ink flex items-center justify-center mb-4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.7" class="w-7 h-7"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span>
-          <p class="font-display text-lg font-semibold text-ink">Scheduling widget goes here</p>
-          <p class="text-slate-500 text-sm mt-1 max-w-sm">Add your Calendly link in <code class="text-ink">CALENDLY_URL</code> (in this page's source) to make this a live, bookable calendar.</p>
-          <a href="https://calendly.com/event_types/user/me" class="btn-dark px-5 py-2.5 text-sm mt-5">Get your Calendly link</a>
+      <h2 class="font-display text-2xl font-semibold text-ink mb-4">How booking works</h2>
+      <div class="card p-7 sm:p-8 spotlight">
+        <ol class="space-y-6 list-none">
+          <li class="flex items-start gap-4"><span class="w-10 h-10 rounded-full bg-ink text-gold font-display text-lg font-semibold flex items-center justify-center flex-shrink-0">1</span><div><div class="font-display text-lg font-semibold text-ink">Tell us about your need</div><p class="text-slate-600 text-sm leading-relaxed">Fill out the quick form, and pick a free discovery call or a paid strategy session.</p></div></li>
+          <li class="flex items-start gap-4"><span class="w-10 h-10 rounded-full bg-ink text-gold font-display text-lg font-semibold flex items-center justify-center flex-shrink-0">2</span><div><div class="font-display text-lg font-semibold text-ink">We reply within one business day</div><p class="text-slate-600 text-sm leading-relaxed">You'll get a short note with a few times that work, matched to your situation.</p></div></li>
+          <li class="flex items-start gap-4"><span class="w-10 h-10 rounded-full bg-gold text-ink font-display text-lg font-semibold flex items-center justify-center flex-shrink-0">3</span><div><div class="font-display text-lg font-semibold text-ink">You're booked</div><p class="text-slate-600 text-sm leading-relaxed">Confirm a time and you'll receive details by email. That's it — no back-and-forth.</p></div></li>
+        </ol>
+        <div class="mt-7 pt-6 border-t border-ink/8 flex items-center gap-3 text-sm text-slate-600">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-5 h-5 flex-shrink-0" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Confidential — NDAs available on request.
         </div>
       </div>
-      <script>
-        // ====== Paste your scheduling link here to go live ======
-        var CALENDLY_URL = ""; // e.g. "https://calendly.com/your-handle/15min"
-        (function () {
-          if (!CALENDLY_URL) return; // keep placeholder until configured
-          var host = document.getElementById('scheduler');
-          var fb = document.getElementById('calendly-fallback');
-          if (fb) fb.remove();
-          var widget = document.createElement('div');
-          widget.className = 'calendly-inline-widget';
-          widget.setAttribute('data-url', CALENDLY_URL);
-          widget.style.minWidth = '320px';
-          widget.style.height = '700px';
-          host.appendChild(widget);
-          if (window.Calendly && Calendly.initInlineWidget) {
-            Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: widget });
-          }
-        })();
-      </script>
     </div>
 
     <!-- Intake form -->
