@@ -16,6 +16,8 @@
     }}}
   </script>
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
@@ -70,17 +72,35 @@
     <!-- Calendly embed placeholder -->
     <div class="lg:col-span-7" data-reveal>
       <h2 class="font-display text-2xl font-semibold text-ink mb-4">Choose a time</h2>
-      <!-- Replace this placeholder with your Calendly/Cal.com embed:
-           <div class="calendly-inline-widget" data-url="https://calendly.com/your-handle/discovery" style="min-width:320px;height:680px;"></div>
-           <script src="https://assets.calendly.com/assets/external/widget.js" async></script> -->
-      <div class="card overflow-hidden">
-        <div class="aspect-[4/3] sm:aspect-[3/2] w-full bg-paper flex flex-col items-center justify-center text-center px-6">
+      <!-- LIVE EMBED: add your link in the CALENDLY_URL variable in the script below.
+           Until then, the styled placeholder shows. Cal.com works the same way. -->
+      <div id="scheduler" class="card overflow-hidden">
+        <div id="calendly-fallback" class="aspect-[4/3] sm:aspect-[3/2] w-full bg-paper flex flex-col items-center justify-center text-center px-6">
           <span class="w-14 h-14 rounded-2xl bg-ink flex items-center justify-center mb-4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.7" class="w-7 h-7"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span>
           <p class="font-display text-lg font-semibold text-ink">Scheduling widget goes here</p>
-          <p class="text-slate-500 text-sm mt-1 max-w-sm">Embed your Calendly or Cal.com link to let visitors pick a time instantly. (Placeholder — see the comment in this page's source.)</p>
-          <a href="https://calendly.com" class="btn-dark px-5 py-2.5 text-sm mt-5">Open scheduler</a>
+          <p class="text-slate-500 text-sm mt-1 max-w-sm">Add your Calendly link in <code class="text-ink">CALENDLY_URL</code> (in this page's source) to make this a live, bookable calendar.</p>
+          <a href="https://calendly.com/event_types/user/me" class="btn-dark px-5 py-2.5 text-sm mt-5">Get your Calendly link</a>
         </div>
       </div>
+      <script>
+        // ====== Paste your scheduling link here to go live ======
+        var CALENDLY_URL = ""; // e.g. "https://calendly.com/your-handle/15min"
+        (function () {
+          if (!CALENDLY_URL) return; // keep placeholder until configured
+          var host = document.getElementById('scheduler');
+          var fb = document.getElementById('calendly-fallback');
+          if (fb) fb.remove();
+          var widget = document.createElement('div');
+          widget.className = 'calendly-inline-widget';
+          widget.setAttribute('data-url', CALENDLY_URL);
+          widget.style.minWidth = '320px';
+          widget.style.height = '700px';
+          host.appendChild(widget);
+          if (window.Calendly && Calendly.initInlineWidget) {
+            Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: widget });
+          }
+        })();
+      </script>
     </div>
 
     <!-- Intake form -->
@@ -88,7 +108,10 @@
       <div class="card p-7">
         <h2 class="font-display text-2xl font-semibold text-ink mb-1">Tell us a bit first</h2>
         <p class="text-slate-500 text-sm mb-6">So we can make your call as useful as possible.</p>
-        <form action="#" method="POST" novalidate aria-label="Consultation intake form">
+        <!-- Replace your-form-id with your Formspree form ID (formspree.io) to receive submissions by email. -->
+        <form action="https://formspree.io/f/your-form-id" method="POST" aria-label="Consultation intake form">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="New PeopleEdge consultation request" />
           <div class="mb-4"><label for="name" class="block text-sm font-medium text-ink mb-1.5">Name <span class="text-gold" aria-hidden="true">*</span></label><input type="text" id="name" name="name" required autocomplete="name" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="Jordan Reyes" /></div>
           <div class="mb-4"><label for="email" class="block text-sm font-medium text-ink mb-1.5">Email <span class="text-gold" aria-hidden="true">*</span></label><input type="email" id="email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="jordan@company.com" /></div>
           <div class="mb-4"><label for="company" class="block text-sm font-medium text-ink mb-1.5">Company name <span class="text-slate-400 font-normal">(optional)</span></label><input type="text" id="company" name="company" autocomplete="organization" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="Acme Co." /></div>
