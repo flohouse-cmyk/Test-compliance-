@@ -104,4 +104,49 @@
       });
     });
   }
+
+  // Live mesh-gradient hero (lightweight canvas — the static-friendly "shader")
+  var canvas = document.getElementById('hero-canvas');
+  if (canvas && !prefersReduced) {
+    var ctx = canvas.getContext('2d');
+    // Navy / gold / soft-blue light sources that drift around the hero
+    var blobs = [
+      { hue: 'rgba(200,169,110,0.85)', ax: 0.26, ay: 0.30, sx: 0.21, sy: 0.16, fx: 0.7, fy: 0.5, ph: 0.0, r: 0.62 },
+      { hue: 'rgba(74,108,176,0.85)',  ax: 0.76, ay: 0.24, sx: 0.18, sy: 0.20, fx: 0.5, fy: 0.8, ph: 1.7, r: 0.66 },
+      { hue: 'rgba(35,58,100,0.95)',   ax: 0.58, ay: 0.78, sx: 0.22, sy: 0.16, fx: 0.6, fy: 0.4, ph: 3.1, r: 0.60 },
+      { hue: 'rgba(216,196,154,0.60)', ax: 0.36, ay: 0.62, sx: 0.16, sy: 0.18, fx: 0.9, fy: 0.7, ph: 4.6, r: 0.50 }
+    ];
+    var W, H, t = 0, raf = null, running = false;
+    function resize() {
+      // Render at low resolution; CSS blur smooths it — very cheap.
+      var scale = 0.42;
+      W = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * scale));
+      H = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * scale));
+    }
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < blobs.length; i++) {
+        var b = blobs[i];
+        var x = (b.ax + b.sx * Math.sin(t * b.fx + b.ph)) * W;
+        var y = (b.ay + b.sy * Math.cos(t * b.fy + b.ph)) * H;
+        var rad = b.r * Math.max(W, H);
+        var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+        g.addColorStop(0, b.hue);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, W, H);
+      }
+    }
+    function loop() { if (!running) return; t += 0.004; render(); raf = requestAnimationFrame(loop); }
+    function start() { if (!running) { running = true; loop(); } }
+    function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
+    resize();
+    window.addEventListener('resize', function () { resize(); render(); }, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0 }).observe(canvas);
+    } else { start(); }
+  }
 })();

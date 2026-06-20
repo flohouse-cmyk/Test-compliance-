@@ -144,6 +144,16 @@ a:focus-visible, button:focus-visible { outline:2px solid #C8A96E; outline-offse
 .spotlight:hover::before, .card-hover:hover::before { opacity:1; }
 .card-hover > * { position:relative; z-index:1; }
 
+/* Live mesh-gradient hero canvas (static-friendly shader alternative) */
+#hero-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; filter:blur(36px) saturate(1.1); opacity:.85; }
+
+/* Cinematic hero entrance */
+.hero-in { opacity:0; transform:translateY(28px); animation: heroIn .9s cubic-bezier(.22,1,.36,1) forwards; }
+.hero-in.d1 { animation-delay:.08s; } .hero-in.d2 { animation-delay:.2s; } .hero-in.d3 { animation-delay:.34s; } .hero-in.d4 { animation-delay:.48s; }
+@keyframes heroIn { to { opacity:1; transform:none; } }
+
 @media (prefers-reduced-motion: reduce) {
   .hero-glow::before, .hero-glow::after, .text-shimmer, .spin-slow { animation: none !important; }
+  #hero-canvas { display:none; }
+  .hero-in { opacity:1 !important; transform:none !important; animation:none !important; }
 }
