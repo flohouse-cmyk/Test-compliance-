@@ -93,3 +93,54 @@ a:focus-visible, button:focus-visible { outline:2px solid #C8A96E; outline-offse
 [data-reveal].is-visible { opacity:1; transform:none; }
 [data-reveal-stagger] > * { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
 [data-reveal-stagger].is-visible > * { opacity:1; transform:none; }
+
+/* ============== Premium motion & graphics ============== */
+
+/* Animated aurora blobs on every dark section (via .hero-glow, no markup needed) */
+.hero-glow { overflow: hidden; }
+.hero-glow::before, .hero-glow::after {
+  content:''; position:absolute; border-radius:50%; filter:blur(72px); pointer-events:none; will-change:transform;
+}
+.hero-glow::before { width:40rem; height:40rem; top:-12rem; right:-8rem; background:radial-gradient(circle, rgba(200,169,110,.42), transparent 70%); animation: aurora-a 20s ease-in-out infinite; }
+.hero-glow::after  { width:36rem; height:36rem; bottom:-14rem; left:-10rem; background:radial-gradient(circle, rgba(74,108,176,.50), transparent 70%); animation: aurora-b 26s ease-in-out infinite; }
+@keyframes aurora-a { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-9%,11%) scale(1.18)} 66%{transform:translate(7%,-7%) scale(.9)} }
+@keyframes aurora-b { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(11%,-9%) scale(1.12)} 66%{transform:translate(-7%,9%) scale(.94)} }
+
+/* Fine film grain on dark sections */
+.hero-bg::before {
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Shimmering gold gradient text */
+.text-shimmer {
+  background:linear-gradient(110deg,#C8A96E 10%,#F2E4C4 28%,#C8A96E 45%,#F2E4C4 62%,#C8A96E 80%);
+  background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { to { background-position:200% center; } }
+
+/* Rotating circular seal */
+.spin-slow { animation: spin 22s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Magnetic button base + light sweep */
+.magnetic { transition: transform .25s cubic-bezier(.22,1,.36,1); }
+.sheen { position:relative; overflow:hidden; }
+.sheen::after {
+  content:''; position:absolute; top:0; left:-120%; width:60%; height:100%; transform:skewX(-20deg);
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transition:left .6s ease;
+}
+.sheen:hover::after { left:140%; }
+
+/* Spotlight that follows the cursor on cards */
+.spotlight { position:relative; }
+.spotlight::before {
+  content:''; position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity .3s ease; pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(200,169,110,.16), transparent 60%);
+}
+.spotlight:hover::before { opacity:1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow::before, .hero-glow::after, .text-shimmer, .spin-slow { animation: none !important; }
+}
