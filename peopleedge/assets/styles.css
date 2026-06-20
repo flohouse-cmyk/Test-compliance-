@@ -37,7 +37,9 @@ h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; color: #1B2B4B; }
 }
 
 /* Buttons */
-.btn-primary { background:#C8A96E; color:#1B2B4B; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:transform .18s ease, box-shadow .25s ease, background .25s ease; }
+.btn-primary { position:relative; overflow:hidden; background:#C8A96E; color:#1B2B4B; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:transform .18s ease, box-shadow .25s ease, background .25s ease; }
+.btn-primary::after { content:''; position:absolute; top:0; left:-130%; width:55%; height:100%; transform:skewX(-20deg); background:linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); transition:left .6s ease; pointer-events:none; }
+.btn-primary:hover::after { left:150%; }
 .btn-primary:hover { background:#D8BE86; transform:translateY(-2px); box-shadow:0 12px 30px rgba(200,169,110,.35); }
 .btn-primary:active { transform:translateY(0) scale(.98); }
 .btn-primary:focus-visible { outline:3px solid #C8A96E; outline-offset:3px; }
@@ -133,13 +135,14 @@ a:focus-visible, button:focus-visible { outline:2px solid #C8A96E; outline-offse
 }
 .sheen:hover::after { left:140%; }
 
-/* Spotlight that follows the cursor on cards */
-.spotlight { position:relative; }
-.spotlight::before {
-  content:''; position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity .3s ease; pointer-events:none;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(200,169,110,.16), transparent 60%);
+/* Spotlight that follows the cursor on cards (applies to all hoverable cards) */
+.spotlight, .card-hover { position:relative; overflow:hidden; }
+.spotlight::before, .card-hover::before {
+  content:''; position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity .3s ease; pointer-events:none; z-index:0;
+  background:radial-gradient(440px circle at var(--mx,50%) var(--my,50%), rgba(200,169,110,.16), transparent 60%);
 }
-.spotlight:hover::before { opacity:1; }
+.spotlight:hover::before, .card-hover:hover::before { opacity:1; }
+.card-hover > * { position:relative; z-index:1; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-glow::before, .hero-glow::after, .text-shimmer, .spin-slow { animation: none !important; }

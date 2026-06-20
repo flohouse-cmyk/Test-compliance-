@@ -82,9 +82,10 @@
     }
   }
 
-  // Magnetic buttons (subtle pull toward cursor)
+  // Magnetic pull on all gold CTAs (and anything tagged .magnetic)
   if (!prefersReduced && window.matchMedia('(pointer:fine)').matches) {
-    document.querySelectorAll('.magnetic').forEach(function (el) {
+    document.querySelectorAll('.magnetic, .btn-primary').forEach(function (el) {
+      el.classList.add('magnetic');
       el.addEventListener('mousemove', function (e) {
         var r = el.getBoundingClientRect();
         var mx = e.clientX - r.left - r.width / 2;
@@ -94,8 +95,8 @@
       el.addEventListener('mouseleave', function () { el.style.transform = ''; });
     });
 
-    // Cursor spotlight on cards
-    document.querySelectorAll('.spotlight').forEach(function (el) {
+    // Cursor spotlight on every hoverable card
+    document.querySelectorAll('.spotlight, .card-hover').forEach(function (el) {
       el.addEventListener('mousemove', function (e) {
         var r = el.getBoundingClientRect();
         el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
