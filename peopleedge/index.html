@@ -3,625 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PeopleEdge HR Consulting | Veteran-Owned (SDVOSB) HR & Talent Acquisition</title>
-  <meta name="description" content="Veteran-owned (SDVOSB) HR consulting led by a talent acquisition specialist with 12+ years of experience. Fractional HR, compliance, recruiting, and career coaching for businesses and individuals." />
+  <title>PeopleEdge — HR Consulting</title>
+  <meta name="description" content="Premium HR consulting: recruiting, compliance, fractional HR, and career coaching. Senior expertise, scaled to you. Veteran-owned (SDVOSB)." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: {
-      colors: { ink:'#1B2B4B', 'ink-deep':'#142036', gold:'#C8A96E', 'gold-soft':'#DCC79A', ivory:'#F9F7F4', paper:'#F1ECE3' },
-      fontFamily: { display:['"Playfair Display"','serif'], sans:['Inter','sans-serif'] }
+      colors: {
+        ink:'#15181E', paper:'#FBFAF8', moss:'#15604F', 'moss-deep':'#0F4A3C',
+        sand:'#F1ECE3', line:'#E7E2D8', muted:'#5A6069'
+      },
+      fontFamily: { display:['"Cormorant Garamond"','serif'], sans:['Inter','sans-serif'] }
     }}}
   </script>
   <style>
-/* PeopleEdge HR Consulting — shared styles
-   Palette: navy #1B2B4B · gold #C8A96E · cream #F9F7F4 · near-black #1A1A1A
-   Type:    Playfair Display (display) + Inter (body) */
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  [data-reveal], [data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
-}
-
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background: #F9F7F4; color: #1A1A1A; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; color: #1B2B4B; }
-
-.eyebrow { letter-spacing: .22em; }
-.rule { height: 1px; background: linear-gradient(to right, #C8A96E, rgba(200,169,110,0)); }
-.hairline { background-image: linear-gradient(to right, transparent, rgba(255,255,255,.10) 20%, rgba(255,255,255,.10) 80%, transparent); }
-
-/* Navbar */
-.navbar {
-  position: fixed; top: 16px; left: 16px; right: 16px; z-index: 50;
-  background: rgba(249,247,244,.82); backdrop-filter: blur(14px);
-  border: 1px solid rgba(27,43,75,.08); border-radius: 14px;
-  transition: box-shadow .25s ease, background .25s ease;
-}
-.navbar.scrolled { box-shadow: 0 10px 40px rgba(27,43,75,.10); background: rgba(249,247,244,.96); }
-.nav-link { font-size: .875rem; font-weight: 500; color: #475569; transition: color .2s ease; }
-.nav-link:hover { color: #1B2B4B; }
-.nav-link.active { color: #1B2B4B; }
-.nav-link.active::after { content: ''; display: block; height: 2px; background: #C8A96E; border-radius: 2px; margin-top: 3px; }
-
-/* Hero / dark sections */
-.hero-bg { background: radial-gradient(120% 120% at 80% 0%, #233a64 0%, #1B2B4B 45%, #142036 100%); }
-.hero-glow {
-  background-image:
-    radial-gradient(40rem 30rem at 78% 8%, rgba(200,169,110,.18) 0%, transparent 60%),
-    radial-gradient(34rem 26rem at 8% 90%, rgba(60,86,140,.30) 0%, transparent 60%);
-}
-
-/* Buttons */
-.btn-primary { position:relative; overflow:hidden; background:#C8A96E; color:#1B2B4B; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:transform .18s ease, box-shadow .25s ease, background .25s ease; }
-.btn-primary::after { content:''; position:absolute; top:0; left:-130%; width:55%; height:100%; transform:skewX(-20deg); background:linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); transition:left .6s ease; pointer-events:none; }
-.btn-primary:hover::after { left:150%; }
-.btn-primary:hover { background:#D8BE86; transform:translateY(-2px); box-shadow:0 12px 30px rgba(200,169,110,.35); }
-.btn-primary:active { transform:translateY(0) scale(.98); }
-.btn-primary:focus-visible { outline:3px solid #C8A96E; outline-offset:3px; }
-
-.btn-dark { background:#1B2B4B; color:#fff; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:transform .18s ease, box-shadow .25s ease, background .25s ease; }
-.btn-dark:hover { background:#142036; transform:translateY(-2px); box-shadow:0 12px 30px rgba(27,43,75,.25); }
-.btn-dark:active { transform:translateY(0) scale(.98); }
-.btn-dark:focus-visible { outline:3px solid #1B2B4B; outline-offset:3px; }
-
-.btn-ghost { border:1px solid rgba(255,255,255,.30); color:#fff; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:background .2s ease, border-color .2s ease; }
-.btn-ghost:hover { background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.6); }
-.btn-ghost:active { transform:scale(.98); }
-.btn-ghost:focus-visible { outline:3px solid #fff; outline-offset:3px; }
-
-.btn-outline-ink { border:1px solid rgba(27,43,75,.20); color:#1B2B4B; border-radius:9999px; font-weight:600; display:inline-flex; align-items:center; gap:8px; cursor:pointer; transition:background .2s ease, border-color .2s ease; }
-.btn-outline-ink:hover { background:rgba(27,43,75,.04); border-color:rgba(27,43,75,.45); }
-.btn-outline-ink:active { transform:scale(.98); }
-.btn-outline-ink:focus-visible { outline:3px solid #1B2B4B; outline-offset:3px; }
-
-/* Cards */
-.card { background:#fff; border:1px solid rgba(27,43,75,.08); border-radius:18px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-.card-hover:hover { transform:translateY(-5px); border-color:rgba(200,169,110,.45); box-shadow:0 1px 2px rgba(27,43,75,.04), 0 18px 50px -12px rgba(27,43,75,.18); }
-
-.icon-chip { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(27,43,75,.05); border:1px solid rgba(27,43,75,.08); color:#1B2B4B; transition:background .25s ease, color .25s ease, border-color .25s ease; }
-.group:hover .icon-chip { background:#1B2B4B; color:#C8A96E; border-color:#1B2B4B; }
-
-/* Pricing highlight */
-.tier-popular { border-color:#C8A96E; box-shadow:0 20px 50px -16px rgba(27,43,75,.25); }
-
-/* Audience editorial rows */
-.aud-row { transition:background .25s ease; }
-.aud-row:hover { background:rgba(200,169,110,.06); }
-.aud-num { font-family:'Playfair Display', serif; }
-
-/* Process connector */
-.step-line::before { content:''; position:absolute; top:28px; left:calc(50% + 36px); right:calc(-50% + 36px); height:1px; background:linear-gradient(to right, rgba(200,169,110,.7), rgba(200,169,110,.2)); }
-@media (max-width:768px){ .step-line::before{ display:none; } }
-
-/* Mobile menu / accordion */
-#mobile-menu { display:none; }
-#mobile-menu.open { display:block; }
-.faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
-.faq-item.open .faq-answer { max-height:360px; }
-.faq-item.open .faq-icon { transform:rotate(135deg); }
-.faq-icon { transition:transform .25s ease; }
-
-.photo-frame { background:#22335a; }
-
-a:focus-visible, button:focus-visible { outline:2px solid #C8A96E; outline-offset:2px; border-radius:6px; }
-
-/* Scroll reveal */
-/* Only hide reveal content when JS is present (fail-safe: visible without JS) */
-.js [data-reveal] { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-.js [data-reveal].is-visible { opacity:1; transform:none; }
-.js [data-reveal-stagger] > * { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-.js [data-reveal-stagger].is-visible > * { opacity:1; transform:none; }
-
-/* ============== Premium motion & graphics ============== */
-
-/* Animated aurora blobs on every dark section (via .hero-glow, no markup needed) */
-.hero-glow { overflow: hidden; }
-.hero-glow::before, .hero-glow::after {
-  content:''; position:absolute; border-radius:50%; filter:blur(72px); pointer-events:none; will-change:transform;
-}
-.hero-glow::before { width:40rem; height:40rem; top:-12rem; right:-8rem; background:radial-gradient(circle, rgba(200,169,110,.42), transparent 70%); animation: aurora-a 20s ease-in-out infinite; }
-.hero-glow::after  { width:36rem; height:36rem; bottom:-14rem; left:-10rem; background:radial-gradient(circle, rgba(74,108,176,.50), transparent 70%); animation: aurora-b 26s ease-in-out infinite; }
-@keyframes aurora-a { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-9%,11%) scale(1.18)} 66%{transform:translate(7%,-7%) scale(.9)} }
-@keyframes aurora-b { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(11%,-9%) scale(1.12)} 66%{transform:translate(-7%,9%) scale(.94)} }
-
-/* Fine film grain on dark sections */
-.hero-bg::before {
-  content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Shimmering gold gradient text */
-.text-shimmer {
-  background:linear-gradient(110deg,#C8A96E 10%,#F2E4C4 28%,#C8A96E 45%,#F2E4C4 62%,#C8A96E 80%);
-  background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
-  animation: shimmer 6s linear infinite;
-}
-@keyframes shimmer { to { background-position:200% center; } }
-
-/* Rotating circular seal */
-.spin-slow { animation: spin 22s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Magnetic button base + light sweep */
-.magnetic { transition: transform .25s cubic-bezier(.22,1,.36,1); }
-.sheen { position:relative; overflow:hidden; }
-.sheen::after {
-  content:''; position:absolute; top:0; left:-120%; width:60%; height:100%; transform:skewX(-20deg);
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transition:left .6s ease;
-}
-.sheen:hover::after { left:140%; }
-
-/* Spotlight that follows the cursor on cards (applies to all hoverable cards) */
-.spotlight, .card-hover { position:relative; overflow:hidden; }
-.spotlight::before, .card-hover::before {
-  content:''; position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity .3s ease; pointer-events:none; z-index:0;
-  background:radial-gradient(440px circle at var(--mx,50%) var(--my,50%), rgba(200,169,110,.16), transparent 60%);
-}
-.spotlight:hover::before, .card-hover:hover::before { opacity:1; }
-.card-hover > * { position:relative; z-index:1; }
-
-/* Live mesh-gradient hero canvas (static-friendly shader alternative) */
-#hero-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; filter:blur(36px) saturate(1.1); opacity:.85; }
-
-/* Cinematic hero entrance */
-.hero-in { opacity:0; transform:translateY(28px); animation: heroIn .9s cubic-bezier(.22,1,.36,1) forwards; }
-.hero-in.d1 { animation-delay:.08s; } .hero-in.d2 { animation-delay:.2s; } .hero-in.d3 { animation-delay:.34s; } .hero-in.d4 { animation-delay:.48s; }
-@keyframes heroIn { to { opacity:1; transform:none; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-glow::before, .hero-glow::after, .text-shimmer, .spin-slow { animation: none !important; }
-  #hero-canvas { display:none; }
-  .hero-in { opacity:1 !important; transform:none !important; animation:none !important; }
-}
-
-</style>
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; background:#FBFAF8; color:#15181E; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Cormorant Garamond',serif; }
+    .nav { transition: background .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .nav.scrolled { background:rgba(251,250,248,.9); backdrop-filter:blur(10px); box-shadow:0 1px 0 rgba(21,24,30,.06); }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; font-weight:500; transition:transform .15s ease, background .2s ease, box-shadow .2s ease, color .2s ease; }
+    .btn:active { transform:translateY(1px); }
+    .btn-primary { background:#15604F; color:#fff; }
+    .btn-primary:hover { background:#0F4A3C; box-shadow:0 10px 24px -8px rgba(15,74,60,.5); }
+    .btn-ghost { border:1px solid rgba(21,24,30,.18); color:#15181E; }
+    .btn-ghost:hover { background:rgba(21,24,30,.04); border-color:rgba(21,24,30,.4); }
+    .svc { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .svc:hover { transform:translateY(-4px); border-color:rgba(21,96,79,.35); box-shadow:0 24px 50px -24px rgba(21,24,30,.25); }
+    .svc:hover .svc-arrow { transform:translateX(4px); }
+    .svc-arrow { transition: transform .25s ease; }
+    .field { width:100%; padding:.8rem 1rem; border:1px solid #E7E2D8; border-radius:.75rem; background:#fff; font-size:.95rem; transition:border-color .2s, box-shadow .2s; }
+    .field:focus { outline:none; border-color:#15604F; box-shadow:0 0 0 3px rgba(21,96,79,.15); }
+    /* Fail-safe reveal: only hide when JS runs */
+    .js .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .js .reveal.show { opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce) { *{ animation:none!important; transition:none!important; } .js .reveal{ opacity:1!important; transform:none!important; } }
+  </style>
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
 
-<!-- ===== TOP BAR ===== -->
-<div class="hidden md:block bg-ink text-ivory/80 text-xs">
-  <div class="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
-    <p class="flex items-center gap-2"><span class="inline-block w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span> Veteran-owned · SDVOSB-certified · Texas-based, serving clients nationwide</p>
-    <div class="flex items-center gap-5">
-      <a href="mailto:hello@peopleedge.com" class="hover:text-gold transition-colors">hello@peopleedge.com</a>
-      <a href="https://www.linkedin.com" class="hover:text-gold transition-colors">LinkedIn</a>
-    </div>
-  </div>
-</div>
-
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar" role="navigation" aria-label="Main navigation">
-  <div class="flex items-center justify-between px-5 py-3">
-    <a href="index.html" class="flex items-center gap-2.5 rounded-lg" aria-label="PeopleEdge home">
-      <span class="w-9 h-9 rounded-lg bg-ink flex items-center justify-center" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-gold" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </span>
-      <span class="font-display text-xl font-semibold text-ink tracking-tight">PeopleEdge</span>
+<!-- NAV -->
+<header class="nav fixed inset-x-0 top-0 z-50 border-b border-transparent">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-full bg-moss text-white grid place-items-center font-display text-lg font-semibold">P</span>
+      <span class="font-display text-2xl font-semibold tracking-tight">PeopleEdge</span>
     </a>
-    <ul class="hidden md:flex items-center gap-8 list-none" role="list">
-      <li><a href="index.html" class="nav-link active">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="services.html" class="nav-link">Services</a></li>
-      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-      <li><a href="contact.html" class="nav-link">Contact</a></li>
-    </ul>
-    <a href="book.html" class="hidden md:inline-flex btn-dark px-5 py-2.5 text-sm">Book a Free Consult
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    <button id="hamburger" class="md:hidden p-2 rounded-lg text-ink hover:bg-ink/5 transition-colors cursor-pointer" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
-  </div>
-  <div id="mobile-menu" class="border-t border-ink/10 px-5 pb-4" role="menu">
-    <ul class="flex flex-col gap-1 pt-3 list-none" role="list">
-      <li><a href="index.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-ink bg-ink/5" role="menuitem">Home</a></li>
-      <li><a href="about.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">About</a></li>
-      <li><a href="services.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Services</a></li>
-      <li><a href="pricing.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Pricing</a></li>
-      <li><a href="contact.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Contact</a></li>
-      <li class="pt-2"><a href="book.html" class="btn-dark block text-center py-2.5 px-4 text-sm justify-center">Book a Free Consult</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ===== HERO ===== -->
-<header class="hero-bg relative overflow-hidden pt-36 md:pt-44 pb-24 px-4 md:px-8" role="banner">
-  <canvas id="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
-  <div class="relative max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-    <div class="lg:col-span-7">
-      <div class="flex items-center gap-3 mb-7 hero-in d1">
-        <span class="eyebrow text-gold text-xs font-semibold uppercase">Strategic HR, built for people</span>
-        <span class="rule w-16" aria-hidden="true"></span>
-      </div>
-      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-[1.08] mb-6 hero-in d2">
-        Get the HR support<br class="hidden md:block" /> your team <span class="italic text-shimmer">deserves.</span>
-      </h1>
-      <p class="text-slate-300 text-lg leading-relaxed mb-9 max-w-xl hero-in d3">
-        Veteran-owned HR consulting led by a talent acquisition specialist with 12+ years of experience —
-        fractional HR, compliance, recruiting, and career coaching for the businesses and people who need it most.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-3.5 hero-in d4">
-        <a href="book.html" class="btn-primary magnetic sheen px-7 py-3.5 text-base">Book a Free Consult
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="services.html" class="btn-ghost magnetic px-7 py-3.5 text-base">View Services</a>
-      </div>
-      <p class="text-slate-400 text-sm mt-7 italic hero-in d4">"Strategic HR Solutions — Built for People, Powered by Experience."</p>
-    </div>
-    <div class="lg:col-span-5">
-      <div class="relative">
-        <div class="absolute -inset-4 rounded-[2rem] bg-gold/10 blur-2xl" aria-hidden="true"></div>
-        <!-- Rotating veteran-owned seal -->
-        <div class="absolute -top-7 -left-7 z-20 hidden sm:block" aria-hidden="true">
-          <div class="relative w-24 h-24 drop-shadow-xl">
-            <svg class="spin-slow w-full h-full" viewBox="0 0 100 100">
-              <defs><path id="seal-path" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"/></defs>
-              <circle cx="50" cy="50" r="49" fill="#1B2B4B" stroke="#C8A96E" stroke-width="1" stroke-opacity="0.5"/>
-              <text fill="#C8A96E" font-size="9" letter-spacing="1.8" font-family="Inter, sans-serif" font-weight="600"><textPath href="#seal-path" startOffset="0">VETERAN-OWNED • SDVOSB • EST. 2009 • </textPath></text>
-            </svg>
-            <span class="absolute inset-0 flex items-center justify-center"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.6" class="w-7 h-7"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-          </div>
-        </div>
-        <figure class="photo-frame relative rounded-[1.5rem] overflow-hidden border border-white/10 shadow-2xl" style="aspect-ratio:4/5">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80" alt="An HR consultant meeting with a client" width="900" height="1125" loading="eager" decoding="async" referrerpolicy="no-referrer" class="h-full w-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" aria-hidden="true"></div>
-          <div class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-ink/70 backdrop-blur-md border border-white/15 px-3 py-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span><span class="text-white/90 text-xs font-medium">Veteran-owned · SDVOSB</span>
-          </div>
-          <figcaption class="absolute bottom-4 left-4 right-4 sm:right-auto rounded-2xl bg-ink/75 backdrop-blur-md border border-white/15 px-5 py-4 shadow-xl">
-            <div class="flex items-center gap-6">
-              <div><div class="font-display text-3xl font-semibold text-gold-soft leading-none" data-count="12" data-suffix="+">12+</div><div class="text-slate-300 text-xs mt-1.5">Years experience</div></div>
-              <div class="w-px self-stretch bg-white/15" aria-hidden="true"></div>
-              <div><div class="font-display text-3xl font-semibold text-white leading-none" data-count="100" data-suffix="+">100+</div><div class="text-slate-300 text-xs mt-1.5">Clients served</div></div>
-            </div>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
+    <nav class="hidden md:flex items-center gap-9 text-sm text-muted">
+      <a href="#services" class="hover:text-ink transition-colors">Services</a>
+      <a href="#approach" class="hover:text-ink transition-colors">Approach</a>
+      <a href="#about" class="hover:text-ink transition-colors">About</a>
+      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary px-5 py-2.5 text-sm">Book a consultation</a>
   </div>
 </header>
 
-<!-- ===== CREDIBILITY BAR ===== -->
-<section class="bg-ink-deep border-t border-white/5 py-6 px-4 md:px-8" aria-label="Credentials">
-  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center" data-reveal>
-    <div><div class="font-display text-2xl text-gold-soft"><span data-count="12" data-suffix="+">12+</span> Years</div><div class="text-slate-400 text-xs mt-1">HR &amp; recruiting experience</div></div>
-    <div><div class="font-display text-2xl text-gold-soft">SDVOSB</div><div class="text-slate-400 text-xs mt-1">Set-aside certified</div></div>
-    <div><div class="font-display text-2xl text-gold-soft">Veteran-Owned</div><div class="text-slate-400 text-xs mt-1">Service-disabled</div></div>
-    <div><div class="font-display text-2xl text-gold-soft"><span data-count="100" data-suffix="+">100+</span> Clients</div><div class="text-slate-400 text-xs mt-1">Served &amp; counting</div></div>
+<!-- HERO -->
+<section id="top" class="px-6 pt-40 pb-24 md:pt-48 md:pb-32">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="reveal text-sm tracking-[0.25em] uppercase text-moss mb-6">HR Consulting</p>
+    <h1 class="reveal font-display text-5xl md:text-7xl font-semibold leading-[1.05] tracking-tight">
+      The people side of your business, <span class="italic text-moss">handled with care.</span>
+    </h1>
+    <p class="reveal mx-auto mt-7 max-w-xl text-lg text-muted leading-relaxed">
+      Senior HR expertise — recruiting, compliance, fractional support, and career coaching —
+      scaled to exactly what your team needs. Veteran-owned, with 12+ years of experience.
+    </p>
+    <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#contact" class="btn btn-primary px-7 py-3.5 text-base">Book a free consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#services" class="btn btn-ghost px-7 py-3.5 text-base">View services</a>
+    </div>
+    <div class="reveal mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted">
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-moss"></span> Veteran-owned · SDVOSB</span>
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-moss"></span> SHRM-certified</span>
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-moss"></span> Texas · serving nationwide</span>
+    </div>
   </div>
 </section>
 
-<!-- ===== SERVICES SNAPSHOT ===== -->
-<section class="py-24 px-4 md:px-8 bg-ivory" aria-labelledby="snap-heading">
+<!-- SERVICES -->
+<section id="services" class="px-6 py-24 bg-white border-y border-line">
   <div class="max-w-6xl mx-auto">
-    <div class="max-w-2xl mb-14" data-reveal>
-      <div class="flex items-center gap-3 mb-4"><span class="eyebrow text-gold text-xs font-semibold uppercase">What we do</span><span class="rule w-16" aria-hidden="true"></span></div>
-      <h2 id="snap-heading" class="font-display text-3xl md:text-5xl font-semibold text-ink leading-tight mb-4">HR expertise, scaled to you</h2>
-      <p class="text-slate-600 text-lg leading-relaxed">From full-cycle recruiting to compliance and career coaching — the support your team deserves, exactly when you need it.</p>
+    <div class="reveal max-w-2xl mb-14">
+      <p class="text-sm tracking-[0.25em] uppercase text-moss mb-4">What we do</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">HR support, scaled to you</h2>
+      <p class="mt-4 text-muted text-lg leading-relaxed">From a single hire to a full HR function — engage by the project, on retainer, or à la carte.</p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal-stagger>
-      <article class="group card card-hover spotlight p-7">
-        <div class="icon-chip mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-        <h3 class="font-display text-xl font-semibold text-ink mb-2.5">Full-Cycle Recruiting</h3>
-        <p class="text-slate-600 text-sm leading-relaxed mb-4">Sourcing, screening, interview coordination, and offer management for SMBs and corporations.</p>
-        <a href="services.html" class="text-sm font-semibold text-ink inline-flex items-center gap-1 hover:gap-2 transition-all">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-      <article class="group card card-hover spotlight p-7">
-        <div class="icon-chip mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
-        <h3 class="font-display text-xl font-semibold text-ink mb-2.5">HR Compliance</h3>
-        <p class="text-slate-600 text-sm leading-relaxed mb-4">I-9 compliance, records retention, corrective action, and policy development that keeps you audit-ready.</p>
-        <a href="services.html" class="text-sm font-semibold text-ink inline-flex items-center gap-1 hover:gap-2 transition-all">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-      <article class="group card card-hover spotlight p-7">
-        <div class="icon-chip mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3 class="font-display text-xl font-semibold text-ink mb-2.5">Fractional HR</h3>
-        <p class="text-slate-600 text-sm leading-relaxed mb-4">Ongoing, retainer-based HR for companies without an in-house team — the department, without the headcount.</p>
-        <a href="services.html" class="text-sm font-semibold text-ink inline-flex items-center gap-1 hover:gap-2 transition-all">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-      <article class="group card card-hover spotlight p-7">
-        <div class="icon-chip mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h3 class="font-display text-xl font-semibold text-ink mb-2.5">Career Services</h3>
-        <p class="text-slate-600 text-sm leading-relaxed mb-4">Resume reviews, interview prep, and career coaching for individuals ready for their next move.</p>
-        <a href="services.html" class="text-sm font-semibold text-ink inline-flex items-center gap-1 hover:gap-2 transition-all">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">Recruiting &amp; Talent</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">Full-cycle recruiting — sourcing, screening, and offer management for roles that matter.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">HR Compliance</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">I-9s, records retention, handbooks, and policy that keep you audit-ready and protected.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">Fractional HR</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">An on-call HR partner for companies without an in-house team — the department, not the headcount.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">Career Coaching</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">Resume reviews, interview prep, and 1:1 coaching for professionals ready for their next move.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">Intern Programs</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">Structured onboarding and early-career program design that builds a real talent pipeline.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#contact" class="svc group block rounded-2xl border border-line bg-paper p-7">
+        <span class="grid w-11 h-11 place-items-center rounded-xl bg-moss/10 text-moss mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 2 4-5"/></svg></span>
+        <h3 class="font-display text-2xl font-semibold">HR Strategy</h3>
+        <p class="mt-2 text-muted text-sm leading-relaxed">Org design, compensation benchmarking, and people analytics that inform better decisions.</p>
+        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-moss">Learn more <svg class="svc-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ===== WHO WE SERVE ===== -->
-<section id="audiences" class="py-24 px-4 md:px-8 bg-paper" aria-labelledby="aud-heading">
-  <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12">
-    <div class="lg:col-span-4" data-reveal>
-      <div class="lg:sticky lg:top-28">
-        <div class="flex items-center gap-3 mb-4"><span class="eyebrow text-gold text-xs font-semibold uppercase">Who we serve</span><span class="rule w-16" aria-hidden="true"></span></div>
-        <h2 id="aud-heading" class="font-display text-3xl md:text-4xl font-semibold text-ink leading-tight mb-4">Five kinds of clients, one standard of care</h2>
-        <p class="text-slate-600 leading-relaxed mb-6">Whether you're a growing company, an industrial employer, a contractor, or charting your own next move — we shape our support around you.</p>
-        <a href="book.html" class="btn-outline-ink px-5 py-2.5 text-sm">Find your fit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<!-- APPROACH -->
+<section id="approach" class="px-6 py-24">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
+    <div class="reveal lg:col-span-5">
+      <p class="text-sm tracking-[0.25em] uppercase text-moss mb-4">Our approach</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">Senior expertise, without the overhead</h2>
+      <p class="mt-4 text-muted text-lg leading-relaxed">You get a seasoned HR partner who does the work alongside you — practical, hands-on, and right-sized for your business.</p>
+    </div>
+    <div class="lg:col-span-7 grid sm:grid-cols-3 gap-8">
+      <div class="reveal"><div class="font-display text-5xl font-semibold text-moss">01</div><h3 class="font-display text-xl font-semibold mt-3">Discovery</h3><p class="mt-2 text-muted text-sm leading-relaxed">We learn your team, culture, and goals through a quick, candid audit.</p></div>
+      <div class="reveal"><div class="font-display text-5xl font-semibold text-moss">02</div><h3 class="font-display text-xl font-semibold mt-3">Plan</h3><p class="mt-2 text-muted text-sm leading-relaxed">A prioritized roadmap with clear timelines and the outcomes we'll measure.</p></div>
+      <div class="reveal"><div class="font-display text-5xl font-semibold text-moss">03</div><h3 class="font-display text-xl font-semibold mt-3">Deliver</h3><p class="mt-2 text-muted text-sm leading-relaxed">We execute hands-on and track real results — hiring, retention, compliance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="px-6 py-16 bg-moss text-white">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="reveal"><div class="font-display text-5xl font-semibold">12+</div><div class="mt-1 text-sm text-white/70">Years experience</div></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold">100+</div><div class="mt-1 text-sm text-white/70">Clients served</div></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold">98%</div><div class="mt-1 text-sm text-white/70">Client retention</div></div>
+    <div class="reveal"><div class="font-display text-5xl font-semibold">SDVOSB</div><div class="mt-1 text-sm text-white/70">Veteran-owned</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="px-6 py-24 bg-white border-y border-line">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="reveal text-sm tracking-[0.25em] uppercase text-moss mb-4">About</p>
+    <h2 class="reveal font-display text-4xl md:text-5xl font-semibold leading-tight">Hi, I'm Ashley.</h2>
+    <p class="reveal mt-6 text-lg text-muted leading-relaxed">
+      For more than 12 years I've helped companies hire, build, and keep great teams — and helped
+      individuals land roles they're proud of. I started PeopleEdge to bring senior-level HR and
+      talent-acquisition expertise to the businesses and people who need it most. As a veteran-owned,
+      SDVOSB-certified practice, I'm proud to serve government contractors and mission-driven employers
+      with the compliance rigor and human care the people side of business deserves.
+    </p>
+    <div class="reveal mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted">
+      <span>SHRM Certified</span><span aria-hidden="true">·</span>
+      <span>DDI Behavioral Interviewing</span><span aria-hidden="true">·</span>
+      <span>I-9 Compliance</span><span aria-hidden="true">·</span>
+      <span>SDVOSB</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="px-6 py-24">
+  <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+    <div class="reveal">
+      <p class="text-sm tracking-[0.25em] uppercase text-moss mb-4">Get started</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">Let's build a stronger team.</h2>
+      <p class="mt-4 text-muted text-lg leading-relaxed">Book a free 15-minute consultation. Tell me a little about your situation and I'll reply within one business day.</p>
+      <div class="mt-8 space-y-3 text-sm">
+        <a href="mailto:hello@peopleedge.com" class="flex items-center gap-3 text-ink hover:text-moss transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5 text-moss"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> hello@peopleedge.com</a>
+        <p class="flex items-center gap-3 text-muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-5 h-5 text-moss"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Texas · serving clients nationwide</p>
       </div>
     </div>
-    <div class="lg:col-span-8">
-      <ul class="list-none border-t border-ink/10" role="list" data-reveal-stagger>
-        <li class="aud-row group" role="listitem"><div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
-          <span class="aud-num text-2xl text-gold w-10 shrink-0 pt-0.5" aria-hidden="true">01</span>
-          <span class="icon-chip shrink-0" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span>
-          <div><h3 class="font-display text-xl font-semibold text-ink mb-1.5">Small-to-mid-size businesses</h3><p class="text-slate-600 leading-relaxed">Companies without in-house HR that need fractional support — the depth of a full HR team, sized for where you are.</p></div></div></li>
-        <li class="aud-row group" role="listitem"><div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
-          <span class="aud-num text-2xl text-gold w-10 shrink-0 pt-0.5" aria-hidden="true">02</span>
-          <span class="icon-chip shrink-0" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h.01M13 18h.01M9 18h.01"/></svg></span>
-          <div><h3 class="font-display text-xl font-semibold text-ink mb-1.5">Chemical &amp; manufacturing companies</h3><p class="text-slate-600 leading-relaxed">Industrial employers who benefit from prior KAI industry experience — HR built for plant-floor and process-driven teams.</p></div></div></li>
-        <li class="aud-row group" role="listitem"><div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
-          <span class="aud-num text-2xl text-gold w-10 shrink-0 pt-0.5" aria-hidden="true">03</span>
-          <span class="icon-chip shrink-0" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span>
-          <div><div class="flex flex-wrap items-center gap-3 mb-1.5"><h3 class="font-display text-xl font-semibold text-ink">Government contractors</h3><span class="inline-flex items-center gap-1 bg-ink text-gold text-[11px] font-semibold tracking-wide px-2.5 py-1 rounded-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3 h-3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> SDVOSB</span></div><p class="text-slate-600 leading-relaxed">Contractors who need rock-solid HR compliance. As an SDVOSB, we're set-aside eligible — a partner that fits your procurement requirements.</p></div></div></li>
-        <li class="aud-row group" role="listitem"><div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
-          <span class="aud-num text-2xl text-gold w-10 shrink-0 pt-0.5" aria-hidden="true">04</span>
-          <span class="icon-chip shrink-0" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-          <div><h3 class="font-display text-xl font-semibold text-ink mb-1.5">Individuals</h3><p class="text-slate-600 leading-relaxed">Job seekers who need career coaching, resume help, or interview prep — personal, one-on-one guidance to land the role.</p></div></div></li>
-        <li class="aud-row group" role="listitem"><div class="flex items-start gap-5 sm:gap-7 py-7 px-2 sm:px-4 border-b border-ink/10">
-          <span class="aud-num text-2xl text-gold w-10 shrink-0 pt-0.5" aria-hidden="true">05</span>
-          <span class="icon-chip shrink-0" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-          <div><h3 class="font-display text-xl font-semibold text-ink mb-1.5">Companies building intern programs</h3><p class="text-slate-600 leading-relaxed">Organizations that need structured onboarding and early-career program design — pipelines that genuinely develop talent.</p></div></div></li>
-      </ul>
+    <div class="reveal">
+      <!-- Replace your-form-id with your Formspree ID (formspree.io) to receive messages by email. -->
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="rounded-2xl border border-line bg-white p-7">
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label for="name" class="block text-sm font-medium mb-1.5">Name</label><input id="name" name="name" required class="field" placeholder="Jordan Reyes" /></div>
+          <div><label for="email" class="block text-sm font-medium mb-1.5">Email</label><input id="email" name="email" type="email" required class="field" placeholder="jordan@company.com" /></div>
+        </div>
+        <div class="mt-4"><label for="message" class="block text-sm font-medium mb-1.5">How can we help?</label><textarea id="message" name="message" rows="4" class="field resize-none" placeholder="A sentence or two about what you need..."></textarea></div>
+        <button type="submit" class="btn btn-primary w-full justify-center mt-5 py-3.5 text-base">Send message
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        <p class="text-xs text-muted text-center mt-3">No spam. Your information is never shared.</p>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ===== ABOUT TEASER ===== -->
-<section class="py-24 px-4 md:px-8 bg-ivory" aria-labelledby="about-teaser-heading">
-  <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-    <div class="lg:col-span-5" data-reveal>
-      <div class="relative max-w-sm mx-auto lg:mx-0">
-        <div class="absolute -inset-3 rounded-[1.75rem] bg-gold/15 blur-2xl" aria-hidden="true"></div>
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=700&q=80" alt="Ashley, founder and lead HR consultant" width="700" height="800" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="relative rounded-[1.5rem] border border-ink/10 shadow-xl w-full object-cover" style="aspect-ratio:7/8" />
-      </div>
+<!-- FOOTER -->
+<footer class="px-6 py-10 border-t border-line">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
+    <div class="flex items-center gap-2.5">
+      <span class="w-7 h-7 rounded-full bg-moss text-white grid place-items-center font-display text-base font-semibold">P</span>
+      <span class="font-display text-lg font-semibold text-ink">PeopleEdge</span>
     </div>
-    <div class="lg:col-span-7" data-reveal>
-      <div class="flex items-center gap-3 mb-4"><span class="eyebrow text-gold text-xs font-semibold uppercase">Meet your consultant</span><span class="rule w-16" aria-hidden="true"></span></div>
-      <h2 id="about-teaser-heading" class="font-display text-3xl md:text-4xl font-semibold text-ink leading-tight mb-5">Hi, I'm Ashley.</h2>
-      <p class="text-slate-600 text-lg leading-relaxed mb-4">For 12+ years I've helped companies hire, build, and keep great teams — and helped individuals land roles they're proud of. I started PeopleEdge to bring that same senior-level HR and talent-acquisition expertise to the businesses and people who need it most.</p>
-      <p class="text-slate-600 leading-relaxed mb-8">As a veteran-owned, SDVOSB-certified practice, I'm proud to support government contractors and mission-driven employers with the compliance and care they deserve.</p>
-      <a href="about.html" class="btn-dark px-6 py-3 text-base">Meet Ashley <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TESTIMONIALS ===== -->
-<section class="hero-bg relative overflow-hidden py-24 px-4 md:px-8" aria-labelledby="tst-heading">
-  <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
-  <div class="relative max-w-6xl mx-auto">
-    <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
-      <div class="flex items-center justify-center gap-3 mb-4"><span class="rule w-12 rotate-180" aria-hidden="true"></span><span class="eyebrow text-gold text-xs font-semibold uppercase">Client words</span><span class="rule w-12" aria-hidden="true"></span></div>
-      <h2 id="tst-heading" class="font-display text-3xl md:text-5xl font-semibold text-white leading-tight">Trusted by teams and individuals alike</h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-5" data-reveal-stagger>
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
-        <svg viewBox="0 0 24 24" fill="#C8A96E" class="w-7 h-7 mb-4 opacity-80" aria-hidden="true"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-slate-200 leading-relaxed mb-6 text-sm">Ashley gave us a real HR function without the overhead of hiring one. Hiring is faster and compliance stopped being a worry.</p>
-        <footer class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white text-sm font-semibold" aria-hidden="true">SC</div><div><div class="text-white text-sm font-medium">Sarah C.</div><div class="text-slate-400 text-xs">COO, Specialty Manufacturer</div></div></footer>
-      </blockquote>
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
-        <svg viewBox="0 0 24 24" fill="#C8A96E" class="w-7 h-7 mb-4 opacity-80" aria-hidden="true"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-slate-200 leading-relaxed mb-6 text-sm">As a small contractor, compliance kept me up at night. She got our documentation audit-ready and made it painless.</p>
-        <footer class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white text-sm font-semibold" aria-hidden="true">MJ</div><div><div class="text-white text-sm font-medium">Marcus J.</div><div class="text-slate-400 text-xs">Founder, Government Contractor</div></div></footer>
-      </blockquote>
-      <blockquote class="rounded-2xl border border-white/10 bg-white/[0.03] p-7">
-        <svg viewBox="0 0 24 24" fill="#C8A96E" class="w-7 h-7 mb-4 opacity-80" aria-hidden="true"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-slate-200 leading-relaxed mb-6 text-sm">The resume rewrite and interview coaching landed me three callbacks in two weeks. Worth every penny.</p>
-        <footer class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white text-sm font-semibold" aria-hidden="true">DR</div><div><div class="text-white text-sm font-medium">Dana R.</div><div class="text-slate-400 text-xs">Career coaching client</div></div></footer>
-      </blockquote>
-    </div>
-    <p class="text-center text-slate-500 text-xs mt-8">Placeholder testimonials — to be replaced with your real client quotes.</p>
-  </div>
-</section>
-
-<!-- ===== CTA BANNER ===== -->
-<section class="py-20 px-4 md:px-8 bg-ivory">
-  <div class="max-w-5xl mx-auto rounded-3xl bg-ink relative overflow-hidden px-8 py-14 text-center" data-reveal>
-    <div class="hero-glow absolute inset-0 opacity-70" aria-hidden="true"></div>
-    <div class="relative">
-      <h2 class="font-display text-3xl md:text-4xl font-semibold text-white mb-4">Ready to build a stronger team?</h2>
-      <p class="text-slate-300 max-w-xl mx-auto mb-8">Book a free 15-minute discovery call and let's talk about what your business — or your career — needs next.</p>
-      <a href="book.html" class="btn-primary px-7 py-3.5 text-base">Schedule a Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER (shared) ===== -->
-<footer class="bg-ink text-white pt-16 pb-10 px-4 md:px-8" role="contentinfo">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
-    <div class="md:col-span-2">
-      <div class="flex items-center gap-2.5 mb-5">
-        <span class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-gold" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <span class="font-display text-xl font-semibold">PeopleEdge</span>
-      </div>
-      <p class="text-slate-400 text-sm leading-relaxed max-w-xs mb-6">Strategic HR solutions — built for people, powered by experience. Veteran-owned (SDVOSB), Texas-based, serving clients nationwide.</p>
-      <div class="flex gap-3">
-        <a href="https://www.linkedin.com" aria-label="LinkedIn" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-gold hover:text-ink transition-colors cursor-pointer"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="mailto:hello@peopleedge.com" aria-label="Email" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-gold hover:text-ink transition-colors cursor-pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-      </div>
-    </div>
-    <nav aria-label="Footer navigation">
-      <h3 class="font-display font-semibold text-white mb-4 text-sm uppercase tracking-wider">Explore</h3>
-      <ul class="space-y-2.5 list-none" role="list">
-        <li><a href="about.html" class="text-slate-400 text-sm hover:text-gold transition-colors">About</a></li>
-        <li><a href="services.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Services</a></li>
-        <li><a href="pricing.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Pricing</a></li>
-        <li><a href="book.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Book a Consultation</a></li>
-        <li><a href="contact.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Contact</a></li>
-      </ul>
-    </nav>
-    <div>
-      <h3 class="font-display font-semibold text-white mb-4 text-sm uppercase tracking-wider">Contact</h3>
-      <ul class="space-y-3 list-none" role="list">
-        <li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:hello@peopleedge.com" class="text-slate-400 text-sm hover:text-gold transition-colors">hello@peopleedge.com</a></li>
-        <li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="text-slate-400 text-sm">Texas · nationwide</span></li>
-        <li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="text-slate-400 text-sm">SDVOSB · Veteran-Owned</span></li>
-      </ul>
-    </div>
-  </div>
-  <div class="max-w-6xl mx-auto border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    <p class="text-slate-500 text-sm">&copy; 2026 PeopleEdge HR Consulting. All rights reserved.</p>
-    <nav aria-label="Legal navigation"><ul class="flex gap-6 list-none" role="list"><li><a href="#" class="text-slate-500 text-sm hover:text-gold transition-colors">Privacy</a></li><li><a href="#" class="text-slate-500 text-sm hover:text-gold transition-colors">Terms</a></li></ul></nav>
+    <p>&copy; 2026 PeopleEdge HR Consulting · Veteran-owned (SDVOSB)</p>
+    <a href="https://www.linkedin.com" class="hover:text-moss transition-colors">LinkedIn</a>
   </div>
 </footer>
 
 <script>
-/* PeopleEdge — shared interactions: sticky nav, mobile menu, FAQ, scroll reveal */
-(function () {
-  // Navbar scroll state
-  var navbar = document.querySelector('.navbar');
-  if (navbar) {
-    window.addEventListener('scroll', function () {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
-  }
+  var nav = document.querySelector('.nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 12); }, { passive:true });
 
-  // Mobile menu
-  var hamburger = document.getElementById('hamburger');
-  var mobileMenu = document.getElementById('mobile-menu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function () {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  // FAQ accordion
-  document.querySelectorAll('.faq-trigger').forEach(function (trigger) {
-    trigger.addEventListener('click', function () {
-      var item = trigger.closest('.faq-item');
-      var isOpen = item.classList.toggle('open');
-      trigger.setAttribute('aria-expanded', isOpen);
-    });
-  });
-
-  // Scroll reveal (respects reduced motion)
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealEls = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
-  if (prefersReduced || !('IntersectionObserver' in window)) {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('show'); });
   } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-        if (el.hasAttribute('data-reveal-stagger')) {
-          Array.prototype.slice.call(el.children).forEach(function (child, i) {
-            child.style.transitionDelay = Math.min(i * 55, 400) + 'ms';
-          });
-        }
-        el.classList.add('is-visible');
-        io.unobserve(el);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+    items.forEach(function(el){ io.observe(el); });
   }
-
-  // Animated number counters ([data-count] with optional data-prefix/data-suffix)
-  var counters = document.querySelectorAll('[data-count]');
-  function runCounter(el) {
-    var target = parseFloat(el.getAttribute('data-count')) || 0;
-    var prefix = el.getAttribute('data-prefix') || '';
-    var suffix = el.getAttribute('data-suffix') || '';
-    if (prefersReduced) { el.textContent = prefix + target + suffix; return; }
-    var start = performance.now(), dur = 1400;
-    function tick(now) {
-      var p = Math.min((now - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  if (counters.length) {
-    if (prefersReduced || !('IntersectionObserver' in window)) {
-      counters.forEach(runCounter);
-    } else {
-      var cio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); } });
-      }, { threshold: 0.5 });
-      counters.forEach(function (el) { cio.observe(el); });
-    }
-  }
-
-  // Magnetic pull on all gold CTAs (and anything tagged .magnetic)
-  if (!prefersReduced && window.matchMedia('(pointer:fine)').matches) {
-    document.querySelectorAll('.magnetic, .btn-primary').forEach(function (el) {
-      el.classList.add('magnetic');
-      el.addEventListener('mousemove', function (e) {
-        var r = el.getBoundingClientRect();
-        var mx = e.clientX - r.left - r.width / 2;
-        var my = e.clientY - r.top - r.height / 2;
-        el.style.transform = 'translate(' + (mx * 0.18) + 'px,' + (my * 0.28) + 'px)';
-      });
-      el.addEventListener('mouseleave', function () { el.style.transform = ''; });
-    });
-
-    // Cursor spotlight on every hoverable card
-    document.querySelectorAll('.spotlight, .card-hover').forEach(function (el) {
-      el.addEventListener('mousemove', function (e) {
-        var r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-  }
-
-  // Live mesh-gradient hero (lightweight canvas — the static-friendly "shader")
-  var canvas = document.getElementById('hero-canvas');
-  if (canvas && !prefersReduced) {
-    var ctx = canvas.getContext('2d');
-    // Navy / gold / soft-blue light sources that drift around the hero
-    var blobs = [
-      { hue: 'rgba(200,169,110,0.85)', ax: 0.26, ay: 0.30, sx: 0.21, sy: 0.16, fx: 0.7, fy: 0.5, ph: 0.0, r: 0.62 },
-      { hue: 'rgba(74,108,176,0.85)',  ax: 0.76, ay: 0.24, sx: 0.18, sy: 0.20, fx: 0.5, fy: 0.8, ph: 1.7, r: 0.66 },
-      { hue: 'rgba(35,58,100,0.95)',   ax: 0.58, ay: 0.78, sx: 0.22, sy: 0.16, fx: 0.6, fy: 0.4, ph: 3.1, r: 0.60 },
-      { hue: 'rgba(216,196,154,0.60)', ax: 0.36, ay: 0.62, sx: 0.16, sy: 0.18, fx: 0.9, fy: 0.7, ph: 4.6, r: 0.50 }
-    ];
-    var W, H, t = 0, raf = null, running = false;
-    function resize() {
-      // Render at low resolution; CSS blur smooths it — very cheap.
-      var scale = 0.42;
-      W = canvas.width = Math.max(1, Math.round(canvas.offsetWidth * scale));
-      H = canvas.height = Math.max(1, Math.round(canvas.offsetHeight * scale));
-    }
-    function render() {
-      ctx.clearRect(0, 0, W, H);
-      ctx.globalCompositeOperation = 'lighter';
-      for (var i = 0; i < blobs.length; i++) {
-        var b = blobs[i];
-        var x = (b.ax + b.sx * Math.sin(t * b.fx + b.ph)) * W;
-        var y = (b.ay + b.sy * Math.cos(t * b.fy + b.ph)) * H;
-        var rad = b.r * Math.max(W, H);
-        var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
-        g.addColorStop(0, b.hue);
-        g.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, W, H);
-      }
-    }
-    function loop() { if (!running) return; t += 0.004; render(); raf = requestAnimationFrame(loop); }
-    function start() { if (!running) { running = true; loop(); } }
-    function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
-    resize();
-    window.addEventListener('resize', function () { resize(); render(); }, { passive: true });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
-      }, { threshold: 0 }).observe(canvas);
-    } else { start(); }
-  }
-})();
-
 </script>
 </body>
 </html>
