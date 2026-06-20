@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Consultation | PeopleEdge HR Consulting</title>
+  <meta name="description" content="Book a free 15-minute discovery call or a paid 60-minute strategy session with PeopleEdge HR Consulting. Veteran-owned, SDVOSB-certified." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink:'#1B2B4B', 'ink-deep':'#142036', gold:'#C8A96E', 'gold-soft':'#DCC79A', ivory:'#F9F7F4', paper:'#F1ECE3' },
+      fontFamily: { display:['"Playfair Display"','serif'], sans:['Inter','sans-serif'] }
+    }}}
+  </script>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="hidden md:block bg-ink text-ivory/80 text-xs"><div class="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between"><p class="flex items-center gap-2"><span class="inline-block w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span> Veteran-owned · SDVOSB-certified · Texas-based, serving clients nationwide</p><div class="flex items-center gap-5"><a href="mailto:hello@peopleedge.com" class="hover:text-gold transition-colors">hello@peopleedge.com</a><a href="https://www.linkedin.com" class="hover:text-gold transition-colors">LinkedIn</a></div></div></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="flex items-center justify-between px-5 py-3">
+    <a href="index.html" class="flex items-center gap-2.5 rounded-lg" aria-label="PeopleEdge home"><span class="w-9 h-9 rounded-lg bg-ink flex items-center justify-center" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-gold" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="font-display text-xl font-semibold text-ink tracking-tight">PeopleEdge</span></a>
+    <ul class="hidden md:flex items-center gap-8 list-none" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="book.html" class="hidden md:inline-flex btn-dark px-5 py-2.5 text-sm">Book a Free Consult <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <button id="hamburger" class="md:hidden p-2 rounded-lg text-ink hover:bg-ink/5 transition-colors cursor-pointer" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+  </div>
+  <div id="mobile-menu" class="border-t border-ink/10 px-5 pb-4" role="menu"><ul class="flex flex-col gap-1 pt-3 list-none" role="list">
+    <li><a href="index.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Home</a></li>
+    <li><a href="about.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">About</a></li>
+    <li><a href="services.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Services</a></li>
+    <li><a href="pricing.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Pricing</a></li>
+    <li><a href="contact.html" class="block py-2 px-3 rounded-lg text-sm font-medium text-slate-700 hover:bg-ink/5 transition-colors" role="menuitem">Contact</a></li>
+    <li class="pt-2"><a href="book.html" class="btn-dark block text-center py-2.5 px-4 text-sm justify-center">Book a Free Consult</a></li>
+  </ul></div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="hero-bg relative overflow-hidden pt-36 md:pt-40 pb-20 px-4 md:px-8">
+  <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto text-center">
+    <div class="flex items-center justify-center gap-3 mb-5"><span class="rule w-12 rotate-180" aria-hidden="true"></span><span class="eyebrow text-gold text-xs font-semibold uppercase">Book a consultation</span><span class="rule w-12" aria-hidden="true"></span></div>
+    <h1 class="font-display text-4xl md:text-5xl font-semibold text-white leading-tight mb-4">Let's find the right next step</h1>
+    <p class="text-slate-300 text-lg max-w-2xl mx-auto">Pick a time that works for you. Choose a free discovery call to explore fit, or a paid strategy session to dive in.</p>
+  </div>
+</header>
+
+<!-- APPOINTMENT TYPES -->
+<section class="py-16 px-4 md:px-8 bg-ivory">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-5" data-reveal-stagger>
+    <div class="card p-7"><div class="flex items-center gap-3 mb-3"><span class="icon-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span class="text-xs font-semibold uppercase tracking-widest text-gold">Free · 15 min</span></div><h2 class="font-display text-xl font-semibold text-ink mb-2">Discovery Call</h2><p class="text-slate-600 text-sm leading-relaxed">For new clients exploring fit. We'll talk through your situation and whether PeopleEdge is the right partner — no obligation.</p></div>
+    <div class="card p-7"><div class="flex items-center gap-3 mb-3"><span class="icon-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-6 h-6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span class="text-xs font-semibold uppercase tracking-widest text-gold">Paid · 60 min</span></div><h2 class="font-display text-xl font-semibold text-ink mb-2">Strategy Session</h2><p class="text-slate-600 text-sm leading-relaxed">For clients ready to dive in. A focused working session with concrete recommendations you can act on right away.</p></div>
+  </div>
+</section>
+
+<!-- SCHEDULER + INTAKE -->
+<section class="pb-24 px-4 md:px-8 bg-ivory">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-8 items-start">
+    <!-- Calendly embed placeholder -->
+    <div class="lg:col-span-7" data-reveal>
+      <h2 class="font-display text-2xl font-semibold text-ink mb-4">Choose a time</h2>
+      <!-- Replace this placeholder with your Calendly/Cal.com embed:
+           <div class="calendly-inline-widget" data-url="https://calendly.com/your-handle/discovery" style="min-width:320px;height:680px;"></div>
+           <script src="https://assets.calendly.com/assets/external/widget.js" async></script> -->
+      <div class="card overflow-hidden">
+        <div class="aspect-[4/3] sm:aspect-[3/2] w-full bg-paper flex flex-col items-center justify-center text-center px-6">
+          <span class="w-14 h-14 rounded-2xl bg-ink flex items-center justify-center mb-4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.7" class="w-7 h-7"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span>
+          <p class="font-display text-lg font-semibold text-ink">Scheduling widget goes here</p>
+          <p class="text-slate-500 text-sm mt-1 max-w-sm">Embed your Calendly or Cal.com link to let visitors pick a time instantly. (Placeholder — see the comment in this page's source.)</p>
+          <a href="https://calendly.com" class="btn-dark px-5 py-2.5 text-sm mt-5">Open scheduler</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Intake form -->
+    <div class="lg:col-span-5" data-reveal>
+      <div class="card p-7">
+        <h2 class="font-display text-2xl font-semibold text-ink mb-1">Tell us a bit first</h2>
+        <p class="text-slate-500 text-sm mb-6">So we can make your call as useful as possible.</p>
+        <form action="#" method="POST" novalidate aria-label="Consultation intake form">
+          <div class="mb-4"><label for="name" class="block text-sm font-medium text-ink mb-1.5">Name <span class="text-gold" aria-hidden="true">*</span></label><input type="text" id="name" name="name" required autocomplete="name" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="Jordan Reyes" /></div>
+          <div class="mb-4"><label for="email" class="block text-sm font-medium text-ink mb-1.5">Email <span class="text-gold" aria-hidden="true">*</span></label><input type="email" id="email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="jordan@company.com" /></div>
+          <div class="mb-4"><label for="company" class="block text-sm font-medium text-ink mb-1.5">Company name <span class="text-slate-400 font-normal">(optional)</span></label><input type="text" id="company" name="company" autocomplete="organization" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="Acme Co." /></div>
+          <div class="mb-4"><label for="help" class="block text-sm font-medium text-ink mb-1.5">What type of help are you looking for?</label><select id="help" name="help" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition cursor-pointer"><option value="">Select one...</option><option value="business">Business HR</option><option value="career">Career help</option><option value="not-sure">Not sure</option></select></div>
+          <div class="mb-4"><label for="need" class="block text-sm font-medium text-ink mb-1.5">Brief description of your need</label><textarea id="need" name="need" rows="3" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition resize-none" placeholder="A sentence or two about what you're hoping to solve..."></textarea></div>
+          <div class="mb-6"><label for="source" class="block text-sm font-medium text-ink mb-1.5">How did you hear about us? <span class="text-slate-400 font-normal">(optional)</span></label><input type="text" id="source" name="source" class="w-full px-4 py-3 rounded-xl border border-ink/15 bg-ivory text-ink text-sm focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition" placeholder="LinkedIn, referral, search..." /></div>
+          <button type="submit" class="btn-dark w-full py-3.5 text-base justify-center">Request my booking <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <p class="text-center text-slate-400 text-xs mt-4">After booking you'll see: <span class="text-ink font-medium">"You're booked! Check your email for details."</span></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-white pt-16 pb-10 px-4 md:px-8" role="contentinfo">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2"><div class="flex items-center gap-2.5 mb-5"><span class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" class="w-5 h-5 text-gold" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="font-display text-xl font-semibold">PeopleEdge</span></div><p class="text-slate-400 text-sm leading-relaxed max-w-xs mb-6">Strategic HR solutions — built for people, powered by experience. Veteran-owned (SDVOSB), Texas-based, serving clients nationwide.</p><div class="flex gap-3"><a href="https://www.linkedin.com" aria-label="LinkedIn" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-gold hover:text-ink transition-colors cursor-pointer"><svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a><a href="mailto:hello@peopleedge.com" aria-label="Email" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-gold hover:text-ink transition-colors cursor-pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a></div></div>
+    <nav aria-label="Footer navigation"><h3 class="font-display font-semibold text-white mb-4 text-sm uppercase tracking-wider">Explore</h3><ul class="space-y-2.5 list-none" role="list"><li><a href="about.html" class="text-slate-400 text-sm hover:text-gold transition-colors">About</a></li><li><a href="services.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Services</a></li><li><a href="pricing.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Pricing</a></li><li><a href="book.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Book a Consultation</a></li><li><a href="contact.html" class="text-slate-400 text-sm hover:text-gold transition-colors">Contact</a></li></ul></nav>
+    <div><h3 class="font-display font-semibold text-white mb-4 text-sm uppercase tracking-wider">Contact</h3><ul class="space-y-3 list-none" role="list"><li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:hello@peopleedge.com" class="text-slate-400 text-sm hover:text-gold transition-colors">hello@peopleedge.com</a></li><li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="text-slate-400 text-sm">Texas · nationwide</span></li><li class="flex items-center gap-3"><svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="2" class="w-4 h-4 flex-shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="text-slate-400 text-sm">SDVOSB · Veteran-Owned</span></li></ul></div>
+  </div>
+  <div class="max-w-6xl mx-auto border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"><p class="text-slate-500 text-sm">&copy; 2026 PeopleEdge HR Consulting. All rights reserved.</p><nav aria-label="Legal navigation"><ul class="flex gap-6 list-none" role="list"><li><a href="#" class="text-slate-500 text-sm hover:text-gold transition-colors">Privacy</a></li><li><a href="#" class="text-slate-500 text-sm hover:text-gold transition-colors">Terms</a></li></ul></nav></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
