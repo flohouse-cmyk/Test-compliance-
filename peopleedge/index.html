@@ -12,35 +12,44 @@
   <script>
     tailwind.config = { theme: { extend: {
       colors: {
-        ink:'#1E2742', 'ink-deep':'#161D33', gold:'#C2A24E', 'gold-soft':'#D8BE82',
-        ivory:'#F8F6F0', paper:'#EFEADF', line:'#E4DECF', muted:'#5A6173'
+        ink:'oklch(23.5% .055 265)', 'ink-deep':'oklch(19% .05 265)',
+        gold:'oklch(74% .09 78)', 'gold-soft':'oklch(82% .085 80)',
+        ivory:'oklch(97.2% .012 85)', paper:'oklch(93.5% .018 82)',
+        card:'oklch(98.5% .008 85)', line:'oklch(86% .018 85)', muted:'oklch(46% .03 260)'
       },
       fontFamily: { display:['"Instrument Serif"','serif'], sans:['"Work Sans"','sans-serif'] }
     }}}
   </script>
   <style>
+    :root{
+      --ink:oklch(23.5% .055 265); --ink-deep:oklch(19% .05 265);
+      --gold:oklch(74% .09 78); --gold-soft:oklch(82% .085 80);
+      --ivory:oklch(97.2% .012 85); --paper:oklch(93.5% .018 82);
+      --card:oklch(98.5% .008 85); --line:oklch(86% .018 85); --muted:oklch(46% .03 260);
+    }
+
     html { scroll-behavior:smooth; }
-    body { font-family:'Work Sans',sans-serif; background:#F8F6F0; color:#1E2742; -webkit-font-smoothing:antialiased; }
+    body { font-family:'Work Sans',sans-serif; background:var(--ivory); color:var(--ink); -webkit-font-smoothing:antialiased; }
     h1,h2,h3 { font-family:'Instrument Serif',serif; font-weight:400; letter-spacing:.01em; }
-    .label { font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:#5A6173; display:inline-flex; align-items:center; gap:.6rem; }
-    .label b { color:#C2A24E; font-weight:600; font-family:'Instrument Serif',serif; font-size:1rem; letter-spacing:0; }
+    .label { font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); display:inline-flex; align-items:center; gap:.6rem; }
+    .label b { color:var(--gold); font-weight:600; font-family:'Instrument Serif',serif; font-size:1rem; letter-spacing:0; }
     .nav { transition:background .3s, box-shadow .3s; }
     .nav.scrolled { background:rgba(248,246,240,.92); backdrop-filter:blur(12px); box-shadow:0 1px 0 rgba(30,39,66,.08); }
     .btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; font-weight:500; transition:transform .15s, background .2s, box-shadow .25s, color .2s, border-color .2s; }
     .btn:active { transform:translateY(1px) scale(.99); }
-    .btn-gold { background:#C2A24E; color:#1E2742; }
-    .btn-gold:hover { background:#D8BE82; box-shadow:0 12px 30px -10px rgba(194,162,78,.6); transform:translateY(-2px); }
-    .btn-ink { background:#1E2742; color:#fff; }
-    .btn-ink:hover { background:#161D33; box-shadow:0 12px 30px -10px rgba(30,39,66,.5); transform:translateY(-2px); }
+    .btn-gold { background:var(--gold); color:var(--ink); }
+    .btn-gold:hover { background:var(--gold-soft); box-shadow:0 12px 30px -10px rgba(194,162,78,.6); transform:translateY(-2px); }
+    .btn-ink { background:var(--ink); color:#fff; }
+    .btn-ink:hover { background:var(--ink-deep); box-shadow:0 12px 30px -10px rgba(30,39,66,.5); transform:translateY(-2px); }
     .btn-ghost { border:1px solid rgba(255,255,255,.4); color:#fff; }
     .btn-ghost:hover { background:rgba(255,255,255,.12); border-color:#fff; }
-    .btn-outline { border:1px solid rgba(30,39,66,.22); color:#1E2742; }
+    .btn-outline { border:1px solid rgba(30,39,66,.22); color:var(--ink); }
     .btn-outline:hover { background:rgba(30,39,66,.04); border-color:rgba(30,39,66,.45); }
-    .card { background:#fff; border:1px solid #E4DECF; border-radius:1rem; transition:transform .28s, box-shadow .28s, border-color .28s; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:1rem; transition:transform .28s, box-shadow .28s, border-color .28s; }
     .card-h:hover { transform:translateY(-5px); border-color:rgba(194,162,78,.5); box-shadow:0 28px 60px -28px rgba(30,39,66,.3); }
     .card-h:hover .arr { transform:translateX(5px); }
     .arr { transition:transform .25s; }
-    .frame { position:relative; overflow:hidden; background:#1E2742; }
+    .frame { position:relative; overflow:hidden; background:var(--ink); }
     .kenburns { animation:kb 22s ease-in-out infinite alternate; }
     @keyframes kb { from { transform:scale(1) translate(0,0); } to { transform:scale(1.08) translate(-1.5%,-1.5%); } }
     .js .reveal { opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
@@ -87,7 +96,7 @@
   </div>
   <div class="reveal max-w-5xl mx-auto mt-14">
     <div class="frame rounded-2xl border border-line shadow-2xl" style="aspect-ratio:16/9">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="HR team collaborating in a sunlit conference room" class="kenburns absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+      <img src="https://ascend-hr-glow.lovable.app/assets/team-meeting-DPxd3g7h.jpg" alt="HR team collaborating in a sunlit conference room" class="kenburns absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" referrerpolicy="no-referrer" />
       <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(30,39,66,.35), transparent 55%)"></div>
     </div>
   </div>
@@ -104,7 +113,7 @@
 </section>
 
 <!-- SERVICES (01) -->
-<section id="services" class="px-6 py-24 bg-white border-y border-line">
+<section id="services" class="px-6 py-24 bg-card border-y border-line">
   <div class="max-w-6xl mx-auto">
     <div class="reveal max-w-3xl mb-14">
       <p class="label mb-5"><b>01</b> — Services</p>
@@ -146,7 +155,7 @@
     <div class="lg:col-span-5 reveal">
       <div class="relative max-w-sm mx-auto lg:mx-0">
         <div class="frame rounded-2xl border border-line shadow-xl" style="aspect-ratio:4/5">
-          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" alt="Ashley Hart, Founder & Principal Consultant" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+          <img src="https://ascend-hr-glow.lovable.app/assets/consultant-portrait-BeehwMM7.jpg" alt="Ashley Hart, Founder & Principal Consultant" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
         </div>
         <div class="absolute -bottom-4 -right-4 bg-ink text-white rounded-xl px-5 py-3 shadow-lg">
           <div class="font-display text-lg leading-none">Ashley Hart</div>
