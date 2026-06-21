@@ -10,17 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:oklch(23.5% .055 265); --ink-deep:oklch(18% .05 265);
+    --ink:oklch(23.5% .055 265); --ink-deep:oklch(17% .05 265);
     --gold:oklch(74% .09 78); --gold-soft:oklch(83% .085 80);
     --ivory:oklch(97.2% .012 85); --paper:oklch(94% .016 82);
-    --card:oklch(98.6% .008 85); --line:oklch(87% .016 85); --muted:oklch(47% .03 262);
-    --shadow:0 30px 70px -34px color-mix(in oklch, var(--ink), transparent 55%);
+    --card:oklch(98.8% .006 85); --line:oklch(87% .016 85); --muted:oklch(47% .03 262);
+    --shadow:0 30px 70px -34px color-mix(in oklch, var(--ink), transparent 52%);
+    --shadow-sm:0 14px 36px -22px color-mix(in oklch, var(--ink), transparent 55%);
     --maxw:1160px;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{ font-family:'Work Sans',ui-sans-serif,system-ui,sans-serif; background:var(--ivory); color:var(--ink); line-height:1.62; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  h1,h2,h3{ font-family:'Instrument Serif',ui-serif,Georgia,serif; font-weight:400; line-height:1.05; }
+  h1,h2,h3{ font-family:'Instrument Serif',ui-serif,Georgia,serif; font-weight:400; line-height:1.04; }
   img{ display:block; max-width:100%; }
   a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
@@ -41,8 +42,6 @@
   .btn-ink:hover{ background:var(--ink-deep); transform:translateY(-2px); box-shadow:0 16px 34px -14px color-mix(in oklch, var(--ink), transparent 50%); }
   .btn-outline{ border-color:color-mix(in oklch, var(--ink), transparent 78%); color:var(--ink); }
   .btn-outline:hover{ background:color-mix(in oklch, var(--ink), transparent 95%); border-color:color-mix(in oklch, var(--ink), transparent 50%); }
-  .btn-light{ border:1px solid color-mix(in oklch, #fff, transparent 65%); color:#fff; }
-  .btn-light:hover{ background:color-mix(in oklch, #fff, transparent 88%); border-color:#fff; }
 
   /* top bar */
   .topbar{ background:var(--ink); color:color-mix(in oklch,#fff,transparent 22%); font-size:.78rem; }
@@ -67,17 +66,17 @@
   #mnav a{ display:block; padding:13px 28px; color:var(--ink); border-bottom:1px solid var(--line); font-size:.95rem; }
 
   /* hero */
-  .hero{ padding:72px 0 84px; }
-  .hero .grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
-  .hero h1{ font-size:clamp(2.8rem,5.2vw,4.7rem); color:var(--ink); margin:22px 0 0; }
+  .hero{ position:relative; padding:80px 0 0; overflow:hidden; }
+  .hero::before{ content:""; position:absolute; width:46rem; height:46rem; right:-14rem; top:-18rem; border-radius:50%; background:radial-gradient(circle, color-mix(in oklch, var(--gold), transparent 72%), transparent 64%); filter:blur(20px); z-index:0; }
+  .hero::after{ content:""; position:absolute; width:40rem; height:40rem; left:-16rem; bottom:-10rem; border-radius:50%; background:radial-gradient(circle, color-mix(in oklch, var(--ink), transparent 88%), transparent 64%); z-index:0; }
+  .hero .grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:clamp(2.8rem,5.2vw,4.8rem); color:var(--ink); margin:22px 0 0; }
   .hero .sub{ margin-top:24px; max-width:42ch; color:var(--muted); font-size:1.12rem; }
   .hero .cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
-  .hero .mini{ display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:34px; font-size:.85rem; color:var(--muted); }
-  .hero .mini b{ font-family:'Instrument Serif',serif; font-weight:400; color:var(--ink); font-size:1.15rem; margin-right:6px; }
   .heroart{ position:relative; }
   .heroart .accent{ position:absolute; inset:18px -16px -16px 18px; border:1.5px solid color-mix(in oklch, var(--gold), transparent 45%); border-radius:20px; z-index:0; }
   .frame{ position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--line); background:var(--ink); box-shadow:var(--shadow); z-index:1; }
-  .frame.r54{ aspect-ratio:5/4; } .frame.r45{ aspect-ratio:4/5; } .frame.r169{ aspect-ratio:16/9; }
+  .frame.r54{ aspect-ratio:5/4; } .frame.r45{ aspect-ratio:4/5; }
   .frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .frame .veil{ position:absolute; inset:0; background:linear-gradient(to top, color-mix(in oklch, var(--ink), transparent 55%), transparent 50%); }
   .kenburns{ animation:kb 24s ease-in-out infinite alternate; }
@@ -87,44 +86,52 @@
   .floatcard .nm{ font-family:'Instrument Serif',serif; font-size:1.1rem; line-height:1; }
   .floatcard .rl{ font-size:.72rem; color:color-mix(in oklch,#fff,transparent 42%); margin-top:4px; }
 
-  /* stats */
-  .stats{ background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .stats .grid{ display:grid; grid-template-columns:repeat(4,1fr); }
-  .stat{ padding:40px 24px; text-align:center; border-right:1px solid var(--line); }
-  .stat:last-child{ border-right:0; }
-  .stat .n{ font-family:'Instrument Serif',serif; font-size:3.1rem; color:var(--ink); line-height:1; }
-  .stat .n.gold{ color:var(--gold); }
-  .stat .t{ margin-top:10px; font-size:.85rem; color:var(--muted); }
+  /* floating stat tiles */
+  .stats{ position:relative; z-index:2; }
+  .stats .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:64px; }
+  .tile-stat{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 24px; text-align:center; box-shadow:var(--shadow-sm); transition:transform .25s, box-shadow .25s; }
+  .tile-stat:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .tile-stat .n{ font-family:'Instrument Serif',serif; font-size:3rem; color:var(--ink); line-height:1; }
+  .tile-stat .n.gold{ color:var(--gold); }
+  .tile-stat .t{ margin-top:9px; font-size:.84rem; color:var(--muted); }
 
-  section.block{ padding:108px 0; }
-  .surface{ background:var(--card); border-bottom:1px solid var(--line); }
+  section.block{ padding:104px 0; }
   .ink-sec{ background:var(--ink); color:#fff; }
   .ink-sec .eyebrow{ color:color-mix(in oklch,#fff,transparent 45%); }
   .head{ max-width:780px; }
   .head h2{ font-size:clamp(2.3rem,4.6vw,3.7rem); color:var(--ink); margin-top:18px; }
   .ink-sec .head h2{ color:#fff; }
 
-  /* services */
+  /* services tiles (equal height, corner number, gold accent) */
   .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:50px; }
-  .card{ position:relative; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:28px; transition:transform .28s, box-shadow .28s, border-color .28s; overflow:hidden; }
+  .card{ position:relative; display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:30px 28px; transition:transform .28s, box-shadow .28s, border-color .28s; overflow:hidden; }
   .card::before{ content:""; position:absolute; left:0; top:0; height:3px; width:100%; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
   .card:hover{ transform:translateY(-6px); border-color:color-mix(in oklch, var(--gold), transparent 50%); box-shadow:var(--shadow); }
   .card:hover::before{ transform:scaleX(1); }
-  .chip{ width:46px; height:46px; border-radius:12px; display:grid; place-items:center; background:color-mix(in oklch, var(--ink), transparent 93%); color:var(--ink); margin-bottom:20px; transition:background .25s,color .25s; }
+  .card .corner{ position:absolute; top:18px; right:22px; font-family:'Instrument Serif',serif; font-size:1.6rem; color:color-mix(in oklch, var(--gold), transparent 55%); }
+  .chip{ width:48px; height:48px; border-radius:13px; display:grid; place-items:center; background:color-mix(in oklch, var(--ink), transparent 93%); color:var(--ink); margin-bottom:20px; transition:background .25s,color .25s; }
   .card:hover .chip{ background:var(--ink); color:var(--gold); }
   .card h3{ font-size:1.55rem; color:var(--ink); }
   .card p{ margin-top:9px; font-size:.9rem; color:var(--muted); }
-  .more{ display:inline-flex; align-items:center; gap:7px; margin-top:20px; font-size:.85rem; font-weight:500; color:var(--gold); }
+  .more{ display:inline-flex; align-items:center; gap:7px; margin-top:auto; padding-top:20px; font-size:.85rem; font-weight:500; color:var(--gold); }
   .more .ico{ width:15px; height:15px; transition:transform .25s; }
   .card:hover .more .ico{ transform:translateX(4px); }
   .alllink{ display:inline-flex; align-items:center; gap:9px; margin-top:38px; font-size:.92rem; font-weight:500; color:var(--ink); }
   .alllink:hover{ color:var(--gold); }
   .alllink .ico{ width:16px; height:16px; }
 
+  /* who we serve tiles */
+  .serve{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:46px; }
+  .stile{ display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; transition:transform .25s, border-color .25s, box-shadow .25s; }
+  .stile:hover{ transform:translateY(-3px); border-color:color-mix(in oklch,var(--gold),transparent 50%); box-shadow:var(--shadow-sm); }
+  .stile .sic{ width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:color-mix(in oklch,var(--gold),transparent 86%); color:var(--gold); flex:none; }
+  .stile .st{ font-weight:600; font-size:.95rem; color:var(--ink); } .stile .ss{ font-size:.78rem; color:var(--muted); }
+
   /* split (about) */
   .split{ display:grid; grid-template-columns:5fr 7fr; gap:60px; align-items:center; }
   .portrait{ position:relative; max-width:400px; }
-  .portrait .tag{ position:absolute; right:-16px; bottom:-16px; background:var(--ink); color:#fff; border-radius:13px; padding:13px 18px; box-shadow:var(--shadow); }
+  .portrait .accent{ position:absolute; inset:16px -14px -14px 16px; border:1.5px solid color-mix(in oklch,var(--gold),transparent 45%); border-radius:18px; }
+  .portrait .tag{ position:absolute; right:-16px; bottom:-16px; z-index:2; background:var(--ink); color:#fff; border-radius:13px; padding:13px 18px; box-shadow:var(--shadow); }
   .portrait .tag .nm{ font-family:'Instrument Serif',serif; font-size:1.25rem; line-height:1; }
   .portrait .tag .rl{ font-size:.72rem; color:color-mix(in oklch,#fff,transparent 40%); margin-top:5px; }
   .about p{ color:var(--muted); margin-top:18px; }
@@ -134,10 +141,10 @@
 
   /* testimonials */
   .quotes{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:50px; }
-  .quote{ background:color-mix(in oklch,#fff,transparent 95%); border:1px solid color-mix(in oklch,#fff,transparent 88%); border-radius:16px; padding:28px; }
+  .quote{ display:flex; flex-direction:column; background:color-mix(in oklch,#fff,transparent 95%); border:1px solid color-mix(in oklch,#fff,transparent 88%); border-radius:16px; padding:28px; }
   .quote .mark{ width:30px; height:30px; fill:var(--gold); opacity:.9; margin-bottom:14px; }
   .quote p{ color:color-mix(in oklch,#fff,transparent 12%); font-size:.98rem; }
-  .quote footer{ margin-top:20px; font-size:.85rem; }
+  .quote footer{ margin-top:auto; padding-top:20px; font-size:.85rem; }
   .quote .who{ color:#fff; } .quote .role{ color:color-mix(in oklch,#fff,transparent 48%); }
 
   /* final */
@@ -165,21 +172,21 @@
   @media (max-width:980px){
     .hero .grid{ grid-template-columns:1fr; gap:48px; }
     .heroart{ max-width:520px; margin:0 auto; }
+    .stats .grid{ grid-template-columns:repeat(2,1fr); margin-top:48px; }
     .split{ grid-template-columns:1fr; gap:52px; } .portrait{ margin:0 auto; }
     .cards{ grid-template-columns:repeat(2,1fr); }
+    .serve{ grid-template-columns:repeat(2,1fr); }
     .quotes{ grid-template-columns:1fr; }
     .fgrid{ grid-template-columns:1fr 1fr; }
-    .stats .grid{ grid-template-columns:repeat(2,1fr); }
-    .stat:nth-child(2){ border-right:0; } .stat:nth-child(1),.stat:nth-child(2){ border-bottom:1px solid var(--line); }
   }
   @media (max-width:640px){
     .menu, .navactions .btn{ display:none; } .burger{ display:flex; }
     .topbar .right a:last-child{ display:none; }
-    .cards{ grid-template-columns:1fr; }
-    .fgrid{ grid-template-columns:1fr; }
-    section.block{ padding:80px 0; }
-    .stat{ border-right:0; } .stat:nth-child(1),.stat:nth-child(2),.stat:nth-child(3){ border-bottom:1px solid var(--line); }
+    .topbar span:first-child{ font-size:.72rem; }
+    .cards, .serve{ grid-template-columns:1fr; }
     .stats .grid{ grid-template-columns:repeat(2,1fr); }
+    .fgrid{ grid-template-columns:1fr; }
+    section.block{ padding:78px 0; }
   }
   @media (prefers-reduced-motion: reduce){
     *{ animation:none!important; transition:none!important; }
@@ -203,10 +210,7 @@
   <div class="wrap row">
     <a href="#top" class="brand"><span class="word">Hart &amp; Co.</span><span class="badge">SDVOSB</span></a>
     <nav class="menu">
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#testimonials">Results</a>
-      <a href="#contact">Contact</a>
+      <a href="#services">Services</a><a href="#serve">Who We Serve</a><a href="#about">About</a><a href="#testimonials">Results</a><a href="#contact">Contact</a>
     </nav>
     <div class="navactions">
       <a href="#contact" class="btn btn-ink" style="padding:.62rem 1.25rem;font-size:.86rem">Book a free consult</a>
@@ -214,7 +218,7 @@
     </div>
   </div>
   <div id="mnav">
-    <a href="#services">Services</a><a href="#about">About</a><a href="#testimonials">Results</a><a href="#contact">Contact</a>
+    <a href="#services">Services</a><a href="#serve">Who We Serve</a><a href="#about">About</a><a href="#testimonials">Results</a><a href="#contact">Contact</a>
     <a href="#contact" style="color:var(--gold)">Book a free consult →</a>
   </div>
 </header>
@@ -230,11 +234,6 @@
         <a href="#contact" class="btn btn-gold">Book a free consult <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <a href="#services" class="btn btn-outline">View services</a>
       </div>
-      <div class="mini reveal">
-        <span><b>12+</b>years experience</span>
-        <span><b>100+</b>clients served</span>
-        <span><b>50</b>states · nationwide</span>
-      </div>
     </div>
     <div class="heroart reveal">
       <div class="accent"></div>
@@ -248,22 +247,20 @@
       </div>
     </div>
   </div>
-</section>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="wrap">
+  <!-- floating stat tiles -->
+  <div class="wrap stats">
     <div class="grid">
-      <div class="stat reveal"><div class="n"><span data-count="12">12</span>+</div><div class="t">Years HR &amp; talent acquisition experience</div></div>
-      <div class="stat reveal"><div class="n"><span data-count="100">100</span>+</div><div class="t">Clients served across industries</div></div>
-      <div class="stat reveal"><div class="n gold">SDVOSB</div><div class="t">Certified veteran-owned small business</div></div>
-      <div class="stat reveal"><div class="n"><span data-count="50">50</span></div><div class="t">States — remote-first, nationwide delivery</div></div>
+      <div class="tile-stat reveal"><div class="n"><span data-count="12">12</span>+</div><div class="t">Years HR &amp; talent acquisition experience</div></div>
+      <div class="tile-stat reveal"><div class="n"><span data-count="100">100</span>+</div><div class="t">Clients served across industries</div></div>
+      <div class="tile-stat reveal"><div class="n gold">SDVOSB</div><div class="t">Certified veteran-owned small business</div></div>
+      <div class="tile-stat reveal"><div class="n"><span data-count="50">50</span></div><div class="t">States — remote-first, nationwide</div></div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="block surface">
+<section id="services" class="block">
   <div class="wrap">
     <div class="head reveal">
       <p class="eyebrow"><span class="num">01</span><span class="ln"></span> Services</p>
@@ -271,24 +268,28 @@
     </div>
     <div class="cards">
       <a href="#contact" class="card reveal">
+        <span class="corner">01</span>
         <span class="chip"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
         <h3>Full-Cycle Recruiting</h3>
         <p>Sourcing, screening, interviews, and offer management for SMBs and corporations.</p>
         <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
       <a href="#contact" class="card reveal">
+        <span class="corner">02</span>
         <span class="chip"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
         <h3>HR Compliance</h3>
         <p>I-9 audits, records retention, corrective action, and policy development you can defend.</p>
         <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
       <a href="#contact" class="card reveal">
+        <span class="corner">03</span>
         <span class="chip"><svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
         <h3>Fractional HR Support</h3>
         <p>Ongoing retainer-based HR leadership for companies without an in-house function.</p>
         <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
       <a href="#contact" class="card reveal">
+        <span class="corner">04</span>
         <span class="chip"><svg class="ico" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
         <h3>Intern &amp; Early Career</h3>
         <p>Program structure, onboarding toolkits, mentoring frameworks, and evaluation tools.</p>
@@ -299,11 +300,28 @@
   </div>
 </section>
 
+<!-- WHO WE SERVE -->
+<section id="serve" class="block" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow"><span class="num">02</span><span class="ln"></span> Who we serve</p>
+      <h2>Built for the teams <span class="em">that build things.</span></h2>
+    </div>
+    <div class="serve">
+      <div class="stile reveal"><span class="sic"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span><div><div class="st">Small &amp; mid-size businesses</div><div class="ss">Fractional HR without the headcount</div></div></div>
+      <div class="stile reveal"><span class="sic"><svg class="ico" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></span><div><div class="st">Chemical &amp; manufacturing</div><div class="ss">Plant-floor HR &amp; compliance</div></div></div>
+      <div class="stile reveal"><span class="sic"><svg class="ico" viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span><div><div class="st">Government contractors</div><div class="ss">SDVOSB · set-aside eligible</div></div></div>
+      <div class="stile reveal"><span class="sic"><svg class="ico" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><div class="st">Individuals &amp; job seekers</div><div class="ss">Coaching, resumes, interview prep</div></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about" class="block">
   <div class="wrap split">
     <div class="reveal">
       <div class="portrait">
+        <div class="accent"></div>
         <div class="frame r45">
           <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" alt="Ashley Hart, Founder & Principal Consultant" referrerpolicy="no-referrer" />
         </div>
@@ -311,7 +329,7 @@
       </div>
     </div>
     <div class="about reveal">
-      <p class="eyebrow"><span class="num">02</span><span class="ln"></span> Meet Ashley</p>
+      <p class="eyebrow"><span class="num">03</span><span class="ln"></span> Meet Ashley</p>
       <h2 style="font-size:clamp(2.2rem,4.4vw,3.4rem);color:var(--ink);margin-top:16px">Senior expertise, earned in the field.</h2>
       <p class="lead">Ashley Hart has spent 12+ years building and leading HR and talent functions — from chemical plants and manufacturing floors to tech teams and federal contracting. She founded Hart &amp; Co. to bring that hard-won, senior-level expertise to the businesses and people who need it most.</p>
       <p>As a veteran-owned, SDVOSB-certified practice, Hart &amp; Co. partners with government contractors, industrial employers, and mission-driven companies — pairing real compliance rigor with genuine human care.</p>
@@ -325,7 +343,7 @@
 <section id="testimonials" class="block ink-sec">
   <div class="wrap">
     <div class="head reveal">
-      <p class="eyebrow"><span class="num">03</span><span class="ln"></span> Results</p>
+      <p class="eyebrow"><span class="num">04</span><span class="ln"></span> Results</p>
       <h2>Quiet partnerships. <span class="em" style="color:var(--gold-soft)">Loud results.</span></h2>
     </div>
     <div class="quotes">
@@ -372,7 +390,7 @@
       </div>
       <div class="fcol">
         <h4>Explore</h4>
-        <a href="#services">Services</a><a href="#about">About</a><a href="#testimonials">Results</a><a href="#contact">Book a Consult</a>
+        <a href="#services">Services</a><a href="#serve">Who We Serve</a><a href="#about">About</a><a href="#contact">Book a Consult</a>
       </div>
       <div class="fcol">
         <h4>Practice</h4>
