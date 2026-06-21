@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Folorunsho “Flo” Ogunyemi — AI Product Manager</title>
+  <meta name="description" content="Folorunsho (Flo) Ogunyemi — AI Product Manager with 7+ years driving AI, data governance, security, compliance and user experience across Microsoft, Accenture and healthcare." />
+  <meta name="author" content="Folorunsho Ogunyemi" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Folorunsho “Flo” Ogunyemi — AI Product Manager" />
+  <meta property="og:description" content="AI Product Manager • Data Governance, Security & Compliance • 7+ years across Microsoft, Accenture & healthcare." />
+  <meta property="og:image" content="./assets/flo.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366F1'/%3E%3Cstop offset='0.5' stop-color='%23A855F7'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            ink: '#0B1020',
+            indigo: { brand: '#6366F1' },
+            violet: { brand: '#A855F7' },
+            cyan: { brand: '#22D3EE' },
+            fuchsia: { brand: '#EC4899' },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root { --grad: linear-gradient(100deg, #6366F1 0%, #A855F7 45%, #EC4899 75%, #22D3EE 100%); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: #0B1020; background: #FBFAFF; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+
+    .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .grad-bg { background: var(--grad); }
+    .grad-border { position: relative; background: #fff; border-radius: 1rem; }
+    .grad-border::before {
+      content: ""; position: absolute; inset: 0; padding: 1.5px; border-radius: inherit;
+      background: var(--grad); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+
+    /* Aurora blobs */
+    .aurora { position: fixed; inset: 0; overflow: hidden; z-index: -1; }
+    .blob { position: absolute; border-radius: 9999px; filter: blur(80px); opacity: .55; will-change: transform; }
+    .blob-1 { width: 46vw; height: 46vw; left: -8vw; top: -10vw; background: #6366F1; animation: drift1 22s ease-in-out infinite; }
+    .blob-2 { width: 42vw; height: 42vw; right: -10vw; top: 4vw; background: #EC4899; animation: drift2 26s ease-in-out infinite; }
+    .blob-3 { width: 40vw; height: 40vw; left: 18vw; bottom: -14vw; background: #22D3EE; animation: drift3 24s ease-in-out infinite; }
+    .blob-4 { width: 30vw; height: 30vw; right: 14vw; bottom: 2vw; background: #A855F7; animation: drift1 28s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(4vw,5vw) scale(1.12)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5vw,4vw) scale(1.08)} }
+    @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(3vw,-4vw) scale(1.1)} }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    .marquee-track { animation: marquee 28s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .blob, .marquee-track { animation: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    }
+  </style>
+</head>
+
+<body class="font-body antialiased selection:bg-fuchsia-200/70">
+
+  <!-- Aurora background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="absolute inset-0 bg-white/55 backdrop-blur-[2px]"></div>
+  </div>
+
+  <!-- Skip link -->
+  <a href="#about" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
+
+  <!-- Nav -->
+  <header class="fixed top-3 inset-x-0 z-40 px-4">
+    <nav class="mx-auto max-w-6xl flex items-center justify-between rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg shadow-indigo-500/5 px-4 sm:px-5 py-2.5">
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span class="grad-bg w-8 h-8 rounded-lg grid place-items-center text-white font-heading font-bold shadow-md shadow-fuchsia-500/30">F</span>
+        <span class="font-heading font-semibold tracking-tight">Flo Ogunyemi</span>
+      </a>
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+        <a href="#about" class="px-3 py-2 rounded-lg hover:text-ink hover:bg-slate-100 transition-colors">About</a>
+        <a href="#experience" class="px-3 py-2 rounded-lg hover:text-ink hover:bg-slate-100 transition-colors">Experience</a>
+        <a href="#skills" class="px-3 py-2 rounded-lg hover:text-ink hover:bg-slate-100 transition-colors">Skills</a>
+        <a href="#projects" class="px-3 py-2 rounded-lg hover:text-ink hover:bg-slate-100 transition-colors">Projects</a>
+        <a href="resume.html" class="px-3 py-2 rounded-lg hover:text-ink hover:bg-slate-100 transition-colors">Résumé</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="hidden sm:inline-flex grad-bg text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-md shadow-fuchsia-500/30 hover:opacity-90 transition-opacity cursor-pointer">Let’s talk</a>
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden mx-auto max-w-6xl mt-2 rounded-2xl bg-white/90 backdrop-blur-xl border border-white/60 shadow-lg p-2 text-sm font-medium">
+      <a href="#about" class="block px-4 py-3 rounded-lg hover:bg-slate-100">About</a>
+      <a href="#experience" class="block px-4 py-3 rounded-lg hover:bg-slate-100">Experience</a>
+      <a href="#skills" class="block px-4 py-3 rounded-lg hover:bg-slate-100">Skills</a>
+      <a href="#projects" class="block px-4 py-3 rounded-lg hover:bg-slate-100">Projects</a>
+      <a href="resume.html" class="block px-4 py-3 rounded-lg hover:bg-slate-100">Résumé</a>
+      <a href="#contact" class="block px-4 py-3 rounded-lg hover:bg-slate-100">Contact</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="relative px-4 pt-32 sm:pt-40 pb-20">
+      <div class="mx-auto max-w-6xl grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 bg-indigo-100/70 border border-indigo-200/70 rounded-full px-3 py-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Open to AI / Product leadership roles
+          </span>
+          <h1 class="mt-5 font-heading font-bold tracking-tight text-4xl sm:text-6xl leading-[1.05]">
+            Folorunsho <span class="grad-text">“Flo”</span> Ogunyemi
+          </h1>
+          <p class="mt-4 text-xl sm:text-2xl font-heading font-medium text-slate-700">
+            AI Product Manager
+          </p>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+            I turn complex AI, data-governance and compliance challenges into products people actually use — shipping
+            conversational &amp; voice AI, RAG-powered enterprise search and security-posture platforms across
+            <span class="font-semibold text-ink">Microsoft</span>, <span class="font-semibold text-ink">Accenture</span>
+            and healthcare. <span class="whitespace-nowrap">7+ years</span>, outcome-obsessed.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#projects" class="grad-bg text-white font-semibold px-6 py-3 rounded-xl shadow-lg shadow-fuchsia-500/30 hover:opacity-90 transition-opacity cursor-pointer">View my work</a>
+            <a href="resume.html" class="bg-white text-ink font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm hover:border-slate-300 hover:shadow-md transition-all cursor-pointer">Digital résumé</a>
+            <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-slate-600 font-semibold px-3 py-3 hover:text-ink transition-colors cursor-pointer" aria-label="LinkedIn profile">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.99H5.67v8.35h2.67zM7 8.8a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.54v-4.59c0-2.45-1.31-3.59-3.06-3.59a2.64 2.64 0 0 0-2.39 1.31v-1.13h-2.67c.04.75 0 8.35 0 8.35h2.67v-4.66c0-.25.02-.5.09-.67.2-.5.66-1.02 1.43-1.02 1.01 0 1.41.77 1.41 1.89v4.46h2.79z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <!-- Photo -->
+        <div class="reveal flex justify-center lg:justify-end">
+          <div class="relative">
+            <div class="absolute -inset-3 grad-bg rounded-[2rem] blur-2xl opacity-40"></div>
+            <div class="relative grad-bg p-1.5 rounded-[2rem] shadow-2xl shadow-indigo-500/20">
+              <div class="bg-white rounded-[1.6rem] p-1.5">
+                <div class="relative w-60 h-72 sm:w-72 sm:h-80 rounded-[1.3rem] overflow-hidden bg-gradient-to-br from-indigo-100 via-fuchsia-100 to-cyan-100">
+                  <img id="heroPhoto" src="./assets/flo.jpg" alt="Portrait of Folorunsho Ogunyemi"
+                       class="w-full h-full object-cover object-top"
+                       onerror="this.style.display='none';document.getElementById('photoFallback').style.display='flex';" />
+                  <div id="photoFallback" class="absolute inset-0 hidden flex-col items-center justify-center text-center p-6">
+                    <span class="font-heading font-bold text-6xl grad-text">FO</span>
+                    <span class="mt-3 text-sm font-medium text-slate-500">Add <code>assets/flo.jpg</code></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- floating chips -->
+            <div class="absolute -left-6 top-8 bg-white rounded-xl shadow-lg px-3 py-2 text-sm font-semibold text-ink border border-slate-100 hidden sm:block">🎙️ Voice&nbsp;AI</div>
+            <div class="absolute -right-5 top-1/3 bg-white rounded-xl shadow-lg px-3 py-2 text-sm font-semibold text-ink border border-slate-100 hidden sm:block">🔒 Compliance</div>
+            <div class="absolute -left-4 bottom-10 bg-white rounded-xl shadow-lg px-3 py-2 text-sm font-semibold text-ink border border-slate-100 hidden sm:block">🧠 RAG&nbsp;/&nbsp;LLMs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo marquee -->
+      <div class="mx-auto max-w-6xl mt-16 reveal">
+        <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-400 mb-5">Experience across</p>
+        <div class="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+          <div class="marquee-track flex w-max items-center gap-12 text-lg font-heading font-semibold text-slate-400">
+            <span>Judi Health</span><span>Microsoft</span><span>Accenture</span><span>Allscripts</span><span>Huntington Ingalls</span><span>Sentara Healthcare</span>
+            <span aria-hidden="true">Judi Health</span><span aria-hidden="true">Microsoft</span><span aria-hidden="true">Accenture</span><span aria-hidden="true">Allscripts</span><span aria-hidden="true">Huntington Ingalls</span><span aria-hidden="true">Sentara Healthcare</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About + stats -->
+    <section id="about" class="px-4 py-16 scroll-mt-24">
+      <div class="mx-auto max-w-6xl grid lg:grid-cols-[1.3fr_1fr] gap-10 items-start">
+        <div class="reveal">
+          <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">About</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-600">
+            I’m an accomplished Product Manager with <span class="font-semibold text-ink">7+ years</span> driving
+            artificial intelligence, data-access governance, security, compliance and user-experience initiatives
+            inside cloud and enterprise environments.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-slate-600">
+            I lead cross-functional teams to design and ship data-protection, access-governance and regulatory-compliance
+            solutions that meet both business goals and industry standards — with deep expertise in
+            <span class="font-semibold text-ink">GDPR, data privacy and telemetry-data governance</span>, and a track
+            record of high-impact delivery for large enterprises like Microsoft and Accenture across
+            <span class="font-semibold text-ink">healthcare, consulting and enterprise products</span>.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-2 text-sm font-medium">
+            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700">📍 Houston, TX</span>
+            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700">🎓 B.S.B.A · Old Dominion University</span>
+            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700">🛡️ Minor in Cybersecurity</span>
+          </div>
+        </div>
+        <div class="reveal grid grid-cols-2 gap-4">
+          <div class="grad-border p-5"><div class="font-heading font-bold text-4xl grad-text">7+</div><div class="mt-1 text-sm font-medium text-slate-600">Years in product</div></div>
+          <div class="grad-border p-5"><div class="font-heading font-bold text-4xl grad-text">6</div><div class="mt-1 text-sm font-medium text-slate-600">Enterprises shipped for</div></div>
+          <div class="grad-border p-5"><div class="font-heading font-bold text-4xl grad-text">5+</div><div class="mt-1 text-sm font-medium text-slate-600">Compliance frameworks</div></div>
+          <div class="grad-border p-5"><div class="font-heading font-bold text-4xl grad-text">2</div><div class="mt-1 text-sm font-medium text-slate-600">Professional certs</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="px-4 py-16 scroll-mt-24">
+      <div class="mx-auto max-w-4xl">
+        <div class="reveal">
+          <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">Experience</h2>
+          <p class="mt-3 text-lg text-slate-600">A decade of building at the intersection of AI, data and trust.</p>
+        </div>
+
+        <div class="mt-10 relative">
+          <div class="absolute left-[15px] sm:left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-indigo-brand via-fuchsia-brand to-cyan-brand opacity-40"></div>
+
+          <!-- item -->
+          <div class="reveal relative pl-12 sm:pl-16 pb-10">
+            <span class="absolute left-0 top-1.5 grad-bg w-8 h-8 sm:w-10 sm:h-10 rounded-xl grid place-items-center text-white shadow-md shadow-fuchsia-500/30 ring-4 ring-[#FBFAFF]">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17 9 21l-1-1-1 1-.75-4M4 7h16M4 7a2 2 0 0 0-2 2v3a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4V9a2 2 0 0 0-2-2M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+            </span>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 hover:shadow-md transition-shadow">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <h3 class="font-heading font-semibold text-xl">AI Product Manager</h3>
+                <span class="text-sm font-medium text-indigo-700">Jun 2025 — Present</span>
+              </div>
+              <p class="font-heading font-medium text-slate-500">Judi Health · Remote</p>
+              <ul class="mt-3 space-y-2 text-slate-600 leading-relaxed">
+                <li>Lead enterprise AI/ML strategy with engineering, clinical, ops &amp; compliance — shipping conversational AI, RAG and automation across healthcare workflows.</li>
+                <li>Own end-to-end voice-AI across inbound/outbound channels: caller authentication, intent detection, call routing and automated member &amp; prescriber outreach.</li>
+                <li>Stood up enterprise AI Chat (search + analytical reporting) over Snowflake, Confluence, Jira &amp; GitHub with feedback loops for accuracy and relevance.</li>
+                <li>Track KPIs — intent detection, containment, AI-only handle time, escalation rate — to drive reliability.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- item -->
+          <div class="reveal relative pl-12 sm:pl-16 pb-10">
+            <span class="absolute left-0 top-1.5 grad-bg w-8 h-8 sm:w-10 sm:h-10 rounded-xl grid place-items-center text-white shadow-md shadow-fuchsia-500/30 ring-4 ring-[#FBFAFF]">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h7V3H3v9zm0 9h7v-7H3v7zm11 0h7V12h-7v9zm0-18v7h7V3h-7z"/></svg>
+            </span>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 hover:shadow-md transition-shadow">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <h3 class="font-heading font-semibold text-xl">Product Manager II</h3>
+                <span class="text-sm font-medium text-indigo-700">Jun 2021 — May 2025</span>
+              </div>
+              <p class="font-heading font-medium text-slate-500">Microsoft · Remote — Observability &amp; Intelligence Cloud · Data Protection &amp; Security</p>
+              <ul class="mt-3 space-y-2 text-slate-600 leading-relaxed">
+                <li>Delivered a world-class observability experience for M365 customers — timely, targeted, actionable insights into tenant health for external admins and internal incident teams.</li>
+                <li>Drove internal Data Access Governance products with cross-functional and China-based dev teams; led the lockdown of M365 telemetry data stores and the access-governance roadmap.</li>
+                <li>Built a centralized governance app and audit-ready dashboards for Non-Financial Disclosure, Internal and Dutch Ministry of Justice (EU) audits.</li>
+                <li><span class="font-semibold text-ink">Led a transparency security &amp; compliance-posture platform</span> giving leadership real-time insight into posture and risk — the inspiration for <a href="projects/complyscope.html" class="text-fuchsia-600 font-semibold hover:underline">ComplyScope ↓</a>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- item -->
+          <div class="reveal relative pl-12 sm:pl-16 pb-10">
+            <span class="absolute left-0 top-1.5 grad-bg w-8 h-8 sm:w-10 sm:h-10 rounded-xl grid place-items-center text-white shadow-md shadow-fuchsia-500/30 ring-4 ring-[#FBFAFF]">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H4v-2a4 4 0 0 1 3-3.87m6-1.13a4 4 0 1 0-4-4 4 4 0 0 0 4 4z"/></svg>
+            </span>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 hover:shadow-md transition-shadow">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <h3 class="font-heading font-semibold text-xl">Product Manager</h3>
+                <span class="text-sm font-medium text-indigo-700">Oct 2019 — Jun 2021</span>
+              </div>
+              <p class="font-heading font-medium text-slate-500">Accenture · Remote</p>
+              <ul class="mt-3 space-y-2 text-slate-600 leading-relaxed">
+                <li>Led delivery for state, airline, financial and pharmaceutical clients — architecture, implementation and maintenance with cross-functional teams.</li>
+                <li>Ran requirement gathering, As-Is/To-Be flows, use/test cases, wireframes and full validation testing for a major airline client.</li>
+                <li>Built a security architecture and risk evaluation for a federal-state client handling 500,000+ inquiries.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- collapsed earlier roles -->
+          <div class="reveal relative pl-12 sm:pl-16">
+            <span class="absolute left-0 top-1.5 bg-white border-2 border-indigo-200 w-8 h-8 sm:w-10 sm:h-10 rounded-xl grid place-items-center text-indigo-500 ring-4 ring-[#FBFAFF]">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+            </span>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div class="bg-white/70 rounded-2xl border border-slate-100 p-5">
+                <h3 class="font-heading font-semibold">Product Manager</h3>
+                <p class="text-sm font-medium text-slate-500">Allscripts</p>
+                <p class="mt-2 text-sm text-slate-600">Healthcare-software testing &amp; compliance; metrics-based governance and audit support.</p>
+                <p class="mt-2 text-xs font-medium text-indigo-700">2019</p>
+              </div>
+              <div class="bg-white/70 rounded-2xl border border-slate-100 p-5">
+                <h3 class="font-heading font-semibold">Product Owner</h3>
+                <p class="text-sm font-medium text-slate-500">Huntington Ingalls</p>
+                <p class="mt-2 text-sm text-slate-600">Secure software in C#/VB for Teamcenter/NX; SAP Basis support across ECC &amp; S/4HANA.</p>
+                <p class="mt-2 text-xs font-medium text-indigo-700">2018 — 2019</p>
+              </div>
+              <div class="bg-white/70 rounded-2xl border border-slate-100 p-5">
+                <h3 class="font-heading font-semibold">Jr. Cybersecurity Analyst</h3>
+                <p class="text-sm font-medium text-slate-500">Sentara Healthcare</p>
+                <p class="mt-2 text-sm text-slate-600">EHR/Epic access &amp; HIPAA identity lifecycle; monitoring, incident analysis and forensics.</p>
+                <p class="mt-2 text-xs font-medium text-indigo-700">2017</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="px-4 py-16 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal">
+          <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">Skills &amp; toolkit</h2>
+          <p class="mt-3 text-lg text-slate-600">What I reach for to take products from discovery to delivery.</p>
+        </div>
+        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg flex items-center gap-2"><span class="grad-text">AI &amp; Machine Learning</span></h3>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Conversational AI</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Voice AI</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">RAG</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">LLMs / GPT</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Prompt Engineering</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Agentic Workflows</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">NLP</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Generative AI</span>
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-medium">Enterprise Search</span>
+            </div>
+          </div>
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg"><span class="grad-text">Product Management</span></h3>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Product Strategy</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Roadmapping</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Discovery</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Go-To-Market</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">OKRs &amp; KPIs</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Stakeholder Mgmt</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Agile / SAFe</span>
+              <span class="px-2.5 py-1 rounded-lg bg-fuchsia-50 text-fuchsia-700 font-medium">Backlog &amp; User Stories</span>
+            </div>
+          </div>
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg"><span class="grad-text">Security &amp; Compliance</span></h3>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Data Governance</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Access Governance</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Data Privacy / GDPR</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">HIPAA</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Telemetry Data</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Cybersecurity</span>
+              <span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 font-medium">Change Management</span>
+            </div>
+          </div>
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg"><span class="grad-text">Cloud &amp; Data</span></h3>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">Azure</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">AWS</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">SaaS / PaaS / DaaS</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">SQL</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">Snowflake</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">Big Data</span>
+              <span class="px-2.5 py-1 rounded-lg bg-violet-50 text-violet-700 font-medium">Data Visualization</span>
+            </div>
+          </div>
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg"><span class="grad-text">Tools &amp; Platforms</span></h3>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">Jira</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">Confluence</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">Azure DevOps</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">ServiceNow</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">Figma</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">Postman</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">VS Code</span>
+            </div>
+          </div>
+          <div class="reveal grad-border p-6">
+            <h3 class="font-heading font-semibold text-lg"><span class="grad-text">Certifications</span></h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li class="flex gap-3">
+                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+                <span><span class="font-semibold text-ink">SAFe® 5</span> — Product Owner / Product Manager</span>
+              </li>
+              <li class="flex gap-3">
+                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+                <span><span class="font-semibold text-ink">SAP</span> — Certified Application Associate, Business Process Integration with S/4HANA 1809</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="px-4 py-16 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <div class="reveal">
+          <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">Projects</h2>
+          <p class="mt-3 text-lg text-slate-600">Live, interactive products you can open and explore — each in its own world.</p>
+        </div>
+
+        <div class="mt-10 grid lg:grid-cols-2 gap-6">
+          <!-- ComplyScope -->
+          <a href="projects/complyscope.html" class="reveal group block rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-xl transition-all cursor-pointer">
+            <div class="relative h-52 bg-[#0B1020] overflow-hidden">
+              <div class="absolute inset-0 opacity-90" style="background:radial-gradient(120% 120% at 0% 0%, #1e293b 0%, #0B1020 60%);"></div>
+              <div class="absolute -right-10 -top-10 w-56 h-56 rounded-full bg-cyan-500/20 blur-3xl"></div>
+              <div class="absolute left-6 bottom-6 right-6">
+                <div class="flex items-center gap-2 text-cyan-300 text-xs font-semibold uppercase tracking-widest">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.6 1.6A9 9 0 1 1 12 3"/></svg>
+                  Live demo
+                </div>
+                <h3 class="mt-2 font-heading font-bold text-2xl text-white">ComplyScope</h3>
+                <p class="text-slate-300 text-sm">Datadog-style compliance-posture platform</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-slate-600 leading-relaxed">
+                A role-based observability platform for compliance posture — Leadership, Team-Lead and Delivery views over
+                5 frameworks (SOC 2, ISO 27001, GDPR, HIPAA, PCI DSS) with AI-style summaries and audit-readiness insights.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2 text-xs font-medium">
+                <span class="px-2 py-1 rounded-md bg-slate-100 text-slate-600">React</span>
+                <span class="px-2 py-1 rounded-md bg-slate-100 text-slate-600">TypeScript</span>
+                <span class="px-2 py-1 rounded-md bg-slate-100 text-slate-600">Tailwind</span>
+                <span class="px-2 py-1 rounded-md bg-slate-100 text-slate-600">Recharts</span>
+              </div>
+              <span class="mt-5 inline-flex items-center gap-1.5 font-semibold text-fuchsia-600 group-hover:gap-2.5 transition-all">
+                Explore the case study
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0-5 5m5-5H6"/></svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Placeholder for future -->
+          <div class="reveal rounded-3xl border-2 border-dashed border-slate-200 bg-white/40 p-6 flex flex-col items-center justify-center text-center min-h-[19rem]">
+            <div class="w-12 h-12 rounded-2xl grad-bg grid place-items-center text-white shadow-md shadow-fuchsia-500/30">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            </div>
+            <h3 class="mt-4 font-heading font-semibold text-xl">More universes incoming</h3>
+            <p class="mt-2 max-w-xs text-slate-500">New projects drop in here as their own self-contained experiences. Each gets a case-study page and a live demo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="px-4 py-20 scroll-mt-24">
+      <div class="mx-auto max-w-4xl reveal">
+        <div class="relative rounded-3xl grad-bg p-[1.5px] shadow-2xl shadow-fuchsia-500/20">
+          <div class="rounded-3xl bg-white px-6 py-12 sm:px-12 text-center">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">Let’s build something that earns trust.</h2>
+            <p class="mt-4 max-w-xl mx-auto text-lg text-slate-600">
+              Hiring for AI or product leadership, or want a closer look at my work? I’d love to talk.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+              <a href="mailto:fogun.1992@gmail.com" class="grad-bg text-white font-semibold px-6 py-3 rounded-xl shadow-lg shadow-fuchsia-500/30 hover:opacity-90 transition-opacity cursor-pointer">Email me</a>
+              <a href="tel:+17573861992" class="bg-white text-ink font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors cursor-pointer">Call: (757) 386-1992</a>
+              <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="bg-white text-ink font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors cursor-pointer">Connect on LinkedIn</a>
+              <a href="resume.html" class="bg-white text-ink font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors cursor-pointer">View résumé</a>
+            </div>
+            <p class="mt-8 text-sm text-slate-400">📍 Houston, TX · Open to remote</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="px-4 py-10 border-t border-slate-200/70">
+    <div class="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <p>© <span id="year"></span> Folorunsho Ogunyemi. Built with care.</p>
+      <div class="flex items-center gap-4">
+        <a href="mailto:fogun.1992@gmail.com" class="hover:text-ink transition-colors">Email</a>
+        <a href="tel:+17573861992" class="hover:text-ink transition-colors">(757) 386-1992</a>
+        <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="hover:text-ink transition-colors">LinkedIn</a>
+        <a href="resume.html" class="hover:text-ink transition-colors">Résumé</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
