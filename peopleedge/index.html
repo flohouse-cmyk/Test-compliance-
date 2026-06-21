@@ -1,265 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hart &amp; Co. HR Advisory — Strategic HR, built for people</title>
-  <meta name="description" content="Hart & Co. HR Advisory — veteran-owned (SDVOSB) HR consulting led by Ashley Hart. Full-cycle recruiting, HR compliance, fractional HR, and early-career programs. 12+ years, nationwide." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: {
-      colors: {
-        ink:'oklch(23.5% .055 265)', 'ink-deep':'oklch(19% .05 265)',
-        gold:'oklch(74% .09 78)', 'gold-soft':'oklch(82% .085 80)',
-        ivory:'oklch(97.2% .012 85)', paper:'oklch(93.5% .018 82)',
-        card:'oklch(98.5% .008 85)', line:'oklch(86% .018 85)', muted:'oklch(46% .03 260)'
-      },
-      fontFamily: { display:['"Instrument Serif"','serif'], sans:['"Work Sans"','sans-serif'] }
-    }}}
-  </script>
-  <style>
-    :root{
-      --ink:oklch(23.5% .055 265); --ink-deep:oklch(19% .05 265);
-      --gold:oklch(74% .09 78); --gold-soft:oklch(82% .085 80);
-      --ivory:oklch(97.2% .012 85); --paper:oklch(93.5% .018 82);
-      --card:oklch(98.5% .008 85); --line:oklch(86% .018 85); --muted:oklch(46% .03 260);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hart &amp; Co. HR Advisory — Strategic HR, built for people</title>
+<meta name="description" content="Hart & Co. HR Advisory — veteran-owned (SDVOSB) HR consulting led by Ashley Hart. Full-cycle recruiting, HR compliance, fractional HR, and early-career programs. 12+ years, nationwide." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:oklch(23.5% .055 265); --ink-deep:oklch(19% .05 265);
+    --gold:oklch(74% .09 78); --gold-soft:oklch(82% .085 80);
+    --ivory:oklch(97.2% .012 85); --paper:oklch(93.5% .018 82);
+    --card:oklch(98.5% .008 85); --line:oklch(86% .018 85); --muted:oklch(46% .03 260);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Work Sans',ui-sans-serif,system-ui,sans-serif; background:var(--ivory); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Instrument Serif',ui-serif,Georgia,serif; font-weight:400; line-height:1.06; letter-spacing:.005em; }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  .em{ font-style:italic; color:var(--gold); }
 
-    html { scroll-behavior:smooth; }
-    body { font-family:'Work Sans',sans-serif; background:var(--ivory); color:var(--ink); -webkit-font-smoothing:antialiased; }
-    h1,h2,h3 { font-family:'Instrument Serif',serif; font-weight:400; letter-spacing:.01em; }
-    .label { font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); display:inline-flex; align-items:center; gap:.6rem; }
-    .label b { color:var(--gold); font-weight:600; font-family:'Instrument Serif',serif; font-size:1rem; letter-spacing:0; }
-    .nav { transition:background .3s, box-shadow .3s; }
-    .nav.scrolled { background:rgba(248,246,240,.92); backdrop-filter:blur(12px); box-shadow:0 1px 0 rgba(30,39,66,.08); }
-    .btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; font-weight:500; transition:transform .15s, background .2s, box-shadow .25s, color .2s, border-color .2s; }
-    .btn:active { transform:translateY(1px) scale(.99); }
-    .btn-gold { background:var(--gold); color:var(--ink); }
-    .btn-gold:hover { background:var(--gold-soft); box-shadow:0 12px 30px -10px rgba(194,162,78,.6); transform:translateY(-2px); }
-    .btn-ink { background:var(--ink); color:#fff; }
-    .btn-ink:hover { background:var(--ink-deep); box-shadow:0 12px 30px -10px rgba(30,39,66,.5); transform:translateY(-2px); }
-    .btn-ghost { border:1px solid rgba(255,255,255,.4); color:#fff; }
-    .btn-ghost:hover { background:rgba(255,255,255,.12); border-color:#fff; }
-    .btn-outline { border:1px solid rgba(30,39,66,.22); color:var(--ink); }
-    .btn-outline:hover { background:rgba(30,39,66,.04); border-color:rgba(30,39,66,.45); }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:1rem; transition:transform .28s, box-shadow .28s, border-color .28s; }
-    .card-h:hover { transform:translateY(-5px); border-color:rgba(194,162,78,.5); box-shadow:0 28px 60px -28px rgba(30,39,66,.3); }
-    .card-h:hover .arr { transform:translateX(5px); }
-    .arr { transition:transform .25s; }
-    .frame { position:relative; overflow:hidden; background:var(--ink); }
-    .kenburns { animation:kb 22s ease-in-out infinite alternate; }
-    @keyframes kb { from { transform:scale(1) translate(0,0); } to { transform:scale(1.08) translate(-1.5%,-1.5%); } }
-    .js .reveal { opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
-    .js .reveal.show { opacity:1; transform:none; }
-    @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } .js .reveal{ opacity:1!important; transform:none!important; } .kenburns{ animation:none!important; } }
-  </style>
+  /* labels */
+  .label{ font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); display:inline-flex; align-items:center; gap:.55rem; }
+  .label b{ font-family:'Instrument Serif',serif; color:var(--gold); font-size:1.05rem; letter-spacing:0; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block; }
+
+  /* buttons */
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:999px; font:500 .95rem 'Work Sans',sans-serif; padding:.85rem 1.6rem; cursor:pointer; border:1px solid transparent; transition:transform .15s, background .2s, box-shadow .25s, border-color .2s, color .2s; }
+  .btn .ico{ width:17px; height:17px; }
+  .btn:active{ transform:translateY(1px); }
+  .btn-gold{ background:var(--gold); color:var(--ink); }
+  .btn-gold:hover{ background:var(--gold-soft); transform:translateY(-2px); box-shadow:0 14px 32px -12px color-mix(in oklch, var(--gold), transparent 45%); }
+  .btn-ink{ background:var(--ink); color:#fff; }
+  .btn-ink:hover{ background:var(--ink-deep); transform:translateY(-2px); box-shadow:0 14px 32px -12px color-mix(in oklch, var(--ink), transparent 55%); }
+  .btn-outline{ border-color:color-mix(in oklch, var(--ink), transparent 78%); color:var(--ink); background:transparent; }
+  .btn-outline:hover{ background:color-mix(in oklch, var(--ink), transparent 95%); border-color:color-mix(in oklch, var(--ink), transparent 55%); }
+  .ico{ width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:1.7; flex:none; }
+
+  /* header */
+  header.nav{ position:fixed; inset:0 0 auto 0; z-index:50; transition:background .3s, box-shadow .3s; }
+  header.nav .bar{ height:68px; display:flex; align-items:center; justify-content:space-between; }
+  header.nav.scrolled{ background:color-mix(in oklch, var(--ivory), transparent 8%); backdrop-filter:blur(12px); box-shadow:0 1px 0 color-mix(in oklch, var(--ink), transparent 90%); }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand .word{ font-family:'Instrument Serif',serif; font-size:1.55rem; color:var(--ink); }
+  .badge{ font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); border:1px solid color-mix(in oklch, var(--gold), transparent 55%); border-radius:999px; padding:3px 8px; }
+  nav.menu{ display:flex; align-items:center; gap:30px; }
+  nav.menu a{ font-size:.9rem; color:var(--muted); transition:color .2s; }
+  nav.menu a:hover{ color:var(--ink); }
+  .nav-cta{ display:inline-flex; }
+
+  /* hero */
+  .hero{ padding:128px 0 64px; text-align:center; }
+  .hero h1{ font-size:clamp(2.7rem, 7vw, 4.6rem); color:var(--ink); margin:22px auto 0; max-width:14ch; }
+  .hero p.sub{ max-width:640px; margin:26px auto 0; color:var(--muted); font-size:1.12rem; }
+  .hero .cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:34px; }
+  .heroimg{ max-width:980px; margin:56px auto 0; }
+  .frame{ position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--line); background:var(--ink); box-shadow:0 40px 80px -40px color-mix(in oklch, var(--ink), transparent 55%); }
+  .frame.r169{ aspect-ratio:16/9; }
+  .frame.r45{ aspect-ratio:4/5; }
+  .frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .frame .veil{ position:absolute; inset:0; background:linear-gradient(to top, color-mix(in oklch, var(--ink), transparent 60%), transparent 55%); }
+  .kenburns{ animation:kb 22s ease-in-out infinite alternate; }
+  @keyframes kb{ from{ transform:scale(1) } to{ transform:scale(1.08) translate(-1.5%,-1.5%) } }
+
+  /* stats */
+  .stats{ padding:36px 0 12px; }
+  .stats .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px 18px; text-align:center; }
+  .stat .n{ font-family:'Instrument Serif',serif; font-size:3rem; color:var(--ink); line-height:1; }
+  .stat .n.gold{ color:var(--gold); }
+  .stat .t{ margin-top:8px; font-size:.86rem; color:var(--muted); }
+
+  /* sections */
+  section.block{ padding:96px 0; }
+  .surface{ background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .ink-sec{ background:var(--ink); color:#fff; }
+  .head{ max-width:760px; }
+  .head h2{ font-size:clamp(2.2rem, 5vw, 3.6rem); color:var(--ink); margin-top:18px; }
+  .ink-sec .head h2{ color:#fff; }
+  .ink-sec .label{ color:color-mix(in oklch, #fff, transparent 50%); }
+
+  /* services */
+  .cards4{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:46px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px; transition:transform .28s, box-shadow .28s, border-color .28s; display:block; }
+  .card:hover{ transform:translateY(-5px); border-color:color-mix(in oklch, var(--gold), transparent 45%); box-shadow:0 30px 60px -30px color-mix(in oklch, var(--ink), transparent 65%); }
+  .chip{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:color-mix(in oklch, var(--ink), transparent 94%); color:var(--ink); margin-bottom:18px; }
+  .card h3{ font-size:1.5rem; color:var(--ink); }
+  .card p{ margin-top:8px; font-size:.9rem; color:var(--muted); }
+  .more{ display:inline-flex; align-items:center; gap:7px; margin-top:18px; font-size:.85rem; font-weight:500; color:var(--gold); }
+  .card:hover .more .ico{ transform:translateX(4px); }
+  .more .ico{ width:15px; height:15px; transition:transform .25s; }
+  .alllink{ display:inline-flex; align-items:center; gap:8px; margin-top:34px; font-size:.9rem; font-weight:500; color:var(--ink); }
+  .alllink:hover{ color:var(--gold); }
+
+  /* about */
+  .split{ display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:center; }
+  .portrait{ position:relative; max-width:380px; }
+  .portrait .tag{ position:absolute; right:-14px; bottom:-14px; background:var(--ink); color:#fff; border-radius:12px; padding:12px 16px; box-shadow:0 18px 36px -18px rgba(0,0,0,.5); }
+  .portrait .tag .nm{ font-family:'Instrument Serif',serif; font-size:1.2rem; line-height:1; }
+  .portrait .tag .rl{ font-size:.72rem; color:color-mix(in oklch,#fff,transparent 40%); margin-top:4px; }
+  .about-body p{ color:var(--muted); margin-top:18px; }
+  .about-body p.lead{ font-size:1.12rem; }
+  .creds{ display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:24px; font-size:.85rem; color:var(--muted); }
+
+  /* testimonials */
+  .quotes{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; }
+  .quote{ background:color-mix(in oklch, #fff, transparent 96%); border:1px solid color-mix(in oklch, #fff, transparent 90%); border-radius:16px; padding:26px; }
+  .quote .mark{ width:28px; height:28px; fill:var(--gold); opacity:.85; margin-bottom:14px; }
+  .quote p{ color:color-mix(in oklch,#fff,transparent 14%); }
+  .quote footer{ margin-top:18px; font-size:.85rem; }
+  .quote footer .who{ color:#fff; } .quote footer .role{ color:color-mix(in oklch,#fff,transparent 50%); }
+
+  /* final cta */
+  .final{ text-align:center; padding:112px 0; }
+  .final h2{ font-size:clamp(2.6rem,6vw,4rem); color:var(--ink); margin:0 auto; max-width:16ch; }
+  .final p{ max-width:560px; margin:22px auto 0; color:var(--muted); font-size:1.12rem; }
+  .final .cta{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:34px; }
+  .final .mail{ margin-top:26px; font-size:.9rem; color:var(--muted); }
+  .final .mail a{ color:var(--ink); border-bottom:1px solid var(--gold); }
+
+  /* footer */
+  footer.site{ background:var(--ink); color:#fff; padding:56px 0 28px; }
+  .fgrid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px; }
+  footer.site .word{ font-family:'Instrument Serif',serif; font-size:1.5rem; }
+  footer.site .ftag{ color:color-mix(in oklch,#fff,transparent 40%); font-size:.9rem; margin-top:8px; max-width:30ch; }
+  .fcol h4{ font:600 .72rem 'Work Sans',sans-serif; letter-spacing:.14em; text-transform:uppercase; color:color-mix(in oklch,#fff,transparent 50%); margin-bottom:14px; }
+  .fcol a, .fcol span{ display:block; color:color-mix(in oklch,#fff,transparent 25%); font-size:.9rem; margin-bottom:9px; }
+  .fcol a:hover{ color:var(--gold); }
+  .fgold{ color:var(--gold) !important; display:inline-flex; align-items:center; gap:7px; }
+  .fbar{ border-top:1px solid color-mix(in oklch,#fff,transparent 90%); margin-top:36px; padding-top:22px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:.78rem; color:color-mix(in oklch,#fff,transparent 50%); }
+
+  /* reveal (fail-safe) */
+  .js .reveal{ opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+  .js .reveal.show{ opacity:1; transform:none; }
+
+  /* responsive */
+  @media (max-width:900px){
+    .cards4{ grid-template-columns:repeat(2,1fr); }
+    .quotes{ grid-template-columns:1fr; }
+    .split{ grid-template-columns:1fr; gap:40px; }
+    .portrait{ margin:0 auto; }
+    .fgrid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:680px){
+    nav.menu{ display:none; }
+    .stats .grid{ grid-template-columns:repeat(2,1fr); }
+    .cards4{ grid-template-columns:1fr; }
+    .fgrid{ grid-template-columns:1fr; }
+    .hero{ padding:108px 0 48px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none!important; transition:none!important; }
+    .js .reveal{ opacity:1!important; transform:none!important; }
+  }
+</style>
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
 
-<!-- HEADER -->
-<header class="nav fixed inset-x-0 top-0 z-50">
-  <div class="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-3">
-      <span class="font-display text-2xl text-ink leading-none">Hart &amp; Co.</span>
-      <span class="hidden sm:inline-flex items-center text-[10px] font-semibold tracking-wider uppercase text-gold border border-gold/40 rounded-full px-2 py-0.5">SDVOSB</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm text-muted">
-      <a href="#services" class="hover:text-ink transition-colors">Services</a>
-      <a href="#about" class="hover:text-ink transition-colors">About</a>
-      <a href="#testimonials" class="hover:text-ink transition-colors">Results</a>
-      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+<header class="nav">
+  <div class="wrap bar">
+    <a href="#top" class="brand"><span class="word">Hart &amp; Co.</span><span class="badge">SDVOSB</span></a>
+    <nav class="menu">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Results</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn-ink px-5 py-2.5 text-sm">Book a free consult</a>
+    <a href="#contact" class="btn btn-ink nav-cta" style="padding:.6rem 1.2rem;font-size:.85rem">Book a free consult</a>
   </div>
 </header>
 
 <!-- HERO -->
-<section id="top" class="px-6 pt-32 md:pt-36 pb-16 text-center">
-  <div class="max-w-4xl mx-auto">
-    <p class="reveal label justify-center mb-6"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Veteran-owned · SDVOSB-certified</p>
-    <h1 class="reveal text-5xl md:text-7xl leading-[1.04] text-ink">
-      Strategic HR solutions — <span class="italic text-gold">built for people,</span> powered by experience.
-    </h1>
-    <p class="reveal mx-auto mt-7 max-w-2xl text-lg text-muted leading-relaxed">
-      Hart &amp; Co. is a veteran-owned HR advisory led by Ashley Hart — 12+ years across recruiting, compliance,
-      fractional HR, and early-career programs. Senior expertise, scaled precisely to your team.
-    </p>
-    <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="#contact" class="btn btn-gold px-7 py-3.5 text-base">Book a free consult
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="#services" class="btn btn-outline px-7 py-3.5 text-base">View services</a>
+<section id="top" class="hero">
+  <div class="wrap">
+    <p class="label reveal" style="justify-content:center"><span class="dot"></span> Veteran-owned · SDVOSB-certified</p>
+    <h1 class="reveal">Strategic HR solutions — <span class="em">built for people,</span> powered by experience.</h1>
+    <p class="sub reveal">Hart &amp; Co. is a veteran-owned HR advisory led by Ashley Hart — 12+ years across recruiting, compliance, fractional HR, and early-career programs. Senior expertise, scaled precisely to your team.</p>
+    <div class="cta reveal">
+      <a href="#contact" class="btn btn-gold">Book a free consult <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#services" class="btn btn-outline">View services</a>
     </div>
   </div>
-  <div class="reveal max-w-5xl mx-auto mt-14">
-    <div class="frame rounded-2xl border border-line shadow-2xl" style="aspect-ratio:16/9">
-      <img src="https://ascend-hr-glow.lovable.app/assets/team-meeting-DPxd3g7h.jpg" alt="HR team collaborating in a sunlit conference room" class="kenburns absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" referrerpolicy="no-referrer" />
-      <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(30,39,66,.35), transparent 55%)"></div>
+  <div class="wrap heroimg reveal">
+    <div class="frame r169">
+      <img class="kenburns" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="HR team collaborating in a sunlit conference room" referrerpolicy="no-referrer" />
+      <div class="veil"></div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<section class="px-6 pb-8 pt-6">
-  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 text-center">
-    <div class="reveal"><div class="font-display text-5xl text-ink"><span data-count="12">12</span>+</div><div class="mt-1.5 text-sm text-muted leading-snug">Years HR &amp; talent<br>acquisition experience</div></div>
-    <div class="reveal"><div class="font-display text-5xl text-ink"><span data-count="100">100</span>+</div><div class="mt-1.5 text-sm text-muted leading-snug">Clients served<br>across industries</div></div>
-    <div class="reveal"><div class="font-display text-5xl text-gold">SDVOSB</div><div class="mt-1.5 text-sm text-muted leading-snug">Certified veteran-owned<br>small business</div></div>
-    <div class="reveal"><div class="font-display text-5xl text-ink"><span data-count="50">50</span></div><div class="mt-1.5 text-sm text-muted leading-snug">States — remote-first,<br>nationwide delivery</div></div>
+<section class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stat reveal"><div class="n"><span data-count="12">12</span>+</div><div class="t">Years HR &amp; talent acquisition experience</div></div>
+      <div class="stat reveal"><div class="n"><span data-count="100">100</span>+</div><div class="t">Clients served across industries</div></div>
+      <div class="stat reveal"><div class="n gold">SDVOSB</div><div class="t">Certified veteran-owned small business</div></div>
+      <div class="stat reveal"><div class="n"><span data-count="50">50</span></div><div class="t">States — remote-first, nationwide delivery</div></div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICES (01) -->
-<section id="services" class="px-6 py-24 bg-card border-y border-line">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal max-w-3xl mb-14">
-      <p class="label mb-5"><b>01</b> — Services</p>
-      <h2 class="text-4xl md:text-6xl text-ink leading-[1.05]">Four practices. <span class="italic text-gold">One mandate:</span> stronger teams.</h2>
+<!-- SERVICES -->
+<section id="services" class="block surface">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="label"><b>01</b> — Services</p>
+      <h2>Four practices. <span class="em">One mandate:</span> stronger teams.</h2>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <a href="#contact" class="card card-h p-7 block group">
-        <span class="grid w-11 h-11 place-items-center rounded-xl bg-ink/5 text-ink mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="w-5 h-5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
-        <h3 class="text-2xl text-ink">Full-Cycle Recruiting</h3>
-        <p class="mt-2 text-muted text-sm leading-relaxed">Sourcing, screening, interviews, and offer management for SMBs and corporations.</p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold">Learn more <svg class="arr w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    <div class="cards4">
+      <a href="#contact" class="card reveal">
+        <span class="chip"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+        <h3>Full-Cycle Recruiting</h3>
+        <p>Sourcing, screening, interviews, and offer management for SMBs and corporations.</p>
+        <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="#contact" class="card card-h p-7 block group">
-        <span class="grid w-11 h-11 place-items-center rounded-xl bg-ink/5 text-ink mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
-        <h3 class="text-2xl text-ink">HR Compliance</h3>
-        <p class="mt-2 text-muted text-sm leading-relaxed">I-9 audits, records retention, corrective action, and policy development you can defend.</p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold">Learn more <svg class="arr w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      <a href="#contact" class="card reveal">
+        <span class="chip"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
+        <h3>HR Compliance</h3>
+        <p>I-9 audits, records retention, corrective action, and policy development you can defend.</p>
+        <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="#contact" class="card card-h p-7 block group">
-        <span class="grid w-11 h-11 place-items-center rounded-xl bg-ink/5 text-ink mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="w-5 h-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
-        <h3 class="text-2xl text-ink">Fractional HR Support</h3>
-        <p class="mt-2 text-muted text-sm leading-relaxed">Ongoing retainer-based HR leadership for companies without an in-house function.</p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold">Learn more <svg class="arr w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      <a href="#contact" class="card reveal">
+        <span class="chip"><svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+        <h3>Fractional HR Support</h3>
+        <p>Ongoing retainer-based HR leadership for companies without an in-house function.</p>
+        <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="#contact" class="card card-h p-7 block group">
-        <span class="grid w-11 h-11 place-items-center rounded-xl bg-ink/5 text-ink mb-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="w-5 h-5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-        <h3 class="text-2xl text-ink">Intern &amp; Early Career</h3>
-        <p class="mt-2 text-muted text-sm leading-relaxed">Program structure, onboarding toolkits, mentoring frameworks, and evaluation tools.</p>
-        <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gold">Learn more <svg class="arr w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      <a href="#contact" class="card reveal">
+        <span class="chip"><svg class="ico" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+        <h3>Intern &amp; Early Career</h3>
+        <p>Program structure, onboarding toolkits, mentoring frameworks, and evaluation tools.</p>
+        <span class="more">Learn more <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
     </div>
-    <div class="reveal mt-9"><a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-gold transition-colors">All services <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+    <a href="#contact" class="alllink reveal">All services <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
 </section>
 
-<!-- MEET ASHLEY (02) -->
-<section id="about" class="px-6 py-24">
-  <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-    <div class="lg:col-span-5 reveal">
-      <div class="relative max-w-sm mx-auto lg:mx-0">
-        <div class="frame rounded-2xl border border-line shadow-xl" style="aspect-ratio:4/5">
-          <img src="https://ascend-hr-glow.lovable.app/assets/consultant-portrait-BeehwMM7.jpg" alt="Ashley Hart, Founder & Principal Consultant" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+<!-- ABOUT -->
+<section id="about" class="block">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="portrait">
+        <div class="frame r45">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" alt="Ashley Hart, Founder & Principal Consultant" referrerpolicy="no-referrer" />
         </div>
-        <div class="absolute -bottom-4 -right-4 bg-ink text-white rounded-xl px-5 py-3 shadow-lg">
-          <div class="font-display text-lg leading-none">Ashley Hart</div>
-          <div class="text-white/60 text-xs mt-1">Founder &amp; Principal Consultant</div>
-        </div>
+        <div class="tag"><div class="nm">Ashley Hart</div><div class="rl">Founder &amp; Principal Consultant</div></div>
       </div>
     </div>
-    <div class="lg:col-span-7 reveal">
-      <p class="label mb-5"><b>02</b> — Meet Ashley</p>
-      <h2 class="text-4xl md:text-5xl text-ink leading-tight">Senior expertise, earned in the field.</h2>
-      <p class="mt-5 text-muted text-lg leading-relaxed">Ashley Hart has spent 12+ years building and leading HR and talent functions — from chemical plants and manufacturing floors to tech teams and federal contracting. She founded Hart &amp; Co. to bring that hard-won, senior-level expertise to the businesses and people who need it most.</p>
-      <p class="mt-4 text-muted leading-relaxed">As a veteran-owned, SDVOSB-certified practice, Hart &amp; Co. partners with government contractors, industrial employers, and mission-driven companies — pairing real compliance rigor with genuine human care.</p>
-      <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-        <span>SHRM Certified</span><span aria-hidden="true">·</span><span>DDI Behavioral Interviewing</span><span aria-hidden="true">·</span><span>I-9 Compliance</span>
-      </div>
-      <a href="#contact" class="btn btn-outline px-6 py-3 text-sm mt-8">Meet Ashley
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="about-body reveal">
+      <p class="label"><b>02</b> — Meet Ashley</p>
+      <h2 style="font-size:clamp(2.2rem,5vw,3.4rem);color:var(--ink);margin-top:16px">Senior expertise, earned in the field.</h2>
+      <p class="lead">Ashley Hart has spent 12+ years building and leading HR and talent functions — from chemical plants and manufacturing floors to tech teams and federal contracting. She founded Hart &amp; Co. to bring that hard-won, senior-level expertise to the businesses and people who need it most.</p>
+      <p>As a veteran-owned, SDVOSB-certified practice, Hart &amp; Co. partners with government contractors, industrial employers, and mission-driven companies — pairing real compliance rigor with genuine human care.</p>
+      <div class="creds"><span>SHRM Certified</span><span>·</span><span>DDI Behavioral Interviewing</span><span>·</span><span>I-9 Compliance</span></div>
+      <a href="#contact" class="btn btn-outline" style="margin-top:28px">Meet Ashley <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS (03) -->
-<section id="testimonials" class="px-6 py-24 bg-ink text-white">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal max-w-3xl mb-14">
-      <p class="label mb-5" style="color:rgba(255,255,255,.55)"><b>03</b> — Results</p>
-      <h2 class="text-4xl md:text-6xl leading-[1.05]">Quiet partnerships. <span class="italic text-gold-soft">Loud results.</span></h2>
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="block ink-sec">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="label"><b>03</b> — Results</p>
+      <h2>Quiet partnerships. <span class="em" style="color:var(--gold-soft)">Loud results.</span></h2>
     </div>
-    <div class="grid md:grid-cols-3 gap-5">
-      <blockquote class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-7">
-        <svg viewBox="0 0 24 24" fill="#C2A24E" class="w-7 h-7 mb-4 opacity-80"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-white/85 leading-relaxed">She rebuilt our hiring process from the ground up and filled two senior roles in 30 days. We finally have a pipeline we trust.</p>
-        <footer class="mt-5 text-sm"><span class="text-white">VP, Operations</span><span class="text-white/50"> · Chemical Manufacturer</span></footer>
+    <div class="quotes">
+      <blockquote class="quote reveal">
+        <svg class="mark" viewBox="0 0 24 24"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
+        <p>She rebuilt our hiring process from the ground up and filled two senior roles in 30 days. We finally have a pipeline we trust.</p>
+        <footer><span class="who">VP, Operations</span><span class="role"> · Chemical Manufacturer</span></footer>
       </blockquote>
-      <blockquote class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-7">
-        <svg viewBox="0 0 24 24" fill="#C2A24E" class="w-7 h-7 mb-4 opacity-80"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-white/85 leading-relaxed">Our intern program became the template for our entire early-career strategy. Structured, measurable, and genuinely good for the students.</p>
-        <footer class="mt-5 text-sm"><span class="text-white">Director of Talent</span><span class="text-white/50"> · Industrial Services</span></footer>
+      <blockquote class="quote reveal">
+        <svg class="mark" viewBox="0 0 24 24"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
+        <p>Our intern program became the template for our entire early-career strategy. Structured, measurable, and genuinely good for the students.</p>
+        <footer><span class="who">Director of Talent</span><span class="role"> · Industrial Services</span></footer>
       </blockquote>
-      <blockquote class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-7">
-        <svg viewBox="0 0 24 24" fill="#C2A24E" class="w-7 h-7 mb-4 opacity-80"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
-        <p class="text-white/85 leading-relaxed">As an SDVOSB, they understood our world — and the compliance that comes with federal work. A partner, not just a vendor.</p>
-        <footer class="mt-5 text-sm"><span class="text-white">Owner</span><span class="text-white/50"> · Federal IT Services Firm</span></footer>
+      <blockquote class="quote reveal">
+        <svg class="mark" viewBox="0 0 24 24"><path d="M9.13 8.6c0-2.3 1.6-3.96 3.96-4.34l.3 1.32c-1.2.36-1.86 1.1-1.92 2.18h1.74V13H9.13V8.6zm-7.13 0C2 6.3 3.6 4.64 5.96 4.26l.3 1.32C5.06 5.94 4.4 6.68 4.34 7.76h1.74V13H2V8.6z"/></svg>
+        <p>As an SDVOSB, they understood our world — and the compliance that comes with federal work. A partner, not just a vendor.</p>
+        <footer><span class="who">Owner</span><span class="role"> · Federal IT Services Firm</span></footer>
       </blockquote>
     </div>
   </div>
 </section>
 
-<!-- CTA (04) -->
-<section id="contact" class="px-6 py-28 text-center">
-  <div class="max-w-3xl mx-auto reveal">
-    <h2 class="text-5xl md:text-6xl text-ink leading-[1.05]">Ready to build a <span class="italic text-gold">stronger team?</span></h2>
-    <p class="mt-6 text-lg text-muted leading-relaxed max-w-xl mx-auto">Book a discovery call. We'll listen, ask the hard questions, and show you exactly where to start — no pressure, no jargon.</p>
-    <div class="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="mailto:hello@hartco-hr.com?subject=Free%2015-min%20discovery%20call" class="btn btn-gold px-7 py-3.5 text-base">Free 15-min discovery
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="mailto:hello@hartco-hr.com?subject=Paid%2060-min%20strategy%20session" class="btn btn-outline px-7 py-3.5 text-base">Paid 60-min strategy</a>
+<!-- FINAL CTA -->
+<section id="contact" class="final">
+  <div class="wrap reveal">
+    <h2>Ready to build a <span class="em">stronger team?</span></h2>
+    <p>Book a discovery call. We'll listen, ask the hard questions, and show you exactly where to start — no pressure, no jargon.</p>
+    <div class="cta">
+      <a href="mailto:hello@hartco-hr.com?subject=Free%2015-min%20discovery%20call" class="btn btn-gold">Free 15-min discovery <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="mailto:hello@hartco-hr.com?subject=Paid%2060-min%20strategy%20session" class="btn btn-outline">Paid 60-min strategy</a>
     </div>
-    <p class="mt-7 text-sm text-muted">Or email <a href="mailto:hello@hartco-hr.com" class="text-ink hover:text-gold transition-colors underline decoration-gold underline-offset-2">hello@hartco-hr.com</a></p>
+    <p class="mail">Or email <a href="mailto:hello@hartco-hr.com">hello@hartco-hr.com</a></p>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="px-6 py-12 bg-ink text-white">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 items-start">
-    <div>
-      <div class="font-display text-2xl mb-2">Hart &amp; Co. HR Advisory</div>
-      <p class="text-white/60 text-sm leading-relaxed max-w-xs">Strategic HR solutions — built for people, powered by experience.</p>
-      <a href="#contact" class="btn btn-gold px-5 py-2.5 text-sm mt-5">Book a free 15-min consult</a>
-    </div>
-    <div class="text-sm">
-      <div class="text-white/50 uppercase tracking-wider text-xs mb-3">Explore</div>
-      <div class="flex flex-col gap-2">
-        <a href="#services" class="text-white/75 hover:text-gold transition-colors">Services</a>
-        <a href="#about" class="text-white/75 hover:text-gold transition-colors">About</a>
-        <a href="#testimonials" class="text-white/75 hover:text-gold transition-colors">Results</a>
-        <a href="#contact" class="text-white/75 hover:text-gold transition-colors">Book a Consult</a>
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="word">Hart &amp; Co. HR Advisory</div>
+        <p class="ftag">Strategic HR solutions — built for people, powered by experience.</p>
+        <a href="#contact" class="btn btn-gold" style="margin-top:18px">Book a free 15-min consult</a>
+      </div>
+      <div class="fcol">
+        <h4>Explore</h4>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Results</a>
+        <a href="#contact">Book a Consult</a>
+      </div>
+      <div class="fcol">
+        <h4>Practice</h4>
+        <span>Based in Texas · serving nationally</span>
+        <a href="mailto:hello@hartco-hr.com">hello@hartco-hr.com</a>
+        <a href="https://www.linkedin.com">LinkedIn</a>
+        <span class="fgold"><svg class="ico" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> SDVOSB · Veteran-Owned</span>
       </div>
     </div>
-    <div class="text-sm">
-      <div class="text-white/50 uppercase tracking-wider text-xs mb-3">Practice</div>
-      <div class="flex flex-col gap-2 text-white/75">
-        <span>Based in Texas · serving clients nationally</span>
-        <a href="mailto:hello@hartco-hr.com" class="hover:text-gold transition-colors">hello@hartco-hr.com</a>
-        <a href="https://www.linkedin.com" class="hover:text-gold transition-colors">LinkedIn</a>
-        <span class="inline-flex items-center gap-2 text-gold mt-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-4 h-4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> SDVOSB · Veteran-Owned</span>
-      </div>
+    <div class="fbar">
+      <span>&copy; 2026 Hart &amp; Co. HR Advisory. All rights reserved.</span>
+      <span>NAICS 541612 · 561310</span>
     </div>
-  </div>
-  <div class="max-w-6xl mx-auto border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
-    <span>&copy; 2026 Hart &amp; Co. HR Advisory. All rights reserved.</span>
-    <span>NAICS 541612 · 561310</span>
   </div>
 </footer>
 
 <script>
-  var nav = document.querySelector('.nav');
+  var nav = document.querySelector('header.nav');
   window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 12); }, { passive:true });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var items = document.querySelectorAll('.reveal');
   if (reduce || !('IntersectionObserver' in window)) { items.forEach(function(el){ el.classList.add('show'); }); }
   else {
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }); }, { threshold:.14, rootMargin:'0px 0px -8% 0px' });
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }); }, { threshold:.12, rootMargin:'0px 0px -8% 0px' });
     items.forEach(function(el){ io.observe(el); });
   }
   var nums = document.querySelectorAll('[data-count]');
