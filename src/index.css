@@ -170,3 +170,7 @@ h1, h2, h3, h4, .font-display {
   opacity: 1;
   transform: none;
 }
+
+/* Hide scrollbar for the horizontal slide carousel */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

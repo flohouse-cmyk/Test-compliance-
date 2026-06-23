@@ -5,7 +5,6 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
-  type MotionValue,
 } from 'framer-motion'
 import {
   ShieldCheck,
@@ -17,6 +16,8 @@ import {
   Users,
   Workflow,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 import { Quote } from 'lucide-react'
 import { Reveal, CountUp, useTilt } from '../components/motion'
@@ -167,118 +168,91 @@ function ProblemChapter() {
   )
 }
 
-const layerCopy = [
+const layers = [
   {
     icon: Gauge,
     title: 'Leadership sees the headline',
-    body: 'Org-wide posture, trend, audit readiness, and the few risks that actually matter — no noise.',
+    body: 'Org-wide posture, trend, audit readiness, and the few risks that actually matter, no noise.',
+    preview: <LeadershipPreview />,
   },
   {
     icon: Users,
     title: 'Team leads see their pod',
     body: 'Where the team stands versus its target, which control areas lag, and what to close next.',
+    preview: <TeamLeadPreview />,
   },
   {
     icon: Workflow,
     title: 'Delivery sees the work',
     body: 'Exactly what is being asked, why it matters, who owns it, and when it is due.',
+    preview: <DevPreview />,
   },
 ]
 
-function LayeredSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+function LayerCaption({ icon: Icon, title, body }: { icon: typeof Gauge; title: string; body: string }) {
+  return (
+    <div className="mt-5 text-center">
+      <div className="flex items-center justify-center gap-2 text-iris">
+        <Icon className="h-5 w-5" />
+        <span className="font-display text-lg font-semibold text-white">{title}</span>
+      </div>
+      <p className="mx-auto mt-1.5 max-w-sm text-sm text-slate-400">{body}</p>
+    </div>
+  )
+}
 
-  if (reduce) {
-    return (
-      <section id="platform" className="mx-auto max-w-6xl px-6 py-24">
-        <SectionHeading
-          eyebrow="One platform, layered"
-          title="Three views. One source of truth."
-          sub="The same live data, presented at the right altitude for every role."
-        />
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          <LeadershipPreview />
-          <TeamLeadPreview />
-          <DevPreview />
-        </div>
-      </section>
-    )
+function LayeredSection() {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const nudge = (dir: number) => {
+    const el = trackRef.current
+    if (!el) return
+    const card = el.querySelector('[data-slide]') as HTMLElement | null
+    const amount = card ? card.offsetWidth + 32 : Math.round(el.clientWidth * 0.85)
+    el.scrollBy({ left: dir * amount, behavior: 'smooth' })
   }
 
   return (
-    <section id="platform" ref={ref} className="relative h-[300vh]">
-      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden px-6">
-        <div className="pointer-events-none absolute inset-0 grain opacity-40" />
-        <Reveal className="relative z-10 mb-10 text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-iris">One platform, layered</span>
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Three views. One source of truth.
-          </h2>
-        </Reveal>
-
-        <div className="relative z-10 h-[360px] w-full max-w-3xl">
-          <LayerCard p={scrollYProgress} index={0}><LeadershipPreview /></LayerCard>
-          <LayerCard p={scrollYProgress} index={1}><TeamLeadPreview /></LayerCard>
-          <LayerCard p={scrollYProgress} index={2}><DevPreview /></LayerCard>
-        </div>
-
-        {/* Captions that crossfade as the layers fan out */}
-        <div className="relative z-10 mt-8 h-20 w-full max-w-2xl text-center">
-          {layerCopy.map((c, i) => (
-            <Caption key={i} p={scrollYProgress} index={i} {...c} />
+    <section id="platform" className="mx-auto max-w-6xl px-6 py-24">
+      <SectionHeading
+        eyebrow="One platform, layered"
+        title="Three views. One source of truth."
+        sub="The same live data, at the right altitude for every role. Swipe to slide through each view."
+      />
+      <div className="relative mt-12">
+        <div
+          ref={trackRef}
+          className="no-scrollbar -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto scroll-smooth px-6 pb-4"
+        >
+          {layers.map((l) => (
+            <div
+              key={l.title}
+              data-slide
+              className="flex w-[82vw] shrink-0 snap-center flex-col sm:w-[24rem]"
+            >
+              {l.preview}
+              <LayerCaption icon={l.icon} title={l.title} body={l.body} />
+            </div>
           ))}
         </div>
+
+        <button
+          type="button"
+          onClick={() => nudge(-1)}
+          aria-label="Previous view"
+          className="absolute -left-3 top-1/3 hidden h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur transition hover:bg-white/20 md:grid"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => nudge(1)}
+          aria-label="Next view"
+          className="absolute -right-3 top-1/3 hidden h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur transition hover:bg-white/20 md:grid"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </div>
     </section>
-  )
-}
-
-function LayerCard({ p, index, children }: { p: MotionValue<number>; index: number; children: React.ReactNode }) {
-  // Fan-out happens between progress 0.1 → 0.55. Cards start stacked, then spread.
-  const targetX = ['-58%', '0%', '58%'][index]
-  const startRotate = [-8, 0, 8][index]
-  const x = useTransform(p, [0.1, 0.55], ['0%', targetX])
-  const rotate = useTransform(p, [0.1, 0.55], [startRotate, 0])
-  const scale = useTransform(p, [0, 0.1], [0.86, 1])
-  const yStack = [22, 0, 22][index]
-  const y = useTransform(p, [0.1, 0.55], [yStack, 0])
-  return (
-    <motion.div
-      style={{ x, y, rotate, scale, zIndex: index === 1 ? 30 : 20 }}
-      className="absolute left-1/2 top-0 w-[20rem] -translate-x-1/2 sm:w-[22rem]"
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-function Caption({
-  p,
-  index,
-  icon: Icon,
-  title,
-  body,
-}: {
-  p: MotionValue<number>
-  index: number
-  icon: typeof Gauge
-  title: string
-  body: string
-}) {
-  // Each caption owns a slice of the back-half of the scroll.
-  const seg = 0.6 + index * 0.13
-  const opacity = useTransform(p, [seg - 0.07, seg, seg + 0.1, seg + 0.16], [0, 1, 1, 0])
-  const y = useTransform(p, [seg - 0.07, seg], [16, 0])
-  return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex flex-col items-center">
-      <div className="flex items-center gap-2 text-iris">
-        <Icon className="h-5 w-5" />
-        <span className="font-display text-xl font-semibold text-white">{title}</span>
-      </div>
-      <p className="mt-2 max-w-lg text-sm text-slate-400">{body}</p>
-    </motion.div>
   )
 }
 
@@ -505,7 +479,7 @@ function FeaturesSection() {
         title="Built for clarity, not dashboards"
         sub="Modular, glanceable, and honest about where you really are."
       />
-      <div className="mt-14 grid auto-rows-[1fr] gap-5 md:grid-cols-3">
+      <div className="mt-14 grid gap-5 md:auto-rows-[1fr] md:grid-cols-3">
         {features.map((f) => (
           <Reveal key={f.title} className={f.span}>
             <FeatureCard feature={f} />
