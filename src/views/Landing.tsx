@@ -423,6 +423,15 @@ const features: Feature[] = [
     body: 'Leadership, team-lead, and delivery views, same data, right altitude.',
     span: '',
     tint: 'from-cyan-500/20',
+    visual: (
+      <div className="mt-5 flex flex-wrap gap-2">
+        {['Leadership', 'Team lead', 'Delivery'].map((r) => (
+          <span key={r} className="rounded-lg border border-cyan-400/20 bg-cyan-500/10 px-3 py-1.5 text-sm text-cyan-100">
+            {r}
+          </span>
+        ))}
+      </div>
+    ),
   },
   {
     icon: FileCheck2,
@@ -430,12 +439,23 @@ const features: Feature[] = [
     body: 'Readiness score, evidence freshness, and a live countdown to every assessment.',
     span: '',
     tint: 'from-emerald-500/20',
+    visual: (
+      <div className="mt-5">
+        <div className="flex items-center justify-between text-xs text-slate-400">
+          <span>Readiness</span><span className="text-emerald-300">78%</span>
+        </div>
+        <div className="mt-2 h-2 rounded-full bg-white/10">
+          <div className="h-2 rounded-full bg-emerald-400" style={{ width: '78%' }} />
+        </div>
+        <p className="mt-3 text-xs text-slate-400">Next assessment in 21 days</p>
+      </div>
+    ),
   },
   {
     icon: ShieldCheck,
     title: 'Five frameworks, one map',
     body: 'Controls unified across the standards that matter to you.',
-    span: 'md:col-span-2',
+    span: 'md:col-span-3',
     tint: 'from-indigo-500/20',
     visual: (
       <div className="mt-4 flex flex-wrap gap-2">
