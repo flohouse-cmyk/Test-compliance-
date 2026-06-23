@@ -4,7 +4,7 @@ export const frameworks: Framework[] = [
   {
     id: 'SOC2',
     name: 'SOC 2 Type II',
-    fullName: 'SOC 2 Type II — Trust Services Criteria',
+    fullName: 'SOC 2 Type II, Trust Services Criteria',
     description: 'Security, Availability & Confidentiality controls audited over a 12-month window.',
     auditType: 'External attestation (AICPA)',
     nextAuditDate: '2026-09-15',
@@ -13,7 +13,7 @@ export const frameworks: Framework[] = [
   {
     id: 'ISO27001',
     name: 'ISO 27001',
-    fullName: 'ISO/IEC 27001:2022 — ISMS',
+    fullName: 'ISO/IEC 27001:2022, ISMS',
     description: 'Information Security Management System certification with Annex A controls.',
     auditType: 'Certification (Stage 2 surveillance)',
     nextAuditDate: '2026-11-03',
@@ -40,7 +40,7 @@ export const frameworks: Framework[] = [
   {
     id: 'PCI',
     name: 'PCI DSS 4.0',
-    fullName: 'PCI DSS 4.0 — Payment Card Industry',
+    fullName: 'PCI DSS 4.0, Payment Card Industry',
     description: 'Cardholder data environment controls for the payments platform.',
     auditType: 'QSA assessment (Level 1)',
     nextAuditDate: '2026-10-12',

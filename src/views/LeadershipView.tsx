@@ -114,7 +114,7 @@ export default function LeadershipView() {
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         <Panel
           title="Posture trend"
-          subtitle="Org compliance score vs. target — trailing 12 months"
+          subtitle="Org compliance score vs. target, trailing 12 months"
           className="lg:col-span-2"
         >
           <div className="h-64">

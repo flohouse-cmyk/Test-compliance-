@@ -56,7 +56,7 @@ export interface OpenItem {
   description: string
   /** Plain-language "what is being asked" for the delivery team */
   ask: string
-  /** Why it matters — the risk/impact framing */
+  /** Why it matters, the risk/impact framing */
   why: string
   frameworkId: FrameworkId
   controlCode: string

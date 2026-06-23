@@ -15,7 +15,7 @@ export function scoreFor(set: Control[]): number {
   const inScope = set.filter((c) => c.status !== 'not_applicable')
   if (inScope.length === 0) return 100
   const compliant = inScope.filter((c) => c.status === 'compliant').length
-  // At-risk controls count as half credit — they are passing today but trending down.
+  // At-risk controls count as half credit, they are passing today but trending down.
   const atRisk = inScope.filter((c) => c.status === 'at_risk').length
   return Math.round(((compliant + atRisk * 0.5) / inScope.length) * 100)
 }

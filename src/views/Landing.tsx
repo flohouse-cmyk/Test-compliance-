@@ -102,7 +102,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90"
         >
-          One platform, layered for every role — leadership, team leads, and delivery teams.
+          One platform, layered for every role, leadership, team leads, and delivery teams.
           Understand your current state versus where you need to be, with AI summaries and
           audit readiness across every framework.
         </motion.p>
@@ -160,7 +160,7 @@ function ProblemChapter() {
       </Reveal>
       <Reveal delay={0.15}>
         <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-400">
-          ComplyScope replaces that with a single, layered source of truth — where each
+          ComplyScope replaces that with a single, layered source of truth, where each
           person sees precisely the altitude they need.
         </p>
       </Reveal>
@@ -328,7 +328,7 @@ function PersonasSection() {
       <SectionHeading
         eyebrow="The humans behind the layers"
         title="One platform. Three very different jobs."
-        sub="Compliance touches everyone — so everyone gets a view built for how they actually work."
+        sub="Compliance touches everyone, so everyone gets a view built for how they actually work."
       />
       <div className="mt-14 grid gap-5 md:grid-cols-3">
         {personas.map((p, i) => (
@@ -410,7 +410,7 @@ const features: Feature[] = [
           <Sparkles className="h-4 w-4" /> AI Executive Summary
         </div>
         <p className="mt-2 text-sm leading-relaxed text-slate-300">
-          “Org posture is {orgScore}% — up 15 points over 12 months. Risk is concentrated in the
+          “Org posture is {orgScore}%, up 15 points over 12 months. Risk is concentrated in the
           payments CDE, with {openOpenItems.filter((o) => o.severity === 'critical').length} critical
           findings gating the autumn audits.”
         </p>
@@ -420,7 +420,7 @@ const features: Feature[] = [
   {
     icon: Layers,
     title: 'Layered by role',
-    body: 'Leadership, team-lead, and delivery views — same data, right altitude.',
+    body: 'Leadership, team-lead, and delivery views, same data, right altitude.',
     span: '',
     tint: 'from-cyan-500/20',
   },

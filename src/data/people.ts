@@ -23,7 +23,7 @@ export const personas: Persona[] = [
     name: 'Priya Nair',
     role: 'Payments Team Lead',
     photo: 'https://randomuser.me/api/portraits/women/65.jpg',
-    quote: 'I can finally see where my pod stands versus target — and exactly what to close next.',
+    quote: 'I can finally see where my pod stands versus target, and exactly what to close next.',
     sees: 'Her pod: gaps, targets, owned controls.',
     accent: '#22d3ee',
   },
@@ -49,7 +49,7 @@ export const testimonial: Testimonial = {
   role: 'Head of Clinical Products',
   photo: 'https://randomuser.me/api/portraits/women/72.jpg',
   quote:
-    'For the first time, leadership, my team leads, and our engineers are all looking at the same truth — just at the altitude each of them needs. Audit prep went from weeks to an afternoon.',
+    'For the first time, leadership, my team leads, and our engineers are all looking at the same truth, just at the altitude each of them needs. Audit prep went from weeks to an afternoon.',
 }
 
 /** Faces for the "trusted by teams" strip. */

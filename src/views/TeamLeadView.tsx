@@ -45,7 +45,7 @@ function ChartTooltip({ active, payload, label }: any) {
 }
 
 export default function TeamLeadView() {
-  const [teamId, setTeamId] = useState(teams[1].id) // default Payments — most interesting
+  const [teamId, setTeamId] = useState(teams[1].id) // default Payments, most interesting
   const team = teams.find((t) => t.id === teamId)!
   const score = teamScore(teamId)
   const target = teamTargets[teamId] ?? 95
@@ -82,7 +82,7 @@ export default function TeamLeadView() {
           >
             {teams.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name} — {t.pod}
+                {t.name}, {t.pod}
               </option>
             ))}
           </select>
@@ -160,7 +160,7 @@ export default function TeamLeadView() {
         <Panel title="Team open items" subtitle="What this pod needs to close, by priority">
           <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
             {teamItems.filter((i) => i.status !== 'done').length === 0 && (
-              <p className="text-sm text-slate-500">No open items — this pod is clear.</p>
+              <p className="text-sm text-slate-500">No open items, this pod is clear.</p>
             )}
             {teamItems
               .filter((i) => i.status !== 'done')

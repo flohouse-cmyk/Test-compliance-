@@ -17,7 +17,7 @@ export interface Insight {
 const sev = severityCount(openOpenItems)
 
 export const leadershipSummary = {
-  headline: `Org posture is ${orgScore}% — up 15 points over 12 months, ${95 - orgScore} short of the board target of 95%.`,
+  headline: `Org posture is ${orgScore}%, up 15 points over 12 months, ${95 - orgScore} short of the board target of 95%.`,
   body: `Momentum is positive and four of five frameworks are audit-ready within tolerance. The risk concentration is in the Cardholder Data Environment: ${sev.critical} critical findings remain open, two of which (segmentation testing and MFA on privileged accounts) gate the PCI Level 1 and SOC 2 attestations this autumn. ${overdueOrSoon.length} items are due within 14 days. With current burn-down, leadership should expect 95% by early Q4 provided the Payments and Identity pods clear their critical items on schedule.`,
   bullets: [
     `${sev.critical} critical + ${sev.high} high findings open across ${frameworks.length} frameworks`,
@@ -37,9 +37,9 @@ export function teamSummary(teamId: string) {
 
   let body: string
   if (s.critical > 0) {
-    body = `${team.name} is ${trend}. The priority is the ${s.critical} critical finding${s.critical > 1 ? 's' : ''} — these block an upcoming audit and should be cleared before any lower-severity work. ${items.length} open item${items.length === 1 ? '' : 's'} total; clearing the critical and ${s.high} high item${s.high === 1 ? '' : 's'} would move the pod above target.`
+    body = `${team.name} is ${trend}. The priority is the ${s.critical} critical finding${s.critical > 1 ? 's' : ''}, these block an upcoming audit and should be cleared before any lower-severity work. ${items.length} open item${items.length === 1 ? '' : 's'} total; clearing the critical and ${s.high} high item${s.high === 1 ? '' : 's'} would move the pod above target.`
   } else if (gap > 0) {
-    body = `${team.name} is ${trend} with no critical findings. ${items.length} open item${items.length === 1 ? '' : 's'} remain — mostly ${s.high} high and ${s.medium} medium severity. Steady burn-down this sprint closes the gap.`
+    body = `${team.name} is ${trend} with no critical findings. ${items.length} open item${items.length === 1 ? '' : 's'} remain, mostly ${s.high} high and ${s.medium} medium severity. Steady burn-down this sprint closes the gap.`
   } else {
     body = `${team.name} is ${trend} and holding. ${items.length} open item${items.length === 1 ? '' : 's'} remain, none critical. Focus shifts to evidence freshness and recertification to keep the score from drifting.`
   }
@@ -53,7 +53,7 @@ export function teamSummary(teamId: string) {
 export const insightFeed: Insight[] = [
   {
     tone: 'critical',
-    text: 'PCI segmentation pen-test is 13 months overdue and blocked on vendor scheduling — this is the single largest threat to the October Level 1 attestation.',
+    text: 'PCI segmentation pen-test is 13 months overdue and blocked on vendor scheduling, this is the single largest threat to the October Level 1 attestation.',
   },
   {
     tone: 'critical',

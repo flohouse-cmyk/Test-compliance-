@@ -31,7 +31,7 @@ const titleNouns = [
   'vulnerability scans', 'access recertification', 'security awareness training',
 ]
 
-/** Target distribution of statuses — weighted toward compliant for a believable mature org. */
+/** Target distribution of statuses, weighted toward compliant for a believable mature org. */
 function pickStatus(r: number): ControlStatus {
   if (r < 0.7) return 'compliant'
   if (r < 0.85) return 'at_risk'
