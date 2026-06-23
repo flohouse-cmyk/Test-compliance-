@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Trading Bot — Case Study · Flo Ogunyemi</title>
+  <meta name="description" content="A functional, autonomous AI trading bot built on Replit and connected to Alpaca, with a custom dashboard for transparency into its trades and decisions. A personal build by Folorunsho Ogunyemi." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Trading Bot — Flo Ogunyemi" />
+  <meta property="og:description" content="An autonomous trading bot I built on Replit, connected to Alpaca, with a dashboard showing trades, decision context, and entries/exits." />
+  <meta property="og:url" content="https://flohouse-cmyk.github.io/projects/trading-bot.html" />
+  <meta property="og:image" content="https://flohouse-cmyk.github.io/assets/og.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230B1020'/%3E%3Cpath d='M20 64l18-18 14 14 28-28' fill='none' stroke='%232dd4bf' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/tailwind.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#0B1020; color:#E2E8F0; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,.font-heading { font-family:'Space Grotesk',sans-serif; }
+    .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .js .reveal.in{opacity:1;transform:none}
+    @media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important}}
+  </style>
+</head>
+<body class="font-body">
+
+  <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-teal-500/10 blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-[40rem] h-[40rem] rounded-full bg-emerald-500/10 blur-3xl"></div>
+  </div>
+
+  <header class="sticky top-0 z-30 backdrop-blur-xl bg-[#0B1020]/70 border-b border-white/10">
+    <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+      <a href="../index.html#projects" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0 5-5m-5 5h12"/></svg>
+        Back to portfolio
+      </a>
+      <span class="text-xs font-medium text-slate-400">Personal build · Autonomous trading</span>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4">
+
+    <section class="pt-16 pb-12">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-teal-300">
+          <span class="w-2 h-2 rounded-full bg-teal-400"></span> Personal build · Autonomous Trading · Vibe Coding
+        </span>
+        <h1 class="mt-4 font-heading font-bold text-4xl sm:text-6xl tracking-tight text-white">AI Trading Bot</h1>
+        <p class="mt-4 max-w-2xl text-lg sm:text-xl text-slate-300 leading-relaxed">
+          A functional trading bot I built that places trades on its own, with no human pulling the trigger.
+          It is connected to Alpaca for market data and execution, and I built a custom dashboard so I can see
+          exactly what it is doing and why.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2 text-xs font-medium">
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Replit</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Alpaca API</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">MCP</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">ChatGPT</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Claude</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Prompt Engineering</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Vibe Coding</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Illustrative dashboard mockup -->
+    <section class="reveal pb-14">
+      <div class="rounded-2xl border border-white/10 overflow-hidden bg-[#0e1424] shadow-2xl shadow-teal-500/10">
+        <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-white/10 bg-white/5">
+          <div class="flex items-center gap-2 text-sm font-medium text-slate-200">
+            <span class="grid h-6 w-6 place-items-center rounded bg-teal-500/20 text-teal-200">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 7-7"/></svg>
+            </span>
+            Bot Dashboard
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-emerald-200">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Autonomous
+            </span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">Connected: Alpaca</span>
+          </div>
+        </div>
+
+        <div class="grid gap-4 p-5 lg:grid-cols-3">
+          <div class="lg:col-span-2 rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+            <div class="px-4 py-2.5 text-xs font-semibold uppercase tracking-widest text-slate-400 border-b border-white/10">Recent trades</div>
+            <table class="w-full text-sm">
+              <thead class="text-xs text-slate-400">
+                <tr class="border-b border-white/5">
+                  <th class="px-4 py-2 text-left font-medium">Symbol</th>
+                  <th class="px-4 py-2 text-left font-medium">Side</th>
+                  <th class="px-4 py-2 text-right font-medium">Entry</th>
+                  <th class="px-4 py-2 text-right font-medium">Exit</th>
+                  <th class="px-4 py-2 text-right font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-200">
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-2.5 font-medium">AAPL</td>
+                  <td class="px-4 py-2.5"><span class="text-emerald-300">Buy</span></td>
+                  <td class="px-4 py-2.5 text-right">187.20</td>
+                  <td class="px-4 py-2.5 text-right text-slate-500">—</td>
+                  <td class="px-4 py-2.5 text-right"><span class="rounded bg-emerald-500/15 px-2 py-0.5 text-xs text-emerald-200">Open</span></td>
+                </tr>
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-2.5 font-medium">MSFT</td>
+                  <td class="px-4 py-2.5"><span class="text-rose-300">Sell</span></td>
+                  <td class="px-4 py-2.5 text-right">412.10</td>
+                  <td class="px-4 py-2.5 text-right">408.05</td>
+                  <td class="px-4 py-2.5 text-right"><span class="rounded bg-white/10 px-2 py-0.5 text-xs text-slate-300">Closed</span></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2.5 font-medium">NVDA</td>
+                  <td class="px-4 py-2.5"><span class="text-emerald-300">Buy</span></td>
+                  <td class="px-4 py-2.5 text-right">118.40</td>
+                  <td class="px-4 py-2.5 text-right">123.90</td>
+                  <td class="px-4 py-2.5 text-right"><span class="rounded bg-white/10 px-2 py-0.5 text-xs text-slate-300">Closed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="rounded-xl border border-teal-400/20 bg-teal-500/5 p-4">
+            <div class="flex items-center gap-2 text-xs font-medium text-teal-200">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 9a2.5 2.5 0 1 1 3 2.45V13M12 17h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+              Decision context
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-slate-300">
+              Entered AAPL on a momentum signal with supportive trend; sized the position to risk rules and set an
+              exit below recent support. Every decision is logged with the signals it came from.
+            </p>
+          </div>
+        </div>
+        <p class="px-5 pb-5 -mt-1 text-xs text-slate-500">Illustrative dashboard with sample data.</p>
+      </div>
+    </section>
+
+    <section class="reveal grid md:grid-cols-3 gap-6 pb-14">
+      <div class="md:col-span-2 space-y-6">
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">The idea</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            I wanted to build something real and fully autonomous: a bot that could make its own trading decisions
+            and execute them without me triggering anything, and eventually grow into something that could trade
+            real money and be profitable.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">How I built it</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            I built the bot on Replit and connected it to Alpaca for market data and order execution through its
+            API. I used ChatGPT and Claude to refine and clean up the code and to engineer the prompts and decision
+            logic. It now runs on its own and places trades autonomously. To keep it transparent, I built a custom
+            dashboard that shows the actions it takes, the context behind each automated decision, and the entry and
+            exit of every trade.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">My role</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            Solo project, end to end: the idea, the build (vibe coding), the Alpaca integration, the prompt
+            engineering, the dashboard, and the ongoing iteration as I improve its decisions and risk handling.
+          </p>
+        </div>
+      </div>
+
+      <aside class="space-y-3">
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Role</p>
+          <p class="mt-1 text-white font-medium">Solo builder, idea to working bot</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Status</p>
+          <p class="mt-1 text-white font-medium">Functional &amp; trading autonomously</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Goal</p>
+          <p class="mt-1 text-white font-medium">Graduate to real capital and consistent profitability</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="reveal pb-16">
+      <h2 class="font-heading font-semibold text-2xl text-white">Key capabilities</h2>
+      <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">Autonomous execution</h3>
+          <p class="mt-2 text-sm text-slate-300">Places trades on its own, with no human trigger.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">Alpaca integration</h3>
+          <p class="mt-2 text-sm text-slate-300">Market data and order execution via API.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">Decision transparency</h3>
+          <p class="mt-2 text-sm text-slate-300">Logs the context and signals behind every move.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">Entry / exit tracking</h3>
+          <p class="mt-2 text-sm text-slate-300">Clear record of where each trade opened and closed.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">Custom dashboard</h3>
+          <p class="mt-2 text-sm text-slate-300">A purpose-built view to understand the bot's behavior.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5">
+          <h3 class="font-heading font-semibold text-white">AI-assisted build</h3>
+          <p class="mt-2 text-sm text-slate-300">ChatGPT and Claude for code cleanup and prompt engineering.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal pb-16">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-400">
+        Personal, experimental project, shared to show how I build. Not investment advice. Trading involves risk;
+        figures shown are illustrative sample data.
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-10">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+        <a href="../index.html" class="hover:text-white transition-colors">Folorunsho Ogunyemi · Portfolio</a>
+        <div class="flex items-center gap-4">
+          <a href="mailto:fogun.1992@gmail.com" class="hover:text-white transition-colors">Email: fogun.1992@gmail.com</a>
+          <a href="tel:+17573861992" class="hover:text-white transition-colors">(757) 386-1992</a>
+          <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
