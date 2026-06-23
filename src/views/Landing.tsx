@@ -402,7 +402,7 @@ const features: Feature[] = [
     icon: Sparkles,
     title: 'AI summaries that read like a briefing',
     body: 'Every view opens with a short, generated narrative: what improved, what is at risk, and what to do next.',
-    span: 'md:col-span-2 md:row-span-2',
+    span: 'md:col-span-2',
     tint: 'from-violet-500/20',
     visual: (
       <div className="mt-5 rounded-xl border border-violet-400/20 bg-violet-500/10 p-4">
@@ -455,7 +455,7 @@ const features: Feature[] = [
     icon: ShieldCheck,
     title: 'Five frameworks, one map',
     body: 'Controls unified across the standards that matter to you.',
-    span: 'md:col-span-3',
+    span: 'md:col-span-2',
     tint: 'from-indigo-500/20',
     visual: (
       <div className="mt-4 flex flex-wrap gap-2">
@@ -476,7 +476,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
-      className={`group card relative overflow-hidden p-6 ${feature.span}`}
+      className={`group card relative h-full overflow-hidden p-6 ${feature.span}`}
     >
       <div className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br ${feature.tint} to-transparent opacity-60 blur-2xl transition-opacity duration-300 group-hover:opacity-100`} />
       <div className="relative">
@@ -501,7 +501,7 @@ function FeaturesSection() {
       />
       <div className="mt-14 grid gap-5 md:auto-rows-[1fr] md:grid-cols-3">
         {features.map((f) => (
-          <Reveal key={f.title} className={f.span}>
+          <Reveal key={f.title} className={`${f.span} h-full`}>
             <FeatureCard feature={f} />
           </Reveal>
         ))}
