@@ -5,75 +5,122 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Flo Ogunyemi — Preview (Cinematic)</title>
+<title>Flo Ogunyemi - Preview</title>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
 <style>
+  /* ===========================================================
+     PREVIEW DESIGN SYSTEM v2 - cinematic editorial, warm tungsten
+     Accent is LOCKED to one real color (tungsten amber). No AI-blue.
+     =========================================================== */
+  :root{
+    --bg:#0B0A0C;            /* warm near-black */
+    --bg-2:#100D10;
+    --ink:#F4F0EA;          /* warm off-white */
+    --muted:#ABA49B;        /* warm grey */
+    --faint:#6E6862;
+    --line:rgba(255,255,255,.10);
+    --accent:#E9A45C;       /* tungsten amber - the one accent */
+    --accent-hi:#F2B069;
+    --lamp:#FFE6BE;
+    --r-card:1.25rem;
+  }
   html{scroll-behavior:smooth}
-  body{font-family:Satoshi,sans-serif;background:#05050A;color:#E7E9EE;-webkit-font-smoothing:antialiased}
+  body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
+  ::selection{background:rgba(233,164,92,.30)}
 
-  .name-solid{color:#EEF1F6}
-  .accent{background:linear-gradient(100deg,#7C9CFF,#67E8F9);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(16px)}
-  .glass:hover{background:rgba(255,255,255,.08)}
-  .glassbtn{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px)}
-  .glassbtn:hover{background:rgba(255,255,255,.18)}
-  .chrome-border{position:relative;border-radius:1.25rem;background:rgba(255,255,255,.03)}
+  /* same-family color emphasis (no gradient headline text) */
+  .name-solid{color:var(--ink)}
+  .accent{color:var(--accent)}
+
+  /* glass kept sparingly: nav + ghost controls only */
+  .glass{background:rgba(255,255,255,.045);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .glass:hover{background:rgba(255,255,255,.07)}
+  .glassbtn{background:rgba(255,255,255,.06);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .glassbtn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26)}
+
+  /* hairline bezel card (re-tinted warm; alias kept for downstream markup) */
+  .chrome-border{position:relative;border-radius:var(--r-card);background:rgba(255,255,255,.025);border:1px solid var(--line)}
   .chrome-border::before{content:"";position:absolute;inset:0;padding:1px;border-radius:inherit;
-    background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 35%,rgba(124,156,255,.35));
+    background:linear-gradient(150deg,rgba(255,255,255,.22),rgba(255,255,255,.02) 42%,rgba(233,164,92,.20));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 
-  .tilt{transform-style:preserve-3d;transition:transform .2s ease}
-  .magnetic{transition:transform .15s ease}
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+  /* buttons: pill system, tactile press */
+  .btn{display:inline-flex;align-items:center;gap:.6rem;border-radius:9999px;font-weight:600;
+    transition:transform .16s cubic-bezier(.23,1,.32,1),background .2s ease,border-color .2s ease}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--accent);color:#1A130B}
+  .btn-primary:hover{background:var(--accent-hi)}
+  .btn-ico{display:grid;place-items:center;width:1.55rem;height:1.55rem;border-radius:9999px;background:rgba(0,0,0,.16);
+    transition:transform .2s cubic-bezier(.23,1,.32,1)}
+  .btn-primary:hover .btn-ico{transform:translate(2px,-1px)}
+
+  .tilt{transition:transform .25s cubic-bezier(.23,1,.32,1)}
+  .magnetic{transition:transform .18s cubic-bezier(.23,1,.32,1)}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
   .reveal.in{opacity:1;transform:none}
-  .marquee{animation:m 26s linear infinite}
+  .marquee{animation:m 30s linear infinite}
   @keyframes m{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;z-index:5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
-  /* ===== CINEMATIC HERO ===== */
-  .cine{position:relative;min-height:100vh;overflow:hidden}
-  .cine-bg{position:absolute;inset:0;
+  /* ===== CINEMATIC EDITORIAL HERO ===== */
+  .hero{position:relative;min-height:100dvh;overflow:hidden;
     background:
-      radial-gradient(75% 55% at 50% 2%, rgba(124,156,255,.22), transparent 60%),
-      radial-gradient(60% 45% at 50% 78%, rgba(45,212,191,.12), transparent 60%),
-      radial-gradient(90% 70% at 50% 40%, rgba(50,38,110,.30), transparent 75%),
-      linear-gradient(180deg,#0a0a16,#05050a 72%)}
-  .cine-bg::after{content:"";position:absolute;inset:-25%;
-    background:conic-gradient(from 200deg at 55% 25%, rgba(255,255,255,.05),transparent 25%,rgba(124,156,255,.08),transparent 55%,rgba(45,212,191,.05),transparent 82%);
-    filter:blur(40px);animation:swirl 30s linear infinite}
-  @keyframes swirl{to{transform:rotate(360deg)}}
-  .cine-vignette{position:absolute;inset:0;pointer-events:none;z-index:4;
-    background:radial-gradient(115% 80% at 50% 32%, transparent 42%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.9) 100%)}
+      radial-gradient(120% 90% at 72% -10%, rgba(233,164,92,.16), transparent 56%),
+      radial-gradient(85% 65% at 50% 122%, rgba(38,26,14,.55), transparent 60%),
+      linear-gradient(180deg,#0E0B0E,#0B0A0C 70%)}
+  .hero-grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;z-index:6;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-inner{position:relative;z-index:3;max-width:72rem;margin:0 auto;min-height:100dvh;
+    display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:2rem;padding:7rem 1.5rem 3rem}
 
-  /* the lamp / spotlight beam */
-  .spot{position:absolute;top:-6%;left:50%;width:58%;height:96%;transform:translateX(-50%);
-    clip-path:polygon(46% 0,54% 0,80% 100%,20% 100%);
-    background:linear-gradient(180deg, rgba(255,246,230,.55), rgba(255,242,222,.10) 48%, transparent 80%);
-    filter:blur(12px);mix-blend-mode:screen;pointer-events:none;transition:transform .2s ease;animation:sway 9s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-2.2deg)}50%{transform:translateX(-50%) rotate(2.2deg)}}
-  .spot-src{position:absolute;top:-34px;left:50%;width:170px;height:170px;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(255,249,238,.95),rgba(255,240,214,.45) 28%,transparent 70%);filter:blur(6px);pointer-events:none}
+  .role{display:inline-flex;align-items:center;font-size:.78rem;font-weight:600;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent)}
+  .hero h1{margin-top:1.05rem;font-weight:700;line-height:.98;letter-spacing:-.02em;
+    font-size:clamp(2.7rem,6vw,4.6rem);color:var(--ink)}
+  .hero h1 .nick{color:var(--accent)}
+  .lede{margin-top:1.4rem;max-width:30rem;font-size:1.07rem;line-height:1.65;color:var(--muted)}
+  .cta-row{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.75rem}
+  .cta-row .btn-primary{padding:.8rem .65rem .8rem 1.4rem}
+  .cta-row .btn-ghost{padding:.8rem 1.4rem;background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .cta-row .btn-ghost:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
 
-  /* spotlit cut-out subject + reflection (flamingo-style) */
-  .subject{position:relative;display:flex;flex-direction:column;align-items:center;width:300px;max-width:80vw;margin:18px auto 0;animation:float 6.5s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .halo{position:absolute;top:-2%;left:50%;width:86%;height:62%;transform:translateX(-50%);border-radius:50%;z-index:0;
-    background:radial-gradient(circle, rgba(255,244,224,.55), rgba(124,156,255,.20) 45%, transparent 70%);filter:blur(30px);transition:background .15s ease}
-  .cut{position:relative;z-index:1;width:100%;display:block;transition:transform .2s ease;
-    filter:drop-shadow(0 26px 36px rgba(0,0,0,.9)) contrast(1.06) saturate(1.04)}
-  .cut-ref{width:100%;display:block;margin-top:-4%;transform:scaleY(-1);opacity:.16;filter:blur(2px);
-    -webkit-mask-image:linear-gradient(180deg,#000,transparent 50%);mask-image:linear-gradient(180deg,#000,transparent 50%)}
-  .floor{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:60%;height:2px;z-index:1;
-    background:linear-gradient(90deg,transparent,rgba(124,156,255,.5),transparent);filter:blur(1px)}
+  /* stage / tungsten spotlight on the subject */
+  .hero-stage{position:relative;align-self:stretch;min-height:100dvh}
+  .lamp{position:absolute;top:-4%;left:54%;width:46%;height:106%;transform:translateX(-50%);
+    clip-path:polygon(44% 0,56% 0,86% 100%,14% 100%);
+    background:linear-gradient(180deg,rgba(255,230,190,.5),rgba(255,224,178,.08) 50%,transparent 82%);
+    filter:blur(14px);mix-blend-mode:screen;pointer-events:none;animation:sway 11s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-1.8deg)}50%{transform:translateX(-50%) rotate(1.8deg)}}
+  .lamp-src{position:absolute;top:1.3rem;left:54%;width:150px;height:150px;transform:translateX(-50%);
+    background:radial-gradient(circle,rgba(255,238,210,.9),rgba(255,224,178,.32) 30%,transparent 70%);filter:blur(8px);pointer-events:none}
+  .subject{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);width:min(360px,76%);z-index:2;
+    animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+  .subject-glow{position:absolute;top:-3%;left:50%;width:84%;height:60%;transform:translateX(-50%);border-radius:50%;z-index:0;
+    background:radial-gradient(circle,rgba(255,224,178,.5),rgba(233,164,92,.16) 46%,transparent 72%);filter:blur(26px);transition:background .15s ease}
+  .subject-img{position:relative;z-index:1;width:100%;display:block;transition:transform .2s cubic-bezier(.23,1,.32,1);
+    filter:drop-shadow(0 30px 42px rgba(0,0,0,.85)) contrast(1.05) saturate(1.03)}
+  .subject-ref{width:100%;display:block;margin-top:-4%;transform:scaleY(-1);opacity:.14;filter:blur(2px);
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 52%);mask-image:linear-gradient(180deg,#000,transparent 52%)}
+  .floor-line{position:absolute;left:50%;bottom:7.5%;transform:translateX(-50%);width:64%;height:1px;z-index:1;
+    background:linear-gradient(90deg,transparent,rgba(233,164,92,.5),transparent)}
+  .stage-vignette{position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(82% 72% at 54% 36%,transparent 46%,rgba(0,0,0,.5) 82%,rgba(0,0,0,.85) 100%)}
 
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:.5rem;padding:6.25rem 1.25rem 2.5rem;min-height:auto;text-align:center}
+    .role{justify-content:center}
+    .cta-row{justify-content:center}
+    .lede{margin-left:auto;margin-right:auto}
+    .hero-copy{order:1}
+    .hero-stage{order:2;min-height:60vh;margin-top:1.5rem}
+    .lamp,.lamp-src{left:50%}
+    .subject{bottom:3%}
+  }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.cine-bg::after,.spot,.subject{animation:none}
+    .marquee,.lamp,.subject{animation:none}
     .reveal{opacity:1;transform:none;transition:none}
   }
-  ::selection{background:rgba(124,156,255,.35)}
 </style>
 </head>
 <body class="antialiased">
@@ -82,7 +129,7 @@
 <header class="fixed inset-x-0 top-3 z-50 px-4">
   <nav class="mx-auto flex max-w-6xl items-center justify-between rounded-2xl glass px-4 py-2.5">
     <a href="#top" class="flex items-center gap-2.5">
-      <span class="grid h-8 w-8 place-items-center rounded-lg text-ink font-heading font-bold" style="background:linear-gradient(180deg,#fff,#9aa1ad)">F</span>
+      <span class="grid h-8 w-8 place-items-center rounded-lg font-heading font-bold" style="background:var(--accent);color:#1A130B">F</span>
       <span class="font-heading font-semibold tracking-tight">Flo Ogunyemi</span>
     </a>
     <div class="hidden gap-1 text-sm text-slate-300 md:flex">
@@ -91,67 +138,49 @@
       <a href="#skills" class="rounded-lg px-3 py-2 hover:bg-white/5 hover:text-white transition-colors">Skills</a>
       <a href="#projects" class="rounded-lg px-3 py-2 hover:bg-white/5 hover:text-white transition-colors">Projects</a>
     </div>
-    <a href="#contact" class="magnetic glassbtn rounded-xl px-4 py-2 text-sm font-semibold text-white">Let's talk</a>
+    <a href="#contact" class="magnetic glassbtn rounded-full px-4 py-2 text-sm font-semibold text-white">Get in touch</a>
   </nav>
 </header>
 
 <main id="top">
 
-<!-- CINEMATIC HERO -->
-<section id="hero" class="cine grain grid place-items-center text-center">
-  <div class="cine-bg"></div>
-  <div id="spot" class="spot"></div>
-  <div id="spotSrc" class="spot-src"></div>
+<!-- CINEMATIC EDITORIAL HERO -->
+<section id="hero" class="hero">
+  <div class="hero-grain"></div>
 
-  <div class="relative z-10 mx-auto max-w-3xl px-5 pt-28 pb-14">
-    <span class="reveal inline-flex items-center gap-2 rounded-full glass px-3.5 py-1.5 text-xs text-slate-200">
-      <span class="h-1.5 w-1.5 rounded-full" style="background:#7C9CFF"></span> AI Product Manager
-    </span>
-
-    <h1 class="reveal mt-6 font-heading text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
-      <span class="name-solid">Folorunsho</span>
-      <span class="name-solid"> </span>
-      <svg id="flo" viewBox="0 0 300 140" class="inline-block h-[0.92em] w-auto align-middle" aria-label="Flo">
-        <defs>
-          <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#ffffff"/><stop offset="22%" stop-color="#eaf0f8"/>
-            <stop offset="46%" stop-color="#8b95a8"/><stop offset="56%" stop-color="#566072"/>
-            <stop offset="70%" stop-color="#f2f6fc"/><stop offset="100%" stop-color="#aab3c4"/>
-          </linearGradient>
-          <filter id="liquid" x="-25%" y="-25%" width="150%" height="150%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.010 0.018" numOctaves="2" seed="4" result="n">
-              <animate attributeName="baseFrequency" dur="12s" values="0.009 0.016;0.016 0.027;0.009 0.016" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-        </defs>
-        <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
-              font-family="Clash Display, sans-serif" font-weight="700" font-size="124"
-              fill="url(#chrome)" filter="url(#liquid)">Flo</text>
-      </svg>
-      <span class="name-solid"> Ogunyemi</span>
-    </h1>
-
-    <p class="reveal mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-300/90 sm:text-lg">
-      I turn data, stakeholder pain points and business goals into functional, usable products that drive
-      operational efficiency and improve experience.
-    </p>
-
-    <div class="reveal mt-7 flex flex-wrap items-center justify-center gap-3">
-      <a href="#projects" class="magnetic rounded-2xl px-6 py-3 font-semibold text-ink" style="background:linear-gradient(180deg,#fff,#c3c8d2)">View my work</a>
-      <a href="#contact" class="magnetic glassbtn rounded-2xl px-6 py-3 font-semibold text-white">Get in touch</a>
+  <div class="hero-inner">
+    <!-- copy -->
+    <div class="hero-copy">
+      <p class="role reveal">AI Product Manager</p>
+      <h1 class="reveal">Folorunsho <span class="nick">&ldquo;Flo&rdquo;</span><br />Ogunyemi</h1>
+      <p class="lede reveal">
+        I turn data, stakeholder pain and business goals into usable products that
+        drive efficiency and earn trust.
+      </p>
+      <div class="cta-row reveal">
+        <a href="#projects" class="btn btn-primary magnetic">
+          View my work
+          <span class="btn-ico" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a href="#contact" class="btn btn-ghost magnetic">Get in touch</a>
+      </div>
     </div>
 
-    <!-- spotlit subject with reflection -->
-    <div id="subject" class="subject">
-      <div id="halo" class="halo"></div>
-      <img id="cut" class="cut" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi" onerror="this.style.display='none'" />
-      <img class="cut-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+    <!-- spotlit subject + reflection on a glossy floor -->
+    <div class="hero-stage">
+      <div id="lamp" class="lamp"></div>
+      <div id="lampSrc" class="lamp-src"></div>
+      <div class="subject">
+        <div id="subjectGlow" class="subject-glow"></div>
+        <img id="subjectImg" class="subject-img" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi" onerror="this.closest('.hero-stage').style.display='none'" />
+        <img class="subject-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="floor-line"></div>
+      <div class="stage-vignette"></div>
     </div>
   </div>
-
-  <div class="floor"></div>
-  <div class="cine-vignette"></div>
 </section>
 
 <!-- MARQUEE -->
@@ -199,21 +228,21 @@
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:#7C9CFF">Jun 2025 - Present</span>
+        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:var(--accent)">Jun 2025 - Present</span>
       </div>
       <p class="text-slate-400">Judi Health · Remote</p>
       <p class="mt-3 text-slate-300/90">Conversational & voice AI, RAG enterprise search, and automation across healthcare and clinical workflows.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:#7C9CFF">Jun 2021 - May 2025</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:var(--accent)">Jun 2021 - May 2025</span>
       </div>
       <p class="text-slate-400">Microsoft · Remote</p>
       <p class="mt-3 text-slate-300/90">M365 observability and data-access governance; led a transparency security & compliance-posture platform.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:#7C9CFF">Oct 2019 - Jun 2021</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:var(--accent)">Oct 2019 - Jun 2021</span>
       </div>
       <p class="text-slate-400">Accenture · Remote</p>
       <p class="mt-3 text-slate-300/90">Led delivery for state, airline, financial and pharma clients; requirements, testing and roadmaps.</p>
@@ -244,10 +273,10 @@
   <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Projects</h2>
   <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #1e293b, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(34,211,238,.25);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#67E8F9">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #312e81, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(124,156,255,.3);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#a5b4fc">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">Voice AI</h3></div></div><div class="p-6 text-slate-300/90">NLP voice agent automating routine contact-center calls end to end, inbound &amp; outbound.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #064e3b, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(52,211,153,.28);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#6ee7b7">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Chat</h3></div></div><div class="p-6 text-slate-300/90">Slack-native RAG assistant for enterprise search &amp; analytical reporting.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #134e4a, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(45,212,191,.28);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#5eead4">Personal build</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Trading Bot</h3></div></div><div class="p-6 text-slate-300/90">Autonomous trading bot (Replit + Alpaca) with a custom decision dashboard.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">Voice AI</h3></div></div><div class="p-6 text-slate-300/90">NLP voice agent automating routine contact-center calls end to end, inbound &amp; outbound.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Chat</h3></div></div><div class="p-6 text-slate-300/90">Slack-native RAG assistant for enterprise search &amp; analytical reporting.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Personal build</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Trading Bot</h3></div></div><div class="p-6 text-slate-300/90">Autonomous trading bot (Replit + Alpaca) with a custom decision dashboard.</div></a>
   </div>
 </section>
 
@@ -257,9 +286,9 @@
     <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/>that earns trust.</h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="#" class="magnetic rounded-2xl px-6 py-3.5 font-semibold text-ink" style="background:linear-gradient(180deg,#fff,#c3c8d2)">Email me</a>
-      <a href="#" class="magnetic glassbtn rounded-2xl px-6 py-3.5 font-semibold text-white">LinkedIn</a>
-      <a href="#" class="magnetic glassbtn rounded-2xl px-6 py-3.5 font-semibold text-white">Résumé</a>
+      <a href="#" class="btn btn-primary magnetic px-6 py-3.5">Email me</a>
+      <a href="#" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">LinkedIn</a>
+      <a href="#" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">Résumé</a>
     </div>
     <p class="mt-8 text-sm text-slate-500">Houston, TX</p>
   </div>
@@ -282,18 +311,24 @@ if(!reduceM){
     b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.25}px,${(e.clientY-r.top-r.height/2)*0.35}px)`});
     b.addEventListener('pointerleave',()=>b.style.transform='');
   });
-  // lamp + subject react to cursor
-  const hero=document.getElementById('hero'), spot=document.getElementById('spot'),
-        src=document.getElementById('spotSrc'), cut=document.getElementById('cut'), halo=document.getElementById('halo');
-  if(hero){
+  // tungsten lamp + subject track the cursor (pointer: fine only, transform-only)
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const hero=document.getElementById('hero'), lamp=document.getElementById('lamp'),
+        lampSrc=document.getElementById('lampSrc'), subj=document.getElementById('subjectImg'),
+        glow=document.getElementById('subjectGlow');
+  if(hero && fine){
     hero.addEventListener('pointermove',e=>{
       const r=hero.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
-      spot.style.transform=`translateX(-50%) rotate(${px*14}deg)`;
-      src.style.left=`${50+px*36}%`;
-      if(cut) cut.style.transform=`perspective(900px) rotateX(${-py*4}deg) rotateY(${px*6}deg)`;
-      if(halo) halo.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,244,224,.6), rgba(124,156,255,.20) 45%, transparent 70%)`;
+      if(lamp) lamp.style.transform=`translateX(-50%) rotate(${px*10}deg)`;
+      if(lampSrc) lampSrc.style.transform=`translateX(calc(-50% + ${px*26}px))`;
+      if(subj) subj.style.transform=`perspective(900px) rotateX(${-py*4}deg) rotateY(${px*6}deg)`;
+      if(glow) glow.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,228,186,.55), rgba(233,164,92,.16) 46%, transparent 72%)`;
     });
-    hero.addEventListener('pointerleave',()=>{spot.style.transform='translateX(-50%)';src.style.left='50%';if(cut)cut.style.transform='';});
+    hero.addEventListener('pointerleave',()=>{
+      if(lamp) lamp.style.transform='';
+      if(lampSrc) lampSrc.style.transform='';
+      if(subj) subj.style.transform='';
+    });
   }
 }
 </script>
