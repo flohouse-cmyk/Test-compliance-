@@ -24,6 +24,10 @@ for (const name of await fs.readdir(dist)) {
   if (name === 'portfolio' || name === 'complyscope') continue;
   await fs.rename(path.join(dist, name), path.join(csDir, name));
 }
+// The Vite entry is index.vite.html — serve it as complyscope/index.html
+if (await exists(path.join(csDir, 'index.vite.html'))) {
+  await fs.rename(path.join(csDir, 'index.vite.html'), path.join(csDir, 'index.html'));
+}
 
 // 2) Lift the portfolio up to the site root
 for (const name of await fs.readdir(portfolioDir)) {

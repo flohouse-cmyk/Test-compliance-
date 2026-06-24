@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Trading Bot, Dashboard (Demo) · Flo Ogunyemi</title>
+  <meta name="description" content="An illustrative demo dashboard for an autonomous AI trading bot: equity curve, open positions, recent trades, and a decision log. Sample data only." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230B1020'/%3E%3Cpath d='M20 64l18-18 14 14 28-28' fill='none' stroke='%232dd4bf' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/tailwind.css" />
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#0B1020; color:#E2E8F0; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,.font-heading { font-family:'Space Grotesk',sans-serif; }
+    .mono { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="font-body">
+
+  <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-teal-500/10 blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-[40rem] h-[40rem] rounded-full bg-emerald-500/10 blur-3xl"></div>
+  </div>
+
+  <!-- App bar -->
+  <header class="sticky top-0 z-30 backdrop-blur-xl bg-[#0B1020]/80 border-b border-white/10">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="trading-bot.html" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0 5-5m-5 5h12"/></svg>
+          Back
+        </a>
+        <span class="hidden sm:block h-5 w-px bg-white/10"></span>
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-teal-500/20 text-teal-200 shrink-0">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 7-7"/></svg>
+        </span>
+        <span class="font-heading font-semibold text-white">AI Trading Bot</span>
+      </div>
+      <div class="flex w-full flex-wrap items-center gap-2 text-xs sm:ml-auto sm:w-auto">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-emerald-200">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Autonomous
+        </span>
+        <span class="hidden sm:inline rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">Connected: Alpaca</span>
+        <span class="rounded-full border border-amber-400/30 bg-amber-500/10 px-2.5 py-1 text-amber-200">Demo · sample data</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-6 space-y-5">
+
+    <!-- Stat cards -->
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+        <p class="text-xs uppercase tracking-widest text-slate-400">Portfolio value</p>
+        <p class="mt-1 font-heading text-2xl font-bold text-white mono">$52,480</p>
+        <p class="mt-1 text-xs text-emerald-300">▲ 1.18% today</p>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+        <p class="text-xs uppercase tracking-widest text-slate-400">Today's P&amp;L</p>
+        <p class="mt-1 font-heading text-2xl font-bold text-emerald-300 mono">+$612</p>
+        <p class="mt-1 text-xs text-slate-400">Realized + unrealized</p>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+        <p class="text-xs uppercase tracking-widest text-slate-400">Open positions</p>
+        <p class="mt-1 font-heading text-2xl font-bold text-white mono">4</p>
+        <p class="mt-1 text-xs text-slate-400">of 6 max</p>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+        <p class="text-xs uppercase tracking-widest text-slate-400">Win rate (30d)</p>
+        <p class="mt-1 font-heading text-2xl font-bold text-white mono">63%</p>
+        <p class="mt-1 text-xs text-slate-400">38 of 60 trades</p>
+      </div>
+    </section>
+
+    <!-- Equity curve -->
+    <section class="rounded-2xl border border-white/10 bg-white/5 p-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-heading font-semibold text-white">Equity curve</h2>
+          <p class="text-xs text-slate-400">Last 30 days</p>
+        </div>
+        <div class="flex gap-1 text-xs">
+          <span class="rounded-md bg-white/10 px-2 py-1 text-white">30D</span>
+          <span class="rounded-md px-2 py-1 text-slate-400">90D</span>
+          <span class="rounded-md px-2 py-1 text-slate-400">YTD</span>
+        </div>
+      </div>
+      <svg viewBox="0 0 600 200" preserveAspectRatio="none" class="mt-4 h-48 w-full">
+        <defs>
+          <linearGradient id="eq" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.35" />
+            <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="50" x2="600" y2="50" stroke="rgba(255,255,255,0.06)" />
+        <line x1="0" y1="100" x2="600" y2="100" stroke="rgba(255,255,255,0.06)" />
+        <line x1="0" y1="150" x2="600" y2="150" stroke="rgba(255,255,255,0.06)" />
+        <path d="M0,160 L40,150 L80,158 L120,140 L160,146 L200,128 L240,134 L280,116 L320,123 L360,104 L400,111 L440,90 L480,97 L520,76 L560,68 L600,56 L600,200 L0,200 Z" fill="url(#eq)" />
+        <path d="M0,160 L40,150 L80,158 L120,140 L160,146 L200,128 L240,134 L280,116 L320,123 L360,104 L400,111 L440,90 L480,97 L520,76 L560,68 L600,56" fill="none" stroke="#2dd4bf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </section>
+
+    <div class="grid gap-5 lg:grid-cols-3">
+      <!-- Open positions -->
+      <section class="lg:col-span-2 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+        <div class="px-5 py-3 border-b border-white/10 flex items-center justify-between">
+          <h2 class="font-heading font-semibold text-white">Open positions</h2>
+          <span class="text-xs text-slate-400">Live · auto-managed</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm whitespace-nowrap">
+            <thead class="text-xs text-slate-400">
+              <tr class="border-b border-white/5">
+                <th class="px-5 py-2 text-left font-medium">Symbol</th>
+                <th class="px-5 py-2 text-right font-medium">Qty</th>
+                <th class="px-5 py-2 text-right font-medium">Avg entry</th>
+                <th class="px-5 py-2 text-right font-medium">Last</th>
+                <th class="px-5 py-2 text-right font-medium">Unrealized</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-200 mono">
+              <tr class="border-b border-white/5">
+                <td class="px-5 py-2.5 font-medium font-body">AAPL</td>
+                <td class="px-5 py-2.5 text-right">25</td>
+                <td class="px-5 py-2.5 text-right">187.20</td>
+                <td class="px-5 py-2.5 text-right">191.05</td>
+                <td class="px-5 py-2.5 text-right text-emerald-300">+$96.25</td>
+              </tr>
+              <tr class="border-b border-white/5">
+                <td class="px-5 py-2.5 font-medium font-body">NVDA</td>
+                <td class="px-5 py-2.5 text-right">40</td>
+                <td class="px-5 py-2.5 text-right">118.40</td>
+                <td class="px-5 py-2.5 text-right">123.90</td>
+                <td class="px-5 py-2.5 text-right text-emerald-300">+$220.00</td>
+              </tr>
+              <tr class="border-b border-white/5">
+                <td class="px-5 py-2.5 font-medium font-body">SPY</td>
+                <td class="px-5 py-2.5 text-right">15</td>
+                <td class="px-5 py-2.5 text-right">541.30</td>
+                <td class="px-5 py-2.5 text-right">539.10</td>
+                <td class="px-5 py-2.5 text-right text-rose-300">−$33.00</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-2.5 font-medium font-body">AMD</td>
+                <td class="px-5 py-2.5 text-right">30</td>
+                <td class="px-5 py-2.5 text-right">162.10</td>
+                <td class="px-5 py-2.5 text-right">166.45</td>
+                <td class="px-5 py-2.5 text-right text-emerald-300">+$130.50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Allocation -->
+      <section class="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <h2 class="font-heading font-semibold text-white">Allocation</h2>
+        <div class="mt-4 space-y-3 text-sm">
+          <div>
+            <div class="flex justify-between text-slate-300"><span>Equities</span><span class="mono">72%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-teal-400" style="width:72%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-slate-300"><span>ETFs</span><span class="mono">18%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-emerald-400" style="width:18%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-slate-300"><span>Cash</span><span class="mono">10%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-slate-400" style="width:10%"></div></div>
+          </div>
+        </div>
+        <div class="mt-5 rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-slate-400">
+          Risk per trade capped at 1%. Stops set automatically on every entry.
+        </div>
+      </section>
+    </div>
+
+    <div class="grid gap-5 lg:grid-cols-3">
+      <!-- Recent trades -->
+      <section class="lg:col-span-2 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+        <div class="px-5 py-3 border-b border-white/10">
+          <h2 class="font-heading font-semibold text-white">Recent closed trades</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm whitespace-nowrap">
+            <thead class="text-xs text-slate-400">
+              <tr class="border-b border-white/5">
+                <th class="px-5 py-2 text-left font-medium">Symbol</th>
+                <th class="px-5 py-2 text-left font-medium">Side</th>
+                <th class="px-5 py-2 text-right font-medium">Entry</th>
+                <th class="px-5 py-2 text-right font-medium">Exit</th>
+                <th class="px-5 py-2 text-right font-medium">P&amp;L</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-200 mono">
+              <tr class="border-b border-white/5"><td class="px-5 py-2.5 font-medium font-body">MSFT</td><td class="px-5 py-2.5 font-body text-rose-300">Sell</td><td class="px-5 py-2.5 text-right">412.10</td><td class="px-5 py-2.5 text-right">408.05</td><td class="px-5 py-2.5 text-right text-emerald-300">+$81.00</td></tr>
+              <tr class="border-b border-white/5"><td class="px-5 py-2.5 font-medium font-body">TSLA</td><td class="px-5 py-2.5 font-body text-emerald-300">Buy</td><td class="px-5 py-2.5 text-right">242.50</td><td class="px-5 py-2.5 text-right">238.90</td><td class="px-5 py-2.5 text-right text-rose-300">−$54.00</td></tr>
+              <tr class="border-b border-white/5"><td class="px-5 py-2.5 font-medium font-body">NVDA</td><td class="px-5 py-2.5 font-body text-emerald-300">Buy</td><td class="px-5 py-2.5 text-right">110.20</td><td class="px-5 py-2.5 text-right">118.75</td><td class="px-5 py-2.5 text-right text-emerald-300">+$256.50</td></tr>
+              <tr><td class="px-5 py-2.5 font-medium font-body">QQQ</td><td class="px-5 py-2.5 font-body text-emerald-300">Buy</td><td class="px-5 py-2.5 text-right">468.30</td><td class="px-5 py-2.5 text-right">472.10</td><td class="px-5 py-2.5 text-right text-emerald-300">+$57.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Decision log -->
+      <section class="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <h2 class="font-heading font-semibold text-white">Decision log</h2>
+        <ol class="mt-4 space-y-4 text-sm">
+          <li class="relative pl-5">
+            <span class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-emerald-400"></span>
+            <p class="text-slate-200"><span class="font-medium">Entered AAPL</span> <span class="text-xs text-slate-500">09:41</span></p>
+            <p class="mt-0.5 text-xs text-slate-400">Momentum + positive trend signal; stop set below support.</p>
+          </li>
+          <li class="relative pl-5">
+            <span class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-rose-400"></span>
+            <p class="text-slate-200"><span class="font-medium">Exited TSLA</span> <span class="text-xs text-slate-500">10:07</span></p>
+            <p class="mt-0.5 text-xs text-slate-400">Stop triggered after trend weakened; loss capped to risk rule.</p>
+          </li>
+          <li class="relative pl-5">
+            <span class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-emerald-400"></span>
+            <p class="text-slate-200"><span class="font-medium">Scaled into NVDA</span> <span class="text-xs text-slate-500">10:52</span></p>
+            <p class="mt-0.5 text-xs text-slate-400">Breakout confirmed on volume; added within position limit.</p>
+          </li>
+          <li class="relative pl-5">
+            <span class="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-slate-400"></span>
+            <p class="text-slate-200"><span class="font-medium">Held SPY</span> <span class="text-xs text-slate-500">11:20</span></p>
+            <p class="mt-0.5 text-xs text-slate-400">Signal neutral; no action, monitoring for exit.</p>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <p class="pt-2 pb-8 text-center text-xs text-slate-500">
+      Illustrative demo with sample data. This is not my live trading dashboard and does not show real trades or balances. Not investment advice.
+    </p>
+  </main>
+</body>
+</html>

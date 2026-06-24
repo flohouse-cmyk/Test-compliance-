@@ -1,12 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Deploys run from the default branch — the only branch the github-pages
-  # environment permits to publish. Develop on the feature branch, then
-  # promote to the default branch to publish.
-  push:
-    branches:
-      - claude/nice-franklin-i7qjko
+  # The site is published as static files committed to the branch root (served
+  # directly by GitHub Pages in "Deploy from a branch" mode). This Actions
+  # workflow is kept for optional manual runs only, so it can't fight or reset
+  # the Pages source on every push.
   workflow_dispatch:
 
 permissions:

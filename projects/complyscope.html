@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ComplyScope - Case Study · Flo Ogunyemi</title>
+  <meta name="description" content="ComplyScope, a compliance-posture platform I designed and built, with role-based views. A project by Folorunsho Ogunyemi." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230B1020'/%3E%3Cpath d='M50 18l24 9v18c0 15-10 27-24 31-14-4-24-16-24-31V27z' fill='none' stroke='%2322D3EE' stroke-width='5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/tailwind.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#0B1020; color:#E2E8F0; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,.font-heading { font-family:'Space Grotesk',sans-serif; }
+    .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .js .reveal.in{opacity:1;transform:none}
+    @media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important}}
+  </style>
+</head>
+<body class="font-body">
+
+  <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-40 -left-40 w-[40rem] h-[40rem] rounded-full bg-cyan-500/10 blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-[40rem] h-[40rem] rounded-full bg-blue-500/10 blur-3xl"></div>
+  </div>
+
+  <header class="sticky top-0 z-30 backdrop-blur-xl bg-[#0B1020]/70 border-b border-white/10">
+    <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+      <a href="../index.html#projects" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0 5-5m-5 5h12"/></svg>
+        Back to portfolio
+      </a>
+      <a href="../complyscope/" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 text-sm font-semibold bg-cyan-400 text-ink px-4 py-2 rounded-lg hover:bg-cyan-300 transition-colors cursor-pointer">
+        Launch live demo
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5m0-5L10 14M19 14v5H5V5h5"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4">
+
+    <section class="pt-16 pb-12">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-300">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Compliance · Observability · Product
+        </span>
+        <h1 class="mt-4 font-heading font-bold text-4xl sm:text-6xl tracking-tight text-white">ComplyScope</h1>
+        <p class="mt-4 max-w-2xl text-lg sm:text-xl text-slate-300 leading-relaxed">
+          A platform I designed and built to give every stakeholder the visibility they need to see the current
+          state versus the needed future state across teams and individual findings.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="../complyscope/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 font-semibold bg-cyan-400 text-ink px-5 py-3 rounded-xl hover:bg-cyan-300 transition-colors cursor-pointer">
+            Launch live demo
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5m0-5L10 14"/></svg>
+          </a>
+          <a href="https://github.com/flohouse-cmyk/flohouse-cmyk.github.io" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 font-semibold bg-white/10 text-white px-5 py-3 rounded-xl border border-white/15 hover:bg-white/15 transition-colors cursor-pointer">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+            View source
+          </a>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2 text-xs font-medium">
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">React 18</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">TypeScript</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Tailwind CSS</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Recharts</span>
+          <span class="px-2.5 py-1 rounded-md bg-white/10 text-slate-200">Figma</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal pb-14">
+      <div class="rounded-2xl border border-white/10 overflow-hidden shadow-2xl shadow-cyan-500/10 bg-[#0e1424]">
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/5">
+          <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+          <span class="ml-3 text-xs text-slate-400 font-mono">complyscope.app</span>
+        </div>
+        <div class="aspect-[16/10] w-full bg-[#0B1020]">
+          <iframe src="../complyscope/" title="ComplyScope live demo" loading="lazy" class="w-full h-full" style="border:0"></iframe>
+        </div>
+      </div>
+      <p class="mt-3 text-center text-sm text-slate-400">
+        Live embed. If it does not load here, <a href="../complyscope/" target="_blank" rel="noopener" class="text-cyan-300 hover:underline">open it in a new tab.</a>
+      </p>
+    </section>
+
+    <section class="reveal grid md:grid-cols-3 gap-6 pb-14">
+      <div class="md:col-span-2 space-y-6">
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">The problem</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            Compliance posture data is scattered across various teams, with no unified way to comprehend it.
+            Different personas spend time just figuring out what the data is even trying to say, which makes the
+            whole process slow and inefficient.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">The approach</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            ComplyScope reframes compliance as observability: one source of truth, three role-based lenses, and
+            narrative summaries that turn raw metrics into what is improving, what is at risk, and what to do next.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-2xl text-white">My role</h2>
+          <p class="mt-3 text-slate-300 leading-relaxed">
+            I owned this end to end, from idea to reality. I interviewed and aligned stakeholders on the problem and
+            the goals, then shaped that into a PRD. I designed the experience in Figma, aligned with tech and dev
+            leads on feasibility, ran POCs, and coordinated dependency teams through delivery, tracking scope, risks
+            and dependencies along the way.
+          </p>
+        </div>
+      </div>
+
+      <aside class="space-y-3">
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Role</p>
+          <p class="mt-1 text-white font-medium">Product Manager, idea to launch</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Process</p>
+          <p class="mt-1 text-white font-medium">Discovery, PRD, Figma design, dev alignment, POCs</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+          <p class="text-xs uppercase tracking-widest text-slate-400">Audience</p>
+          <p class="mt-1 text-white font-medium">Leadership, Team Leads, Delivery teams</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="reveal pb-16">
+      <h2 class="font-heading font-semibold text-2xl text-white">Role-based views</h2>
+      <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
+          <h3 class="font-heading font-semibold text-white">Leadership</h3>
+          <p class="mt-2 text-sm text-slate-300">High-level posture, trend, audit readiness and top risks, with no noise. Includes an executive summary.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
+          <h3 class="font-heading font-semibold text-white">Team Lead</h3>
+          <p class="mt-2 text-sm text-slate-300">Where is my pod’s posture, and where does it need to be? Score vs. target, control areas and open items.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
+          <h3 class="font-heading font-semibold text-white">PM / Dev</h3>
+          <p class="mt-2 text-sm text-slate-300">The detailed work: what is asked, why it matters, who owns it and when it is due, fully filterable.</p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-colors">
+          <h3 class="font-heading font-semibold text-white">Insights</h3>
+          <p class="mt-2 text-sm text-slate-300">An insight feed plus per-area audit readiness: readiness score, evidence freshness and timeline.</p>
+        </div>
+        <a href="../complyscope/" target="_blank" rel="noopener"
+           class="sm:col-span-2 lg:col-span-1 rounded-xl border border-cyan-400/30 bg-cyan-400/10 p-5 flex flex-col justify-center items-center text-center hover:bg-cyan-400/20 transition-colors cursor-pointer">
+          <span class="font-heading font-semibold text-cyan-200">Try them all live</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-10">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+        <a href="../index.html" class="hover:text-white transition-colors">Folorunsho Ogunyemi · Portfolio</a>
+        <div class="flex items-center gap-4">
+          <a href="mailto:fogun.1992@gmail.com" class="hover:text-white transition-colors">Email: fogun.1992@gmail.com</a>
+          <a href="tel:+17573861992" class="hover:text-white transition-colors">(757) 386-1992</a>
+          <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

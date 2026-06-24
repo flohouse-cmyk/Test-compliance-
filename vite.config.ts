@@ -7,6 +7,13 @@ export default defineConfig({
   // (https://<user>.github.io/<repo>/) as well as at a domain root.
   base: './',
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      // The Vite/ComplyScope entry lives at index.vite.html so the repo root
+      // index.html can hold the built portfolio (served directly in branch mode).
+      input: 'index.vite.html',
+    },
+  },
   server: {
     host: true,
     port: 5173,
