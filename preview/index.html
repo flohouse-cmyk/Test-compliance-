@@ -107,6 +107,58 @@
   .stage-vignette{position:absolute;inset:0;pointer-events:none;z-index:1;
     background:radial-gradient(82% 72% at 54% 36%,transparent 46%,rgba(0,0,0,.5) 82%,rgba(0,0,0,.85) 100%)}
 
+  /* ===== BODY SECTIONS ===== */
+  .eyebrow{font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+  .h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em;
+    font-size:clamp(1.9rem,4vw,2.5rem);color:var(--ink);line-height:1.05}
+  .lead{margin-top:.85rem;color:var(--muted);font-size:1.05rem;line-height:1.6;max-width:42rem}
+
+  /* brand strip */
+  .brandstrip span{color:var(--faint);transition:color .25s ease}
+  .brandstrip span:hover{color:var(--ink)}
+
+  /* about copy + stats */
+  .stat{padding:1.4rem 1.4rem 1.5rem}
+  .stat b{display:block;font-family:"Clash Display",sans-serif;font-weight:700;font-size:2.6rem;color:var(--ink);line-height:1}
+  .stat small{display:block;margin-top:.45rem;font-size:.9rem;color:var(--muted)}
+  .stat i{font-style:normal;color:var(--accent)}
+
+  /* timeline */
+  .tl{position:relative;margin-top:2.75rem;padding-left:.2rem}
+  .tl::before{content:"";position:absolute;left:7px;top:.6rem;bottom:5.5rem;width:1px;
+    background:linear-gradient(180deg,var(--accent),rgba(233,164,92,.12))}
+  .tl-item{position:relative;padding:0 0 2rem 2.4rem}
+  .tl-node{position:absolute;left:1px;top:.3rem;width:14px;height:14px;border-radius:9999px;
+    background:var(--accent);box-shadow:0 0 0 4px rgba(233,164,92,.13)}
+  .tl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem}
+  .tl-role{font-family:"Clash Display",sans-serif;font-weight:600;font-size:1.18rem;color:var(--ink)}
+  .tl-date{font-size:.85rem;font-weight:600;color:var(--accent)}
+  .tl-co{margin-top:.15rem;color:var(--muted);font-size:.95rem}
+  .tl-desc{margin-top:.6rem;color:rgba(244,240,234,.8);line-height:1.6}
+
+  /* chips */
+  .chip{border-radius:.55rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+    padding:.28rem .62rem;font-size:.83rem;color:#D8D2C9}
+
+  /* projects */
+  .proj-feat{display:grid;grid-template-columns:1.05fr .95fr;gap:0;margin-top:2.75rem;overflow:hidden}
+  .proj-feat .feat-art{position:relative;min-height:230px;overflow:hidden;
+    background:radial-gradient(120% 120% at 0% 0%, #2a2014, #0b0a0c 64%)}
+  .proj-feat .feat-art::after{content:"";position:absolute;right:-3rem;top:-3rem;width:16rem;height:16rem;
+    border-radius:9999px;background:rgba(233,164,92,.2);filter:blur(46px)}
+  .proj-feat .feat-body{padding:2rem}
+  .proj-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.25rem}
+  .proj-card .art{position:relative;height:128px;overflow:hidden;
+    background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 64%)}
+  .proj-card .art::after{content:"";position:absolute;right:-2rem;top:-2rem;width:11rem;height:11rem;
+    border-radius:9999px;background:rgba(233,164,92,.16);filter:blur(38px)}
+  .arrow-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);font-weight:600;font-size:.92rem;transition:gap .2s ease}
+  .arrow-link:hover{gap:.7rem}
+  @media (max-width:760px){
+    .proj-feat{grid-template-columns:1fr}
+    .proj-row{grid-template-columns:1fr}
+  }
+
   @media (max-width:860px){
     .hero-inner{grid-template-columns:1fr;gap:.5rem;padding:6.25rem 1.25rem 2.5rem;min-height:auto;text-align:center}
     .role{justify-content:center}
@@ -174,8 +226,14 @@
       <div id="lampSrc" class="lamp-src"></div>
       <div class="subject">
         <div id="subjectGlow" class="subject-glow"></div>
-        <img id="subjectImg" class="subject-img" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi" onerror="this.closest('.hero-stage').style.display='none'" />
-        <img class="subject-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+        <!-- HERO OBJECT: drop a real photo at public/portfolio/assets/hero-object.png
+             (a glass prism on a transparent/dark background works best).
+             Until it exists, this falls back to the headshot cut-out so the stage never looks broken. -->
+        <img id="subjectImg" class="subject-img" src="../assets/hero-object.png"
+             alt="A glass prism splitting a warm beam of light into a spectrum"
+             onerror="this.onerror=null;this.src='../assets/flo-cutout.png';this.alt='Folorunsho Ogunyemi';var r=document.getElementById('subjectRef');if(r)r.src='../assets/flo-cutout.png';" />
+        <img id="subjectRef" class="subject-ref" src="../assets/hero-object.png" alt="" aria-hidden="true"
+             onerror="this.onerror=null;this.src='../assets/flo-cutout.png';" />
       </div>
       <div class="floor-line"></div>
       <div class="stage-vignette"></div>
@@ -183,23 +241,23 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
-<section class="mx-auto max-w-6xl px-5 py-8">
-  <p class="mb-4 text-center text-xs font-semibold uppercase tracking-[.3em] text-slate-500">Experience across</p>
+<!-- BRAND STRIP -->
+<section class="mx-auto max-w-6xl px-5 py-10">
+  <p class="eyebrow mb-5 text-center">Experience across</p>
   <div class="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-    <div class="marquee flex w-max items-center gap-12 font-heading text-lg text-slate-500">
+    <div class="brandstrip marquee flex w-max items-center gap-12 font-heading text-lg">
       <span>Judi Health</span><span>Microsoft</span><span>Accenture</span><span>Allscripts</span><span>Huntington Ingalls</span><span>Sentara</span>
-      <span>Judi Health</span><span>Microsoft</span><span>Accenture</span><span>Allscripts</span><span>Huntington Ingalls</span><span>Sentara</span>
+      <span aria-hidden="true">Judi Health</span><span aria-hidden="true">Microsoft</span><span aria-hidden="true">Accenture</span><span aria-hidden="true">Allscripts</span><span aria-hidden="true">Huntington Ingalls</span><span aria-hidden="true">Sentara</span>
     </div>
   </div>
 </section>
 
 <!-- ABOUT + STATS -->
 <section id="about" class="mx-auto max-w-6xl px-5 py-24">
-  <div class="grid gap-10 lg:grid-cols-[1.25fr_.75fr]">
+  <div class="grid gap-12 lg:grid-cols-[1.25fr_.75fr] items-start">
     <div class="reveal">
-      <h2 class="font-heading text-4xl font-bold tracking-tight">About</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-300/90">
+      <h2 class="h2">About</h2>
+      <p class="mt-6 text-lg leading-relaxed text-slate-300/90">
         Accomplished Product Manager with 7+ years driving AI, data-access governance, security, compliance and
         user-experience initiatives inside cloud and enterprise environments.
       </p>
@@ -208,89 +266,128 @@
         that meet business goals and industry standards, with deep expertise in GDPR, data privacy and telemetry
         governance, and high-impact delivery for Microsoft and Accenture across healthcare, consulting and enterprise.
       </p>
-      <div class="mt-6 flex flex-wrap gap-2 text-sm">
-        <span class="rounded-full glass px-3 py-1.5">Houston, TX</span>
-        <span class="rounded-full glass px-3 py-1.5">B.S.B.A · Old Dominion University</span>
-        <span class="rounded-full glass px-3 py-1.5">Minor in Cybersecurity</span>
+      <div class="mt-7 flex flex-wrap gap-2 text-sm text-slate-300">
+        <span class="rounded-full glass px-3.5 py-1.5">Houston, TX</span>
+        <span class="rounded-full glass px-3.5 py-1.5">B.S.B.A, Old Dominion University</span>
+        <span class="rounded-full glass px-3.5 py-1.5">Minor in Cybersecurity</span>
       </div>
     </div>
     <div class="reveal grid grid-cols-2 gap-4">
-      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
-      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
-      <div class="chrome-border tilt col-span-2 p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
+      <div class="chrome-border tilt stat"><b>7<i>+</i></b><small>Years in product</small></div>
+      <div class="chrome-border tilt stat"><b>6</b><small>Enterprises shipped for</small></div>
+      <div class="chrome-border tilt stat col-span-2"><b>4</b><small>Live AI products shipped end to end</small></div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience" class="mx-auto max-w-4xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Experience</h2>
-  <div class="mt-10 space-y-4">
-    <div class="reveal chrome-border tilt p-6">
-      <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:var(--accent)">Jun 2025 - Present</span>
-      </div>
-      <p class="text-slate-400">Judi Health · Remote</p>
-      <p class="mt-3 text-slate-300/90">Conversational & voice AI, RAG enterprise search, and automation across healthcare and clinical workflows.</p>
+  <h2 class="reveal h2">Experience</h2>
+
+  <div class="tl">
+    <div class="reveal tl-item">
+      <span class="tl-node"></span>
+      <div class="tl-head"><span class="tl-role">AI Product Manager</span><span class="tl-date">Jun 2025 - Present</span></div>
+      <p class="tl-co">Judi Health, Remote</p>
+      <p class="tl-desc">Conversational and voice AI, RAG enterprise search, and automation across healthcare and clinical workflows.</p>
     </div>
-    <div class="reveal chrome-border tilt p-6">
-      <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:var(--accent)">Jun 2021 - May 2025</span>
-      </div>
-      <p class="text-slate-400">Microsoft · Remote</p>
-      <p class="mt-3 text-slate-300/90">M365 observability and data-access governance; led a transparency security & compliance-posture platform.</p>
+    <div class="reveal tl-item">
+      <span class="tl-node"></span>
+      <div class="tl-head"><span class="tl-role">Product Manager II</span><span class="tl-date">Jun 2021 - May 2025</span></div>
+      <p class="tl-co">Microsoft, Remote</p>
+      <p class="tl-desc">M365 observability and data-access governance; led a transparency security and compliance-posture platform.</p>
     </div>
-    <div class="reveal chrome-border tilt p-6">
-      <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:var(--accent)">Oct 2019 - Jun 2021</span>
-      </div>
-      <p class="text-slate-400">Accenture · Remote</p>
-      <p class="mt-3 text-slate-300/90">Led delivery for state, airline, financial and pharma clients; requirements, testing and roadmaps.</p>
+    <div class="reveal tl-item">
+      <span class="tl-node"></span>
+      <div class="tl-head"><span class="tl-role">Product Manager</span><span class="tl-date">Oct 2019 - Jun 2021</span></div>
+      <p class="tl-co">Accenture, Remote</p>
+      <p class="tl-desc">Led delivery for state, airline, financial and pharma clients across requirements, testing and roadmaps.</p>
     </div>
-    <div class="reveal grid gap-4 sm:grid-cols-3">
-      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Allscripts</h3><p class="mt-1 text-sm text-slate-400">Healthcare software testing & governance</p></div>
-      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Huntington Ingalls</h3><p class="mt-1 text-sm text-slate-400">Secure software · SAP Basis</p></div>
-      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Sentara</h3><p class="mt-1 text-sm text-slate-400">EHR/Epic access · HIPAA · monitoring</p></div>
+
+    <div class="reveal grid gap-4 sm:grid-cols-3" style="padding-left:2.4rem">
+      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Allscripts</h3><p class="mt-1 text-sm text-slate-400">Healthcare software testing and governance</p></div>
+      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Huntington Ingalls</h3><p class="mt-1 text-sm text-slate-400">Secure software, SAP Basis</p></div>
+      <div class="glass rounded-2xl p-5"><h3 class="font-heading font-semibold">Sentara</h3><p class="mt-1 text-sm text-slate-400">EHR / Epic access, HIPAA, monitoring</p></div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
-  <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI &amp; Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Conversational AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Voice AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">RAG</span><span class="rounded-lg bg-white/5 px-2.5 py-1">LLMs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Vibe Coding</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Prototyping</span></div></div>
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Strategy</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Roadmapping</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Discovery</span><span class="rounded-lg bg-white/5 px-2.5 py-1">OKRs &amp; KPIs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Agile / SAFe</span></div></div>
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Security &amp; Compliance</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Data Governance</span><span class="rounded-lg bg-white/5 px-2.5 py-1">GDPR</span><span class="rounded-lg bg-white/5 px-2.5 py-1">HIPAA</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Telemetry</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Cybersecurity</span></div></div>
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Cloud &amp; Data</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Azure</span><span class="rounded-lg bg-white/5 px-2.5 py-1">AWS</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Snowflake</span><span class="rounded-lg bg-white/5 px-2.5 py-1">SQL</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Data Viz</span></div></div>
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Tools</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Jira</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Confluence</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Figma</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Azure DevOps</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Postman</span></div></div>
-    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Certifications</h3><ul class="mt-4 space-y-2 text-sm text-slate-300"><li>SAFe® 5 Product Owner / Manager</li><li>SAP Certified Application Associate, S/4HANA 1809</li></ul></div>
+  <h2 class="reveal h2">Skills and toolkit</h2>
+  <p class="reveal lead">What I reach for to take products from discovery to delivery.</p>
+  <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI and Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2"><span class="chip">Conversational AI</span><span class="chip">Voice AI</span><span class="chip">RAG</span><span class="chip">LLMs</span><span class="chip">Vibe Coding</span><span class="chip">Prototyping</span></div></div>
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2"><span class="chip">Strategy</span><span class="chip">Roadmapping</span><span class="chip">Discovery</span><span class="chip">OKRs and KPIs</span><span class="chip">Agile / SAFe</span></div></div>
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Security and Compliance</h3><div class="mt-4 flex flex-wrap gap-2"><span class="chip">Data Governance</span><span class="chip">GDPR</span><span class="chip">HIPAA</span><span class="chip">Telemetry</span><span class="chip">Cybersecurity</span></div></div>
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Cloud and Data</h3><div class="mt-4 flex flex-wrap gap-2"><span class="chip">Azure</span><span class="chip">AWS</span><span class="chip">Snowflake</span><span class="chip">SQL</span><span class="chip">Data Viz</span></div></div>
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Tools</h3><div class="mt-4 flex flex-wrap gap-2"><span class="chip">Jira</span><span class="chip">Confluence</span><span class="chip">Figma</span><span class="chip">Azure DevOps</span><span class="chip">Postman</span></div></div>
+    <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Certifications</h3><ul class="mt-4 space-y-2 text-sm text-slate-300"><li>SAFe&reg; 5 Product Owner / Manager</li><li>SAP Certified Application Associate, S/4HANA 1809</li></ul></div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Projects</h2>
-  <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
-  <div class="mt-10 grid gap-6 sm:grid-cols-2">
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">Voice AI</h3></div></div><div class="p-6 text-slate-300/90">NLP voice agent automating routine contact-center calls end to end, inbound &amp; outbound.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Chat</h3></div></div><div class="p-6 text-slate-300/90">Slack-native RAG assistant for enterprise search &amp; analytical reporting.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #221a12, #0b0a0c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(233,164,92,.18);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest accent">Personal build</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Trading Bot</h3></div></div><div class="p-6 text-slate-300/90">Autonomous trading bot (Replit + Alpaca) with a custom decision dashboard.</div></a>
+  <h2 class="reveal h2">Projects</h2>
+  <p class="reveal lead">Products I have shaped from idea to launch. Open any one for the full case study.</p>
+
+  <!-- featured -->
+  <a href="../complyscope/" class="reveal tilt chrome-border proj-feat group">
+    <div class="feat-art"></div>
+    <div class="feat-body">
+      <div class="text-xs uppercase tracking-widest accent">Live demo</div>
+      <h3 class="mt-2 font-heading text-3xl font-semibold">ComplyScope</h3>
+      <p class="mt-3 text-slate-300/90 leading-relaxed">
+        A role-based compliance-posture platform I took from concept to a working product, with Leadership,
+        Team Lead and Delivery views plus narrative summaries and audit-readiness insights.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Recharts</span></div>
+      <span class="arrow-link mt-6">Explore the case study
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- row -->
+  <div class="proj-row">
+    <a href="../projects/voice-agent.html" class="reveal tilt chrome-border proj-card block overflow-hidden group">
+      <div class="art"></div>
+      <div class="p-6">
+        <div class="text-xs uppercase tracking-widest accent">Case study</div>
+        <h3 class="mt-1 font-heading text-xl font-semibold">Voice AI</h3>
+        <p class="mt-2 text-slate-300/90 text-sm leading-relaxed">NLP voice agent automating routine contact-center calls end to end, inbound and outbound.</p>
+      </div>
+    </a>
+    <a href="../projects/ai-chat.html" class="reveal tilt chrome-border proj-card block overflow-hidden group">
+      <div class="art"></div>
+      <div class="p-6">
+        <div class="text-xs uppercase tracking-widest accent">Case study</div>
+        <h3 class="mt-1 font-heading text-xl font-semibold">AI Chat</h3>
+        <p class="mt-2 text-slate-300/90 text-sm leading-relaxed">Slack-native RAG assistant for enterprise search and analytical reporting.</p>
+      </div>
+    </a>
+    <a href="../projects/trading-bot.html" class="reveal tilt chrome-border proj-card block overflow-hidden group">
+      <div class="art"></div>
+      <div class="p-6">
+        <div class="text-xs uppercase tracking-widest accent">Personal build</div>
+        <h3 class="mt-1 font-heading text-xl font-semibold">AI Trading Bot</h3>
+        <p class="mt-2 text-slate-300/90 text-sm leading-relaxed">Autonomous trading bot on Replit and Alpaca with a custom decision dashboard.</p>
+      </div>
+    </a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/>that earns trust.</h2>
-    <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="#" class="btn btn-primary magnetic px-6 py-3.5">Email me</a>
-      <a href="#" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">LinkedIn</a>
-      <a href="#" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">Résumé</a>
+    <h2 class="h2 name-solid" style="font-size:clamp(2rem,5vw,3rem)">Let's build something<br/>that earns trust.</h2>
+    <p class="mx-auto mt-5 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-3">
+      <a href="mailto:fogun.1992@gmail.com" class="btn btn-primary magnetic px-6 py-3.5">Email me</a>
+      <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">LinkedIn</a>
+      <a href="../resume.html" class="magnetic glassbtn rounded-full px-6 py-3.5 font-semibold text-white">Résumé</a>
     </div>
-    <p class="mt-8 text-sm text-slate-500">Houston, TX</p>
+    <p class="mt-9 text-sm text-slate-500">Houston, TX</p>
   </div>
 </section>
 
