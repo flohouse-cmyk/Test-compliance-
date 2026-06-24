@@ -57,21 +57,17 @@
   .spot-src{position:absolute;top:-34px;left:50%;width:170px;height:170px;transform:translateX(-50%);
     background:radial-gradient(circle,rgba(255,249,238,.95),rgba(255,240,214,.45) 28%,transparent 70%);filter:blur(6px);pointer-events:none}
 
-  /* spotlit subject + reflection (flamingo-style) */
-  .subject{position:relative;width:280px;max-width:74vw;margin:28px auto 0;animation:float 6.5s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .pic{position:relative;width:100%;aspect-ratio:4/5;border-radius:1.1rem;overflow:hidden;transition:transform .2s ease;
-    box-shadow:0 40px 90px -25px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.08),0 0 60px -10px rgba(124,156,255,.25)}
-  .pic img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.08) saturate(1.04) brightness(.95)}
-  .pic .toplight{position:absolute;inset:0;mix-blend-mode:soft-light;transition:background .15s ease;
-    background:radial-gradient(70% 50% at 50% 6%, rgba(255,246,230,.95), transparent 62%)}
-  .pic .botshade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(3,3,8,.6))}
-  .reflection{position:relative;width:100%;aspect-ratio:4/5;margin-top:6px;border-radius:1.1rem;overflow:hidden;
-    transform:scaleY(-1);opacity:.20;filter:blur(1.5px);
-    -webkit-mask-image:linear-gradient(180deg,#000,transparent 52%);mask-image:linear-gradient(180deg,#000,transparent 52%)}
-  .reflection img{width:100%;height:100%;object-fit:cover;object-position:center top}
-  .floor{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);width:64%;height:2px;z-index:1;
-    background:linear-gradient(90deg,transparent,rgba(124,156,255,.55),transparent);filter:blur(1px)}
+  /* spotlit cut-out subject + reflection (flamingo-style) */
+  .subject{position:relative;display:flex;flex-direction:column;align-items:center;width:300px;max-width:80vw;margin:18px auto 0;animation:float 6.5s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .halo{position:absolute;top:-2%;left:50%;width:86%;height:62%;transform:translateX(-50%);border-radius:50%;z-index:0;
+    background:radial-gradient(circle, rgba(255,244,224,.55), rgba(124,156,255,.20) 45%, transparent 70%);filter:blur(30px);transition:background .15s ease}
+  .cut{position:relative;z-index:1;width:100%;display:block;transition:transform .2s ease;
+    filter:drop-shadow(0 26px 36px rgba(0,0,0,.9)) contrast(1.06) saturate(1.04)}
+  .cut-ref{width:100%;display:block;margin-top:-4%;transform:scaleY(-1);opacity:.16;filter:blur(2px);
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 50%);mask-image:linear-gradient(180deg,#000,transparent 50%)}
+  .floor{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:60%;height:2px;z-index:1;
+    background:linear-gradient(90deg,transparent,rgba(124,156,255,.5),transparent);filter:blur(1px)}
 
   @media (prefers-reduced-motion: reduce){
     .marquee,.cine-bg::after,.spot,.subject{animation:none}
@@ -148,14 +144,9 @@
 
     <!-- spotlit subject with reflection -->
     <div id="subject" class="subject">
-      <div id="pic" class="pic">
-        <img src="../assets/flo.jpg" alt="Folorunsho Ogunyemi" onerror="this.style.display='none'" />
-        <div id="toplight" class="toplight"></div>
-        <div class="botshade"></div>
-      </div>
-      <div class="reflection" aria-hidden="true">
-        <img src="../assets/flo.jpg" alt="" />
-      </div>
+      <div id="halo" class="halo"></div>
+      <img id="cut" class="cut" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi" onerror="this.style.display='none'" />
+      <img class="cut-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
     </div>
   </div>
 
@@ -293,16 +284,16 @@ if(!reduceM){
   });
   // lamp + subject react to cursor
   const hero=document.getElementById('hero'), spot=document.getElementById('spot'),
-        src=document.getElementById('spotSrc'), pic=document.getElementById('pic'), top=document.getElementById('toplight');
+        src=document.getElementById('spotSrc'), cut=document.getElementById('cut'), halo=document.getElementById('halo');
   if(hero){
     hero.addEventListener('pointermove',e=>{
       const r=hero.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
       spot.style.transform=`translateX(-50%) rotate(${px*14}deg)`;
       src.style.left=`${50+px*36}%`;
-      pic.style.transform=`perspective(900px) rotateX(${-py*5}deg) rotateY(${px*7}deg)`;
-      top.style.background=`radial-gradient(70% 50% at ${50+px*36}% ${6+py*6}%, rgba(255,246,230,.95), transparent 62%)`;
+      if(cut) cut.style.transform=`perspective(900px) rotateX(${-py*4}deg) rotateY(${px*6}deg)`;
+      if(halo) halo.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,244,224,.6), rgba(124,156,255,.20) 45%, transparent 70%)`;
     });
-    hero.addEventListener('pointerleave',()=>{spot.style.transform='translateX(-50%)';src.style.left='50%';pic.style.transform='';});
+    hero.addEventListener('pointerleave',()=>{spot.style.transform='translateX(-50%)';src.style.left='50%';if(cut)cut.style.transform='';});
   }
 }
 </script>
