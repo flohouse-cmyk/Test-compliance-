@@ -14,10 +14,10 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment; newer runs cancel in-progress ones.
+# One deployment at a time; let in-flight runs finish (avoids half-swapped state).
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -38,11 +38,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          # Auto-enable GitHub Pages for the repo if it isn't already on.
-          enablement: true
+      # NOTE: actions/configure-pages with enablement was removed — it kept
+      # resetting the Pages source. Pages "Source" must be set to "GitHub
+      # Actions" once in repo Settings; this workflow no longer touches it.
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
