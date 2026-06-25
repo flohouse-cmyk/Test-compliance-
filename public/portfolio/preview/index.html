@@ -74,6 +74,35 @@
   .about-row{display:grid;gap:2rem;align-items:center;grid-template-columns:1fr}
   @media(min-width:640px){.about-row{grid-template-columns:1fr 13rem}}
   .about-photo{display:block;width:100%;border-radius:1.15rem;object-fit:cover;aspect-ratio:4/5}
+
+  /* end-to-end product-process pipeline (animated, NVIDIA-style flow) */
+  .process{max-width:72rem;margin:0 auto;padding:6rem 1.5rem 1rem}
+  .pipeline{position:relative;display:grid;gap:1.6rem 1rem;grid-template-columns:repeat(6,1fr);margin-top:2.5rem}
+  .pipeline::before{content:"";position:absolute;left:3%;right:3%;top:19px;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(170,190,230,.45) 18%,rgba(170,190,230,.45) 82%,rgba(255,255,255,.04))}
+  .pipeline::after{content:"";position:absolute;top:12px;left:0;width:13%;height:16px;border-radius:999px;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(205,225,255,.9),transparent 72%);filter:blur(2px);animation:flow 5s linear infinite}
+  @keyframes flow{0%{left:-13%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+  .stage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.65rem}
+  .stage .node{width:40px;height:40px;display:grid;place-items:center;border-radius:999px;
+    font-family:"Clash Display",sans-serif;font-weight:600;font-size:.9rem;color:#dfe6f2;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);animation:nodepulse 5s ease-in-out infinite}
+  .stage .txt{display:flex;flex-direction:column;gap:.25rem}
+  .stage h3{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:#eef1f6}
+  .stage p{font-size:.82rem;line-height:1.45;color:#9aa0ac;max-width:18ch;margin:0 auto}
+  @keyframes nodepulse{0%,72%,100%{box-shadow:0 0 0 0 rgba(180,210,255,0);border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.05)}
+    8%{box-shadow:0 0 22px 3px rgba(180,210,255,.45);border-color:rgba(195,218,255,.75);background:rgba(190,215,255,.18)}}
+  .stage:nth-child(1) .node{animation-delay:0s} .stage:nth-child(2) .node{animation-delay:.83s}
+  .stage:nth-child(3) .node{animation-delay:1.66s} .stage:nth-child(4) .node{animation-delay:2.5s}
+  .stage:nth-child(5) .node{animation-delay:3.33s} .stage:nth-child(6) .node{animation-delay:4.16s}
+  @media(max-width:760px){
+    .pipeline{grid-template-columns:1fr;gap:1.25rem;padding-left:.5rem}
+    .pipeline::before{left:19px;right:auto;top:6px;bottom:6px;width:2px;height:auto}
+    .pipeline::after{top:0;left:12px;width:16px;height:13%;animation:flowv 5s linear infinite}
+    .stage{flex-direction:row;text-align:left;align-items:flex-start;gap:1rem}
+    .stage .node{flex:0 0 auto} .stage p{max-width:none;margin:0}
+  }
+  @keyframes flowv{0%{top:-13%;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
   .hero-sub{margin-top:1.25rem;max-width:36ch;color:#B9BDC6;line-height:1.6;
     font-size:clamp(1rem,1.35vw,1.18rem)}
   .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
@@ -106,7 +135,8 @@
     .hero-copy{justify-content:flex-end;padding-bottom:4.5rem}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.hero-name,.chrome-head{animation:none}
+    .marquee,.hero-name,.chrome-head,.stage .node{animation:none}
+    .pipeline::after{display:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
@@ -190,6 +220,20 @@
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
+  </div>
+</section>
+
+<!-- PRODUCT PROCESS (animated, end to end) -->
+<section id="process" class="process">
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">How I build, end to end</h2>
+  <p class="reveal mt-3 text-lg text-slate-400">From a vague problem to a measured outcome, the way I run product.</p>
+  <div class="pipeline reveal">
+    <div class="stage"><div class="node">01</div><div class="txt"><h3>Discover</h3><p>User and stakeholder research, the real problem behind the ask.</p></div></div>
+    <div class="stage"><div class="node">02</div><div class="txt"><h3>Define</h3><p>Scope, success metrics, and a sharp problem statement.</p></div></div>
+    <div class="stage"><div class="node">03</div><div class="txt"><h3>Design</h3><p>Flows and prototypes, validated with real users.</p></div></div>
+    <div class="stage"><div class="node">04</div><div class="txt"><h3>Build</h3><p>Partner with engineering and ship in tight iterations.</p></div></div>
+    <div class="stage"><div class="node">05</div><div class="txt"><h3>Launch</h3><p>Rollout, enablement, and go-to-market.</p></div></div>
+    <div class="stage"><div class="node">06</div><div class="txt"><h3>Measure</h3><p>Track adoption and impact, then feed it back in.</p></div></div>
   </div>
 </section>
 
