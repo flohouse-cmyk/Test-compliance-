@@ -330,7 +330,7 @@ if (mount && 'WebGLRenderingContext' in window) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, W()/H(), 0.1, 100);
-  camera.position.set(0, 0, 3.35);
+  camera.position.set(0, 0, 4.2);
 
   // studio environment so the oceans and atmosphere catch real reflections
   const pmrem = new THREE.PMREMGenerator(renderer);
@@ -378,6 +378,16 @@ if (mount && 'WebGLRenderingContext' in window) {
   const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color:0x9fb2cc, size:0.035, sizeAttenuation:true, transparent:true, opacity:0.85 }));
   scene.add(stars);
 
+  // orbiting liquid-chrome rings (reflect the studio environment)
+  const rings = new THREE.Group();
+  rings.rotation.set(1.12, 0, 0.22);
+  scene.add(rings);
+  const chromeMat = new THREE.MeshStandardMaterial({ color:0xf0f4fa, metalness:1.0, roughness:0.07, envMapIntensity:1.5 });
+  const ringA = new THREE.Mesh(new THREE.TorusGeometry(1.17, 0.014, 24, 256), chromeMat);
+  const ringB = new THREE.Mesh(new THREE.TorusGeometry(1.30, 0.008, 24, 256), chromeMat);
+  ringB.rotation.x = 0.55;
+  rings.add(ringA, ringB);
+
   const clouds = new THREE.Mesh(
     new THREE.SphereGeometry(1.012, 96, 96),
     new THREE.MeshStandardMaterial({ color:0xffffff, alphaMap: tex('earth_clouds_1024.png'),
@@ -416,7 +426,7 @@ if (mount && 'WebGLRenderingContext' in window) {
   let running = true, raf = 0;
   function tick(){
     const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.07; clouds.rotation.y += d*0.09; stars.rotation.y += d*0.006; }
+    if (!reduce){ earth.rotation.y += d*0.07; clouds.rotation.y += d*0.09; stars.rotation.y += d*0.006; rings.rotation.y += d*0.14; }
     if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(spot.position).applyMatrix4(camera.matrixWorldInverse);
     camera.position.x += (tx*0.5 - camera.position.x) * 0.05;
     camera.position.y += (-ty*0.35 - camera.position.y) * 0.05;
