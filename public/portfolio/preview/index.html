@@ -345,17 +345,38 @@ if (mount && 'WebGLRenderingContext' in window) {
   group.rotation.x = 0.12;
   scene.add(group);
 
-  const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 96, 96),
-    new THREE.MeshStandardMaterial({
-      map: tex('earth_atmos_2048.jpg', true),
-      normalMap: tex('earth_normal_2048.jpg'),
-      normalScale: new THREE.Vector2(0.85, 0.85),
-      metalnessMap: tex('earth_specular_2048.jpg'),
-      metalness: 0.30, roughness: 0.72,
-    })
-  );
+  const earthMat = new THREE.MeshStandardMaterial({
+    map: tex('earth_atmos_2048.jpg', true),
+    normalMap: tex('earth_normal_2048.jpg'),
+    normalScale: new THREE.Vector2(0.85, 0.85),
+    metalnessMap: tex('earth_specular_2048.jpg'),
+    metalness: 0.30, roughness: 0.72,
+  });
+  // glowing city lights on the night side (kept off the lit side via the light direction)
+  const nightTex = tex('earth_lights_2048.png', true);
+  let earthShader = null;
+  earthMat.onBeforeCompile = (sh) => {
+    sh.uniforms.tNight = { value: nightTex };
+    sh.uniforms.uLightViewPos = { value: new THREE.Vector3() };
+    sh.fragmentShader = 'uniform sampler2D tNight;\nuniform vec3 uLightViewPos;\n' +
+      sh.fragmentShader.replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        vec3 Ldir = normalize(uLightViewPos + vViewPosition);
+        float nl = dot(normalize(vNormal), Ldir);
+        float night = smoothstep(0.08, -0.22, nl);
+        totalEmissiveRadiance += texture2D(tNight, vMapUv).rgb * night * 2.1;`);
+    earthShader = sh;
+  };
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 96), earthMat);
   group.add(earth);
+
+  // starfield for depth
+  const starGeo = new THREE.BufferGeometry();
+  const N = 1400, sp = new Float32Array(N*3);
+  for (let i=0;i<N;i++){ const r=7+Math.random()*16, t=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
+    sp[i*3]=r*Math.sin(ph)*Math.cos(t); sp[i*3+1]=r*Math.cos(ph); sp[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(sp,3));
+  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color:0x9fb2cc, size:0.035, sizeAttenuation:true, transparent:true, opacity:0.85 }));
+  scene.add(stars);
 
   const clouds = new THREE.Mesh(
     new THREE.SphereGeometry(1.012, 96, 96),
@@ -395,7 +416,8 @@ if (mount && 'WebGLRenderingContext' in window) {
   let running = true, raf = 0;
   function tick(){
     const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.055; clouds.rotation.y += d*0.075; }
+    if (!reduce){ earth.rotation.y += d*0.07; clouds.rotation.y += d*0.09; stars.rotation.y += d*0.006; }
+    if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(spot.position).applyMatrix4(camera.matrixWorldInverse);
     camera.position.x += (tx*0.5 - camera.position.x) * 0.05;
     camera.position.y += (-ty*0.35 - camera.position.y) * 0.05;
     camera.lookAt(0, 0, 0);
