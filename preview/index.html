@@ -82,7 +82,12 @@
   .about-clear{clear:both}
   @media(max-width:560px){.about-figure{float:none;width:11rem;margin:0 0 1rem 0}}
 
-  /* (process pipeline removed pending direction on the animation) */
+  /* live product-lifecycle flow (WebGL particles) */
+  .flowsec{max-width:72rem;margin:0 auto;padding:6rem 1.5rem 1rem}
+  .flow-canvas{width:100%;height:300px;display:block;margin-top:2rem}
+  .flow-labels{display:flex;justify-content:space-between;gap:.5rem;margin-top:.25rem}
+  .flow-labels span{font-family:"Clash Display",sans-serif;font-size:.85rem;font-weight:500;color:#aeb6c4;letter-spacing:.02em}
+  @media(max-width:640px){.flow-canvas{height:220px}.flow-labels span{font-size:.7rem}}
   .hero-sub{margin-top:1.25rem;max-width:36ch;color:#B9BDC6;line-height:1.6;
     font-size:clamp(1rem,1.35vw,1.18rem)}
   .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
@@ -198,6 +203,16 @@
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
     <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
+  </div>
+</section>
+
+<!-- PRODUCT LIFECYCLE FLOW (live WebGL motion) -->
+<section id="process" class="flowsec">
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">How I build, end to end</h2>
+  <p class="reveal mt-3 text-lg text-slate-400">A live look at how I move product from a vague problem to a measured outcome.</p>
+  <canvas id="flow" class="flow-canvas reveal" style="transition-delay:.1s"></canvas>
+  <div class="flow-labels reveal" style="transition-delay:.18s">
+    <span>Discover</span><span>Define</span><span>Design</span><span>Build</span><span>Launch</span><span>Measure</span>
   </div>
 </section>
 
@@ -419,6 +434,72 @@ if (canvas && 'WebGLRenderingContext' in window) {
     if (e.isIntersecting && !running){ running=true; clock.getDelta(); tick(); }
     else if (!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); }
   }), { threshold: 0 }).observe(document.getElementById('hero'));
+}
+</script>
+
+<!-- Live product-lifecycle flow: glowing particles stream end to end -->
+<script type="module">
+import * as THREE from 'three';
+const fc = document.getElementById('flow');
+const reduceF = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (fc && 'WebGLRenderingContext' in window) {
+  const W = () => fc.clientWidth || 900, H = () => fc.clientHeight || 300;
+  const r = new THREE.WebGLRenderer({ canvas: fc, antialias: true, alpha: true });
+  r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setSize(W(), H(), false);
+  const scene = new THREE.Scene();
+  let aspect = W() / H();
+  const cam = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 10); cam.position.z = 2;
+
+  // glowing round sprite
+  const sc = document.createElement('canvas'); sc.width = sc.height = 64;
+  const sx = sc.getContext('2d'); const g = sx.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(255,255,255,1)'); g.addColorStop(.35,'rgba(190,215,255,.85)'); g.addColorStop(1,'rgba(120,150,255,0)');
+  sx.fillStyle = g; sx.fillRect(0,0,64,64);
+  const sprite = new THREE.CanvasTexture(sc);
+
+  const line = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color:0x4a6bdd, transparent:true, opacity:0.22 }));
+  scene.add(line);
+
+  const N = 540, pg = new THREE.BufferGeometry(), pos = new Float32Array(N*3);
+  pg.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  const seed = new Float32Array(N); for (let i=0;i<N;i++) seed[i] = Math.random();
+  const points = new THREE.Points(pg, new THREE.PointsMaterial({ size:13, map:sprite, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, sizeAttenuation:false }));
+  scene.add(points);
+
+  // six steady node glints marking the stages
+  const ng = new THREE.BufferGeometry(), npos = new Float32Array(6*3);
+  ng.setAttribute('position', new THREE.BufferAttribute(npos,3));
+  const nodes = new THREE.Points(ng, new THREE.PointsMaterial({ size:26, map:sprite, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, sizeAttenuation:false, opacity:0.9 }));
+  scene.add(nodes);
+
+  let sample = [];
+  function buildPath(){
+    aspect = W()/H(); cam.left=-aspect; cam.right=aspect; cam.updateProjectionMatrix();
+    const P=[ new THREE.Vector3(-aspect*0.97,0.16,0), new THREE.Vector3(-aspect*0.58,-0.3,0),
+      new THREE.Vector3(-aspect*0.12,0.26,0), new THREE.Vector3(aspect*0.3,-0.27,0),
+      new THREE.Vector3(aspect*0.68,0.22,0), new THREE.Vector3(aspect*0.97,-0.04,0) ];
+    const curve = new THREE.CatmullRomCurve3(P);
+    sample = curve.getSpacedPoints(700);
+    line.geometry.setFromPoints(sample);
+    for (let k=0;k<6;k++){ const p=curve.getPointAt(k/5); npos[k*3]=p.x; npos[k*3+1]=p.y; npos[k*3+2]=0; }
+    ng.attributes.position.needsUpdate = true;
+  }
+  buildPath();
+
+  let raf=0, running=true, off=0;
+  function frame(){
+    if (!reduceF) off = (off + 0.0013) % 1;
+    const L = sample.length - 1;
+    for (let i=0;i<N;i++){ const t=(seed[i]+off)%1; const p=sample[(t*L)|0]; pos[i*3]=p.x; pos[i*3+1]=p.y; pos[i*3+2]=0; }
+    pg.attributes.position.needsUpdate = true;
+    r.render(scene, cam); raf = requestAnimationFrame(frame);
+  }
+  frame();
+  addEventListener('resize', () => { r.setSize(W(),H(),false); buildPath(); });
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !running){ running=true; frame(); }
+    else if (!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); }
+  }), { threshold: 0 }).observe(fc);
 }
 </script>
 </body>
