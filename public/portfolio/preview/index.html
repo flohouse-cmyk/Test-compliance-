@@ -84,7 +84,7 @@
 
   /* live product-lifecycle flow (WebGL particles) */
   .flowsec{max-width:72rem;margin:0 auto;padding:6rem 1.5rem 1rem}
-  .flow-canvas{width:100%;height:300px;display:block;margin-top:2rem}
+  .flow-canvas{width:100%;height:360px;display:block;margin-top:0}
   .flow-labels{display:flex;justify-content:space-between;gap:.5rem;margin-top:.25rem}
   .flow-labels span{font-family:"Clash Display",sans-serif;font-size:.85rem;font-weight:500;color:#aeb6c4;letter-spacing:.02em}
   @media(max-width:640px){.flow-canvas{height:220px}.flow-labels span{font-size:.7rem}}
@@ -114,13 +114,21 @@
     display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
     padding:6rem 1.5rem 3rem}
   .hero-copy .hero-sub{max-width:34ch;color:#C2C7D2}
+  .shooting{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .shooting i{position:absolute;top:-8%;width:150px;height:2px;border-radius:2px;opacity:0;
+    background:linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,0));
+    filter:drop-shadow(0 0 6px rgba(190,215,255,.9));transform:rotate(22deg);animation:shoot 8s linear infinite}
+  .shooting i:nth-child(1){left:52%;animation-delay:1.5s}
+  .shooting i:nth-child(2){left:74%;width:110px;animation-delay:4.5s}
+  .shooting i:nth-child(3){left:38%;width:130px;animation-delay:7s}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(22deg)}6%{opacity:1}24%{opacity:1}36%{opacity:0;transform:translate(-480px,190px) rotate(22deg)}100%{opacity:0}}
 
   @media(max-width:880px){
     .hero-scrim{background:linear-gradient(0deg,rgba(8,11,26,.86) 0%,rgba(8,11,26,.4) 46%,rgba(8,11,26,0) 82%)}
     .hero-copy{justify-content:flex-end;padding-bottom:4.5rem}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.hero-name,.chrome-head{animation:none}
+    .marquee,.hero-name,.chrome-head,.shooting i{animation:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
@@ -151,6 +159,7 @@
 <!-- FULL-BLEED SPACE HERO -->
 <section id="hero" class="stage">
   <canvas id="space" class="space-canvas"></canvas>
+  <div class="shooting" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="hero-scrim"></div>
   <div class="hero-copy">
     <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
@@ -206,14 +215,9 @@
   </div>
 </section>
 
-<!-- PRODUCT LIFECYCLE FLOW (live WebGL motion) -->
+<!-- LITTLE HUMAN FIGURES FOLLOWING AN END-TO-END PROCESS -->
 <section id="process" class="flowsec">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">How I build, end to end</h2>
-  <p class="reveal mt-3 text-lg text-slate-400">A live look at how I move product from a vague problem to a measured outcome.</p>
-  <canvas id="flow" class="flow-canvas reveal" style="transition-delay:.1s"></canvas>
-  <div class="flow-labels reveal" style="transition-delay:.18s">
-    <span>Discover</span><span>Define</span><span>Design</span><span>Build</span><span>Launch</span><span>Measure</span>
-  </div>
+  <canvas id="flow" class="flow-canvas reveal"></canvas>
 </section>
 
 <!-- EXPERIENCE -->
@@ -316,14 +320,14 @@ const canvas = document.getElementById('space');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (canvas && 'WebGLRenderingContext' in window) {
   const W = () => canvas.clientWidth || innerWidth, H = () => canvas.clientHeight || innerHeight;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
-  // transparent canvas so the page's cosmic backdrop shows through (less flat black)
+  scene.background = new THREE.Color(0x03040b); // real dark space
   const camera = new THREE.PerspectiveCamera(38, W()/H(), 0.1, 400);
 
   const loader = new THREE.TextureLoader();
@@ -394,7 +398,7 @@ if (canvas && 'WebGLRenderingContext' in window) {
     g.setAttribute('position', new THREE.BufferAttribute(a,3));
     return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
   };
-  starGroup.add(makeStars(3200, 1.4, 0.95), makeStars(800, 2.6, 1.0));
+  starGroup.add(makeStars(5200, 1.3, 0.92), makeStars(1200, 2.4, 1.0), makeStars(260, 3.4, 1.0));
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
@@ -437,70 +441,51 @@ if (canvas && 'WebGLRenderingContext' in window) {
 }
 </script>
 
-<!-- Live product-lifecycle flow: glowing particles stream end to end -->
-<script type="module">
-import * as THREE from 'three';
-const fc = document.getElementById('flow');
-const reduceF = matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (fc && 'WebGLRenderingContext' in window) {
-  const W = () => fc.clientWidth || 900, H = () => fc.clientHeight || 300;
-  const r = new THREE.WebGLRenderer({ canvas: fc, antialias: true, alpha: true });
-  r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setSize(W(), H(), false);
-  const scene = new THREE.Scene();
-  let aspect = W() / H();
-  const cam = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 10); cam.position.z = 2;
+<!-- Little human figures walking an end-to-end process (2D canvas) -->
+<script>
+(function(){
+  const cv = document.getElementById('flow'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w=0, h=0, dpr=1;
+  function resize(){ dpr=Math.min(devicePixelRatio,2); w=cv.clientWidth; h=cv.clientHeight; cv.width=w*dpr; cv.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  resize(); addEventListener('resize', resize);
 
-  // glowing round sprite
-  const sc = document.createElement('canvas'); sc.width = sc.height = 64;
-  const sx = sc.getContext('2d'); const g = sx.createRadialGradient(32,32,0,32,32,32);
-  g.addColorStop(0,'rgba(255,255,255,1)'); g.addColorStop(.35,'rgba(190,215,255,.85)'); g.addColorStop(1,'rgba(120,150,255,0)');
-  sx.fillStyle = g; sx.fillRect(0,0,64,64);
-  const sprite = new THREE.CanvasTexture(sc);
+  const STAGES = 6;
+  const pathY = x => h*0.52 + Math.sin(x/Math.max(w,1)*Math.PI*2) * Math.min(h*0.16, 60);
+  const COUNT = 11;
+  const figs = []; for (let i=0;i<COUNT;i++) figs.push({ t:i/COUNT, ph:Math.random()*6.28 });
 
-  const line = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color:0x4a6bdd, transparent:true, opacity:0.22 }));
-  scene.add(line);
-
-  const N = 540, pg = new THREE.BufferGeometry(), pos = new Float32Array(N*3);
-  pg.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  const seed = new Float32Array(N); for (let i=0;i<N;i++) seed[i] = Math.random();
-  const points = new THREE.Points(pg, new THREE.PointsMaterial({ size:13, map:sprite, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, sizeAttenuation:false }));
-  scene.add(points);
-
-  // six steady node glints marking the stages
-  const ng = new THREE.BufferGeometry(), npos = new Float32Array(6*3);
-  ng.setAttribute('position', new THREE.BufferAttribute(npos,3));
-  const nodes = new THREE.Points(ng, new THREE.PointsMaterial({ size:26, map:sprite, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, sizeAttenuation:false, opacity:0.9 }));
-  scene.add(nodes);
-
-  let sample = [];
-  function buildPath(){
-    aspect = W()/H(); cam.left=-aspect; cam.right=aspect; cam.updateProjectionMatrix();
-    const P=[ new THREE.Vector3(-aspect*0.97,0.16,0), new THREE.Vector3(-aspect*0.58,-0.3,0),
-      new THREE.Vector3(-aspect*0.12,0.26,0), new THREE.Vector3(aspect*0.3,-0.27,0),
-      new THREE.Vector3(aspect*0.68,0.22,0), new THREE.Vector3(aspect*0.97,-0.04,0) ];
-    const curve = new THREE.CatmullRomCurve3(P);
-    sample = curve.getSpacedPoints(700);
-    line.geometry.setFromPoints(sample);
-    for (let k=0;k<6;k++){ const p=curve.getPointAt(k/5); npos[k*3]=p.x; npos[k*3+1]=p.y; npos[k*3+2]=0; }
-    ng.attributes.position.needsUpdate = true;
+  function figure(x, y, s, ph){
+    const sw = Math.sin(ph) * s*0.42;
+    ctx.save(); ctx.translate(x, y);
+    ctx.lineCap='round'; ctx.lineWidth=s*0.16;
+    ctx.strokeStyle='rgba(228,236,252,.95)'; ctx.fillStyle='rgba(228,236,252,.96)';
+    ctx.shadowColor='rgba(150,185,255,.55)'; ctx.shadowBlur=8;
+    ctx.beginPath(); ctx.moveTo(0,-s*0.12); ctx.lineTo(sw,s*0.5); ctx.moveTo(0,-s*0.12); ctx.lineTo(-sw,s*0.5); ctx.stroke();   // legs
+    ctx.beginPath(); ctx.moveTo(0,-s*0.72); ctx.lineTo(0,-s*0.12); ctx.stroke();                                                // torso
+    ctx.beginPath(); ctx.moveTo(0,-s*0.56); ctx.lineTo(-sw*0.85,-s*0.2); ctx.moveTo(0,-s*0.56); ctx.lineTo(sw*0.85,-s*0.2); ctx.stroke(); // arms
+    ctx.beginPath(); ctx.arc(0,-s*0.88,s*0.17,0,6.2832); ctx.fill();                                                            // head
+    ctx.restore();
   }
-  buildPath();
 
-  let raf=0, running=true, off=0;
+  let raf=0, running=true;
   function frame(){
-    if (!reduceF) off = (off + 0.0013) % 1;
-    const L = sample.length - 1;
-    for (let i=0;i<N;i++){ const t=(seed[i]+off)%1; const p=sample[(t*L)|0]; pos[i*3]=p.x; pos[i*3+1]=p.y; pos[i*3+2]=0; }
-    pg.attributes.position.needsUpdate = true;
-    r.render(scene, cam); raf = requestAnimationFrame(frame);
+    ctx.clearRect(0,0,w,h);
+    // glowing process path
+    ctx.save(); ctx.strokeStyle='rgba(96,150,255,.45)'; ctx.lineWidth=2.5; ctx.shadowColor='rgba(120,170,255,.85)'; ctx.shadowBlur=14;
+    ctx.beginPath(); for(let x=0;x<=w;x+=6){ const y=pathY(x); x===0?ctx.moveTo(x,y):ctx.lineTo(x,y); } ctx.stroke(); ctx.restore();
+    // stage stations
+    for(let k=0;k<STAGES;k++){ const x=(k+0.5)/STAGES*w, y=pathY(x);
+      ctx.save(); ctx.fillStyle='rgba(170,200,255,.95)'; ctx.shadowColor='rgba(170,200,255,.95)'; ctx.shadowBlur=18;
+      ctx.beginPath(); ctx.arc(x,y,4.5,0,6.2832); ctx.fill(); ctx.restore(); }
+    // walking figures following the path end to end
+    for(const f of figs){ if(!reduce){ f.t=(f.t+0.0011)%1; f.ph+=0.16; } const x=f.t*w, y=pathY(x)-4; figure(x,y,30,f.ph); }
+    raf=requestAnimationFrame(frame);
   }
   frame();
-  addEventListener('resize', () => { r.setSize(W(),H(),false); buildPath(); });
-  new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting && !running){ running=true; frame(); }
-    else if (!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); }
-  }), { threshold: 0 }).observe(fc);
-}
+  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!running){running=true;frame();} else if(!e.isIntersecting&&running){running=false;cancelAnimationFrame(raf);} }),{threshold:0}).observe(cv);
+})();
 </script>
 </body>
 </html>
