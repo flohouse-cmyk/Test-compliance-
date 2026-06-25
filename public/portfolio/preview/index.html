@@ -5,78 +5,110 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Flo Ogunyemi — Preview (Cinematic)</title>
+<title>Folorunsho Ogunyemi, AI Product Manager (Preview)</title>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
 <style>
+  :root{
+    --bg:#0B0B0D; --ink:#EEEAE3; --muted:#9C978D;
+    --accent:#E8A24C; --lamp:#FFE7BE;
+    --ease-out:cubic-bezier(.23,1,.32,1);
+  }
   html{scroll-behavior:smooth}
-  body{font-family:Satoshi,sans-serif;background:#05050A;color:#E7E9EE;-webkit-font-smoothing:antialiased}
+  body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
+  ::selection{background:rgba(232,162,76,.30)}
 
-  .name-solid{color:#EEF1F6}
-  .accent{background:linear-gradient(100deg,#7C9CFF,#67E8F9);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(16px)}
-  .glass:hover{background:rgba(255,255,255,.08)}
-  .glassbtn{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px)}
-  .glassbtn:hover{background:rgba(255,255,255,.18)}
-  .chrome-border{position:relative;border-radius:1.25rem;background:rgba(255,255,255,.03)}
+  .name-solid{color:var(--ink)}
+  .accent{color:var(--accent)}
+  .glass{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(16px)}
+  .glass:hover{background:rgba(255,255,255,.07)}
+  .glassbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px)}
+  .glassbtn:hover{background:rgba(255,255,255,.14)}
+  .chrome-border{position:relative;border-radius:1.25rem;background:rgba(255,255,255,.025)}
   .chrome-border::before{content:"";position:absolute;inset:0;padding:1px;border-radius:inherit;
-    background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 35%,rgba(124,156,255,.35));
+    background:linear-gradient(140deg,rgba(255,255,255,.4),rgba(255,255,255,.04) 38%,rgba(232,162,76,.30));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 
-  .tilt{transform-style:preserve-3d;transition:transform .2s ease}
-  .magnetic{transition:transform .15s ease}
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
-  .reveal.in{opacity:1;transform:none}
-  .marquee{animation:m 26s linear infinite}
+  .tilt{transform-style:preserve-3d;transition:transform .2s var(--ease-out)}
+  .magnetic{transition:transform .15s var(--ease-out)}
+  .reveal{opacity:0;transform:translateY(22px);filter:blur(6px);
+    transition:opacity .8s var(--ease-out),transform .8s var(--ease-out),filter .8s var(--ease-out)}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  .marquee{animation:m 30s linear infinite}
   @keyframes m{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;z-index:5;
+  .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* ===== CINEMATIC HERO ===== */
-  .cine{position:relative;min-height:100vh;overflow:hidden}
-  .cine-bg{position:absolute;inset:0;
+  /* ===== CINEMATIC STAGE HERO (editorial split) ===== */
+  .stage{position:relative;min-height:100dvh;overflow:hidden;isolation:isolate;
     background:
-      radial-gradient(75% 55% at 50% 2%, rgba(124,156,255,.22), transparent 60%),
-      radial-gradient(60% 45% at 50% 78%, rgba(45,212,191,.12), transparent 60%),
-      radial-gradient(90% 70% at 50% 40%, rgba(50,38,110,.30), transparent 75%),
-      linear-gradient(180deg,#0a0a16,#05050a 72%)}
-  .cine-bg::after{content:"";position:absolute;inset:-25%;
-    background:conic-gradient(from 200deg at 55% 25%, rgba(255,255,255,.05),transparent 25%,rgba(124,156,255,.08),transparent 55%,rgba(45,212,191,.05),transparent 82%);
-    filter:blur(40px);animation:swirl 30s linear infinite}
-  @keyframes swirl{to{transform:rotate(360deg)}}
-  .cine-vignette{position:absolute;inset:0;pointer-events:none;z-index:4;
-    background:radial-gradient(115% 80% at 50% 32%, transparent 42%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.9) 100%)}
+      radial-gradient(120% 85% at 72% 6%, rgba(255,231,190,.12), transparent 42%),
+      radial-gradient(70% 55% at 72% 30%, rgba(232,162,76,.10), transparent 58%),
+      linear-gradient(180deg,#101013 0%,#0B0B0D 56%,#070708 100%)}
+  .stage-grid{position:relative;z-index:3;display:grid;gap:2.5rem;align-items:center;
+    max-width:72rem;margin:0 auto;min-height:100dvh;padding:6rem 1.5rem 3rem;
+    grid-template-columns:1.05fr .95fr}
 
-  /* the lamp / spotlight beam */
-  .spot{position:absolute;top:-6%;left:50%;width:58%;height:96%;transform:translateX(-50%);
-    clip-path:polygon(46% 0,54% 0,80% 100%,20% 100%);
-    background:linear-gradient(180deg, rgba(255,246,230,.55), rgba(255,242,222,.10) 48%, transparent 80%);
-    filter:blur(12px);mix-blend-mode:screen;pointer-events:none;transition:transform .2s ease;animation:sway 9s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-2.2deg)}50%{transform:translateX(-50%) rotate(2.2deg)}}
-  .spot-src{position:absolute;top:-34px;left:50%;width:170px;height:170px;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(255,249,238,.95),rgba(255,240,214,.45) 28%,transparent 70%);filter:blur(6px);pointer-events:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .eyebrow .tick{width:26px;height:1px;background:var(--accent);display:inline-block}
+  .hero-name{margin-top:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1;
+    font-size:clamp(2.7rem,6.2vw,4.7rem)}
+  .hero-sub{margin-top:1.25rem;max-width:36ch;color:#C8C3B9;line-height:1.6;
+    font-size:clamp(1rem,1.35vw,1.18rem)}
+  .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
 
-  /* spotlit cut-out subject + reflection (flamingo-style) */
-  .subject{position:relative;display:flex;flex-direction:column;align-items:center;width:300px;max-width:80vw;margin:18px auto 0;animation:float 6.5s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .halo{position:absolute;top:-2%;left:50%;width:86%;height:62%;transform:translateX(-50%);border-radius:50%;z-index:0;
-    background:radial-gradient(circle, rgba(255,244,224,.55), rgba(124,156,255,.20) 45%, transparent 70%);filter:blur(30px);transition:background .15s ease}
-  .cut{position:relative;z-index:1;width:100%;display:block;transition:transform .2s ease;
-    filter:drop-shadow(0 26px 36px rgba(0,0,0,.9)) contrast(1.06) saturate(1.04)}
-  .cut-ref{width:100%;display:block;margin-top:-4%;transform:scaleY(-1);opacity:.16;filter:blur(2px);
-    -webkit-mask-image:linear-gradient(180deg,#000,transparent 50%);mask-image:linear-gradient(180deg,#000,transparent 50%)}
-  .floor{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:60%;height:2px;z-index:1;
-    background:linear-gradient(90deg,transparent,rgba(124,156,255,.5),transparent);filter:blur(1px)}
+  .btn{display:inline-flex;align-items:center;gap:.7rem;border-radius:999px;
+    padding:.85rem 1.25rem .85rem 1.5rem;font-weight:600;font-size:.98rem;line-height:1;white-space:nowrap;
+    transition:transform .16s var(--ease-out),background .2s ease,border-color .2s ease}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:#F4F1EA;color:#161410}
+  .btn-primary:hover{background:#fff}
+  .btn-ghost{color:var(--ink);border:1px solid rgba(255,255,255,.18)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.04)}
+  .btn .ico{display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:999px;
+    background:rgba(0,0,0,.12);font-size:.9rem;transition:transform .2s var(--ease-out)}
+  .btn-ghost .ico{background:rgba(255,255,255,.10)}
+  .btn:hover .ico{transform:translate(2px,-1px)}
 
-  @media (prefers-reduced-motion: reduce){
-    .marquee,.cine-bg::after,.spot,.subject{animation:none}
-    .reveal{opacity:1;transform:none;transition:none}
+  /* the stage scene */
+  .scene{position:relative;height:100%;min-height:58vh;display:flex;align-items:flex-end;justify-content:center}
+  .lamp-beam{position:absolute;top:-10%;left:50%;width:60%;height:108%;transform:translateX(-50%);
+    clip-path:polygon(44% 0,56% 0,82% 100%,18% 100%);transform-origin:50% 0;
+    background:linear-gradient(180deg,rgba(255,231,190,.55),rgba(255,214,150,.10) 46%,transparent 78%);
+    filter:blur(15px);mix-blend-mode:screen;pointer-events:none;animation:sway 11s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-2deg)}50%{transform:translateX(-50%) rotate(2deg)}}
+  .lamp-src{position:absolute;top:-30px;left:50%;width:150px;height:150px;transform:translateX(-50%);
+    background:radial-gradient(circle,rgba(255,247,232,.95),rgba(255,224,176,.4) 30%,transparent 70%);filter:blur(6px);pointer-events:none}
+  .subject-wrap{position:relative;width:min(88%,400px);display:flex;flex-direction:column;align-items:center;
+    animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  .halo{position:absolute;top:0;left:50%;width:80%;height:54%;transform:translateX(-50%);border-radius:50%;z-index:-1;
+    background:radial-gradient(circle,rgba(255,228,184,.5),rgba(232,162,76,.16) 46%,transparent 70%);filter:blur(34px);transition:background .15s ease}
+  .subject-img{width:100%;display:block;transition:transform .2s var(--ease-out);
+    filter:drop-shadow(0 30px 38px rgba(0,0,0,.85)) contrast(1.05) saturate(1.03) brightness(1.02)}
+  .subject-ref{width:100%;display:block;margin-top:-3%;transform:scaleY(-1);opacity:.16;filter:blur(2px);
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 46%);mask-image:linear-gradient(180deg,#000,transparent 46%)}
+  .floor-pool{position:absolute;bottom:13%;left:50%;transform:translateX(-50%);width:66%;height:38px;z-index:-1;
+    background:radial-gradient(closest-side,rgba(255,224,176,.26),transparent 76%);filter:blur(7px)}
+  .vignette{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(125% 80% at 70% 38%,transparent 38%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.9) 100%)}
+
+  @media(max-width:880px){
+    .stage-grid{grid-template-columns:1fr;gap:1.5rem;padding-top:6.5rem}
+    .scene{order:2;min-height:48vh}
+    .stage-text{order:1}
+    .subject-wrap{width:min(72%,300px)}
   }
-  ::selection{background:rgba(124,156,255,.35)}
+  @media (prefers-reduced-motion: reduce){
+    .marquee,.lamp-beam,.subject-wrap{animation:none}
+    .reveal{opacity:1;transform:none;filter:none;transition:none}
+  }
 </style>
 </head>
 <body class="antialiased">
+<div class="grain" aria-hidden="true"></div>
 
 <!-- NAV -->
 <header class="fixed inset-x-0 top-3 z-50 px-4">
@@ -91,67 +123,39 @@
       <a href="#skills" class="rounded-lg px-3 py-2 hover:bg-white/5 hover:text-white transition-colors">Skills</a>
       <a href="#projects" class="rounded-lg px-3 py-2 hover:bg-white/5 hover:text-white transition-colors">Projects</a>
     </div>
-    <a href="#contact" class="magnetic glassbtn rounded-xl px-4 py-2 text-sm font-semibold text-white">Let's talk</a>
+    <a href="#contact" class="magnetic glassbtn rounded-xl px-4 py-2 text-sm font-semibold text-white">Get in touch</a>
   </nav>
 </header>
 
 <main id="top">
 
-<!-- CINEMATIC HERO -->
-<section id="hero" class="cine grain grid place-items-center text-center">
-  <div class="cine-bg"></div>
-  <div id="spot" class="spot"></div>
-  <div id="spotSrc" class="spot-src"></div>
-
-  <div class="relative z-10 mx-auto max-w-3xl px-5 pt-28 pb-14">
-    <span class="reveal inline-flex items-center gap-2 rounded-full glass px-3.5 py-1.5 text-xs text-slate-200">
-      <span class="h-1.5 w-1.5 rounded-full" style="background:#7C9CFF"></span> AI Product Manager
-    </span>
-
-    <h1 class="reveal mt-6 font-heading text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
-      <span class="name-solid">Folorunsho</span>
-      <span class="name-solid"> </span>
-      <svg id="flo" viewBox="0 0 300 140" class="inline-block h-[0.92em] w-auto align-middle" aria-label="Flo">
-        <defs>
-          <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#ffffff"/><stop offset="22%" stop-color="#eaf0f8"/>
-            <stop offset="46%" stop-color="#8b95a8"/><stop offset="56%" stop-color="#566072"/>
-            <stop offset="70%" stop-color="#f2f6fc"/><stop offset="100%" stop-color="#aab3c4"/>
-          </linearGradient>
-          <filter id="liquid" x="-25%" y="-25%" width="150%" height="150%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.010 0.018" numOctaves="2" seed="4" result="n">
-              <animate attributeName="baseFrequency" dur="12s" values="0.009 0.016;0.016 0.027;0.009 0.016" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-        </defs>
-        <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
-              font-family="Clash Display, sans-serif" font-weight="700" font-size="124"
-              fill="url(#chrome)" filter="url(#liquid)">Flo</text>
-      </svg>
-      <span class="name-solid"> Ogunyemi</span>
-    </h1>
-
-    <p class="reveal mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-300/90 sm:text-lg">
-      I turn data, stakeholder pain points and business goals into functional, usable products that drive
-      operational efficiency and improve experience.
-    </p>
-
-    <div class="reveal mt-7 flex flex-wrap items-center justify-center gap-3">
-      <a href="#projects" class="magnetic rounded-2xl px-6 py-3 font-semibold text-ink" style="background:linear-gradient(180deg,#fff,#c3c8d2)">View my work</a>
-      <a href="#contact" class="magnetic glassbtn rounded-2xl px-6 py-3 font-semibold text-white">Get in touch</a>
+<!-- CINEMATIC STAGE HERO -->
+<section id="hero" class="stage">
+  <div class="vignette"></div>
+  <div class="stage-grid">
+    <div class="stage-text">
+      <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
+      <h1 class="reveal hero-name name-solid" style="transition-delay:.08s">Folorunsho<br>Ogunyemi</h1>
+      <p class="reveal hero-sub" style="transition-delay:.16s">
+        I turn data, stakeholder pain, and business goals into AI products that drive operational efficiency and earn trust.
+      </p>
+      <div class="reveal hero-cta" style="transition-delay:.24s">
+        <a href="#projects" class="btn btn-primary magnetic">View my work <span class="ico" aria-hidden="true">&rarr;</span></a>
+        <a href="#contact" class="btn btn-ghost magnetic">Get in touch</a>
+      </div>
     </div>
 
-    <!-- spotlit subject with reflection -->
-    <div id="subject" class="subject">
-      <div id="halo" class="halo"></div>
-      <img id="cut" class="cut" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi" onerror="this.style.display='none'" />
-      <img class="cut-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+    <div class="scene" id="scene">
+      <div class="lamp-beam" id="beam"></div>
+      <div class="lamp-src" id="lampSrc"></div>
+      <div class="floor-pool"></div>
+      <div class="subject-wrap" id="subject">
+        <div class="halo" id="halo"></div>
+        <img id="subjImg" class="subject-img" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi, AI Product Manager" onerror="this.style.display='none'" />
+        <img class="subject-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+      </div>
     </div>
   </div>
-
-  <div class="floor"></div>
-  <div class="cine-vignette"></div>
 </section>
 
 <!-- MARQUEE -->
@@ -199,21 +203,21 @@
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:#7C9CFF">Jun 2025 - Present</span>
+        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:#E8A24C">Jun 2025 - Present</span>
       </div>
       <p class="text-slate-400">Judi Health · Remote</p>
       <p class="mt-3 text-slate-300/90">Conversational & voice AI, RAG enterprise search, and automation across healthcare and clinical workflows.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:#7C9CFF">Jun 2021 - May 2025</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:#E8A24C">Jun 2021 - May 2025</span>
       </div>
       <p class="text-slate-400">Microsoft · Remote</p>
       <p class="mt-3 text-slate-300/90">M365 observability and data-access governance; led a transparency security & compliance-posture platform.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:#7C9CFF">Oct 2019 - Jun 2021</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:#E8A24C">Oct 2019 - Jun 2021</span>
       </div>
       <p class="text-slate-400">Accenture · Remote</p>
       <p class="mt-3 text-slate-300/90">Led delivery for state, airline, financial and pharma clients; requirements, testing and roadmaps.</p>
@@ -282,18 +286,18 @@ if(!reduceM){
     b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.25}px,${(e.clientY-r.top-r.height/2)*0.35}px)`});
     b.addEventListener('pointerleave',()=>b.style.transform='');
   });
-  // lamp + subject react to cursor
-  const hero=document.getElementById('hero'), spot=document.getElementById('spot'),
-        src=document.getElementById('spotSrc'), cut=document.getElementById('cut'), halo=document.getElementById('halo');
-  if(hero){
-    hero.addEventListener('pointermove',e=>{
-      const r=hero.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
-      spot.style.transform=`translateX(-50%) rotate(${px*14}deg)`;
-      src.style.left=`${50+px*36}%`;
-      if(cut) cut.style.transform=`perspective(900px) rotateX(${-py*4}deg) rotateY(${px*6}deg)`;
-      if(halo) halo.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,244,224,.6), rgba(124,156,255,.20) 45%, transparent 70%)`;
+  // spotlight + subject follow the cursor (the light tracks you on the stage)
+  const scene=document.getElementById('scene'), beam=document.getElementById('beam'),
+        src=document.getElementById('lampSrc'), subj=document.getElementById('subjImg'), halo=document.getElementById('halo');
+  if(scene){
+    scene.addEventListener('pointermove',e=>{
+      const r=scene.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
+      beam.style.transform=`translateX(-50%) rotate(${px*10}deg)`;
+      src.style.left=`${50+px*30}%`;
+      if(subj) subj.style.transform=`perspective(900px) rotateX(${-py*3}deg) rotateY(${px*5}deg)`;
+      if(halo) halo.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,228,184,.55), rgba(232,162,76,.16) 46%, transparent 70%)`;
     });
-    hero.addEventListener('pointerleave',()=>{spot.style.transform='translateX(-50%)';src.style.left='50%';if(cut)cut.style.transform='';});
+    scene.addEventListener('pointerleave',()=>{beam.style.transform='translateX(-50%)';src.style.left='50%';if(subj)subj.style.transform='';});
   }
 }
 </script>
