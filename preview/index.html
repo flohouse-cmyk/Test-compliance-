@@ -7,26 +7,31 @@
 <meta name="robots" content="noindex" />
 <title>Folorunsho Ogunyemi, AI Product Manager (Preview)</title>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+<script type="importmap">
+{ "imports": {
+  "three": "../assets/vendor/three.module.js",
+  "three/addons/environments/RoomEnvironment.js": "../assets/vendor/RoomEnvironment.js"
+} }
+</script>
 <style>
   :root{
-    --bg:#0B0B0D; --ink:#EEEAE3; --muted:#9C978D;
-    --accent:#E8A24C; --lamp:#FFE7BE;
+    --bg:#08080A; --ink:#F2F3F6; --muted:#8B9098;
     --ease-out:cubic-bezier(.23,1,.32,1);
   }
   html{scroll-behavior:smooth}
   body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
-  ::selection{background:rgba(232,162,76,.30)}
+  ::selection{background:rgba(200,210,225,.30)}
 
   .name-solid{color:var(--ink)}
-  .accent{color:var(--accent)}
+  .accent{color:#C7CCD6}
   .glass{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(16px)}
   .glass:hover{background:rgba(255,255,255,.07)}
   .glassbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px)}
   .glassbtn:hover{background:rgba(255,255,255,.14)}
   .chrome-border{position:relative;border-radius:1.25rem;background:rgba(255,255,255,.025)}
   .chrome-border::before{content:"";position:absolute;inset:0;padding:1px;border-radius:inherit;
-    background:linear-gradient(140deg,rgba(255,255,255,.4),rgba(255,255,255,.04) 38%,rgba(232,162,76,.30));
+    background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 38%,rgba(150,165,190,.30));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 
   .tilt{transform-style:preserve-3d;transition:transform .2s var(--ease-out)}
@@ -40,22 +45,26 @@
   .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* ===== CINEMATIC STAGE HERO (editorial split) ===== */
+  /* ===== CINEMATIC GLOBE HERO ===== */
   .stage{position:relative;min-height:100dvh;overflow:hidden;isolation:isolate;
     background:
-      radial-gradient(120% 85% at 72% 6%, rgba(255,231,190,.12), transparent 42%),
-      radial-gradient(70% 55% at 72% 30%, rgba(232,162,76,.10), transparent 58%),
-      linear-gradient(180deg,#101013 0%,#0B0B0D 56%,#070708 100%)}
+      radial-gradient(55% 38% at 70% -6%, rgba(255,255,255,.12), transparent 60%),
+      radial-gradient(80% 60% at 70% 42%, rgba(120,134,160,.08), transparent 72%),
+      linear-gradient(180deg,#0c0c10 0%,#08080A 58%,#050506 100%)}
   .stage-grid{position:relative;z-index:3;display:grid;gap:2.5rem;align-items:center;
     max-width:72rem;margin:0 auto;min-height:100dvh;padding:6rem 1.5rem 3rem;
-    grid-template-columns:1.05fr .95fr}
+    grid-template-columns:1fr 1fr}
 
   .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;
     letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-  .eyebrow .tick{width:26px;height:1px;background:var(--accent);display:inline-block}
+  .eyebrow .tick{width:26px;height:1px;display:inline-block;background:linear-gradient(90deg,#dfe3ea,rgba(223,227,234,0))}
   .hero-name{margin-top:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1;
-    font-size:clamp(2.7rem,6.2vw,4.7rem)}
-  .hero-sub{margin-top:1.25rem;max-width:36ch;color:#C8C3B9;line-height:1.6;
+    font-size:clamp(2.7rem,6.2vw,4.7rem);
+    background:linear-gradient(176deg,#ffffff 0%,#d7dbe3 24%,#888e9a 50%,#eef1f6 68%,#a9afbc 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:100% 220%;animation:sheen 7.5s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}
+  .hero-sub{margin-top:1.25rem;max-width:36ch;color:#B9BDC6;line-height:1.6;
     font-size:clamp(1rem,1.35vw,1.18rem)}
   .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
 
@@ -63,8 +72,9 @@
     padding:.85rem 1.25rem .85rem 1.5rem;font-weight:600;font-size:.98rem;line-height:1;white-space:nowrap;
     transition:transform .16s var(--ease-out),background .2s ease,border-color .2s ease}
   .btn:active{transform:scale(.97)}
-  .btn-primary{background:#F4F1EA;color:#161410}
-  .btn-primary:hover{background:#fff}
+  .btn-primary{color:#15161a;background:linear-gradient(180deg,#fbfcff,#c3c8d3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 10px 26px rgba(0,0,0,.45)}
+  .btn-primary:hover{background:linear-gradient(180deg,#fff,#ced3dd)}
   .btn-ghost{color:var(--ink);border:1px solid rgba(255,255,255,.18)}
   .btn-ghost:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.04)}
   .btn .ico{display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:999px;
@@ -72,37 +82,40 @@
   .btn-ghost .ico{background:rgba(255,255,255,.10)}
   .btn:hover .ico{transform:translate(2px,-1px)}
 
-  /* the stage scene */
-  .scene{position:relative;height:100%;min-height:58vh;display:flex;align-items:flex-end;justify-content:center}
-  .lamp-beam{position:absolute;top:-10%;left:50%;width:60%;height:108%;transform:translateX(-50%);
-    clip-path:polygon(44% 0,56% 0,82% 100%,18% 100%);transform-origin:50% 0;
-    background:linear-gradient(180deg,rgba(255,231,190,.55),rgba(255,214,150,.10) 46%,transparent 78%);
-    filter:blur(15px);mix-blend-mode:screen;pointer-events:none;animation:sway 11s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-2deg)}50%{transform:translateX(-50%) rotate(2deg)}}
-  .lamp-src{position:absolute;top:-30px;left:50%;width:150px;height:150px;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(255,247,232,.95),rgba(255,224,176,.4) 30%,transparent 70%);filter:blur(6px);pointer-events:none}
-  .subject-wrap{position:relative;width:min(88%,400px);display:flex;flex-direction:column;align-items:center;
-    animation:float 7s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-  .halo{position:absolute;top:0;left:50%;width:80%;height:54%;transform:translateX(-50%);border-radius:50%;z-index:-1;
-    background:radial-gradient(circle,rgba(255,228,184,.5),rgba(232,162,76,.16) 46%,transparent 70%);filter:blur(34px);transition:background .15s ease}
-  .subject-img{width:100%;display:block;transition:transform .2s var(--ease-out);
-    filter:drop-shadow(0 30px 38px rgba(0,0,0,.85)) contrast(1.05) saturate(1.03) brightness(1.02)}
-  .subject-ref{width:100%;display:block;margin-top:-3%;transform:scaleY(-1);opacity:.16;filter:blur(2px);
-    -webkit-mask-image:linear-gradient(180deg,#000,transparent 46%);mask-image:linear-gradient(180deg,#000,transparent 46%)}
-  .floor-pool{position:absolute;bottom:13%;left:50%;transform:translateX(-50%);width:66%;height:38px;z-index:-1;
-    background:radial-gradient(closest-side,rgba(255,224,176,.26),transparent 76%);filter:blur(7px)}
+  /* the globe stage */
+  .scene{position:relative;height:100%;min-height:60vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center}
+  .light-shaft{position:absolute;top:-6%;left:50%;width:48%;height:74%;transform:translateX(-50%);
+    clip-path:polygon(42% 0,58% 0,78% 100%,22% 100%);transform-origin:50% 0;z-index:0;
+    background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(220,228,240,.08) 48%,transparent 80%);
+    filter:blur(16px);mix-blend-mode:screen;pointer-events:none;animation:sway 12s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:translateX(-50%) rotate(-1.6deg)}50%{transform:translateX(-50%) rotate(1.6deg)}}
+  .light-src{position:absolute;top:-26px;left:50%;width:140px;height:140px;transform:translateX(-50%);z-index:0;
+    background:radial-gradient(circle,rgba(255,255,255,.95),rgba(214,224,240,.4) 30%,transparent 70%);filter:blur(6px);pointer-events:none}
+
+  .actor{position:relative;z-index:1;width:min(82%,360px);display:flex;flex-direction:column;align-items:center;
+    animation:bob 8s ease-in-out infinite;
+    -webkit-box-reflect:below -6px linear-gradient(transparent 56%,rgba(255,255,255,.12) 100%)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .globe{position:relative;width:100%;aspect-ratio:1/1}
+  .globe canvas{display:block;width:100%!important;height:100%!important}
+  .globe-glow{position:absolute;inset:4%;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle at 50% 34%,rgba(205,218,245,.18),rgba(150,170,215,.07) 48%,transparent 70%);filter:blur(28px)}
+  .actor-photo{width:74%;margin-top:-7%;display:block;
+    filter:drop-shadow(0 26px 30px rgba(0,0,0,.85)) contrast(1.04)}
+  .floor-pool{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);width:60%;height:34px;z-index:0;
+    background:radial-gradient(closest-side,rgba(200,214,240,.22),transparent 76%);filter:blur(8px)}
   .vignette{position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:radial-gradient(125% 80% at 70% 38%,transparent 38%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.9) 100%)}
+    background:radial-gradient(125% 82% at 68% 40%,transparent 38%,rgba(0,0,0,.5) 76%,rgba(0,0,0,.92) 100%)}
 
   @media(max-width:880px){
-    .stage-grid{grid-template-columns:1fr;gap:1.5rem;padding-top:6.5rem}
-    .scene{order:2;min-height:48vh}
+    .stage-grid{grid-template-columns:1fr;gap:1.25rem;padding-top:6.5rem}
+    .scene{order:2;min-height:46vh}
     .stage-text{order:1}
-    .subject-wrap{width:min(72%,300px)}
+    .actor{width:min(64%,260px)}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.lamp-beam,.subject-wrap{animation:none}
+    .marquee,.light-shaft,.actor,.hero-name{animation:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
@@ -135,7 +148,7 @@
   <div class="stage-grid">
     <div class="stage-text">
       <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
-      <h1 class="reveal hero-name name-solid" style="transition-delay:.08s">Folorunsho<br>Ogunyemi</h1>
+      <h1 class="reveal hero-name" style="transition-delay:.08s">Folorunsho<br>Ogunyemi</h1>
       <p class="reveal hero-sub" style="transition-delay:.16s">
         I turn data, stakeholder pain, and business goals into AI products that drive operational efficiency and earn trust.
       </p>
@@ -146,13 +159,12 @@
     </div>
 
     <div class="scene" id="scene">
-      <div class="lamp-beam" id="beam"></div>
-      <div class="lamp-src" id="lampSrc"></div>
+      <div class="light-shaft" id="shaft"></div>
+      <div class="light-src" id="lightSrc"></div>
       <div class="floor-pool"></div>
-      <div class="subject-wrap" id="subject">
-        <div class="halo" id="halo"></div>
-        <img id="subjImg" class="subject-img" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi, AI Product Manager" onerror="this.style.display='none'" />
-        <img class="subject-ref" src="../assets/flo-cutout.png" alt="" aria-hidden="true" />
+      <div class="actor" id="actor">
+        <div class="globe" id="globe"><div class="globe-glow"></div></div>
+        <img class="actor-photo" src="../assets/flo-cutout.png" alt="Folorunsho Ogunyemi, AI Product Manager" onerror="this.style.display='none'" />
       </div>
     </div>
   </div>
@@ -203,21 +215,21 @@
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:#E8A24C">Jun 2025 - Present</span>
+        <h3 class="font-heading text-xl font-semibold">AI Product Manager</h3><span class="text-sm" style="color:#C7CCD6">Jun 2025 - Present</span>
       </div>
       <p class="text-slate-400">Judi Health · Remote</p>
       <p class="mt-3 text-slate-300/90">Conversational & voice AI, RAG enterprise search, and automation across healthcare and clinical workflows.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:#E8A24C">Jun 2021 - May 2025</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager II</h3><span class="text-sm" style="color:#C7CCD6">Jun 2021 - May 2025</span>
       </div>
       <p class="text-slate-400">Microsoft · Remote</p>
       <p class="mt-3 text-slate-300/90">M365 observability and data-access governance; led a transparency security & compliance-posture platform.</p>
     </div>
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:#E8A24C">Oct 2019 - Jun 2021</span>
+        <h3 class="font-heading text-xl font-semibold">Product Manager</h3><span class="text-sm" style="color:#C7CCD6">Oct 2019 - Jun 2021</span>
       </div>
       <p class="text-slate-400">Accenture · Remote</p>
       <p class="mt-3 text-slate-300/90">Led delivery for state, airline, financial and pharma clients; requirements, testing and roadmaps.</p>
@@ -286,19 +298,121 @@ if(!reduceM){
     b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.25}px,${(e.clientY-r.top-r.height/2)*0.35}px)`});
     b.addEventListener('pointerleave',()=>b.style.transform='');
   });
-  // spotlight + subject follow the cursor (the light tracks you on the stage)
-  const scene=document.getElementById('scene'), beam=document.getElementById('beam'),
-        src=document.getElementById('lampSrc'), subj=document.getElementById('subjImg'), halo=document.getElementById('halo');
+  // the spotlight shaft drifts toward the cursor
+  const scene=document.getElementById('scene'), shaft=document.getElementById('shaft'), lsrc=document.getElementById('lightSrc');
   if(scene){
     scene.addEventListener('pointermove',e=>{
-      const r=scene.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
-      beam.style.transform=`translateX(-50%) rotate(${px*10}deg)`;
-      src.style.left=`${50+px*30}%`;
-      if(subj) subj.style.transform=`perspective(900px) rotateX(${-py*3}deg) rotateY(${px*5}deg)`;
-      if(halo) halo.style.background=`radial-gradient(circle at ${50+px*40}% ${30+py*20}%, rgba(255,228,184,.55), rgba(232,162,76,.16) 46%, transparent 70%)`;
+      const r=scene.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5;
+      shaft.style.transform=`translateX(-50%) rotate(${px*8}deg)`;
+      lsrc.style.left=`${50+px*26}%`;
     });
-    scene.addEventListener('pointerleave',()=>{beam.style.transform='translateX(-50%)';src.style.left='50%';if(subj)subj.style.transform='';});
+    scene.addEventListener('pointerleave',()=>{shaft.style.transform='translateX(-50%)';lsrc.style.left='50%';});
   }
+}
+</script>
+
+<!-- Live WebGL globe: real Earth, real spotlight, water-style reflection -->
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const mount = document.getElementById('globe');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (mount && 'WebGLRenderingContext' in window) {
+  const W = () => mount.clientWidth || 360, H = () => mount.clientHeight || 360;
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, powerPreference:'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(W(), H());
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, W()/H(), 0.1, 100);
+  camera.position.set(0, 0, 3.35);
+
+  // studio environment so the oceans and atmosphere catch real reflections
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+  const loader = new THREE.TextureLoader();
+  const base = '../assets/earth/';
+  const tex = (f, srgb) => { const t = loader.load(base+f); if(srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; };
+
+  const group = new THREE.Group();
+  group.rotation.z = 0.41;            // axial tilt
+  group.rotation.x = 0.12;
+  scene.add(group);
+
+  const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 96, 96),
+    new THREE.MeshStandardMaterial({
+      map: tex('earth_atmos_2048.jpg', true),
+      normalMap: tex('earth_normal_2048.jpg'),
+      normalScale: new THREE.Vector2(0.85, 0.85),
+      metalnessMap: tex('earth_specular_2048.jpg'),
+      metalness: 0.30, roughness: 0.72,
+    })
+  );
+  group.add(earth);
+
+  const clouds = new THREE.Mesh(
+    new THREE.SphereGeometry(1.012, 96, 96),
+    new THREE.MeshStandardMaterial({ color:0xffffff, alphaMap: tex('earth_clouds_1024.png'),
+      transparent:true, depthWrite:false, opacity:0.85, roughness:1, metalness:0 })
+  );
+  group.add(clouds);
+
+  // thin atmosphere rim (fresnel)
+  const atmo = new THREE.Mesh(
+    new THREE.SphereGeometry(1.18, 64, 64),
+    new THREE.ShaderMaterial({
+      transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
+      uniforms:{ glow:{ value:new THREE.Color(0x9fc2ff) } },
+      vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+      fragmentShader:`varying vec3 vN; uniform vec3 glow; void main(){ float i=pow(0.62 - dot(vN, vec3(0.0,0.0,1.0)), 2.9); gl_FragColor=vec4(glow,1.0)*clamp(i,0.0,1.0)*0.78; }`
+    })
+  );
+  group.add(atmo);
+
+  // the spotlight, from above, on the globe
+  const spot = new THREE.SpotLight(0xffffff, 55, 0, Math.PI/5.2, 0.65, 1.1);
+  spot.position.set(0.5, 3.0, 2.2);
+  spot.target.position.set(0, 0, 0);
+  scene.add(spot, spot.target);
+  scene.add(new THREE.HemisphereLight(0x44505f, 0x070708, 0.55));
+  const rim = new THREE.DirectionalLight(0x88a6ff, 0.35); rim.position.set(-2.2, -0.4, -1.6); scene.add(rim);
+
+  // cursor parallax (decorative; off under reduced motion)
+  let tx = 0, ty = 0;
+  if (!reduce) addEventListener('pointermove', e => {
+    tx = (e.clientX / innerWidth - 0.5);
+    ty = (e.clientY / innerHeight - 0.5);
+  });
+
+  const clock = new THREE.Clock();
+  let running = true, raf = 0;
+  function tick(){
+    const d = Math.min(clock.getDelta(), 0.05);
+    if (!reduce){ earth.rotation.y += d*0.055; clouds.rotation.y += d*0.075; }
+    camera.position.x += (tx*0.5 - camera.position.x) * 0.05;
+    camera.position.y += (-ty*0.35 - camera.position.y) * 0.05;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(tick);
+  }
+  tick();
+
+  addEventListener('resize', () => {
+    renderer.setSize(W(), H()); camera.aspect = W()/H(); camera.updateProjectionMatrix();
+  });
+
+  // pause the loop when the hero scrolls out of view
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting && !running){ running = true; clock.getDelta(); tick(); }
+    else if (!e.isIntersecting && running){ running = false; cancelAnimationFrame(raf); }
+  }), { threshold: 0 }).observe(document.getElementById('hero'));
 }
 </script>
 </body>
