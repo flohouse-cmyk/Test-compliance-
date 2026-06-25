@@ -18,8 +18,16 @@
     --bg:#08080A; --ink:#F2F3F6; --muted:#8B9098;
     --ease-out:cubic-bezier(.23,1,.32,1);
   }
-  html{scroll-behavior:smooth}
-  body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;background:#05060c}
+  body{font-family:Satoshi,sans-serif;background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased}
+  /* cosmic backdrop that flows through every section (not flat black) */
+  .cosmos{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(58% 40% at 80% 4%, rgba(46,86,170,.16), transparent 60%),
+      radial-gradient(52% 42% at 8% 26%, rgba(72,58,150,.13), transparent 62%),
+      radial-gradient(60% 44% at 92% 58%, rgba(40,80,150,.12), transparent 64%),
+      radial-gradient(70% 50% at 45% 104%, rgba(34,74,140,.14), transparent 70%),
+      linear-gradient(180deg,#05060c 0%,#05060f 45%,#070818 100%)}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
   ::selection{background:rgba(200,210,225,.30)}
 
@@ -46,7 +54,7 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
   /* ===== CINEMATIC GLOBE HERO ===== */
-  .stage{position:relative;min-height:100dvh;overflow:hidden;isolation:isolate;background:#04060d}
+  .stage{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;isolation:isolate;background:#04060d}
 
   .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;
     letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
@@ -57,6 +65,15 @@
     -webkit-background-clip:text;background-clip:text;color:transparent;
     background-size:100% 220%;animation:sheen 7.5s ease-in-out infinite}
   @keyframes sheen{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}
+  /* liquid-chrome section headers (same fonts/sizes as before) */
+  .chrome-head{background:linear-gradient(176deg,#ffffff 0%,#dfe3ea 22%,#8b919d 50%,#f1f4f9 68%,#aeb4c1 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:100% 220%;animation:sheen 8s ease-in-out infinite;
+    filter:drop-shadow(0 1px 10px rgba(150,180,255,.12))}
+  /* About: text beside a moderate headshot, paragraph beneath */
+  .about-row{display:grid;gap:2rem;align-items:center;grid-template-columns:1fr}
+  @media(min-width:640px){.about-row{grid-template-columns:1fr 13rem}}
+  .about-photo{display:block;width:100%;border-radius:1.15rem;object-fit:cover;aspect-ratio:4/5}
   .hero-sub{margin-top:1.25rem;max-width:36ch;color:#B9BDC6;line-height:1.6;
     font-size:clamp(1rem,1.35vw,1.18rem)}
   .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
@@ -79,7 +96,7 @@
   .space-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(3,5,12,.9) 0%,rgba(3,5,12,.6) 38%,rgba(3,5,12,0) 68%)}
-  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100dvh;
+  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100vh;min-height:100svh;
     display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
     padding:6rem 1.5rem 3rem}
   .hero-copy .hero-sub{max-width:34ch;color:#C2C7D2}
@@ -89,12 +106,13 @@
     .hero-copy{justify-content:flex-end;padding-bottom:4.5rem}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.hero-name{animation:none}
+    .marquee,.hero-name,.chrome-head{animation:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
 </head>
 <body class="antialiased">
+<div class="cosmos" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <!-- NAV -->
@@ -144,19 +162,14 @@
   </div>
 </section>
 
-<!-- ABOUT + STATS -->
+<!-- ABOUT -->
 <section id="about" class="mx-auto max-w-6xl px-5 py-24">
-  <div class="grid gap-10 lg:grid-cols-[1.25fr_.75fr]">
-    <div class="reveal">
-      <h2 class="font-heading text-4xl font-bold tracking-tight">About</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-300/90">
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">About</h2>
+  <div class="reveal about-row mt-8">
+    <div>
+      <p class="text-lg leading-relaxed text-slate-300/90">
         Accomplished Product Manager with 7+ years driving AI, data-access governance, security, compliance and
         user-experience initiatives inside cloud and enterprise environments.
-      </p>
-      <p class="mt-4 text-lg leading-relaxed text-slate-400">
-        I lead cross-functional teams to ship data-protection, access-governance and regulatory-compliance solutions
-        that meet business goals and industry standards, with deep expertise in GDPR, data privacy and telemetry
-        governance, and high-impact delivery for Microsoft and Accenture across healthcare, consulting and enterprise.
       </p>
       <div class="mt-6 flex flex-wrap gap-2 text-sm">
         <span class="rounded-full glass px-3 py-1.5">Houston, TX</span>
@@ -164,17 +177,25 @@
         <span class="rounded-full glass px-3 py-1.5">Minor in Cybersecurity</span>
       </div>
     </div>
-    <div class="reveal grid grid-cols-2 gap-4">
-      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
-      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
-      <div class="chrome-border tilt col-span-2 p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
+    <div class="chrome-border" style="padding:6px;border-radius:1.5rem">
+      <img src="../assets/flo.jpg" alt="Folorunsho Ogunyemi" class="about-photo" onerror="this.parentElement.style.display='none'" />
     </div>
+  </div>
+  <p class="reveal mt-6 text-lg leading-relaxed text-slate-400" style="max-width:62ch">
+    I lead cross-functional teams to ship data-protection, access-governance and regulatory-compliance solutions
+    that meet business goals and industry standards, with deep expertise in GDPR, data privacy and telemetry
+    governance, and high-impact delivery for Microsoft and Accenture across healthcare, consulting and enterprise.
+  </p>
+  <div class="reveal mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
+    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
+    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
+    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience" class="mx-auto max-w-4xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Experience</h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Experience</h2>
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -207,7 +228,7 @@
 
 <!-- SKILLS -->
 <section id="skills" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI &amp; Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Conversational AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Voice AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">RAG</span><span class="rounded-lg bg-white/5 px-2.5 py-1">LLMs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Vibe Coding</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Prototyping</span></div></div>
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Strategy</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Roadmapping</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Discovery</span><span class="rounded-lg bg-white/5 px-2.5 py-1">OKRs &amp; KPIs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Agile / SAFe</span></div></div>
@@ -220,7 +241,7 @@
 
 <!-- PROJECTS -->
 <section id="projects" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Projects</h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Projects</h2>
   <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
     <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #1e293b, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(34,211,238,.25);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#67E8F9">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
@@ -233,7 +254,7 @@
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/>that earns trust.</h2>
+    <h2 class="chrome-head font-heading text-4xl font-bold tracking-tight sm:text-5xl">Let's build something<br/>that earns trust.</h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="#" class="magnetic rounded-2xl px-6 py-3.5 font-semibold text-ink" style="background:linear-gradient(180deg,#fff,#c3c8d2)">Email me</a>
@@ -271,7 +292,7 @@ import * as THREE from 'three';
 const canvas = document.getElementById('space');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (canvas && 'WebGLRenderingContext' in window) {
-  const W = () => innerWidth, H = () => innerHeight;
+  const W = () => canvas.clientWidth || innerWidth, H = () => canvas.clientHeight || innerHeight;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -292,10 +313,10 @@ if (canvas && 'WebGLRenderingContext' in window) {
   scene.add(group);
 
   const earthMat = new THREE.MeshStandardMaterial({
-    map: tex('real_day_2k.jpg', true),
+    map: tex('real_day_4k.jpg', true),
     normalMap: tex('earth_normal_2048.jpg'),
-    normalScale: new THREE.Vector2(0.8, 0.8),
-    roughness: 0.9, metalness: 0.0,
+    normalScale: new THREE.Vector2(0.85, 0.85),
+    roughness: 0.78, metalness: 0.0,
   });
   // city lights on the night side, masked by the sun direction
   const nightTex = tex('earth_lights_2048.png', true);
@@ -336,10 +357,10 @@ if (canvas && 'WebGLRenderingContext' in window) {
   group.add(new THREE.Mesh(new THREE.SphereGeometry(1.16, 64, 64), atmoMat));
 
   // lighting: one strong sun, faint fill (no studio reflections -> reads as space)
-  const sun = new THREE.DirectionalLight(0xfff4e6, 3.1);
-  sun.position.set(-1.4, 0.55, 1.0);
+  const sun = new THREE.DirectionalLight(0xfff4e6, 3.5);
+  sun.position.set(-1.5, 0.5, 1.1);
   scene.add(sun);
-  scene.add(new THREE.AmbientLight(0x0c1424, 0.16));
+  scene.add(new THREE.AmbientLight(0x0b1322, 0.11));
 
   // dense starfield (two sizes), parented so it drifts slowly
   const starGroup = new THREE.Group(); scene.add(starGroup);
@@ -360,8 +381,12 @@ if (canvas && 'WebGLRenderingContext' in window) {
     else { camZ=4.6; group.position.set(0, 0.95, 0); group.scale.setScalar(1.05); }
     camera.aspect=a; camera.updateProjectionMatrix(); renderer.setSize(w,h,false);
   }
-  layout();
-  addEventListener('resize', layout);
+  // gate resize so the mobile address-bar show/hide does not re-layout the planet on scroll
+  let lastW = 0, lastH = 0;
+  function onResize(){ const w = W(), h = H(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; layout(); }
+  onResize();
+  addEventListener('resize', onResize);
+  addEventListener('orientationchange', onResize);
 
   let tx=0, ty=0;
   if (!reduce) addEventListener('pointermove', e => { tx=e.clientX/innerWidth-0.5; ty=e.clientY/innerHeight-0.5; });
