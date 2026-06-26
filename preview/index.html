@@ -340,7 +340,7 @@ if (canvas && 'WebGLRenderingContext' in window) {
   const base = '../assets/earth/';
   const tex = (f, srgb) => { const t = loader.load(base+f); if(srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
   // real photographic Milky Way as the space backdrop
-  const bgTex = tex('milkyway_2k.jpg', true); bgTex.mapping = THREE.EquirectangularReflectionMapping; scene.background = bgTex;
+  scene.background = new THREE.Color(0x03040a); // clean deep-black space (SpaceX/Starlink style)
 
   // Earth (offset to one side; lit by a single distant "sun")
   const group = new THREE.Group();
@@ -406,7 +406,7 @@ if (canvas && 'WebGLRenderingContext' in window) {
     g.setAttribute('position', new THREE.BufferAttribute(a,3));
     return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
   };
-  starGroup.add(makeStars(1600, 1.2, 0.7), makeStars(420, 2.2, 0.9), makeStars(120, 3.2, 1.0));
+  starGroup.add(makeStars(3800, 1.1, 0.8), makeStars(900, 1.9, 0.95), makeStars(160, 2.8, 1.0));
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
