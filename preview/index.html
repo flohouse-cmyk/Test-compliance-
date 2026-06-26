@@ -18,16 +18,8 @@
     --bg:#08080A; --ink:#F2F3F6; --muted:#8B9098;
     --ease-out:cubic-bezier(.23,1,.32,1);
   }
-  html{scroll-behavior:smooth;background:#05060c}
-  body{font-family:Satoshi,sans-serif;background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased}
-  /* cosmic backdrop that flows through every section (not flat black) */
-  .cosmos{position:fixed;inset:0;z-index:-2;pointer-events:none;
-    background:
-      radial-gradient(46% 32% at 82% 4%, rgba(66,120,228,.30), transparent 60%),
-      radial-gradient(48% 36% at 4% 22%, rgba(128,90,222,.24), transparent 62%),
-      radial-gradient(52% 42% at 96% 58%, rgba(40,158,205,.20), transparent 64%),
-      radial-gradient(60% 46% at 40% 108%, rgba(64,100,218,.24), transparent 70%),
-      linear-gradient(180deg,#0a0f22 0%,#0b1126 46%,#0d1330 100%)}
+  html{scroll-behavior:smooth}
+  body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
   ::selection{background:rgba(200,210,225,.30)}
 
@@ -54,32 +46,17 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
   /* ===== CINEMATIC GLOBE HERO ===== */
-  .stage{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;isolation:isolate;background:transparent}
+  .stage{position:relative;min-height:100dvh;overflow:hidden;isolation:isolate;background:#04060d}
 
   .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;
     letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
   .eyebrow .tick{width:26px;height:1px;display:inline-block;background:linear-gradient(90deg,#dfe3ea,rgba(223,227,234,0))}
-  .hero-name{margin-top:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.04;
-    font-size:clamp(2.6rem,6vw,4.6rem);color:#F4F6FA}
-  .chrome-head{color:#EDF0F6}
-  /* About: text beside a moderate headshot, paragraph beneath */
-  .about-figure{float:right;width:12.5rem;margin:0 0 1rem 1.6rem;padding:6px;border-radius:1.5rem}
-  .about-photo{display:block;width:100%;border-radius:1.15rem;object-fit:cover;aspect-ratio:4/5}
-  .about-clear{clear:both}
-  @media(max-width:560px){.about-figure{float:none;width:11rem;margin:0 0 1rem 0}}
-
-  /* live product-lifecycle flow (WebGL particles) */
-  .flowsec{max-width:72rem;margin:0 auto;padding:6rem 1.5rem 1rem}
-  .flow-canvas{width:100%;height:360px;display:block;margin-top:0}
-  /* 3D chrome heading images (rendered, mirror-metal letters) */
-  .chrome-img{display:block;max-width:100%;max-height:2.7rem;width:auto;height:auto}
-  @media(min-width:640px){.chrome-img{max-height:3rem}}
-  .chrome-name-img{display:block;max-width:100%;max-height:clamp(2.7rem,8.5vw,4.8rem);width:auto;height:auto;margin-top:1.4rem}
-  .chrome-line{display:block;max-width:100%;max-height:clamp(1.9rem,5.5vw,3rem);width:auto;height:auto;margin:0 auto}
-  .chrome-line + .chrome-line{margin-top:.35rem}
-  .flow-labels{display:flex;justify-content:space-between;gap:.5rem;margin-top:.25rem}
-  .flow-labels span{font-family:"Clash Display",sans-serif;font-size:.85rem;font-weight:500;color:#aeb6c4;letter-spacing:.02em}
-  @media(max-width:640px){.flow-canvas{height:220px}.flow-labels span{font-size:.7rem}}
+  .hero-name{margin-top:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1;
+    font-size:clamp(2.7rem,6.2vw,4.7rem);
+    background:linear-gradient(176deg,#ffffff 0%,#d7dbe3 24%,#888e9a 50%,#eef1f6 68%,#a9afbc 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:100% 220%;animation:sheen 7.5s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}
   .hero-sub{margin-top:1.25rem;max-width:36ch;color:#B9BDC6;line-height:1.6;
     font-size:clamp(1rem,1.35vw,1.18rem)}
   .hero-cta{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.85rem}
@@ -101,35 +78,24 @@
   /* full-bleed space hero (SpaceX/Blue Origin style) */
   .space-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(90deg,rgba(8,11,26,.72) 0%,rgba(8,11,26,.34) 40%,rgba(8,11,26,0) 70%)}
-  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100vh;min-height:100svh;
+    background:linear-gradient(90deg,rgba(3,5,12,.9) 0%,rgba(3,5,12,.6) 38%,rgba(3,5,12,0) 68%)}
+  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100dvh;
     display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
     padding:6rem 1.5rem 3rem}
   .hero-copy .hero-sub{max-width:34ch;color:#C2C7D2}
 
   @media(max-width:880px){
-    .hero-scrim{background:linear-gradient(0deg,rgba(8,11,26,.86) 0%,rgba(8,11,26,.4) 46%,rgba(8,11,26,0) 82%)}
+    .hero-scrim{background:linear-gradient(0deg,rgba(3,5,12,.94) 0%,rgba(3,5,12,.55) 44%,rgba(3,5,12,0) 80%)}
     .hero-copy{justify-content:flex-end;padding-bottom:4.5rem}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.hero-name,.chrome-head{animation:none}
+    .marquee,.hero-name{animation:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
 </head>
 <body class="antialiased">
-<div class="cosmos" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <filter id="chrome3d" x="-20%" y="-40%" width="140%" height="180%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="1.6" result="blur"/>
-    <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.9" specularExponent="22" lighting-color="#ffffff" result="spec">
-      <fePointLight x="-60" y="-120" z="160"/>
-    </feSpecularLighting>
-    <feComposite in="spec" in2="SourceAlpha" operator="in" result="specClip"/>
-    <feComposite in="SourceGraphic" in2="specClip" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
-  </filter>
-</defs></svg>
 
 <!-- NAV -->
 <header class="fixed inset-x-0 top-3 z-50 px-4">
@@ -156,7 +122,7 @@
   <div class="hero-scrim"></div>
   <div class="hero-copy">
     <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
-    <h1 class="reveal hero-name font-heading" style="transition-delay:.08s">Folorunsho &ldquo;Flo&rdquo; Ogunyemi</h1>
+    <h1 class="reveal hero-name" style="transition-delay:.08s">Folorunsho<br>Ogunyemi</h1>
     <p class="reveal hero-sub" style="transition-delay:.16s">
       I turn data, stakeholder pain, and business goals into AI products that drive operational efficiency and earn trust.
     </p>
@@ -178,44 +144,37 @@
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT + STATS -->
 <section id="about" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">About</h2>
-  <div class="reveal mt-8">
-    <figure class="about-figure chrome-border">
-      <img src="../assets/flo.jpg" alt="Folorunsho Ogunyemi" class="about-photo" onerror="this.parentElement.style.display='none'" />
-    </figure>
-    <p class="text-lg leading-relaxed text-slate-300/90">
-      Accomplished Product Manager with 7+ years driving AI, data-access governance, security, compliance and
-      user-experience initiatives inside cloud and enterprise environments.
-    </p>
-    <p class="mt-4 text-lg leading-relaxed text-slate-400">
-      I lead cross-functional teams to ship data-protection, access-governance and regulatory-compliance solutions
-      that meet business goals and industry standards, with deep expertise in GDPR, data privacy and telemetry
-      governance, and high-impact delivery for Microsoft and Accenture across healthcare, consulting and enterprise.
-    </p>
-    <div class="mt-6 flex flex-wrap gap-2 text-sm">
-      <span class="rounded-full glass px-3 py-1.5">Houston, TX</span>
-      <span class="rounded-full glass px-3 py-1.5">B.S.B.A · Old Dominion University</span>
-      <span class="rounded-full glass px-3 py-1.5">Minor in Cybersecurity</span>
+  <div class="grid gap-10 lg:grid-cols-[1.25fr_.75fr]">
+    <div class="reveal">
+      <h2 class="font-heading text-4xl font-bold tracking-tight">About</h2>
+      <p class="mt-5 text-lg leading-relaxed text-slate-300/90">
+        Accomplished Product Manager with 7+ years driving AI, data-access governance, security, compliance and
+        user-experience initiatives inside cloud and enterprise environments.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed text-slate-400">
+        I lead cross-functional teams to ship data-protection, access-governance and regulatory-compliance solutions
+        that meet business goals and industry standards, with deep expertise in GDPR, data privacy and telemetry
+        governance, and high-impact delivery for Microsoft and Accenture across healthcare, consulting and enterprise.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-2 text-sm">
+        <span class="rounded-full glass px-3 py-1.5">Houston, TX</span>
+        <span class="rounded-full glass px-3 py-1.5">B.S.B.A · Old Dominion University</span>
+        <span class="rounded-full glass px-3 py-1.5">Minor in Cybersecurity</span>
+      </div>
     </div>
-    <div class="about-clear"></div>
+    <div class="reveal grid grid-cols-2 gap-4">
+      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
+      <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
+      <div class="chrome-border tilt col-span-2 p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
+    </div>
   </div>
-  <div class="reveal mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
-    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">7+</div><div class="mt-1 text-sm text-slate-400">Years in product</div></div>
-    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">6</div><div class="mt-1 text-sm text-slate-400">Enterprises</div></div>
-    <div class="chrome-border tilt p-5"><div class="name-solid font-heading text-4xl font-bold">4</div><div class="mt-1 text-sm text-slate-400">Live AI products shipped</div></div>
-  </div>
-</section>
-
-<!-- LITTLE HUMAN FIGURES FOLLOWING AN END-TO-END PROCESS -->
-<section id="process" class="flowsec">
-  <canvas id="flow" class="flow-canvas reveal"></canvas>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience" class="mx-auto max-w-4xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Experience</h2>
+  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Experience</h2>
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -248,7 +207,7 @@
 
 <!-- SKILLS -->
 <section id="skills" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
+  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI &amp; Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Conversational AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Voice AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">RAG</span><span class="rounded-lg bg-white/5 px-2.5 py-1">LLMs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Vibe Coding</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Prototyping</span></div></div>
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Strategy</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Roadmapping</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Discovery</span><span class="rounded-lg bg-white/5 px-2.5 py-1">OKRs &amp; KPIs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Agile / SAFe</span></div></div>
@@ -261,25 +220,25 @@
 
 <!-- PROJECTS -->
 <section id="projects" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Projects</h2>
+  <h2 class="reveal font-heading text-4xl font-bold tracking-tight">Projects</h2>
   <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #16233f, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(120,160,255,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #1b2550, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(140,170,255,.24);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">Voice AI</h3></div></div><div class="p-6 text-slate-300/90">NLP voice agent automating routine contact-center calls end to end, inbound &amp; outbound.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #13294a, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(120,160,255,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Chat</h3></div></div><div class="p-6 text-slate-300/90">Slack-native RAG assistant for enterprise search &amp; analytical reporting.</div></a>
-    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #182a52, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(140,170,255,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Personal build</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Trading Bot</h3></div></div><div class="p-6 text-slate-300/90">Autonomous trading bot (Replit + Alpaca) with a custom decision dashboard.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #1e293b, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(34,211,238,.25);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#67E8F9">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #312e81, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(124,156,255,.3);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#a5b4fc">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">Voice AI</h3></div></div><div class="p-6 text-slate-300/90">NLP voice agent automating routine contact-center calls end to end, inbound &amp; outbound.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #064e3b, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(52,211,153,.28);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#6ee7b7">Case study</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Chat</h3></div></div><div class="p-6 text-slate-300/90">Slack-native RAG assistant for enterprise search &amp; analytical reporting.</div></a>
+    <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(120% 120% at 0% 0%, #134e4a, #0b0b0f 60%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(45,212,191,.28);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#5eead4">Personal build</div><h3 class="mt-1 font-heading text-2xl font-semibold">AI Trading Bot</h3></div></div><div class="p-6 text-slate-300/90">Autonomous trading bot (Replit + Alpaca) with a custom decision dashboard.</div></a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight sm:text-5xl">Let's build something<br/>that earns trust.</h2>
+    <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/>that earns trust.</h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="mailto:folorunsho58@gmail.com" class="btn btn-primary magnetic">Email me <span class="ico" aria-hidden="true">&rarr;</span></a>
-      <a href="https://www.linkedin.com/in/folorunshoogunyemi/" target="_blank" rel="noopener" class="btn btn-ghost magnetic">LinkedIn</a>
-      <a href="../resume.html" class="btn btn-ghost magnetic">Résumé</a>
+      <a href="#" class="magnetic rounded-2xl px-6 py-3.5 font-semibold text-ink" style="background:linear-gradient(180deg,#fff,#c3c8d2)">Email me</a>
+      <a href="#" class="magnetic glassbtn rounded-2xl px-6 py-3.5 font-semibold text-white">LinkedIn</a>
+      <a href="#" class="magnetic glassbtn rounded-2xl px-6 py-3.5 font-semibold text-white">Résumé</a>
     </div>
     <p class="mt-8 text-sm text-slate-500">Houston, TX</p>
   </div>
@@ -312,7 +271,7 @@ import * as THREE from 'three';
 const canvas = document.getElementById('space');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (canvas && 'WebGLRenderingContext' in window) {
-  const W = () => canvas.clientWidth || innerWidth, H = () => canvas.clientHeight || innerHeight;
+  const W = () => innerWidth, H = () => innerHeight;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -320,13 +279,12 @@ if (canvas && 'WebGLRenderingContext' in window) {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x04060d);
   const camera = new THREE.PerspectiveCamera(38, W()/H(), 0.1, 400);
 
   const loader = new THREE.TextureLoader();
   const base = '../assets/earth/';
   const tex = (f, srgb) => { const t = loader.load(base+f); if(srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
-  // real photographic Milky Way as the space backdrop
-  scene.background = new THREE.Color(0x03040a); // clean deep-black space (SpaceX/Starlink style)
 
   // Earth (offset to one side; lit by a single distant "sun")
   const group = new THREE.Group();
@@ -334,10 +292,10 @@ if (canvas && 'WebGLRenderingContext' in window) {
   scene.add(group);
 
   const earthMat = new THREE.MeshStandardMaterial({
-    map: tex('real_day_4k.jpg', true),
+    map: tex('real_day_2k.jpg', true),
     normalMap: tex('earth_normal_2048.jpg'),
-    normalScale: new THREE.Vector2(0.85, 0.85),
-    roughness: 0.78, metalness: 0.0,
+    normalScale: new THREE.Vector2(0.8, 0.8),
+    roughness: 0.9, metalness: 0.0,
   });
   // city lights on the night side, masked by the sun direction
   const nightTex = tex('earth_lights_2048.png', true);
@@ -366,34 +324,33 @@ if (canvas && 'WebGLRenderingContext' in window) {
   // sun-aware atmosphere: glows on the lit limb, fades on the night limb
   const atmoMat = new THREE.ShaderMaterial({
     transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
-    uniforms:{ glow:{ value:new THREE.Color(0x7ab8ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
+    uniforms:{ glow:{ value:new THREE.Color(0x5aa0ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
     vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
     fragmentShader:`varying vec3 vN; uniform vec3 glow; uniform vec3 uSunDirView;
       void main(){
-        float rim = pow(clamp(0.66 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 3.2);
-        float lit = clamp(dot(normalize(vN), uSunDirView)*0.7 + 0.4, 0.0, 1.0);
-        gl_FragColor = vec4(glow, 1.0) * rim * lit * 1.85;
+        float rim = pow(clamp(0.64 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 2.6);
+        float lit = clamp(dot(normalize(vN), uSunDirView)*0.6 + 0.45, 0.0, 1.0);
+        gl_FragColor = vec4(glow, 1.0) * rim * lit * 1.15;
       }`
   });
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.15, 64, 64), atmoMat));
-  // soft outer halo for the Blue-Origin-style atmospheric bloom
-  const haloMat = new THREE.ShaderMaterial({ transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
-    uniforms:{ glow:{ value:new THREE.Color(0x5a93ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
-    vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-    fragmentShader:`varying vec3 vN; uniform vec3 glow; uniform vec3 uSunDirView;
-      void main(){ float rim=pow(clamp(0.5 - dot(vN,vec3(0.0,0.0,1.0)),0.0,1.0),2.0);
-        float lit=clamp(dot(normalize(vN),uSunDirView)*0.7+0.4,0.0,1.0);
-        gl_FragColor=vec4(glow,1.0)*rim*lit*0.6; }` });
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.32, 48, 48), haloMat));
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.16, 64, 64), atmoMat));
 
   // lighting: one strong sun, faint fill (no studio reflections -> reads as space)
-  const sun = new THREE.DirectionalLight(0xfff4e6, 3.5);
-  sun.position.set(-1.5, 0.5, 1.1);
+  const sun = new THREE.DirectionalLight(0xfff4e6, 3.1);
+  sun.position.set(-1.4, 0.55, 1.0);
   scene.add(sun);
-  scene.add(new THREE.AmbientLight(0x0b1322, 0.11));
+  scene.add(new THREE.AmbientLight(0x0c1424, 0.16));
 
-  // real photographic star sky (Starlink-style) as the equirectangular backdrop
-  const starsTex = tex('stars_4k.jpg', true); starsTex.mapping = THREE.EquirectangularReflectionMapping; scene.background = starsTex;
+  // dense starfield (two sizes), parented so it drifts slowly
+  const starGroup = new THREE.Group(); scene.add(starGroup);
+  const makeStars = (n, size, op) => {
+    const g = new THREE.BufferGeometry(), a = new Float32Array(n*3);
+    for (let i=0;i<n;i++){ const r=40+Math.random()*120, t=Math.random()*6.2832, ph=Math.acos(2*Math.random()-1);
+      a[i*3]=r*Math.sin(ph)*Math.cos(t); a[i*3+1]=r*Math.cos(ph); a[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
+    g.setAttribute('position', new THREE.BufferAttribute(a,3));
+    return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
+  };
+  starGroup.add(makeStars(2400, 1.3, 0.85), makeStars(520, 2.3, 0.95));
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
@@ -403,12 +360,8 @@ if (canvas && 'WebGLRenderingContext' in window) {
     else { camZ=4.6; group.position.set(0, 0.95, 0); group.scale.setScalar(1.05); }
     camera.aspect=a; camera.updateProjectionMatrix(); renderer.setSize(w,h,false);
   }
-  // gate resize so the mobile address-bar show/hide does not re-layout the planet on scroll
-  let lastW = 0, lastH = 0;
-  function onResize(){ const w = W(), h = H(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; layout(); }
-  onResize();
-  addEventListener('resize', onResize);
-  addEventListener('orientationchange', onResize);
+  layout();
+  addEventListener('resize', layout);
 
   let tx=0, ty=0;
   if (!reduce) addEventListener('pointermove', e => { tx=e.clientX/innerWidth-0.5; ty=e.clientY/innerHeight-0.5; });
@@ -418,12 +371,11 @@ if (canvas && 'WebGLRenderingContext' in window) {
   let running = true, raf = 0;
   function tick(){
     const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.045; clouds.rotation.y += d*0.055; }
+    if (!reduce){ earth.rotation.y += d*0.05; clouds.rotation.y += d*0.062; starGroup.rotation.y += d*0.004; }
     camera.position.set(tx*0.18, -ty*0.10, camZ); camera.lookAt(0,0,0);
     sunDirView.copy(sun.position).transformDirection(camera.matrixWorldInverse);
     if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(sunDirView).multiplyScalar(60);
     atmoMat.uniforms.uSunDirView.value.copy(sunDirView);
-    haloMat.uniforms.uSunDirView.value.copy(sunDirView);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(tick);
   }
@@ -435,53 +387,6 @@ if (canvas && 'WebGLRenderingContext' in window) {
     else if (!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); }
   }), { threshold: 0 }).observe(document.getElementById('hero'));
 }
-</script>
-
-<!-- Little human figures walking an end-to-end process (2D canvas) -->
-<script>
-(function(){
-  const cv = document.getElementById('flow'); if (!cv) return;
-  const ctx = cv.getContext('2d');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let w=0, h=0, dpr=1;
-  function resize(){ dpr=Math.min(devicePixelRatio,2); w=cv.clientWidth; h=cv.clientHeight; cv.width=w*dpr; cv.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
-  resize(); addEventListener('resize', resize);
-
-  const STAGES = 6;
-  const pathY = x => h*0.52 + Math.sin(x/Math.max(w,1)*Math.PI*2) * Math.min(h*0.16, 60);
-  const COUNT = 11;
-  const figs = []; for (let i=0;i<COUNT;i++) figs.push({ t:i/COUNT, ph:Math.random()*6.28 });
-
-  function figure(x, y, s, ph){
-    const sw = Math.sin(ph) * s*0.42;
-    ctx.save(); ctx.translate(x, y);
-    ctx.lineCap='round'; ctx.lineWidth=s*0.16;
-    ctx.strokeStyle='rgba(228,236,252,.95)'; ctx.fillStyle='rgba(228,236,252,.96)';
-    ctx.shadowColor='rgba(150,185,255,.55)'; ctx.shadowBlur=8;
-    ctx.beginPath(); ctx.moveTo(0,-s*0.12); ctx.lineTo(sw,s*0.5); ctx.moveTo(0,-s*0.12); ctx.lineTo(-sw,s*0.5); ctx.stroke();   // legs
-    ctx.beginPath(); ctx.moveTo(0,-s*0.72); ctx.lineTo(0,-s*0.12); ctx.stroke();                                                // torso
-    ctx.beginPath(); ctx.moveTo(0,-s*0.56); ctx.lineTo(-sw*0.85,-s*0.2); ctx.moveTo(0,-s*0.56); ctx.lineTo(sw*0.85,-s*0.2); ctx.stroke(); // arms
-    ctx.beginPath(); ctx.arc(0,-s*0.88,s*0.17,0,6.2832); ctx.fill();                                                            // head
-    ctx.restore();
-  }
-
-  let raf=0, running=true;
-  function frame(){
-    ctx.clearRect(0,0,w,h);
-    // glowing process path
-    ctx.save(); ctx.strokeStyle='rgba(96,150,255,.45)'; ctx.lineWidth=2.5; ctx.shadowColor='rgba(120,170,255,.85)'; ctx.shadowBlur=14;
-    ctx.beginPath(); for(let x=0;x<=w;x+=6){ const y=pathY(x); x===0?ctx.moveTo(x,y):ctx.lineTo(x,y); } ctx.stroke(); ctx.restore();
-    // stage stations
-    for(let k=0;k<STAGES;k++){ const x=(k+0.5)/STAGES*w, y=pathY(x);
-      ctx.save(); ctx.fillStyle='rgba(170,200,255,.95)'; ctx.shadowColor='rgba(170,200,255,.95)'; ctx.shadowBlur=18;
-      ctx.beginPath(); ctx.arc(x,y,4.5,0,6.2832); ctx.fill(); ctx.restore(); }
-    // walking figures following the path end to end
-    for(const f of figs){ if(!reduce){ f.t=(f.t+0.0011)%1; f.ph+=0.16; } const x=f.t*w, y=pathY(x)-4; figure(x,y,30,f.ph); }
-    raf=requestAnimationFrame(frame);
-  }
-  frame();
-  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!running){running=true;frame();} else if(!e.isIntersecting&&running){running=false;cancelAnimationFrame(raf);} }),{threshold:0}).observe(cv);
-})();
 </script>
 </body>
 </html>
