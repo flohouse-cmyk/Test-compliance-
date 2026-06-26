@@ -380,16 +380,25 @@ if (canvas && 'WebGLRenderingContext' in window) {
   // sun-aware atmosphere: glows on the lit limb, fades on the night limb
   const atmoMat = new THREE.ShaderMaterial({
     transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
-    uniforms:{ glow:{ value:new THREE.Color(0x5aa0ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
+    uniforms:{ glow:{ value:new THREE.Color(0x7ab8ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
     vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
     fragmentShader:`varying vec3 vN; uniform vec3 glow; uniform vec3 uSunDirView;
       void main(){
-        float rim = pow(clamp(0.64 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 2.6);
-        float lit = clamp(dot(normalize(vN), uSunDirView)*0.6 + 0.45, 0.0, 1.0);
-        gl_FragColor = vec4(glow, 1.0) * rim * lit * 1.15;
+        float rim = pow(clamp(0.66 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 3.2);
+        float lit = clamp(dot(normalize(vN), uSunDirView)*0.7 + 0.4, 0.0, 1.0);
+        gl_FragColor = vec4(glow, 1.0) * rim * lit * 1.85;
       }`
   });
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.16, 64, 64), atmoMat));
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.15, 64, 64), atmoMat));
+  // soft outer halo for the Blue-Origin-style atmospheric bloom
+  const haloMat = new THREE.ShaderMaterial({ transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
+    uniforms:{ glow:{ value:new THREE.Color(0x5a93ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
+    vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`varying vec3 vN; uniform vec3 glow; uniform vec3 uSunDirView;
+      void main(){ float rim=pow(clamp(0.5 - dot(vN,vec3(0.0,0.0,1.0)),0.0,1.0),2.0);
+        float lit=clamp(dot(normalize(vN),uSunDirView)*0.7+0.4,0.0,1.0);
+        gl_FragColor=vec4(glow,1.0)*rim*lit*0.6; }` });
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.32, 48, 48), haloMat));
 
   // lighting: one strong sun, faint fill (no studio reflections -> reads as space)
   const sun = new THREE.DirectionalLight(0xfff4e6, 3.5);
@@ -399,14 +408,22 @@ if (canvas && 'WebGLRenderingContext' in window) {
 
   // dense starfield (two sizes), parented so it drifts slowly
   const starGroup = new THREE.Group(); scene.add(starGroup);
-  const makeStars = (n, size, op) => {
+  // soft round star sprite (Starlink-style glowing points, not square dots)
+  const stc = document.createElement('canvas'); stc.width = stc.height = 32;
+  const stx = stc.getContext('2d'); const stg = stx.createRadialGradient(16,16,0,16,16,16);
+  stg.addColorStop(0,'rgba(255,255,255,1)'); stg.addColorStop(0.35,'rgba(255,255,255,.85)'); stg.addColorStop(1,'rgba(255,255,255,0)');
+  stx.fillStyle = stg; stx.fillRect(0,0,32,32);
+  const starSprite = new THREE.CanvasTexture(stc);
+  const starLayers = [];
+  const makeStars = (n, size, op, col) => {
     const g = new THREE.BufferGeometry(), a = new Float32Array(n*3);
     for (let i=0;i<n;i++){ const r=40+Math.random()*120, t=Math.random()*6.2832, ph=Math.acos(2*Math.random()-1);
       a[i*3]=r*Math.sin(ph)*Math.cos(t); a[i*3+1]=r*Math.cos(ph); a[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
     g.setAttribute('position', new THREE.BufferAttribute(a,3));
-    return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
+    const m = new THREE.PointsMaterial({ map:starSprite, color:col, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false, blending:THREE.AdditiveBlending });
+    const pts = new THREE.Points(g, m); pts.userData = { base:op, ph:Math.random()*6.28 }; starLayers.push(pts); return pts;
   };
-  starGroup.add(makeStars(3800, 1.1, 0.8), makeStars(900, 1.9, 0.95), makeStars(160, 2.8, 1.0));
+  starGroup.add(makeStars(4200, 2.0, 0.7, 0xeaf2ff), makeStars(1100, 3.2, 0.9, 0xffffff), makeStars(180, 4.8, 1.0, 0xdfe9ff));
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
@@ -431,11 +448,13 @@ if (canvas && 'WebGLRenderingContext' in window) {
   let running = true, raf = 0;
   function tick(){
     const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.05; clouds.rotation.y += d*0.062; starGroup.rotation.y += d*0.004; }
+    if (!reduce){ earth.rotation.y += d*0.045; clouds.rotation.y += d*0.055; starGroup.rotation.y += d*0.0035; }
     camera.position.set(tx*0.18, -ty*0.10, camZ); camera.lookAt(0,0,0);
     sunDirView.copy(sun.position).transformDirection(camera.matrixWorldInverse);
     if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(sunDirView).multiplyScalar(60);
     atmoMat.uniforms.uSunDirView.value.copy(sunDirView);
+    haloMat.uniforms.uSunDirView.value.copy(sunDirView);
+    if (!reduce){ const tw = performance.now()*0.001; for (let i=0;i<starLayers.length;i++){ const u=starLayers[i].userData; starLayers[i].material.opacity = u.base*(0.8 + 0.2*Math.sin(tw*0.9 + u.ph + i*1.7)); } }
     renderer.render(scene, camera);
     raf = requestAnimationFrame(tick);
   }
