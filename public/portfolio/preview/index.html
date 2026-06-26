@@ -85,6 +85,12 @@
   /* live product-lifecycle flow (WebGL particles) */
   .flowsec{max-width:72rem;margin:0 auto;padding:6rem 1.5rem 1rem}
   .flow-canvas{width:100%;height:360px;display:block;margin-top:0}
+  /* 3D chrome heading images (rendered, mirror-metal letters) */
+  .chrome-img{display:block;max-width:100%;max-height:2.7rem;width:auto;height:auto}
+  @media(min-width:640px){.chrome-img{max-height:3rem}}
+  .chrome-name-img{display:block;max-width:100%;max-height:clamp(2.7rem,8.5vw,4.8rem);width:auto;height:auto;margin-top:1.4rem}
+  .chrome-line{display:block;max-width:100%;max-height:clamp(1.9rem,5.5vw,3rem);width:auto;height:auto;margin:0 auto}
+  .chrome-line + .chrome-line{margin-top:.35rem}
   .flow-labels{display:flex;justify-content:space-between;gap:.5rem;margin-top:.25rem}
   .flow-labels span{font-family:"Clash Display",sans-serif;font-size:.85rem;font-weight:500;color:#aeb6c4;letter-spacing:.02em}
   @media(max-width:640px){.flow-canvas{height:220px}.flow-labels span{font-size:.7rem}}
@@ -173,7 +179,7 @@
   <div class="hero-scrim"></div>
   <div class="hero-copy">
     <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
-    <h1 class="reveal hero-name" style="transition-delay:.08s">Folorunsho &ldquo;Flo&rdquo; Ogunyemi</h1>
+    <h1 class="reveal" style="transition-delay:.08s"><img class="chrome-name-img" src="../assets/chrome/name.png" alt="Folorunsho &lsquo;Flo&rsquo; Ogunyemi" /></h1>
     <p class="reveal hero-sub" style="transition-delay:.16s">
       I turn data, stakeholder pain, and business goals into AI products that drive operational efficiency and earn trust.
     </p>
@@ -197,7 +203,7 @@
 
 <!-- ABOUT -->
 <section id="about" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">About</h2>
+  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/about.png" alt="About" /></h2>
   <div class="reveal mt-8">
     <figure class="about-figure chrome-border">
       <img src="../assets/flo.jpg" alt="Folorunsho Ogunyemi" class="about-photo" onerror="this.parentElement.style.display='none'" />
@@ -232,7 +238,7 @@
 
 <!-- EXPERIENCE -->
 <section id="experience" class="mx-auto max-w-4xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Experience</h2>
+  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/experience.png" alt="Experience" /></h2>
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -265,7 +271,7 @@
 
 <!-- SKILLS -->
 <section id="skills" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
+  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/skills.png" alt="Skills &amp; toolkit" /></h2>
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI &amp; Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Conversational AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Voice AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">RAG</span><span class="rounded-lg bg-white/5 px-2.5 py-1">LLMs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Vibe Coding</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Prototyping</span></div></div>
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Strategy</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Roadmapping</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Discovery</span><span class="rounded-lg bg-white/5 px-2.5 py-1">OKRs &amp; KPIs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Agile / SAFe</span></div></div>
@@ -278,7 +284,7 @@
 
 <!-- PROJECTS -->
 <section id="projects" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Projects</h2>
+  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/projects.png" alt="Projects" /></h2>
   <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
     <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #16233f, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(120,160,255,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
@@ -291,7 +297,7 @@
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="chrome-head font-heading text-4xl font-bold tracking-tight sm:text-5xl">Let's build something<br/>that earns trust.</h2>
+    <h2 class="reveal"><img class="chrome-line" src="../assets/chrome/contact1.png" alt="Let's build something" /><img class="chrome-line" src="../assets/chrome/contact2.png" alt="that earns trust." /></h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="mailto:folorunsho58@gmail.com" class="btn btn-primary magnetic">Email me <span class="ico" aria-hidden="true">&rarr;</span></a>
@@ -337,12 +343,13 @@ if (canvas && 'WebGLRenderingContext' in window) {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x03040b); // real dark space
   const camera = new THREE.PerspectiveCamera(38, W()/H(), 0.1, 400);
 
   const loader = new THREE.TextureLoader();
   const base = '../assets/earth/';
   const tex = (f, srgb) => { const t = loader.load(base+f); if(srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+  // real photographic Milky Way as the space backdrop
+  const bgTex = tex('milkyway_2k.jpg', true); bgTex.mapping = THREE.EquirectangularReflectionMapping; scene.background = bgTex;
 
   // Earth (offset to one side; lit by a single distant "sun")
   const group = new THREE.Group();
@@ -408,7 +415,7 @@ if (canvas && 'WebGLRenderingContext' in window) {
     g.setAttribute('position', new THREE.BufferAttribute(a,3));
     return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
   };
-  starGroup.add(makeStars(5200, 1.3, 0.92), makeStars(1200, 2.4, 1.0), makeStars(260, 3.4, 1.0));
+  starGroup.add(makeStars(1600, 1.2, 0.7), makeStars(420, 2.2, 0.9), makeStars(120, 3.2, 1.0));
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
