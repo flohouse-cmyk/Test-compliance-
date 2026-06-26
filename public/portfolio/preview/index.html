@@ -60,22 +60,8 @@
     letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
   .eyebrow .tick{width:26px;height:1px;display:inline-block;background:linear-gradient(90deg,#dfe3ea,rgba(223,227,234,0))}
   .hero-name{margin-top:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.04;
-    font-size:clamp(2.6rem,6vw,4.6rem);
-    background:linear-gradient(180deg,#ffffff 0%,#eaf0f8 12%,#b6bfcf 26%,#7c8496 39%,#ffffff 51%,#717a8b 60%,#b9c2d1 76%,#eef3fb 90%,#ffffff 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    background-size:100% 260%;
-    -webkit-text-stroke:0.4px rgba(255,255,255,.16);
-    filter:url(#chrome3d) drop-shadow(0 2px 16px rgba(150,180,235,.30));
-    animation:sheen 5.5s ease-in-out infinite}
-  @keyframes sheen{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}
-  /* liquid-chrome section headers (same fonts/sizes as before) */
-  .chrome-head{
-    background:linear-gradient(180deg,#ffffff 0%,#eaf0f8 12%,#b6bfcf 26%,#7c8496 39%,#ffffff 51%,#717a8b 60%,#b9c2d1 76%,#eef3fb 90%,#ffffff 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    background-size:100% 260%;
-    -webkit-text-stroke:0.4px rgba(255,255,255,.16);
-    filter:url(#chrome3d) drop-shadow(0 4px 18px rgba(150,180,235,.30));
-    animation:sheen 5.5s ease-in-out infinite}
+    font-size:clamp(2.6rem,6vw,4.6rem);color:#F4F6FA}
+  .chrome-head{color:#EDF0F6}
   /* About: text beside a moderate headshot, paragraph beneath */
   .about-figure{float:right;width:12.5rem;margin:0 0 1rem 1.6rem;padding:6px;border-radius:1.5rem}
   .about-photo{display:block;width:100%;border-radius:1.15rem;object-fit:cover;aspect-ratio:4/5}
@@ -170,7 +156,7 @@
   <div class="hero-scrim"></div>
   <div class="hero-copy">
     <span class="reveal eyebrow"><span class="tick"></span> AI Product Manager</span>
-    <h1 class="reveal" style="transition-delay:.08s"><img class="chrome-name-img" src="../assets/chrome/name.png" alt="Folorunsho &lsquo;Flo&rsquo; Ogunyemi" /></h1>
+    <h1 class="reveal hero-name font-heading" style="transition-delay:.08s">Folorunsho &ldquo;Flo&rdquo; Ogunyemi</h1>
     <p class="reveal hero-sub" style="transition-delay:.16s">
       I turn data, stakeholder pain, and business goals into AI products that drive operational efficiency and earn trust.
     </p>
@@ -194,7 +180,7 @@
 
 <!-- ABOUT -->
 <section id="about" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/about.png" alt="About" /></h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">About</h2>
   <div class="reveal mt-8">
     <figure class="about-figure chrome-border">
       <img src="../assets/flo.jpg" alt="Folorunsho Ogunyemi" class="about-photo" onerror="this.parentElement.style.display='none'" />
@@ -229,7 +215,7 @@
 
 <!-- EXPERIENCE -->
 <section id="experience" class="mx-auto max-w-4xl px-5 py-24">
-  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/experience.png" alt="Experience" /></h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Experience</h2>
   <div class="mt-10 space-y-4">
     <div class="reveal chrome-border tilt p-6">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -262,7 +248,7 @@
 
 <!-- SKILLS -->
 <section id="skills" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/skills.png" alt="Skills &amp; toolkit" /></h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Skills &amp; toolkit</h2>
   <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">AI &amp; Machine Learning</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Conversational AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Voice AI</span><span class="rounded-lg bg-white/5 px-2.5 py-1">RAG</span><span class="rounded-lg bg-white/5 px-2.5 py-1">LLMs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Vibe Coding</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Prototyping</span></div></div>
     <div class="reveal chrome-border tilt p-6"><h3 class="font-heading text-lg font-semibold accent">Product Management</h3><div class="mt-4 flex flex-wrap gap-2 text-sm text-slate-300"><span class="rounded-lg bg-white/5 px-2.5 py-1">Strategy</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Roadmapping</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Discovery</span><span class="rounded-lg bg-white/5 px-2.5 py-1">OKRs &amp; KPIs</span><span class="rounded-lg bg-white/5 px-2.5 py-1">Agile / SAFe</span></div></div>
@@ -275,7 +261,7 @@
 
 <!-- PROJECTS -->
 <section id="projects" class="mx-auto max-w-6xl px-5 py-24">
-  <h2 class="reveal"><img class="chrome-img" src="../assets/chrome/projects.png" alt="Projects" /></h2>
+  <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight">Projects</h2>
   <p class="reveal mt-3 text-lg text-slate-400">Products I've shaped from idea to launch.</p>
   <div class="mt-10 grid gap-6 sm:grid-cols-2">
     <a class="reveal tilt group block overflow-hidden rounded-3xl chrome-border" href="#"><div class="relative h-40 overflow-hidden" style="background:radial-gradient(130% 130% at 0% 0%, #16233f, #0a0e1c 62%)"><div class="absolute -right-8 -top-8 h-44 w-44 rounded-full" style="background:rgba(120,160,255,.22);filter:blur(40px)"></div><div class="absolute bottom-5 left-6"><div class="text-xs uppercase tracking-widest" style="color:#C7CCD6">Live demo</div><h3 class="mt-1 font-heading text-2xl font-semibold">ComplyScope</h3></div></div><div class="p-6 text-slate-300/90">Role-based compliance-posture platform with narrative summaries and audit readiness.</div></a>
@@ -288,7 +274,7 @@
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="reveal"><img class="chrome-line" src="../assets/chrome/contact1.png" alt="Let's build something" /><img class="chrome-line" src="../assets/chrome/contact2.png" alt="that earns trust." /></h2>
+    <h2 class="reveal chrome-head font-heading text-4xl font-bold tracking-tight sm:text-5xl">Let's build something<br/>that earns trust.</h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="mailto:folorunsho58@gmail.com" class="btn btn-primary magnetic">Email me <span class="ico" aria-hidden="true">&rarr;</span></a>
@@ -406,24 +392,8 @@ if (canvas && 'WebGLRenderingContext' in window) {
   scene.add(sun);
   scene.add(new THREE.AmbientLight(0x0b1322, 0.11));
 
-  // dense starfield (two sizes), parented so it drifts slowly
-  const starGroup = new THREE.Group(); scene.add(starGroup);
-  // soft round star sprite (Starlink-style glowing points, not square dots)
-  const stc = document.createElement('canvas'); stc.width = stc.height = 32;
-  const stx = stc.getContext('2d'); const stg = stx.createRadialGradient(16,16,0,16,16,16);
-  stg.addColorStop(0,'rgba(255,255,255,1)'); stg.addColorStop(0.35,'rgba(255,255,255,.85)'); stg.addColorStop(1,'rgba(255,255,255,0)');
-  stx.fillStyle = stg; stx.fillRect(0,0,32,32);
-  const starSprite = new THREE.CanvasTexture(stc);
-  const starLayers = [];
-  const makeStars = (n, size, op, col) => {
-    const g = new THREE.BufferGeometry(), a = new Float32Array(n*3);
-    for (let i=0;i<n;i++){ const r=40+Math.random()*120, t=Math.random()*6.2832, ph=Math.acos(2*Math.random()-1);
-      a[i*3]=r*Math.sin(ph)*Math.cos(t); a[i*3+1]=r*Math.cos(ph); a[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
-    g.setAttribute('position', new THREE.BufferAttribute(a,3));
-    const m = new THREE.PointsMaterial({ map:starSprite, color:col, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false, blending:THREE.AdditiveBlending });
-    const pts = new THREE.Points(g, m); pts.userData = { base:op, ph:Math.random()*6.28 }; starLayers.push(pts); return pts;
-  };
-  starGroup.add(makeStars(4200, 2.0, 0.7, 0xeaf2ff), makeStars(1100, 3.2, 0.9, 0xffffff), makeStars(180, 4.8, 1.0, 0xdfe9ff));
+  // real photographic star sky (Starlink-style) as the equirectangular backdrop
+  const starsTex = tex('stars_4k.jpg', true); starsTex.mapping = THREE.EquirectangularReflectionMapping; scene.background = starsTex;
 
   // responsive placement: planet on the right (landscape) or upper-center (portrait)
   let camZ = 4.0;
@@ -448,13 +418,12 @@ if (canvas && 'WebGLRenderingContext' in window) {
   let running = true, raf = 0;
   function tick(){
     const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.045; clouds.rotation.y += d*0.055; starGroup.rotation.y += d*0.0035; }
+    if (!reduce){ earth.rotation.y += d*0.045; clouds.rotation.y += d*0.055; }
     camera.position.set(tx*0.18, -ty*0.10, camZ); camera.lookAt(0,0,0);
     sunDirView.copy(sun.position).transformDirection(camera.matrixWorldInverse);
     if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(sunDirView).multiplyScalar(60);
     atmoMat.uniforms.uSunDirView.value.copy(sunDirView);
     haloMat.uniforms.uSunDirView.value.copy(sunDirView);
-    if (!reduce){ const tw = performance.now()*0.001; for (let i=0;i<starLayers.length;i++){ const u=starLayers[i].userData; starLayers[i].material.opacity = u.base*(0.8 + 0.2*Math.sin(tw*0.9 + u.ph + i*1.7)); } }
     renderer.render(scene, camera);
     raf = requestAnimationFrame(tick);
   }
