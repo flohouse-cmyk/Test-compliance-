@@ -113,7 +113,14 @@
   .btn:hover .ico{transform:translate(2px,-1px)}
 
   /* full-bleed space hero (SpaceX/Blue Origin style) */
-  .space-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+  .hero-space{position:absolute;inset:0;z-index:0;background:#03040b url('../assets/earth/milkyway_2k.jpg') center/cover no-repeat}
+  .earth-wrap{position:absolute;z-index:0;top:50%;right:-8%;transform:translateY(-50%);width:min(72vw,780px)}
+  .earth-wrap::before{content:"";position:absolute;inset:-7%;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle,rgba(95,150,255,.30),rgba(95,150,255,.06) 56%,transparent 70%);filter:blur(22px)}
+  .earth-real{width:100%;display:block;animation:efloat 15s ease-in-out infinite;
+    filter:drop-shadow(0 0 60px rgba(80,130,220,.5)) drop-shadow(0 0 18px rgba(150,190,255,.45))}
+  @keyframes efloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @media(max-width:880px){.earth-wrap{top:15%;right:auto;left:50%;transform:translateX(-50%);width:min(82vw,430px)}}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(8,11,26,.72) 0%,rgba(8,11,26,.34) 40%,rgba(8,11,26,0) 70%)}
   .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100vh;min-height:100svh;
@@ -134,7 +141,7 @@
     .hero-copy{justify-content:flex-end;padding-bottom:4.5rem}
   }
   @media (prefers-reduced-motion: reduce){
-    .marquee,.hero-name,.chrome-head,.shooting i{animation:none}
+    .marquee,.hero-name,.chrome-head,.shooting i,.earth-real{animation:none}
     .reveal{opacity:1;transform:none;filter:none;transition:none}
   }
 </style>
@@ -174,7 +181,8 @@
 
 <!-- FULL-BLEED SPACE HERO -->
 <section id="hero" class="stage">
-  <canvas id="space" class="space-canvas"></canvas>
+  <div class="hero-space"></div>
+  <div class="earth-wrap" aria-hidden="true"><img class="earth-real" src="../assets/earth/earth_real.png" alt="" /></div>
   <div class="shooting" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="hero-scrim"></div>
   <div class="hero-copy">
@@ -328,135 +336,6 @@ if(!reduceM){
 }
 </script>
 
-<!-- Full-bleed space scene: photoreal sunlit Earth + starfield (SpaceX/Blue Origin look) -->
-<script type="module">
-import * as THREE from 'three';
-
-const canvas = document.getElementById('space');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (canvas && 'WebGLRenderingContext' in window) {
-  const W = () => canvas.clientWidth || innerWidth, H = () => canvas.clientHeight || innerHeight;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.0;
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, W()/H(), 0.1, 400);
-
-  const loader = new THREE.TextureLoader();
-  const base = '../assets/earth/';
-  const tex = (f, srgb) => { const t = loader.load(base+f); if(srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
-  // real photographic Milky Way as the space backdrop
-  const bgTex = tex('milkyway_2k.jpg', true); bgTex.mapping = THREE.EquirectangularReflectionMapping; scene.background = bgTex;
-
-  // Earth (offset to one side; lit by a single distant "sun")
-  const group = new THREE.Group();
-  group.rotation.z = 0.41; group.rotation.x = 0.16;
-  scene.add(group);
-
-  const earthMat = new THREE.MeshStandardMaterial({
-    map: tex('real_day_4k.jpg', true),
-    normalMap: tex('earth_normal_2048.jpg'),
-    normalScale: new THREE.Vector2(0.85, 0.85),
-    roughness: 0.78, metalness: 0.0,
-  });
-  // city lights on the night side, masked by the sun direction
-  const nightTex = tex('earth_lights_2048.png', true);
-  let earthShader = null;
-  earthMat.onBeforeCompile = (sh) => {
-    sh.uniforms.tNight = { value: nightTex };
-    sh.uniforms.uLightViewPos = { value: new THREE.Vector3() };
-    sh.fragmentShader = 'uniform sampler2D tNight;\nuniform vec3 uLightViewPos;\n' +
-      sh.fragmentShader.replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
-        vec3 Ldir = normalize(uLightViewPos + vViewPosition);
-        float nl = dot(normalize(vNormal), Ldir);
-        float night = smoothstep(0.06, -0.25, nl);
-        totalEmissiveRadiance += texture2D(tNight, vMapUv).rgb * night * 2.4;`);
-    earthShader = sh;
-  };
-  const earth = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 96), earthMat);
-  group.add(earth);
-
-  const clouds = new THREE.Mesh(
-    new THREE.SphereGeometry(1.01, 96, 96),
-    new THREE.MeshStandardMaterial({ color:0xffffff, alphaMap: tex('real_clouds_2k.jpg'),
-      transparent:true, depthWrite:false, opacity:0.9, roughness:1, metalness:0 })
-  );
-  group.add(clouds);
-
-  // sun-aware atmosphere: glows on the lit limb, fades on the night limb
-  const atmoMat = new THREE.ShaderMaterial({
-    transparent:true, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false,
-    uniforms:{ glow:{ value:new THREE.Color(0x5aa0ff) }, uSunDirView:{ value:new THREE.Vector3(1,0,0) } },
-    vertexShader:`varying vec3 vN; void main(){ vN=normalize(normalMatrix*normal); gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-    fragmentShader:`varying vec3 vN; uniform vec3 glow; uniform vec3 uSunDirView;
-      void main(){
-        float rim = pow(clamp(0.64 - dot(vN, vec3(0.0,0.0,1.0)), 0.0, 1.0), 2.6);
-        float lit = clamp(dot(normalize(vN), uSunDirView)*0.6 + 0.45, 0.0, 1.0);
-        gl_FragColor = vec4(glow, 1.0) * rim * lit * 1.15;
-      }`
-  });
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.16, 64, 64), atmoMat));
-
-  // lighting: one strong sun, faint fill (no studio reflections -> reads as space)
-  const sun = new THREE.DirectionalLight(0xfff4e6, 3.5);
-  sun.position.set(-1.5, 0.5, 1.1);
-  scene.add(sun);
-  scene.add(new THREE.AmbientLight(0x0b1322, 0.11));
-
-  // dense starfield (two sizes), parented so it drifts slowly
-  const starGroup = new THREE.Group(); scene.add(starGroup);
-  const makeStars = (n, size, op) => {
-    const g = new THREE.BufferGeometry(), a = new Float32Array(n*3);
-    for (let i=0;i<n;i++){ const r=40+Math.random()*120, t=Math.random()*6.2832, ph=Math.acos(2*Math.random()-1);
-      a[i*3]=r*Math.sin(ph)*Math.cos(t); a[i*3+1]=r*Math.cos(ph); a[i*3+2]=r*Math.sin(ph)*Math.sin(t); }
-    g.setAttribute('position', new THREE.BufferAttribute(a,3));
-    return new THREE.Points(g, new THREE.PointsMaterial({ color:0xffffff, size, sizeAttenuation:false, transparent:true, opacity:op, depthWrite:false }));
-  };
-  starGroup.add(makeStars(1600, 1.2, 0.7), makeStars(420, 2.2, 0.9), makeStars(120, 3.2, 1.0));
-
-  // responsive placement: planet on the right (landscape) or upper-center (portrait)
-  let camZ = 4.0;
-  function layout(){
-    const w=W(), h=H(), a=w/h;
-    if (a >= 1){ camZ=4.0; group.position.set(Math.min(a*0.95, 1.85), -0.05, 0); group.scale.setScalar(1.55); }
-    else { camZ=4.6; group.position.set(0, 0.95, 0); group.scale.setScalar(1.05); }
-    camera.aspect=a; camera.updateProjectionMatrix(); renderer.setSize(w,h,false);
-  }
-  // gate resize so the mobile address-bar show/hide does not re-layout the planet on scroll
-  let lastW = 0, lastH = 0;
-  function onResize(){ const w = W(), h = H(); if (w === lastW && h === lastH) return; lastW = w; lastH = h; layout(); }
-  onResize();
-  addEventListener('resize', onResize);
-  addEventListener('orientationchange', onResize);
-
-  let tx=0, ty=0;
-  if (!reduce) addEventListener('pointermove', e => { tx=e.clientX/innerWidth-0.5; ty=e.clientY/innerHeight-0.5; });
-
-  const clock = new THREE.Clock();
-  const sunDirView = new THREE.Vector3();
-  let running = true, raf = 0;
-  function tick(){
-    const d = Math.min(clock.getDelta(), 0.05);
-    if (!reduce){ earth.rotation.y += d*0.05; clouds.rotation.y += d*0.062; starGroup.rotation.y += d*0.004; }
-    camera.position.set(tx*0.18, -ty*0.10, camZ); camera.lookAt(0,0,0);
-    sunDirView.copy(sun.position).transformDirection(camera.matrixWorldInverse);
-    if (earthShader) earthShader.uniforms.uLightViewPos.value.copy(sunDirView).multiplyScalar(60);
-    atmoMat.uniforms.uSunDirView.value.copy(sunDirView);
-    renderer.render(scene, camera);
-    raf = requestAnimationFrame(tick);
-  }
-  tick();
-
-  // pause when the hero scrolls out of view
-  new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting && !running){ running=true; clock.getDelta(); tick(); }
-    else if (!e.isIntersecting && running){ running=false; cancelAnimationFrame(raf); }
-  }), { threshold: 0 }).observe(document.getElementById('hero'));
-}
-</script>
 
 <!-- Little human figures walking an end-to-end process (2D canvas) -->
 <script>
