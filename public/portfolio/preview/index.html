@@ -18,8 +18,15 @@
     --bg:#08080A; --ink:#F2F3F6; --muted:#8B9098;
     --ease-out:cubic-bezier(.23,1,.32,1);
   }
-  html{scroll-behavior:smooth}
-  body{font-family:Satoshi,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;background:#05070f}
+  body{font-family:Satoshi,sans-serif;background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased}
+  /* page-wide backdrop that flows in the hero's deep-space colors */
+  .cosmos{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(60% 42% at 50% -6%, rgba(44,86,168,.20), transparent 60%),
+      radial-gradient(48% 40% at 86% 26%, rgba(34,72,150,.16), transparent 62%),
+      radial-gradient(60% 46% at 22% 106%, rgba(150,112,55,.10), transparent 70%),
+      linear-gradient(180deg,#05070f 0%,#070b1a 48%,#060912 100%)}
   h1,h2,h3,.font-heading{font-family:"Clash Display",sans-serif}
   ::selection{background:rgba(200,210,225,.30)}
 
@@ -76,8 +83,9 @@
   .btn:hover .ico{transform:translate(2px,-1px)}
 
   /* full-bleed space hero (SpaceX/Blue Origin style) */
-  .hero-photo{position:absolute;inset:0;z-index:0;background:#03040a url('../assets/earth/hero_earth.jpg') center right/cover no-repeat}
-  @media(max-width:880px){.hero-photo{background-position:60% 22%}}
+  .hero-photo{position:absolute;inset:0;z-index:0;background:#03040a url('../assets/earth/hero_earth.jpg') no-repeat;
+    background-size:auto 122%;background-position:26% 42%}
+  @media(max-width:880px){.hero-photo{background-size:cover;background-position:60% 20%}}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(3,5,12,.9) 0%,rgba(3,5,12,.6) 38%,rgba(3,5,12,0) 68%)}
   .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100dvh;
@@ -96,6 +104,7 @@
 </style>
 </head>
 <body class="antialiased">
+<div class="cosmos" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <!-- NAV -->
