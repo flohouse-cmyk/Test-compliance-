@@ -18,7 +18,7 @@
     --bg:#08080A; --ink:#F2F3F6; --muted:#8B9098;
     --ease-out:cubic-bezier(.23,1,.32,1);
   }
-  html{scroll-behavior:smooth;background:#05070f}
+  html{scroll-behavior:smooth;background:#05070f;scroll-padding-top:6rem}
   body{font-family:Satoshi,sans-serif;background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased}
   /* page-wide backdrop that flows in the hero's deep-space colors */
   .cosmos{position:fixed;inset:0;z-index:-2;pointer-events:none;
@@ -328,8 +328,14 @@
 </main>
 
 <script>
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px',threshold:.05});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // safety net: if anything is still hidden after load (fast scroll / anchor jump), reveal it
+  addEventListener('load',()=>setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in')}),400));
+}else{
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
 const menuBtn=document.getElementById('menuBtn'), mobileMenu=document.getElementById('mobileMenu');
 if(menuBtn&&mobileMenu){
   menuBtn.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open);});
