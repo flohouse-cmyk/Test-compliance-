@@ -54,7 +54,7 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
   /* ===== CINEMATIC GLOBE HERO ===== */
-  .stage{position:relative;min-height:100dvh;overflow:hidden;isolation:isolate;background:#04060d}
+  .stage{position:relative;min-height:100vh;min-height:100dvh;overflow:hidden;isolation:isolate;background:#04060d}
 
   .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;
     letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
@@ -89,7 +89,7 @@
   @media(max-width:880px){.hero-photo{background-size:cover;background-position:60% 20%}}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(3,5,12,.9) 0%,rgba(3,5,12,.6) 38%,rgba(3,5,12,0) 68%)}
-  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100dvh;
+  .hero-copy{position:relative;z-index:2;max-width:72rem;margin:0 auto;min-height:100vh;min-height:100dvh;
     display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
     padding:6rem 1.5rem 3rem}
   .hero-copy .hero-sub{max-width:34ch;color:#C2C7D2}
@@ -109,9 +109,27 @@
   .mobile-menu.open{display:block}
   .cta-desktop{display:none}
   @media(min-width:768px){ .hamburger{display:none} .mobile-menu{display:none!important} .cta-desktop{display:inline-flex} }
+  /* ===== MOBILE LAYER ===== */
+  /* Phones/tablets: content is always visible — no scroll-in fade (feels broken on touch) */
+  @media (hover:none), (max-width:880px){
+    .reveal{opacity:1;transform:none;filter:none;transition:none}
+  }
   @media(max-width:640px){
     .py-24{padding-top:3.5rem;padding-bottom:3.5rem}
     .py-28{padding-top:3.75rem;padding-bottom:3.75rem}
+    /* hero CTAs: primary full-width, secondary pair side by side */
+    .hero-cta{width:100%;gap:.7rem}
+    .hero-cta .btn{justify-content:center;flex:1 1 calc(50% - .7rem)}
+    .hero-cta .btn-primary{flex-basis:100%}
+    /* section headings a touch smaller on phones */
+    .text-4xl{font-size:1.9rem;line-height:1.15}
+    /* cards: tighter padding so text breathes instead of the frame */
+    #experience .chrome-border.tilt, #skills .chrome-border.tilt, #about .chrome-border{padding:1.25rem}
+    /* contact card: compact padding, no forced line break squeeze, stacked full-width buttons */
+    #contact .p-10{padding:2.25rem 1.25rem}
+    #contact h2 br{display:none}
+    #contact h2{font-size:1.9rem;line-height:1.15}
+    #contact .btn{width:100%;justify-content:center}
   }
   .about-grid{display:grid;gap:2.5rem;align-items:stretch;grid-template-columns:1fr}
   @media(min-width:1024px){.about-grid{grid-template-columns:1.25fr .75fr}}
@@ -306,7 +324,7 @@
 <!-- CONTACT -->
 <section id="contact" class="mx-auto max-w-4xl px-5 py-28">
   <div class="chrome-border reveal p-10 text-center sm:p-14">
-    <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/>that earns trust.</h2>
+    <h2 class="font-heading text-4xl font-bold tracking-tight sm:text-5xl name-solid">Let's build something<br/> that earns trust.</h2>
     <p class="mx-auto mt-4 max-w-xl text-slate-400">Want a closer look at my work, or to connect? Reach out.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="mailto:fogun.1992@gmail.com" class="btn btn-primary magnetic">Email me <span class="ico" aria-hidden="true">&rarr;</span></a>
