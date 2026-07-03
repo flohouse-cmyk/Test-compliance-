@@ -145,6 +145,52 @@ def fetch_stock_photos(product, outdir, rng, limit=5):
     return paths
 
 
+def fetch_stock_videos(product, outdir, rng, limit=4):
+    """Download free-to-use motion b-roll clips from Pexels Videos.
+
+    Same free PEXELS_API_KEY and license as photos. Returns [] without the
+    key or on failure; the renderer then tries photos, then gradient cards.
+    """
+    key = API_KEYS.get("PEXELS_API_KEY", "")
+    if not key:
+        return []
+    try:
+        import requests
+    except ImportError:
+        return []
+    paths = []
+    for query in (product["name"], product["category"]):
+        try:
+            resp = requests.get(
+                "https://api.pexels.com/videos/search",
+                params={"query": query, "orientation": "portrait", "per_page": 12},
+                headers={"Authorization": key}, timeout=15)
+            resp.raise_for_status()
+            videos = resp.json().get("videos", [])
+            rng.shuffle(videos)
+            for video in videos:
+                if len(paths) >= limit:
+                    break
+                # Smallest portrait file that's still HD-ish keeps downloads fast.
+                files = sorted(
+                    (f for f in video.get("video_files", [])
+                     if f.get("link") and (f.get("height") or 0) >= 960),
+                    key=lambda f: f.get("height") or 9999)
+                if not files:
+                    continue
+                clip = requests.get(files[0]["link"], timeout=60)
+                clip.raise_for_status()
+                path = os.path.join(outdir, f"clip{len(paths)}.mp4")
+                with open(path, "wb") as f:
+                    f.write(clip.content)
+                paths.append(path)
+        except Exception:  # noqa: BLE001 — stock clips are best-effort
+            continue
+        if len(paths) >= limit:
+            break
+    return paths
+
+
 def _cover_crop(img, w, h):
     ratio = max(w / img.width, h / img.height)
     img = img.resize((int(img.width * ratio) + 1, int(img.height * ratio) + 1))
@@ -175,10 +221,19 @@ def _wrap(draw, text, font, max_width):
     return lines
 
 
-def _card(palette, kicker, title, body, footer, brand, bg_photo=None):
-    """Draw one 1080x1920 scene card, over a stock photo when available."""
+def _card(palette, kicker, title, body, footer, brand, bg_photo=None, transparent=False):
+    """Draw one 1080x1920 scene card. transparent=True returns an RGBA overlay
+    (dark scrim + text) for compositing onto motion video with ffmpeg."""
     top, bottom, accent, ink = palette
-    if bg_photo:
+    if transparent:
+        img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        for y in range(H):  # dark scrim so text reads over any footage
+            t = y / H
+            alpha = 140 if t < 0.62 else int(140 + (t - 0.62) / 0.38 * 65)
+            draw.line([(0, y), (W, y)], fill=(8, 10, 14, alpha))
+        bg_photo = "skip"
+    elif bg_photo:
         try:
             img = _cover_crop(Image.open(bg_photo).convert("RGB"), W, H)
             # Darken for text legibility: base shade, heavier near the bottom.
@@ -237,25 +292,42 @@ def _card(palette, kicker, title, body, footer, brand, bg_photo=None):
     return img
 
 
-def make_scene_images(product, script_fields, outdir, rng):
-    palette = PALETTES[_seeded(product["name"]).randrange(len(PALETTES))]
+def _scenes(product, script_fields):
     brand = db.get_setting("brand_name", "Best Finds Under $100")
-    hook = script_fields["hook"]
-    cta = script_fields["cta"]
-    scenes = [
-        ("", hook, "", "Wait for it…", brand),
+    return [
+        ("", script_fields["hook"], "", "Wait for it…", brand),
         ("THE PROBLEM", product["problem_solved"], "Sound familiar? There's a cheap fix.", "", brand),
         ("THE FIND", product["name"], product["why_care"], f"Typically {product['price_range']}", brand),
         ("HOW TO FIND IT", "Search this:", f"“{product['search_term']}”",
          "Prices and availability may change", brand),
-        ("", cta, script_fields.get("disclosure", ""), "New find every day", brand),
+        ("", script_fields["cta"], script_fields.get("disclosure", ""), "New find every day", brand),
     ]
+
+
+def _palette_for(product):
+    return PALETTES[_seeded(product["name"]).randrange(len(PALETTES))]
+
+
+def make_scene_images(product, script_fields, outdir, rng):
+    """Full-frame scene stills: stock-photo backgrounds when available."""
+    palette = _palette_for(product)
     photos = fetch_stock_photos(product, outdir, rng)
     paths = []
-    for i, (kicker, title, body, footer, brand_line) in enumerate(scenes):
+    for i, scene in enumerate(_scenes(product, script_fields)):
         path = os.path.join(outdir, f"scene{i}.png")
         bg = photos[i % len(photos)] if photos else None
-        _card(palette, kicker, title, body, footer, brand_line, bg_photo=bg).save(path)
+        _card(palette, *scene, bg_photo=bg).save(path)
+        paths.append(path)
+    return paths, ("stock photos" if photos else "branded cards")
+
+
+def make_scene_overlays(product, script_fields, outdir, rng):
+    """Transparent text overlays for compositing onto motion b-roll."""
+    palette = _palette_for(product)
+    paths = []
+    for i, scene in enumerate(_scenes(product, script_fields)):
+        path = os.path.join(outdir, f"overlay{i}.png")
+        _card(palette, *scene, transparent=True).save(path)
         paths.append(path)
     return paths
 
@@ -282,6 +354,43 @@ def assemble(image_paths, audio_path, out_path, total_duration):
         raise RuntimeError("ffmpeg failed: " + (exc.stderr or "")[-400:]) from exc
     finally:
         os.unlink(concat_file)
+
+
+def assemble_motion(clips, overlays, audio_path, out_path, total_duration, workdir):
+    """Composite text overlays onto looping stock clips, concat, add voiceover."""
+    per = max(total_duration / len(overlays), 1.5)
+    scene_files = []
+    for i, overlay in enumerate(overlays):
+        clip = clips[i % len(clips)]
+        scene_out = os.path.join(workdir, f"scenevid{i}.mp4")
+        try:
+            subprocess.run(
+                ["ffmpeg", "-y", "-stream_loop", "-1", "-t", f"{per:.3f}", "-i", clip,
+                 "-i", overlay,
+                 "-filter_complex",
+                 "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,"
+                 "crop=1080:1920,fps=30[bg];[bg][1:v]overlay=0:0,format=yuv420p",
+                 "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                 scene_out],
+                capture_output=True, text=True, check=True, timeout=300)
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError("ffmpeg scene failed: " + (exc.stderr or "")[-300:]) from exc
+        scene_files.append(scene_out)
+
+    concat_file = os.path.join(workdir, "scenes.txt")
+    with open(concat_file, "w") as f:
+        for path in scene_files:
+            f.write(f"file '{path}'\n")
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_file,
+             "-i", audio_path,
+             "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+             "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart",
+             out_path],
+            capture_output=True, text=True, check=True, timeout=300)
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError("ffmpeg concat failed: " + (exc.stderr or "")[-300:]) from exc
 
 
 # ------------------------------------------------------------ main entry
@@ -318,13 +427,22 @@ def render_script(script_type, script_id):
             audio_path = os.path.join(tmp, "voice.mp3")
             voice = make_voiceover(script["voiceover"], audio_path, rng)
             duration = audio_duration(audio_path)
-            images = make_scene_images(product, fields, tmp, rng)
             filename = f"{script_type}_{script_id}_{video_id}.mp4"
-            assemble(images, audio_path, os.path.join(RENDER_DIR, filename), duration)
+            out_path = os.path.join(RENDER_DIR, filename)
+
+            # Best visuals first: motion b-roll → stock photos → branded cards.
+            clips = fetch_stock_videos(product, tmp, rng)
+            if clips:
+                overlays = make_scene_overlays(product, fields, tmp, rng)
+                assemble_motion(clips, overlays, audio_path, out_path, duration, tmp)
+                visuals = "motion b-roll"
+            else:
+                images, visuals = make_scene_images(product, fields, tmp, rng)
+                assemble(images, audio_path, out_path, duration)
 
         db.update("rendered_videos", video_id, {
             "filename": filename, "duration_seconds": round(duration, 1),
-            "voice": voice, "status": "done",
+            "voice": f"{voice} · {visuals}", "status": "done",
         })
     except Exception as exc:  # noqa: BLE001 — record failure, never crash the app
         db.update("rendered_videos", video_id, {"status": "failed", "error": str(exc)[:500]})
