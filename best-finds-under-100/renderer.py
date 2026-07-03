@@ -69,33 +69,46 @@ def _tts_gtts(text, out_path):
     gTTS(text, lang="en", tld="us").save(out_path)
 
 
+def _probe_audio(path):
+    """Validate a media file with ffprobe. Returns (ok, error_detail)."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_format", path],
+                             capture_output=True, text=True, timeout=60)
+        return out.returncode == 0, (out.stderr or "").strip()[:200]
+    except Exception as exc:  # noqa: BLE001
+        return False, f"{exc.__class__.__name__}: {exc}"
+
+
 def make_voiceover(text, out_path, rng):
     """Free TTS: edge-tts (natural voices) first, gTTS as fallback.
-    Returns the voice label used. Raises RuntimeError if both fail."""
+    Each engine's output is validated with ffprobe before being accepted.
+    Returns the voice label used. Raises RuntimeError if all fail."""
     errors = []
     voice = rng.choice(EDGE_VOICES)
-    try:
-        _tts_edge(text, out_path, voice)
-        if os.path.getsize(out_path) > 1000:
-            return f"edge-tts {voice}"
-        errors.append("edge-tts produced empty audio")
-    except Exception as exc:  # noqa: BLE001 — any TTS failure falls through
-        errors.append(f"edge-tts: {exc.__class__.__name__}")
-    try:
-        _tts_gtts(text, out_path)
-        if os.path.getsize(out_path) > 1000:
-            return "gTTS en-us"
-        errors.append("gTTS produced empty audio")
-    except Exception as exc:  # noqa: BLE001
-        errors.append(f"gTTS: {exc.__class__.__name__}")
-    raise RuntimeError("All free TTS voices failed (" + "; ".join(errors) +
-                       "). Check the host's internet access.")
+    engines = [(f"edge-tts {voice}", lambda: _tts_edge(text, out_path, voice)),
+               ("gTTS en-us", lambda: _tts_gtts(text, out_path))]
+    for label, engine in engines:
+        try:
+            engine()
+            if not os.path.exists(out_path) or os.path.getsize(out_path) < 1000:
+                errors.append(f"{label}: empty audio file")
+                continue
+            ok, detail = _probe_audio(out_path)
+            if ok:
+                return label
+            errors.append(f"{label}: invalid audio ({detail})")
+        except Exception as exc:  # noqa: BLE001 — any TTS failure falls through
+            errors.append(f"{label}: {exc.__class__.__name__}: {str(exc)[:150]}")
+    raise RuntimeError("All free TTS voices failed — " + " | ".join(errors))
 
 
 def audio_duration(path):
     out = subprocess.run(
-        ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", path],
-        capture_output=True, text=True, check=True)
+        ["ffprobe", "-v", "error", "-print_format", "json", "-show_format", path],
+        capture_output=True, text=True)
+    if out.returncode != 0:
+        raise RuntimeError(f"ffprobe could not read the voiceover: "
+                           f"{(out.stderr or '').strip()[:200]}")
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
