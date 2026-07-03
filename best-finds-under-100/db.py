@@ -99,6 +99,19 @@ CREATE TABLE IF NOT EXISTS video_prompts (
     created_at TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS rendered_videos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER NOT NULL REFERENCES product_ideas(id) ON DELETE CASCADE,
+    script_type TEXT NOT NULL,       -- 'tiktok' | 'youtube'
+    script_id INTEGER NOT NULL,
+    filename TEXT NOT NULL DEFAULT '',
+    duration_seconds REAL NOT NULL DEFAULT 0,
+    voice TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT 'rendering',  -- rendering | done | failed
+    error TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS content_calendar (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     product_id INTEGER NOT NULL REFERENCES product_ideas(id) ON DELETE CASCADE,

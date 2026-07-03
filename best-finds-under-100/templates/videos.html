@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Videos{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Rendered Videos</h1>
+  <form method="post" action="{{ url_for('render_today') }}">
+    <button class="btn btn-primary">🎬 Render Today's Videos</button>
+  </form>
+</div>
+
+{% if not ffmpeg_ok %}
+<div class="flash flash-error">
+  ffmpeg isn't available on this host, so rendering will fail. On Replit this repo's
+  <code>.replit</code> already requests it — stop and re-run the Repl. Elsewhere,
+  install ffmpeg on the server.
+</div>
+{% endif %}
+
+<section class="card">
+  <p class="muted small">Fully automatic faceless videos: free AI voiceover + branded text-card
+     scenes, ready to download and upload to TikTok / YouTube Shorts. Daily automation renders
+     the day's first TikTok and Shorts video by itself; the button above renders any of
+     today's remaining scripts.</p>
+  <table>
+    <tr><th>Video</th><th>Product</th><th>For</th><th>Length</th><th>Voice</th><th>Status</th><th></th></tr>
+    {% for v in videos %}
+      <tr>
+        <td>#{{ v.id }}</td>
+        <td><a href="{{ url_for('product_detail', product_id=v.product_id) }}">{{ v.product_name }}</a>
+            <div class="muted small">{{ v.category }}</div></td>
+        <td><span class="badge badge-{{ v.script_type }}">{{ 'TikTok' if v.script_type == 'tiktok' else 'YouTube Shorts' }}</span></td>
+        <td>{{ v.duration_seconds }}s</td>
+        <td class="small">{{ v.voice or '—' }}</td>
+        <td>
+          {% if v.status == 'done' %}<span class="badge badge-ok">done</span>
+          {% elif v.status == 'failed' %}<span class="badge" style="background:#fee2e2;color:#991b1b" title="{{ v.error }}">failed</span>
+          {% else %}<span class="badge">{{ v.status }}</span>{% endif %}
+          {% if v.error %}<div class="muted small">{{ v.error[:120] }}</div>{% endif %}
+        </td>
+        <td class="actions">
+          {% if v.status == 'done' %}
+            <a class="btn btn-small" href="{{ url_for('video_watch', video_id=v.id) }}" target="_blank">Watch</a>
+            <a class="btn btn-small btn-primary" href="{{ url_for('video_download', video_id=v.id) }}">Download</a>
+          {% endif %}
+          <form method="post" action="{{ url_for('video_delete', video_id=v.id) }}"
+                onsubmit="return confirm('Delete this video?')">
+            <button class="btn btn-small btn-danger">✕</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7" class="muted">No videos yet — run the daily automation or tap
+          “Render Today's Videos”.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="card">
+  <h2>How to post from your iPad</h2>
+  <ol class="small">
+    <li>Tap <strong>Download</strong> — the MP4 saves via Safari (tap the download icon in the address bar → tap the file → Share → Save Video to add it to Photos).</li>
+    <li>YouTube app: <strong>+</strong> → Upload a video → pick it → paste title &amp; description from the script page → Public → “not made for kids”.</li>
+    <li>TikTok app: <strong>+</strong> → Upload → pick it → paste caption &amp; hashtags → post.</li>
+    <li>Mark the calendar item <strong>Posted</strong>.</li>
+  </ol>
+  <p class="muted small">Tip: videos are auto-styled text cards with voiceover. For extra reach,
+     you can open one in CapCut and add b-roll or trending audio — optional, not required.</p>
+</section>
+{% endblock %}

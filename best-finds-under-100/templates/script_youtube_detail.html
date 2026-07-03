@@ -4,6 +4,9 @@
 <div class="page-head">
   <h1>YouTube Shorts script — {{ product.name }}</h1>
   <div class="btn-row">
+    <form method="post" action="{{ url_for('render_video', script_type='youtube', script_id=script.id) }}">
+      <button class="btn btn-primary">🎬 Render video</button>
+    </form>
     <a class="btn" href="{{ url_for('product_detail', product_id=product.id) }}">View product</a>
     <form method="post" action="{{ url_for('youtube_script_delete', script_id=script.id) }}"
           onsubmit="return confirm('Delete this script?')">

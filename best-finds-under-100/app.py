@@ -5,11 +5,13 @@ Works fully in demo mode with zero API keys.
 """
 import json
 
-from flask import (Flask, abort, flash, redirect, render_template, request, url_for)
+from flask import (Flask, abort, flash, redirect, render_template, request,
+                   send_from_directory, url_for)
 
 import automation
 import db
 import generators
+import renderer
 import seed
 from config import (CALENDAR_STATUSES, CATEGORIES, CONTENT_RULES,
                     MONETIZATION_STATUSES, SECRET_KEY, api_status, demo_mode)
@@ -296,6 +298,77 @@ def prompt_detail(prompt_id):
     prompt = get_or_404("video_prompts", prompt_id)
     product = get_or_404("product_ideas", prompt["product_id"])
     return render_template("prompt_detail.html", prompt=prompt, product=product)
+
+
+# ------------------------------------------------------------ rendered videos
+
+@app.route("/videos")
+def videos():
+    rows = db.query(
+        "SELECT v.*, p.name AS product_name, p.category FROM rendered_videos v "
+        "JOIN product_ideas p ON p.id = v.product_id ORDER BY v.id DESC")
+    return render_template("videos.html", videos=rows,
+                           ffmpeg_ok=renderer.ffmpeg_available())
+
+
+@app.route("/render/<script_type>/<int:script_id>", methods=["POST"])
+def render_video(script_type, script_id):
+    if script_type not in ("tiktok", "youtube"):
+        abort(404)
+    video_id = renderer.render_script(script_type, script_id)
+    video = db.query("SELECT * FROM rendered_videos WHERE id = ?", (video_id,), one=True)
+    if video["status"] == "done":
+        flash(f"Video rendered ({video['duration_seconds']}s, voice: {video['voice']}). "
+              "Download it from the Videos page.", "ok")
+    else:
+        flash(f"Render failed: {video['error']}", "error")
+    return redirect(url_for("videos"))
+
+
+@app.route("/videos/render-today", methods=["POST"])
+def render_today():
+    ids = renderer.render_todays_scripts(limit=6)
+    done = db.count("rendered_videos", "status = 'done' AND id IN ({})".format(
+        ",".join("?" * len(ids))), tuple(ids)) if ids else 0
+    if not ids:
+        flash("No unrendered scripts from today — generate scripts first "
+              "(Run Daily Automation).", "error")
+    elif done == len(ids):
+        flash(f"Rendered {done} video(s). Download them below.", "ok")
+    else:
+        flash(f"Rendered {done} of {len(ids)} — check failed rows below for details.",
+              "error")
+    return redirect(url_for("videos"))
+
+
+@app.route("/videos/<int:video_id>/download")
+def video_download(video_id):
+    video = get_or_404("rendered_videos", video_id)
+    if video["status"] != "done" or not video["filename"]:
+        abort(404)
+    return send_from_directory(renderer.RENDER_DIR, video["filename"], as_attachment=True)
+
+
+@app.route("/videos/<int:video_id>/watch")
+def video_watch(video_id):
+    video = get_or_404("rendered_videos", video_id)
+    if video["status"] != "done" or not video["filename"]:
+        abort(404)
+    return send_from_directory(renderer.RENDER_DIR, video["filename"])
+
+
+@app.route("/videos/<int:video_id>/delete", methods=["POST"])
+def video_delete(video_id):
+    video = get_or_404("rendered_videos", video_id)
+    if video["filename"]:
+        try:
+            import os
+            os.unlink(os.path.join(renderer.RENDER_DIR, video["filename"]))
+        except OSError:
+            pass
+    db.execute("DELETE FROM rendered_videos WHERE id = ?", (video_id,))
+    flash("Video deleted.", "ok")
+    return redirect(url_for("videos"))
 
 
 # ---------------------------------------------------------------- calendar

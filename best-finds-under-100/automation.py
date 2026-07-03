@@ -152,6 +152,7 @@ DAILY_TASKS = [
     "Generate 5 YouTube Shorts scripts",
     "Generate video prompts for each script",
     "Generate captions and hashtags",
+    "Render faceless videos",
     "Generate 7-day content calendar",
     "Generate daily report",
 ]
@@ -185,6 +186,21 @@ def run_daily_automation():
     summary["video_prompts"] = len(prompt_ids)
     summary["captions_and_hashtags"] = len(tiktok_ids) + len(youtube_ids)
 
+    # Render finished MP4s for the day's first TikTok + YouTube script
+    # (free TTS + ffmpeg). Failures are recorded, never fatal.
+    import renderer
+    rendered = []
+    try:
+        if tiktok_ids:
+            rendered.append(renderer.render_script("tiktok", tiktok_ids[0]))
+        if youtube_ids:
+            rendered.append(renderer.render_script("youtube", youtube_ids[0]))
+    except Exception:  # noqa: BLE001
+        pass
+    summary["videos_rendered"] = db.count(
+        "rendered_videos", "status = 'done' AND id IN ({})".format(
+            ",".join("?" * len(rendered))), tuple(rendered)) if rendered else 0
+
     summary["calendar_items"] = len(generate_calendar(7))
     summary["report_id"] = generate_daily_report()
 
@@ -207,6 +223,8 @@ def todays_tasks_status():
         "Generate 5 YouTube Shorts scripts": db.count("youtube_scripts", "created_at LIKE ?", (f"{today}%",)) >= 5,
         "Generate video prompts for each script": db.count("video_prompts", "created_at LIKE ?", (f"{today}%",)) >= 1,
         "Generate captions and hashtags": db.count("tiktok_scripts", "created_at LIKE ?", (f"{today}%",)) >= 1,
+        "Render faceless videos": db.count(
+            "rendered_videos", "created_at LIKE ? AND status = 'done'", (f"{today}%",)) >= 1,
         "Generate 7-day content calendar": db.count("content_calendar", "created_at LIKE ?", (f"{today}%",)) >= 1,
         "Generate daily report": db.count("reports", "created_at LIKE ?", (f"{today}%",)) >= 1,
     }

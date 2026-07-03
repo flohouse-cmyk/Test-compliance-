@@ -2,6 +2,9 @@ run = "python main.py"
 entrypoint = "main.py"
 modules = ["python-3.11"]
 
+[nix]
+packages = ["ffmpeg"]
+
 [deployment]
 run = ["python", "main.py"]
 deploymentTarget = "cloudrun"

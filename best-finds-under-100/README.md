@@ -20,6 +20,7 @@ is blocked while you wait.
 | **TikTok Script Generator** | 5 hooks, voiceover, on-screen text, shot list, caption, hashtags, CTA, length, background style, AI prompts, disclosure |
 | **YouTube Shorts Generator** | Title, hook, voiceover, on-screen text, shot list, description, hashtags, pinned comment, CTA, length, disclosure |
 | **Video Prompt Generator** | Product/background/b-roll/thumbnail prompts, cover text, editing style, music, pacing, CapCut + Canva notes — for Runway, Pika, Kling, etc. |
+| **Video Renderer** | Fully automatic faceless MP4s (1080x1920): free AI voiceover (edge-tts/gTTS) + branded text-card scenes assembled with ffmpeg — zero API keys, download and post |
 | **Content Calendar** | 7-day and 30-day plans across TikTok / YouTube Shorts (+ optional Pinterest) with per-item status workflow |
 | **Automation Engine** | One-click daily pipeline: 10 ideas → score → top 5 → 5 TikTok + 5 Shorts scripts → prompts → captions → 7-day calendar → daily report |
 | **Daily Report** | New content, top opportunities, missing keys, monetization readiness, recommended next actions |
@@ -142,11 +143,28 @@ shares `bestfinds.db` with the web app.
   TikTok Creator Rewards, Amazon Associates, TikTok Shop Affiliate).
 - Put your deployed `/hub` URL in your TikTok/YouTube bios.
 
+## Autonomous video rendering (free, no keys)
+
+The **Videos** page (and the daily automation) renders finished vertical MP4s from
+each script: a free AI voiceover (edge-tts natural voices, gTTS fallback) over
+branded animated text cards (hook → problem → the find → search term → CTA),
+assembled with ffmpeg at 1080x1920/30fps. Daily automation renders the day's first
+TikTok + Shorts video automatically; "Render Today's Videos" does the rest.
+Download the MP4 and upload it in the TikTok/YouTube app.
+
+Requires ffmpeg on the host: on Replit it's already requested via `[nix]
+packages` in `.replit`; elsewhere `apt install ffmpeg` (PythonAnywhere has it
+pre-installed). The card visuals are original generated graphics — no product
+photos are scraped or copied. With an `OPENAI_API_KEY` you can later upgrade to
+AI-written voiceover text; AI-generated product imagery is a future upgrade.
+
 ## What the app cannot automate yet
 
 - **Posting videos** — TikTok/YouTube/Pinterest upload APIs need approved developer
-  apps and OAuth; the keys are supported but no auto-posting is wired up yet.
-- **Rendering videos** — it generates scripts and AI-tool prompts, not final MP4s.
+  apps and OAuth; the keys are supported but no auto-posting is wired up yet. You
+  download the rendered MP4 and tap upload in the platform's app.
+- **Product footage** — rendered videos use branded text-card scenes; real or
+  AI-generated product imagery requires a paid image/video API (future upgrade).
 - **Analytics ingestion** — views/followers aren't pulled automatically yet.
 - **Affiliate link creation** — links must be pasted manually once approved.
 

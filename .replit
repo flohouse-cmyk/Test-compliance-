@@ -4,6 +4,9 @@ run = ["sh", "-c", "cd best-finds-under-100 && pip install -r requirements.txt &
 entrypoint = "best-finds-under-100/main.py"
 modules = ["python-3.11"]
 
+[nix]
+packages = ["ffmpeg"]
+
 [deployment]
 run = ["sh", "-c", "cd best-finds-under-100 && python main.py"]
 deploymentTarget = "cloudrun"
