@@ -154,9 +154,16 @@ Download the MP4 and upload it in the TikTok/YouTube app.
 
 Requires ffmpeg on the host: on Replit it's already requested via `[nix]
 packages` in `.replit`; elsewhere `apt install ffmpeg` (PythonAnywhere has it
-pre-installed). The card visuals are original generated graphics — no product
-photos are scraped or copied. With an `OPENAI_API_KEY` you can later upgrade to
-AI-written voiceover text; AI-generated product imagery is a future upgrade.
+pre-installed).
+
+**Real photo backgrounds (free):** add a `PEXELS_API_KEY` (free key from
+pexels.com/api, ~2 minutes) and rendered videos automatically use real stock
+photos matched to each product/category as scene backgrounds. Pexels photos
+are free for commercial use, so videos stay monetization-safe — unlike
+reusing clips or images from other creators' posts, which YouTube/TikTok
+treat as "reused content" and which risks copyright strikes and monetization
+rejection. Without the key, videos fall back to branded gradient cards.
+No scraped or copied product photos, ever.
 
 ## What the app cannot automate yet
 

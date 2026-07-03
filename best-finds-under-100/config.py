@@ -21,6 +21,7 @@ API_KEYS = {
     "YOUTUBE_CLIENT_ID": os.environ.get("YOUTUBE_CLIENT_ID", ""),
     "YOUTUBE_CLIENT_SECRET": os.environ.get("YOUTUBE_CLIENT_SECRET", ""),
     "PINTEREST_ACCESS_TOKEN": os.environ.get("PINTEREST_ACCESS_TOKEN", ""),
+    "PEXELS_API_KEY": os.environ.get("PEXELS_API_KEY", ""),
 }
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "bestfinds-dev-secret")
@@ -35,6 +36,7 @@ def api_status():
         "YouTube API key": bool(API_KEYS["YOUTUBE_API_KEY"]),
         "YouTube OAuth client": bool(API_KEYS["YOUTUBE_CLIENT_ID"] and API_KEYS["YOUTUBE_CLIENT_SECRET"]),
         "Pinterest access token": bool(API_KEYS["PINTEREST_ACCESS_TOKEN"]),
+        "Pexels (free stock visuals in videos)": bool(API_KEYS["PEXELS_API_KEY"]),
     }
 
 

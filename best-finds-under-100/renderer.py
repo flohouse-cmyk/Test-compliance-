@@ -22,6 +22,7 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 import db
+from config import API_KEYS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RENDER_DIR = os.path.join(BASE_DIR, "renders")
@@ -98,6 +99,59 @@ def audio_duration(path):
     return float(json.loads(out.stdout)["format"]["duration"])
 
 
+# ----------------------------------------------- stock visuals (Pexels)
+
+def fetch_stock_photos(product, outdir, rng, limit=5):
+    """Download free-to-use portrait photos from Pexels as scene backgrounds.
+
+    Pexels photos are free for commercial use (pexels.com/license) — unlike
+    reusing other creators' posts, this keeps videos monetization-safe.
+    Requires the free PEXELS_API_KEY; returns [] without it (text-card
+    fallback) and on any network failure.
+    """
+    key = API_KEYS.get("PEXELS_API_KEY", "")
+    if not key:
+        return []
+    try:
+        import requests
+    except ImportError:
+        return []
+    paths = []
+    for query in (product["name"], product["category"]):
+        try:
+            resp = requests.get(
+                "https://api.pexels.com/v1/search",
+                params={"query": query, "orientation": "portrait", "per_page": 15},
+                headers={"Authorization": key}, timeout=15)
+            resp.raise_for_status()
+            photos = resp.json().get("photos", [])
+            rng.shuffle(photos)
+            for photo in photos:
+                if len(paths) >= limit:
+                    break
+                url = photo.get("src", {}).get("large2x") or photo.get("src", {}).get("portrait")
+                if not url:
+                    continue
+                img = requests.get(url, timeout=20)
+                img.raise_for_status()
+                path = os.path.join(outdir, f"stock{len(paths)}.jpg")
+                with open(path, "wb") as f:
+                    f.write(img.content)
+                paths.append(path)
+        except Exception:  # noqa: BLE001 — stock photos are best-effort
+            continue
+        if len(paths) >= limit:
+            break
+    return paths
+
+
+def _cover_crop(img, w, h):
+    ratio = max(w / img.width, h / img.height)
+    img = img.resize((int(img.width * ratio) + 1, int(img.height * ratio) + 1))
+    left, top = (img.width - w) // 2, (img.height - h) // 2
+    return img.crop((left, top, left + w, top + h))
+
+
 # ----------------------------------------------------------- scene cards
 
 def _font(path, size):
@@ -121,15 +175,29 @@ def _wrap(draw, text, font, max_width):
     return lines
 
 
-def _card(palette, kicker, title, body, footer, brand):
-    """Draw one 1080x1920 scene card."""
+def _card(palette, kicker, title, body, footer, brand, bg_photo=None):
+    """Draw one 1080x1920 scene card, over a stock photo when available."""
     top, bottom, accent, ink = palette
-    img = Image.new("RGB", (W, H))
+    if bg_photo:
+        try:
+            img = _cover_crop(Image.open(bg_photo).convert("RGB"), W, H)
+            # Darken for text legibility: base shade, heavier near the bottom.
+            mask = Image.new("L", (1, H))
+            for y in range(H):
+                t = y / H
+                mask.putpixel((0, y), 150 if t < 0.62 else int(150 + (t - 0.62) / 0.38 * 60))
+            img = Image.composite(Image.new("RGB", (W, H), (8, 10, 14)), img,
+                                  mask.resize((W, H)))
+        except Exception:  # noqa: BLE001 — bad download falls back to gradient
+            bg_photo = None
+    if not bg_photo:
+        img = Image.new("RGB", (W, H))
+        draw = ImageDraw.Draw(img)
+        for y in range(H):  # vertical gradient
+            t = y / H
+            draw.line([(0, y), (W, y)], fill=tuple(
+                int(top[i] + (bottom[i] - top[i]) * t) for i in range(3)))
     draw = ImageDraw.Draw(img)
-    for y in range(H):  # vertical gradient
-        t = y / H
-        draw.line([(0, y), (W, y)], fill=tuple(
-            int(top[i] + (bottom[i] - top[i]) * t) for i in range(3)))
 
     margin, max_w = 90, W - 180
     y = 300
@@ -182,10 +250,12 @@ def make_scene_images(product, script_fields, outdir, rng):
          "Prices and availability may change", brand),
         ("", cta, script_fields.get("disclosure", ""), "New find every day", brand),
     ]
+    photos = fetch_stock_photos(product, outdir, rng)
     paths = []
     for i, (kicker, title, body, footer, brand_line) in enumerate(scenes):
         path = os.path.join(outdir, f"scene{i}.png")
-        _card(palette, kicker, title, body, footer, brand_line).save(path)
+        bg = photos[i % len(photos)] if photos else None
+        _card(palette, kicker, title, body, footer, brand_line, bg_photo=bg).save(path)
         paths.append(path)
     return paths
 
