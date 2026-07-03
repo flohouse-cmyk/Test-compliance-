@@ -1,0 +1,13 @@
+# Runs the Best Finds Under $100 app (in best-finds-under-100/) on Replit.
+# The repo root is a GitHub Pages portfolio; this file only affects Replit.
+run = ["sh", "-c", "cd best-finds-under-100 && pip install -r requirements.txt && python main.py"]
+entrypoint = "best-finds-under-100/main.py"
+modules = ["python-3.11"]
+
+[deployment]
+run = ["sh", "-c", "cd best-finds-under-100 && python main.py"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
