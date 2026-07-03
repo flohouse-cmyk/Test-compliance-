@@ -311,6 +311,11 @@ def videos():
                            ffmpeg_ok=renderer.ffmpeg_available())
 
 
+@app.route("/videos/diagnose")
+def video_diagnose():
+    return render_template("diagnose.html", checks=renderer.diagnose())
+
+
 @app.route("/render/<script_type>/<int:script_id>", methods=["POST"])
 def render_video(script_type, script_id):
     if script_type not in ("tiktok", "youtube"):

@@ -406,6 +406,58 @@ def assemble_motion(clips, overlays, audio_path, out_path, total_duration, workd
         raise RuntimeError("ffmpeg concat failed: " + (exc.stderr or "")[-300:]) from exc
 
 
+def diagnose():
+    """Test every piece of the render pipeline. Returns [(name, ok, detail)]."""
+    checks = [
+        ("ffmpeg installed", bool(shutil.which("ffmpeg")), shutil.which("ffmpeg") or "not found — restart the Repl so [nix] packages install"),
+        ("ffprobe installed", bool(shutil.which("ffprobe")), shutil.which("ffprobe") or "not found"),
+    ]
+    with tempfile.TemporaryDirectory() as tmp:
+        for label, fn in (("edge-tts voice (primary)",
+                           lambda p: _tts_edge("Testing the voice, one two three.", p, "en-US-JennyNeural")),
+                          ("gTTS voice (fallback)",
+                           lambda p: _tts_gtts("Testing the voice, one two three.", p))):
+            path = os.path.join(tmp, label[:4] + ".mp3")
+            try:
+                fn(path)
+                ok, detail = _probe_audio(path)
+                checks.append((label, ok, detail if not ok else f"OK ({os.path.getsize(path)} bytes)"))
+            except Exception as exc:  # noqa: BLE001
+                checks.append((label, False, f"{exc.__class__.__name__}: {str(exc)[:250]}"))
+
+        key = API_KEYS.get("PEXELS_API_KEY", "")
+        if not key:
+            checks.append(("Pexels API (visuals)", False,
+                           "PEXELS_API_KEY not set — videos fall back to branded cards"))
+        else:
+            try:
+                import requests
+                resp = requests.get("https://api.pexels.com/v1/search",
+                                    params={"query": "kitchen", "per_page": 1},
+                                    headers={"Authorization": key}, timeout=15)
+                checks.append(("Pexels API (visuals)", resp.status_code == 200,
+                               f"HTTP {resp.status_code}"
+                               + ("" if resp.status_code == 200 else " — check the key value")))
+            except Exception as exc:  # noqa: BLE001
+                checks.append(("Pexels API (visuals)", False,
+                               f"{exc.__class__.__name__}: {str(exc)[:250]}"))
+
+        try:
+            img_path = os.path.join(tmp, "test.png")
+            Image.new("RGB", (1080, 1920), (20, 24, 32)).save(img_path)
+            out = subprocess.run(
+                ["ffmpeg", "-y", "-loop", "1", "-t", "1", "-i", img_path,
+                 "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
+                 os.path.join(tmp, "test.mp4")],
+                capture_output=True, text=True, timeout=120)
+            checks.append(("ffmpeg test encode", out.returncode == 0,
+                           "OK" if out.returncode == 0 else (out.stderr or "")[-250:]))
+        except Exception as exc:  # noqa: BLE001
+            checks.append(("ffmpeg test encode", False,
+                           f"{exc.__class__.__name__}: {str(exc)[:250]}"))
+    return checks
+
+
 # ------------------------------------------------------------ main entry
 
 def render_script(script_type, script_id):

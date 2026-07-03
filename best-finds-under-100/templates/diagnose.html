@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Render Diagnostics{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Render Diagnostics</h1>
+  <a class="btn" href="{{ url_for('videos') }}">Back to Videos</a>
+</div>
+
+<section class="card">
+  <p class="muted small">Live test of every piece of the video pipeline on this server.</p>
+  <table>
+    <tr><th>Check</th><th>Result</th><th>Detail</th></tr>
+    {% for name, ok, detail in checks %}
+      <tr>
+        <td>{{ name }}</td>
+        <td>{% if ok %}<span class="badge badge-ok">pass</span>
+            {% else %}<span class="badge" style="background:#fee2e2;color:#991b1b">FAIL</span>{% endif %}</td>
+        <td class="small">{{ detail }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p class="muted small">Rendering needs: ffmpeg + at least one working voice.
+     Pexels is optional (visuals); without it videos use branded cards.</p>
+</section>
+{% endblock %}

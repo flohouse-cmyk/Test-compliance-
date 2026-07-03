@@ -3,9 +3,12 @@
 {% block content %}
 <div class="page-head">
   <h1>Rendered Videos</h1>
-  <form method="post" action="{{ url_for('render_today') }}">
-    <button class="btn btn-primary">🎬 Render Today's Videos</button>
-  </form>
+  <div class="btn-row">
+    <form method="post" action="{{ url_for('render_today') }}">
+      <button class="btn btn-primary">🎬 Render Today's Videos</button>
+    </form>
+    <a class="btn" href="{{ url_for('video_diagnose') }}">🩺 Run Diagnostics</a>
+  </div>
 </div>
 
 {% if not ffmpeg_ok %}
