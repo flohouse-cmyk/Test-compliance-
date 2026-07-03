@@ -1,0 +1,52 @@
+{% extends "hub/base_hub.html" %}
+{% block content %}
+<section class="hub-section">
+  <h2>✨ Featured finds</h2>
+  <div class="hub-grid">
+    {% for product, link in featured %}
+      <a class="hub-card" href="{{ link if link.startswith('http') else 'https://www.google.com/search?tbm=shop&q=' + link|urlencode }}"
+         target="_blank" rel="noopener">
+        <span class="hub-card-cat">{{ product.category }}</span>
+        <strong>{{ product.name }}</strong>
+        <span class="hub-card-price">{{ product.price_range }}</span>
+        <span class="hub-card-why">{{ product.why_care }}</span>
+      </a>
+    {% else %}
+      <p class="muted">Finds coming soon.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="hub-section">
+  <h2>🗂 Browse by category</h2>
+  <div class="hub-chips">
+    {% for row in cat_counts %}
+      <a class="chip" href="{{ url_for('hub_category', category=row.category) }}">
+        {{ row.category }} ({{ row.n }})</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="hub-section hub-platforms">
+  <h2>📱 Where to find us</h2>
+  <div class="hub-grid">
+    <div class="hub-card hub-card-static">
+      <strong>TikTok</strong>
+      <span class="hub-card-why">Daily faceless finds under $100.</span>
+      {% if tiktok_handle %}<a class="btn btn-social" href="https://www.tiktok.com/{{ tiktok_handle }}" target="_blank" rel="noopener">Follow {{ tiktok_handle }}</a>{% endif %}
+    </div>
+    <div class="hub-card hub-card-static">
+      <strong>YouTube Shorts</strong>
+      <span class="hub-card-why">Same finds, longer breakdowns.</span>
+      {% if youtube_handle %}<a class="btn btn-social" href="https://www.youtube.com/{{ youtube_handle }}" target="_blank" rel="noopener">Subscribe {{ youtube_handle }}</a>{% endif %}
+    </div>
+    {% if pinterest_enabled %}
+    <div class="hub-card hub-card-static">
+      <strong>Pinterest</strong>
+      <span class="hub-card-why">Save finds to your boards.</span>
+      {% if pinterest_handle %}<a class="btn btn-social" href="https://www.pinterest.com/{{ pinterest_handle }}" target="_blank" rel="noopener">Follow {{ pinterest_handle }}</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

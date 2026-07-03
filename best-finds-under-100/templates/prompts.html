@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Video Prompts{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Faceless Video Prompts</h1>
+  <p class="muted">Ready-to-paste prompts for CapCut, Canva, Runway, Pika, Kling, and similar tools.
+     No copyrighted characters, celebrity likenesses, or brand logos.</p>
+</div>
+
+<section class="card">
+  <table>
+    <tr><th>#</th><th>Product</th><th>Category</th><th>For</th><th>Editing style</th><th>Created</th></tr>
+    {% for pr in prompts %}
+      <tr>
+        <td><a href="{{ url_for('prompt_detail', prompt_id=pr.id) }}">#{{ pr.id }}</a></td>
+        <td><a href="{{ url_for('product_detail', product_id=pr.product_id) }}">{{ pr.product_name }}</a></td>
+        <td>{{ pr.category }}</td>
+        <td>{{ pr.script_type or 'general' }}</td>
+        <td class="small">{{ pr.editing_style[:50] }}…</td>
+        <td class="small">{{ pr.created_at }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="muted">No prompts yet — generate from the dashboard or any product page.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

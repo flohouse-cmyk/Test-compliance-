@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}YouTube Shorts Script{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>YouTube Shorts script — {{ product.name }}</h1>
+  <div class="btn-row">
+    <a class="btn" href="{{ url_for('product_detail', product_id=product.id) }}">View product</a>
+    <form method="post" action="{{ url_for('youtube_script_delete', script_id=script.id) }}"
+          onsubmit="return confirm('Delete this script?')">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Title <button class="btn btn-small copy-btn" data-copy="yt-title">Copy</button></h2>
+    <p class="copy-block" id="yt-title">{{ script.title }}</p>
+
+    <h2>Hook</h2>
+    <p class="copy-block">{{ script.hook }}</p>
+
+    <h2>Voiceover script <button class="btn btn-small copy-btn" data-copy="voiceover">Copy</button></h2>
+    <p class="copy-block" id="voiceover">{{ script.voiceover }}</p>
+
+    <h2>On-screen text</h2>
+    <pre class="copy-block">{{ script.on_screen_text }}</pre>
+
+    <h2>Scene-by-scene shot list</h2>
+    <ol class="shot-list">
+      {% for shot in script.shot_list|fromjson %}<li>{{ shot }}</li>{% endfor %}
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Description <button class="btn btn-small copy-btn" data-copy="description">Copy</button></h2>
+    <p class="copy-block" id="description">{{ script.description }}</p>
+
+    <h2>Hashtags <button class="btn btn-small copy-btn" data-copy="hashtags">Copy</button></h2>
+    <p class="copy-block" id="hashtags">{{ script.hashtags }}</p>
+
+    <h2>Pinned comment <button class="btn btn-small copy-btn" data-copy="pinned">Copy</button></h2>
+    <p class="copy-block" id="pinned">{{ script.pinned_comment }}</p>
+
+    <table class="kv">
+      <tr><th>Call to action</th><td>{{ script.cta }}</td></tr>
+      <tr><th>Suggested length</th><td>{{ script.video_length }}</td></tr>
+      <tr><th>Disclosure line</th><td class="small">{{ script.disclosure }}</td></tr>
+    </table>
+    <p class="muted small">Compliance: no fake claims, no “I tested this” unless actually tested,
+       no guaranteed results.</p>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Edit Link{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Edit link — {{ product.name }}</h1>
+  <a class="btn" href="{{ url_for('product_detail', product_id=product.id) }}">Back to product</a>
+</div>
+
+<section class="card">
+  <form method="post" class="form-grid">
+    <label>Monetization status
+      <select name="monetization_status">
+        {% for key, label in monetization_statuses.items() %}
+          <option value="{{ key }}" {{ 'selected' if link.monetization_status == key }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Platform
+      <input name="platform" value="{{ link.platform }}" placeholder="Amazon / TikTok Shop / Brand / Digital">
+    </label>
+    <label class="full">Product search term
+      <input name="search_term" value="{{ link.search_term }}">
+    </label>
+    <label class="full">Placeholder link (auto search link — works with no accounts)
+      <input name="placeholder_link" value="{{ link.placeholder_link }}">
+    </label>
+    <label class="full">Manual product link (add any product URL yourself)
+      <input name="manual_link" value="{{ link.manual_link }}" placeholder="https://…">
+    </label>
+    <label class="full">Future affiliate link (Amazon Associates, TikTok Shop, etc.)
+      <input name="affiliate_link" value="{{ link.affiliate_link }}" placeholder="Paste once approved">
+    </label>
+    <label class="full">Future brand sponsor link
+      <input name="sponsored_link" value="{{ link.sponsored_link }}" placeholder="Paste when you land a deal">
+    </label>
+    <label class="full">Future digital product link
+      <input name="digital_product_link" value="{{ link.digital_product_link }}" placeholder="Your own product, later">
+    </label>
+    <label>Campaign name
+      <input name="campaign_name" value="{{ link.campaign_name }}" placeholder="e.g. spring-desk-refresh">
+    </label>
+    <label class="full">Notes
+      <textarea name="notes" rows="3">{{ link.notes }}</textarea>
+    </label>
+    <div class="full btn-row">
+      <button class="btn btn-primary">Save link</button>
+      <a class="btn" href="{{ url_for('links') }}">Cancel</a>
+    </div>
+  </form>
+  <p class="muted small">Tip: when you paste an affiliate link, also set the status to
+     “Affiliate link added” so the affiliate disclosure switches on automatically.</p>
+</section>
+{% endblock %}

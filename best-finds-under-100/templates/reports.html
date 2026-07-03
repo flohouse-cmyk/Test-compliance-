@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Daily Reports</h1>
+  <form method="post" action="{{ url_for('run_automation', action='report') }}">
+    <button class="btn btn-primary">Generate Daily Report</button></form>
+</div>
+
+<section class="card">
+  <table>
+    <tr><th>Date</th><th>Generated at</th><th></th></tr>
+    {% for r in reports %}
+      <tr>
+        <td>{{ r.report_date }}</td>
+        <td class="small">{{ r.created_at }}</td>
+        <td><a class="btn btn-small" href="{{ url_for('report_detail', report_id=r.id) }}">Open</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="3" class="muted">No reports yet.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

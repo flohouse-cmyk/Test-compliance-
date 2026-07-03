@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Video Prompt #{{ prompt.id }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Video prompt — {{ product.name }}</h1>
+  <a class="btn" href="{{ url_for('product_detail', product_id=product.id) }}">View product</a>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Product visual prompt <button class="btn btn-small copy-btn" data-copy="p1">Copy</button></h2>
+    <p class="copy-block" id="p1">{{ prompt.product_visual_prompt }}</p>
+
+    <h2>Background prompt <button class="btn btn-small copy-btn" data-copy="p2">Copy</button></h2>
+    <p class="copy-block" id="p2">{{ prompt.background_prompt }}</p>
+
+    <h2>B-roll prompt <button class="btn btn-small copy-btn" data-copy="p3">Copy</button></h2>
+    <p class="copy-block" id="p3">{{ prompt.broll_prompt }}</p>
+
+    <h2>Thumbnail prompt <button class="btn btn-small copy-btn" data-copy="p4">Copy</button></h2>
+    <p class="copy-block" id="p4">{{ prompt.thumbnail_prompt }}</p>
+  </section>
+
+  <section class="card">
+    <table class="kv">
+      <tr><th>TikTok cover text</th><td>{{ prompt.tiktok_cover_text }}</td></tr>
+      <tr><th>YouTube Shorts cover text</th><td>{{ prompt.youtube_cover_text }}</td></tr>
+      <tr><th>Editing style</th><td>{{ prompt.editing_style }}</td></tr>
+      <tr><th>Music / mood</th><td>{{ prompt.music_mood }}</td></tr>
+      <tr><th>Pacing</th><td>{{ prompt.pacing }}</td></tr>
+    </table>
+
+    <h2>CapCut notes</h2>
+    <p class="copy-block">{{ prompt.capcut_notes }}</p>
+
+    <h2>Canva notes</h2>
+    <p class="copy-block">{{ prompt.canva_notes }}</p>
+
+    <p class="muted small">Rules baked in: no copyrighted characters, no celebrity likenesses,
+       no brand logos, no faces (faceless brand).</p>
+  </section>
+</div>
+{% endblock %}

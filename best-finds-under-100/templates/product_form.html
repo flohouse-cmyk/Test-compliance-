@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if product else 'New' }} Product Idea{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ 'Edit product idea' if product else 'New product idea' }}</h1>
+</div>
+
+<section class="card">
+  <form method="post" class="form-grid">
+    <label>Product idea name
+      <input name="name" required value="{{ form.name or '' }}"
+             placeholder="e.g. Motion sensor under-cabinet lights">
+    </label>
+    <label>Category
+      <select name="category">
+        {% for cat in categories %}
+          <option value="{{ cat }}" {{ 'selected' if form.category == cat }}>{{ cat }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Estimated price range
+      <input name="price_range" value="{{ form.price_range or '' }}" placeholder="$20-$40">
+    </label>
+    <label>Search term (used instead of exact URLs)
+      <input name="search_term" value="{{ form.search_term or '' }}"
+             placeholder="motion sensor under cabinet lights under 40">
+    </label>
+    <label class="full">Why people would care
+      <input name="why_care" value="{{ form.why_care or '' }}"
+             placeholder="Instant high-end kitchen glow with zero wiring">
+    </label>
+    <label class="full">Problem it solves
+      <input name="problem_solved" value="{{ form.problem_solved or '' }}"
+             placeholder="Dark counters and fumbling for switches at night">
+    </label>
+    <label class="full">Target audience
+      <input name="target_audience" value="{{ form.target_audience or '' }}"
+             placeholder="Renters and homeowners who want an easy upgrade">
+    </label>
+    <label class="full">Short-form video angle
+      <input name="video_angle" value="{{ form.video_angle or '' }}"
+             placeholder="Apartment upgrades that make your kitchen look expensive">
+    </label>
+    {% if product %}
+    <label class="check full"><input type="checkbox" name="featured" {{ 'checked' if form.featured }}>
+      Featured on the public link hub</label>
+    {% endif %}
+    <div class="full btn-row">
+      <button class="btn btn-primary">{{ 'Save changes' if product else 'Add product idea' }}</button>
+      <a class="btn" href="{{ url_for('products') }}">Cancel</a>
+    </div>
+  </form>
+  <p class="muted small">Scores are assigned automatically. Compliance: use original descriptions,
+     no scraping, no copied retailer copy, no personal-testing claims.</p>
+</section>
+{% endblock %}

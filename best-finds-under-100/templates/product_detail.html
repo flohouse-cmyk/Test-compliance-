@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ product.name }} {% if product.featured %}<span title="Featured">⭐</span>{% endif %}</h1>
+  <div class="btn-row">
+    <a class="btn" href="{{ url_for('product_edit', product_id=product.id) }}">Edit</a>
+    <form method="post" action="{{ url_for('product_delete', product_id=product.id) }}"
+          onsubmit="return confirm('Delete this product idea and all its content?')">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Idea details</h2>
+    <table class="kv">
+      <tr><th>Category</th><td>{{ product.category }}</td></tr>
+      <tr><th>Price range</th><td>{{ product.price_range }}</td></tr>
+      <tr><th>Search term</th><td><code>{{ product.search_term }}</code></td></tr>
+      <tr><th>Why people care</th><td>{{ product.why_care }}</td></tr>
+      <tr><th>Problem it solves</th><td>{{ product.problem_solved }}</td></tr>
+      <tr><th>Target audience</th><td>{{ product.target_audience }}</td></tr>
+      <tr><th>Video angle</th><td>{{ product.video_angle }}</td></tr>
+      <tr><th>Disclosure in use</th><td class="small">{{ disclosure }}</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Scores</h2>
+    <table class="kv">
+      <tr><th>Overall</th><td><span class="score score-big">{{ product.overall_score }}</span></td></tr>
+      <tr><th>Viral</th><td>{{ product.viral_score }}</td></tr>
+      <tr><th>Visual</th><td>{{ product.visual_score }}</td></tr>
+      <tr><th>Giftability</th><td>{{ product.giftability_score }}</td></tr>
+      <tr><th>Impulse-buy</th><td>{{ product.impulse_score }}</td></tr>
+      <tr><th>TikTok potential</th><td>{{ product.tiktok_score }}</td></tr>
+      <tr><th>YouTube Shorts potential</th><td>{{ product.youtube_score }}</td></tr>
+    </table>
+    <h2>Generate content</h2>
+    <div class="btn-row">
+      <form method="post" action="{{ url_for('product_generate', product_id=product.id, content_type='tiktok') }}">
+        <button class="btn btn-primary">+ TikTok script</button></form>
+      <form method="post" action="{{ url_for('product_generate', product_id=product.id, content_type='youtube') }}">
+        <button class="btn btn-primary">+ YouTube Shorts script</button></form>
+      <form method="post" action="{{ url_for('product_generate', product_id=product.id, content_type='prompt') }}">
+        <button class="btn">+ Video prompt</button></form>
+    </div>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Monetization links</h2>
+  <table>
+    <tr><th>Status</th><th>Search term</th><th>Best link</th><th>Platform</th><th>Campaign</th><th></th></tr>
+    {% for l in links %}
+      <tr>
+        <td><span class="badge">{{ monetization_statuses.get(l.monetization_status, l.monetization_status) }}</span></td>
+        <td class="small"><code>{{ l.search_term }}</code></td>
+        <td class="small">
+          {% set best = l.sponsored_link or l.affiliate_link or l.manual_link or l.placeholder_link %}
+          {% if best %}<a href="{{ best }}" target="_blank" rel="noopener">{{ best[:60] }}…</a>{% else %}<span class="muted">none</span>{% endif %}
+        </td>
+        <td>{{ l.platform or '—' }}</td>
+        <td>{{ l.campaign_name or '—' }}</td>
+        <td><a class="btn btn-small" href="{{ url_for('link_edit', link_id=l.id) }}">Edit link</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="muted">No link record yet.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <h2>TikTok scripts ({{ tiktoks|length }})</h2>
+    <ul class="link-list">
+      {% for s in tiktoks %}
+        <li><a href="{{ url_for('tiktok_script_detail', script_id=s.id) }}">{{ s.title }}</a>
+            <span class="muted small">{{ s.created_at }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ul>
+  </section>
+  <section class="card">
+    <h2>YouTube Shorts scripts ({{ youtubes|length }})</h2>
+    <ul class="link-list">
+      {% for s in youtubes %}
+        <li><a href="{{ url_for('youtube_script_detail', script_id=s.id) }}">{{ s.title }}</a>
+            <span class="muted small">{{ s.created_at }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Video prompts ({{ prompts|length }})</h2>
+  <ul class="link-list">
+    {% for pr in prompts %}
+      <li><a href="{{ url_for('prompt_detail', prompt_id=pr.id) }}">
+        Prompt #{{ pr.id }} {{ '· ' + pr.script_type if pr.script_type }}</a>
+        <span class="muted small">{{ pr.created_at }}</span></li>
+    {% else %}<li class="muted">None yet.</li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

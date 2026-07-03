@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}TikTok Script{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>TikTok script — {{ product.name }}</h1>
+  <div class="btn-row">
+    <a class="btn" href="{{ url_for('product_detail', product_id=product.id) }}">View product</a>
+    <form method="post" action="{{ url_for('tiktok_script_delete', script_id=script.id) }}"
+          onsubmit="return confirm('Delete this script?')">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Hook options (pick one)</h2>
+    <ol class="hook-list">
+      {% for hook in script.hooks|fromjson %}<li>{{ hook }}</li>{% endfor %}
+    </ol>
+
+    <h2>Voiceover script <button class="btn btn-small copy-btn" data-copy="voiceover">Copy</button></h2>
+    <p class="copy-block" id="voiceover">{{ script.voiceover }}</p>
+
+    <h2>On-screen text</h2>
+    <pre class="copy-block">{{ script.on_screen_text }}</pre>
+
+    <h2>Scene-by-scene shot list</h2>
+    <ol class="shot-list">
+      {% for shot in script.shot_list|fromjson %}<li>{{ shot }}</li>{% endfor %}
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Caption <button class="btn btn-small copy-btn" data-copy="caption">Copy</button></h2>
+    <p class="copy-block" id="caption">{{ script.caption }}</p>
+
+    <h2>Hashtags <button class="btn btn-small copy-btn" data-copy="hashtags">Copy</button></h2>
+    <p class="copy-block" id="hashtags">{{ script.hashtags }}</p>
+
+    <table class="kv">
+      <tr><th>Call to action</th><td>{{ script.cta }}</td></tr>
+      <tr><th>Suggested length</th><td>{{ script.video_length }}</td></tr>
+      <tr><th>Background style</th><td>{{ script.background_style }}</td></tr>
+      <tr><th>Disclosure line</th><td class="small">{{ script.disclosure }}</td></tr>
+    </table>
+
+    <h2>Suggested AI image/video prompts</h2>
+    <ul class="prompt-list">
+      {% for prompt in script.ai_prompts|fromjson %}<li class="copy-block">{{ prompt }}</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

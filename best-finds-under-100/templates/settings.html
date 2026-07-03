@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Settings</h1></div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Brand & platforms</h2>
+    <form method="post" class="form-grid">
+      <label>Brand name<input name="brand_name" value="{{ values.brand_name }}"></label>
+      <label>Posting time<input name="posting_time" value="{{ values.posting_time }}" placeholder="18:00"></label>
+      <label class="full">Tagline<input name="tagline" value="{{ values.tagline }}"></label>
+      <label>TikTok handle<input name="tiktok_handle" value="{{ values.tiktok_handle }}"></label>
+      <label>YouTube handle<input name="youtube_handle" value="{{ values.youtube_handle }}"></label>
+      <label>Pinterest handle<input name="pinterest_handle" value="{{ values.pinterest_handle }}"></label>
+      <label class="check"><input type="checkbox" name="pinterest_enabled"
+             {{ 'checked' if values.pinterest_enabled == '1' }}> Include Pinterest in calendars & hub</label>
+      <label class="full">Default disclosure (non-affiliate)
+        <textarea name="default_disclosure" rows="2">{{ values.default_disclosure }}</textarea></label>
+      <label class="full">Affiliate disclosure (used only when affiliate links exist)
+        <textarea name="affiliate_disclosure" rows="2">{{ values.affiliate_disclosure }}</textarea></label>
+      <div class="full"><button class="btn btn-primary">Save settings</button></div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>API connections</h2>
+    <ul class="api-list">
+      {% for name, connected in api_status.items() %}
+        <li><span class="dot {{ 'dot-on' if connected else 'dot-off' }}"></span>
+            {{ name }} — {{ 'connected' if connected else 'not configured' }}</li>
+      {% endfor %}
+    </ul>
+    <p class="muted small">Keys are read from environment variables (Replit Secrets).
+       See <code>.env.example</code>. The app never requires them.</p>
+
+    <h2>Safety & compliance rules</h2>
+    <ul class="small">
+      {% for rule in content_rules %}<li>{{ rule }}</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

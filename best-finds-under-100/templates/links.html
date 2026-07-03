@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Link Manager{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Monetization-Ready Link Manager</h1>
+  <p class="muted">Works today with search links; plug in affiliate links whenever your accounts are approved.</p>
+</div>
+
+<section class="stat-grid">
+  {% for key, label in monetization_statuses.items() %}
+    <div class="stat"><span class="stat-num">{{ counts[key] }}</span><span class="stat-label">{{ label }}</span></div>
+  {% endfor %}
+</section>
+
+<section class="card">
+  <table>
+    <tr><th>Product</th><th>Status</th><th>Search term</th><th>Best link</th><th>Platform</th><th>Campaign</th><th></th></tr>
+    {% for l in links %}
+      <tr>
+        <td><a href="{{ url_for('product_detail', product_id=l.product_id) }}">{{ l.product_name }}</a>
+            <div class="muted small">{{ l.category }}</div></td>
+        <td><span class="badge">{{ monetization_statuses.get(l.monetization_status, l.monetization_status) }}</span></td>
+        <td class="small"><code>{{ l.search_term }}</code></td>
+        <td class="small">
+          {% set best = l.sponsored_link or l.affiliate_link or l.manual_link or l.placeholder_link %}
+          {% if best %}<a href="{{ best }}" target="_blank" rel="noopener">open ↗</a>{% else %}<span class="muted">none</span>{% endif %}
+        </td>
+        <td>{{ l.platform or '—' }}</td>
+        <td>{{ l.campaign_name or '—' }}</td>
+        <td><a class="btn btn-small" href="{{ url_for('link_edit', link_id=l.id) }}">Edit</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7" class="muted">No links yet — links are created automatically with each product idea.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="card">
+  <h2>Disclosure rules</h2>
+  <p class="small">Non-affiliate content uses: <em>“Product ideas are for discovery and inspiration.
+     Prices and availability may change.”</em></p>
+  <p class="small">Once a link is marked <strong>Affiliate link added</strong> or
+     <strong>Sponsored link added</strong>, its product's content automatically switches to:
+     <em>“As an affiliate, we may earn from qualifying purchases. Prices and availability may change.”</em></p>
+</section>
+{% endblock %}

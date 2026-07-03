@@ -1,0 +1,21 @@
+{% extends "hub/base_hub.html" %}
+{% block title %}{{ category }} · {{ brand_name }}{% endblock %}
+{% block content %}
+<section class="hub-section">
+  <a class="chip" href="{{ url_for('hub_home') }}">← All categories</a>
+  <h2>{{ category }}</h2>
+  <div class="hub-grid">
+    {% for product, link in products %}
+      <a class="hub-card" href="{{ link if link.startswith('http') else 'https://www.google.com/search?tbm=shop&q=' + link|urlencode }}"
+         target="_blank" rel="noopener">
+        <strong>{{ product.name }}</strong>
+        <span class="hub-card-price">{{ product.price_range }}</span>
+        <span class="hub-card-why">{{ product.why_care }}</span>
+        <span class="hub-card-term">🔎 {{ product.search_term }}</span>
+      </a>
+    {% else %}
+      <p class="muted">No finds in this category yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Product Ideas{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Product Ideas</h1>
+  <a class="btn btn-primary" href="{{ url_for('product_new') }}">+ Add product idea</a>
+</div>
+
+<div class="filter-row">
+  <a class="chip {{ 'chip-active' if not active_category }}" href="{{ url_for('products') }}">All</a>
+  {% for cat in categories %}
+    <a class="chip {{ 'chip-active' if active_category == cat }}"
+       href="{{ url_for('products', category=cat) }}">{{ cat }}</a>
+  {% endfor %}
+</div>
+<div class="filter-row">
+  <span class="muted small">Sort:</span>
+  {% for key, label in [('score', 'Score'), ('newest', 'Newest'), ('name', 'Name')] %}
+    <a class="chip {{ 'chip-active' if sort == key }}"
+       href="{{ url_for('products', category=active_category, sort=key) }}">{{ label }}</a>
+  {% endfor %}
+</div>
+
+<section class="card">
+  <table>
+    <tr><th>Product idea</th><th>Category</th><th>Price</th><th>Score</th><th>TikTok</th><th>YT</th><th>Featured</th><th></th></tr>
+    {% for p in products %}
+      <tr>
+        <td><a href="{{ url_for('product_detail', product_id=p.id) }}">{{ p.name }}</a></td>
+        <td>{{ p.category }}</td>
+        <td>{{ p.price_range }}</td>
+        <td><span class="score">{{ p.overall_score }}</span></td>
+        <td>{{ p.tiktok_score }}</td>
+        <td>{{ p.youtube_score }}</td>
+        <td>{{ '⭐' if p.featured }}</td>
+        <td class="actions">
+          <a class="btn btn-small" href="{{ url_for('product_edit', product_id=p.id) }}">Edit</a>
+          <form method="post" action="{{ url_for('product_delete', product_id=p.id) }}"
+                onsubmit="return confirm('Delete this product idea and all its scripts?')">
+            <button class="btn btn-small btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="8" class="muted">No product ideas yet — generate some from the dashboard.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

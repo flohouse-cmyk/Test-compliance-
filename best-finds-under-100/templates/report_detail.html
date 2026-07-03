@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Report {{ report.report_date }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Daily report — {{ report.report_date }}</h1>
+  <a class="btn" href="{{ url_for('reports') }}">All reports</a>
+</div>
+
+<section class="stat-grid">
+  <div class="stat"><span class="stat-num">{{ content.new_ideas_today }}</span><span class="stat-label">New ideas today</span></div>
+  <div class="stat"><span class="stat-num">{{ content.tiktok_scripts_today }}</span><span class="stat-label">TikTok scripts today</span></div>
+  <div class="stat"><span class="stat-num">{{ content.youtube_scripts_today }}</span><span class="stat-label">Shorts scripts today</span></div>
+  <div class="stat"><span class="stat-num">{{ content.video_prompts_today }}</span><span class="stat-label">Video prompts today</span></div>
+  <div class="stat"><span class="stat-num">{{ content.ready_to_post }}</span><span class="stat-label">Ready to post</span></div>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Highest-scoring product opportunities</h2>
+    <table>
+      <tr><th>Product</th><th>Category</th><th>Price</th><th>Score</th></tr>
+      {% for p in content.top_products %}
+        <tr><td>{{ p.name }}</td><td>{{ p.category }}</td><td>{{ p.price_range }}</td>
+            <td><span class="score">{{ p.overall_score }}</span></td></tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Top categories to focus on</h2>
+    <table>
+      <tr><th>Category</th><th>Products</th><th>Avg score</th></tr>
+      {% for c in content.top_categories %}
+        <tr><td>{{ c.category }}</td><td>{{ c.count }}</td><td>{{ c.avg_score }}</td></tr>
+      {% endfor %}
+    </table>
+  </section>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Monetization readiness</h2>
+    <p>{{ content.monetization.readiness }}</p>
+    <table class="kv">
+      {% for label, n in content.monetization.link_counts.items() %}
+        <tr><th>{{ label }}</th><td>{{ n }}</td></tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Missing API keys (all optional)</h2>
+    <ul>
+      {% for key in content.missing_keys %}<li>{{ key }}</li>
+      {% else %}<li class="muted">All integrations configured 🎉</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Recommended next actions</h2>
+  <ol>
+    {% for rec in content.recommendations %}<li>{{ rec }}</li>{% endfor %}
+  </ol>
+</section>
+{% endblock %}

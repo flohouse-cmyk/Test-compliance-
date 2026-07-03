@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Content Calendar{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Content Calendar</h1>
+  <div class="btn-row">
+    <form method="post" action="{{ url_for('run_automation', action='calendar7') }}">
+      <button class="btn btn-primary">Generate 7-Day Plan</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='calendar30') }}">
+      <button class="btn">Generate 30-Day Plan</button></form>
+  </div>
+</div>
+
+{% for day, items in grouped.items() %}
+<section class="card">
+  <h2>{{ day }}</h2>
+  <table>
+    <tr><th>Platform</th><th>Product</th><th>Hook</th><th>Link / term</th><th>Status</th><th></th></tr>
+    {% for item in items %}
+      <tr>
+        <td><span class="badge badge-{{ item.platform.split(' ')[0]|lower }}">{{ item.platform }}</span></td>
+        <td><a href="{{ url_for('product_detail', product_id=item.product_id) }}">{{ item.product_name }}</a>
+            <div class="muted small">{{ item.category }}</div></td>
+        <td class="small">{{ item.hook }}
+          <details class="small"><summary>caption + hashtags</summary>
+            <p>{{ item.caption }}</p><p>{{ item.hashtags }}</p></details>
+        </td>
+        <td class="small">
+          {% if item.link_or_term.startswith('http') %}
+            <a href="{{ item.link_or_term }}" target="_blank" rel="noopener">link ↗</a>
+          {% else %}<code>{{ item.link_or_term }}</code>{% endif %}
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('calendar_status', item_id=item.id) }}" class="inline-form">
+            <select name="status" onchange="this.form.submit()">
+              {% for key, label in calendar_statuses.items() %}
+                <option value="{{ key }}" {{ 'selected' if item.status == key }}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('calendar_delete', item_id=item.id) }}"
+                onsubmit="return confirm('Remove this calendar item?')">
+            <button class="btn btn-small btn-danger">✕</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</section>
+{% else %}
+<section class="card"><p class="muted">No calendar items yet — generate a 7-day plan above.</p></section>
+{% endfor %}
+{% endblock %}

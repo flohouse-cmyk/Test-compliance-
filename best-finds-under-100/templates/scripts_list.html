@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ platform }} Scripts{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ platform }} Scripts</h1>
+  <p class="muted">Faceless, original, product-discovery scripts. Generate more from any product page
+     or with the dashboard buttons.</p>
+</div>
+
+<section class="card">
+  <table>
+    <tr><th>Title</th><th>Product</th><th>Category</th><th>Length</th><th>Created</th></tr>
+    {% for s in scripts %}
+      <tr>
+        <td><a href="{{ url_for(detail_endpoint, script_id=s.id) }}">{{ s.title }}</a></td>
+        <td><a href="{{ url_for('product_detail', product_id=s.product_id) }}">{{ s.product_name }}</a></td>
+        <td>{{ s.category }}</td>
+        <td>{{ s.video_length }}</td>
+        <td class="small">{{ s.created_at }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="muted">No scripts yet — generate some from the dashboard.</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

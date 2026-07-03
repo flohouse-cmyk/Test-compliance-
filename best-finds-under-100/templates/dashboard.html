@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Dashboard</h1>
+  <p class="muted">Your faceless content engine at a glance.</p>
+</div>
+
+<section class="stat-grid">
+  <div class="stat"><span class="stat-num">{{ stats.products }}</span><span class="stat-label">Products saved</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.video_ideas }}</span><span class="stat-label">Video ideas generated</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.tiktok_scripts }}</span><span class="stat-label">TikTok scripts</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.youtube_scripts }}</span><span class="stat-label">YouTube Shorts scripts</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.captions }}</span><span class="stat-label">Captions generated</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.video_prompts }}</span><span class="stat-label">Video prompts</span></div>
+  <div class="stat"><span class="stat-num">{{ stats.calendar_items }}</span><span class="stat-label">Calendar items</span></div>
+</section>
+
+<section class="card">
+  <h2>Automation</h2>
+  <div class="btn-row">
+    <form method="post" action="{{ url_for('run_automation', action='daily') }}"><button class="btn btn-primary">▶ Run Daily Automation</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='ideas') }}"><button class="btn">Generate Product Ideas</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='tiktok') }}"><button class="btn">Generate TikTok Scripts</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='youtube') }}"><button class="btn">Generate YouTube Shorts Scripts</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='prompts') }}"><button class="btn">Generate Video Prompts</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='calendar7') }}"><button class="btn">Generate 7-Day Calendar</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='calendar30') }}"><button class="btn">Generate 30-Day Calendar</button></form>
+    <form method="post" action="{{ url_for('run_automation', action='report') }}"><button class="btn">Generate Daily Report</button></form>
+  </div>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Today's automation tasks</h2>
+    <ul class="task-list">
+      {% for task, done in tasks %}
+        <li class="{{ 'done' if done }}">{{ '✅' if done else '⬜' }} {{ task }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>API connection status</h2>
+    <ul class="api-list">
+      {% for name, connected in api_status.items() %}
+        <li><span class="dot {{ 'dot-on' if connected else 'dot-off' }}"></span>
+            {{ name }} — {{ 'connected' if connected else 'not configured (optional)' }}</li>
+      {% endfor %}
+    </ul>
+    <p class="muted small">Missing keys never block features — demo mode covers everything.</p>
+  </section>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Top categories</h2>
+    {% if top_categories %}
+    <table>
+      <tr><th>Category</th><th>Products</th><th>Avg score</th></tr>
+      {% for row in top_categories %}
+        <tr><td>{{ row.category }}</td><td>{{ row.n }}</td><td>{{ row.avg_score|int }}</td></tr>
+      {% endfor %}
+    </table>
+    {% else %}<p class="muted">No products yet.</p>{% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Latest daily report</h2>
+    {% if latest_report %}
+      <p><strong>{{ latest_report.report_date }}</strong> —
+         {{ latest_report_content.totals.product_ideas }} ideas,
+         {{ latest_report_content.totals.tiktok_scripts }} TikTok scripts,
+         {{ latest_report_content.totals.youtube_scripts }} Shorts scripts,
+         {{ latest_report_content.ready_to_post }} items ready to post.</p>
+      <p>{{ latest_report_content.monetization.readiness }}</p>
+      <a class="btn btn-small" href="{{ url_for('report_detail', report_id=latest_report.id) }}">Open report</a>
+    {% else %}<p class="muted">No reports yet — run the daily automation.</p>{% endif %}
+  </section>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <h2>Recent TikTok scripts</h2>
+    <ul class="link-list">
+      {% for s in recent_tiktok %}
+        <li><a href="{{ url_for('tiktok_script_detail', script_id=s.id) }}">{{ s.title }}</a>
+            <span class="muted small">{{ s.category }} · {{ s.created_at }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Recent YouTube Shorts scripts</h2>
+    <ul class="link-list">
+      {% for s in recent_youtube %}
+        <li><a href="{{ url_for('youtube_script_detail', script_id=s.id) }}">{{ s.title }}</a>
+            <span class="muted small">{{ s.category }} · {{ s.created_at }}</span></li>
+      {% else %}<li class="muted">None yet.</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Recent automation runs</h2>
+  {% if recent_runs %}
+  <table>
+    <tr><th>Run</th><th>Status</th><th>Details</th><th>When</th></tr>
+    {% for run in recent_runs %}
+      <tr>
+        <td>{{ run.run_type.replace('_', ' ') }}</td>
+        <td><span class="badge badge-ok">{{ run.status }}</span></td>
+        <td class="small">{{ run.details }}</td>
+        <td class="small">{{ run.started_at }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}<p class="muted">No runs yet.</p>{% endif %}
+</section>
+{% endblock %}

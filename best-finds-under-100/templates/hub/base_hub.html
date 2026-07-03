@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ brand_name }}{% endblock %}</title>
+  <meta name="description" content="{{ tagline }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="hub-body">
+<main class="hub-container">
+  <header class="hub-header">
+    <a href="{{ url_for('hub_home') }}" class="hub-logo">💸</a>
+    <h1><a href="{{ url_for('hub_home') }}">{{ brand_name }}</a></h1>
+    <p class="muted">{{ tagline }}</p>
+    <div class="hub-socials">
+      {% if tiktok_handle %}<a class="btn btn-social" href="https://www.tiktok.com/{{ tiktok_handle }}" target="_blank" rel="noopener">TikTok {{ tiktok_handle }}</a>{% endif %}
+      {% if youtube_handle %}<a class="btn btn-social" href="https://www.youtube.com/{{ youtube_handle }}" target="_blank" rel="noopener">YouTube {{ youtube_handle }}</a>{% endif %}
+      {% if pinterest_enabled and pinterest_handle %}<a class="btn btn-social" href="https://www.pinterest.com/{{ pinterest_handle }}" target="_blank" rel="noopener">Pinterest {{ pinterest_handle }}</a>{% endif %}
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="hub-footer">
+    <a href="{{ url_for('hub_disclosure') }}">Disclosure</a>
+    <p class="muted small">Prices and availability may change.</p>
+  </footer>
+</main>
+</body>
+</html>
