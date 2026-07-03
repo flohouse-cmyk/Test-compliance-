@@ -44,6 +44,41 @@ pip install -r requirements.txt
 python main.py     # → http://localhost:5000
 ```
 
+## Run it without Replit (e.g. PythonAnywhere — works from an iPad)
+
+The app is a plain Flask app; Replit is optional. PythonAnywhere's free tier is a
+good fit: browser-only setup, persistent SQLite storage, a public URL, and one
+free daily scheduled task for the automation.
+
+1. Sign up at pythonanywhere.com (free "Beginner" plan).
+2. Open **Consoles → Bash** and run:
+   ```bash
+   git clone https://github.com/flohouse-cmyk/flohouse-cmyk.github.io.git
+   cd flohouse-cmyk.github.io
+   git checkout claude/best-finds-content-engine-5eksi5   # until merged to main
+   pip install --user -r best-finds-under-100/requirements.txt
+   ```
+3. **Web tab → Add a new web app → Manual configuration → Python 3.11** (any 3.10+).
+4. Open the WSGI configuration file it shows you, delete its contents, and paste
+   (replace YOUR_USERNAME):
+   ```python
+   import sys
+   sys.path.insert(0, '/home/YOUR_USERNAME/flohouse-cmyk.github.io/best-finds-under-100')
+   from wsgi import application
+   ```
+5. Optional: in the Web tab, set an environment variable `SECRET_KEY` to any random
+   string. Hit **Reload** — your app is live at `https://YOUR_USERNAME.pythonanywhere.com`
+   (admin at `/`, public link hub at `/hub`).
+6. **Tasks tab** → add a daily task:
+   ```bash
+   python3 /home/YOUR_USERNAME/flohouse-cmyk.github.io/best-finds-under-100/run_automation.py
+   ```
+7. To update later, open a Bash console and `git pull`, then Reload the web app.
+
+Any other host with a persistent disk works the same way via `wsgi.py`
+(`gunicorn wsgi:application`). Avoid free tiers with ephemeral filesystems
+(e.g. Render free) — the SQLite database would reset on every restart.
+
 ## Demo mode (default)
 
 With no API keys, the app runs in **demo mode** (badge in the header):
